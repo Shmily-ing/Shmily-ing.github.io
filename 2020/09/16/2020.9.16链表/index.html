@@ -47,7 +47,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-2020.09.16链表"
+  id="post-2020.9.16链表"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -65,7 +65,7 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2020/09/16/2020.09.16%E9%93%BE%E8%A1%A8/" class="article-date">
+      <a href="/2020/09/16/2020.9.16%E9%93%BE%E8%A1%A8/" class="article-date">
   <time datetime="2020-09-16T06:19:37.667Z" itemprop="datePublished">2020-09-16</time>
 </a> 
   <div class="article-category">
@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">601</span>
+            <span class="post-count">602</span>
         </span>
     </span>
 
@@ -101,7 +101,7 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>Welcome to <a target="_blank" rel="noopener" href="https://shmily-ing.github.io/">Shmily-ing</a>! </p>
+  <p>Welcome to <a target="_blank" rel="noopener" href="https://shmily-ing.github.io/">Shmily-ing’blog</a>! </p>
 <p>下面主要是运用C去实现链表的头插法，尾插法实现有序插入，以及中间插入一个数。</p>
 <a id="more"></a>
 <h2 id="头插法"><a href="#头插法" class="headerlink" title="头插法"></a>头插法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">#include &lt;stdio.h&gt;// 头插法</span></span><br><span class="line"> <span class="comment">#include &lt;stdlib.h&gt;</span></span><br><span class="line"></span><br><span class="line">/* run this program using the console pauser or add your own getch, system(<span class="string">&quot;pause&quot;</span>) or input loop */</span><br><span class="line"></span><br><span class="line">typedef struct node&#123;</span><br><span class="line">	</span><br><span class="line">	int data ;</span><br><span class="line">	</span><br><span class="line">	struct node *next;</span><br><span class="line">	</span><br><span class="line">&#125;list;</span><br><span class="line"></span><br><span class="line">list *head,*s;</span><br><span class="line"></span><br><span class="line">void input();</span><br><span class="line"></span><br><span class="line">int main(int argc, char *argv[]) &#123;</span><br><span class="line">    list *p;</span><br><span class="line">	head=NULL;</span><br><span class="line">	</span><br><span class="line">	input();</span><br><span class="line">	<span class="keyword">for</span>(p=head;p!=NULL;p=p-&gt;next)&#123; //输出头插法链表数据</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>,p-&gt;data);</span><br><span class="line">&#125;</span><br><span class="line">	<span class="built_in">return</span> 0;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line">void <span class="function"><span class="title">input</span></span>()&#123;</span><br><span class="line">	int i;</span><br><span class="line">	</span><br><span class="line">	head = NULL;</span><br><span class="line">	scanf(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">	<span class="keyword">while</span>(i!=100)&#123;</span><br><span class="line">		</span><br><span class="line">		s=(list*)malloc(sizeof(list));</span><br><span class="line">		s-&gt;data=i;</span><br><span class="line">		s-&gt;next = head;  //第一个数据地址为空，下一个指向前一个s；</span><br><span class="line">		head = s;          //作为新头部；</span><br><span class="line">		scanf(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -164,7 +164,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2020/09/16/2020.09.16%E9%93%BE%E8%A1%A8/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2020/09/16/2020.9.16%E9%93%BE%E8%A1%A8/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -175,6 +175,20 @@
   </div>
 
    
+  <nav class="article-nav">
+    
+      <a href="/2020/09/27/2020.9.26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            MSF-永恒之蓝入侵
+          
+        </div>
+      </a>
+    
+    
+  </nav>
+
    
 <!-- valine评论 -->
 <div id="vcomments-box">
