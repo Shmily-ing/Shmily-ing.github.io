@@ -47,7 +47,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-unctf"
+  id="post-unctf2020"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -65,7 +65,7 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2020/11/15/unctf/" class="article-date">
+      <a href="/2020/11/15/unctf2020/" class="article-date">
   <time datetime="2020-11-15T02:29:10.000Z" itemprop="datePublished">2020-11-15</time>
 </a> 
   <div class="article-category">
@@ -113,7 +113,7 @@
 <blockquote>
 <p>?url=<a target="_blank" rel="noopener" href="http://www.unctf.com/flag">www.unctf.com/../../../../../flag</a></p>
 </blockquote>
-<p><img src="/2020/11/15/unctf/1.png" alt="1"></p>
+<p><img src="/2020/11/15/unctf2020/1.png" alt="1"></p>
 <hr>
 <hr>
 <p>payload2:</p>
@@ -123,7 +123,7 @@
 <blockquote>
 <p>?url=aaa://unctf.com/../../../../../../flag</p>
 </blockquote>
-<p><img src="/2020/11/15/unctf/2.png" alt="2"></p>
+<p><img src="/2020/11/15/unctf2020/2.png" alt="2"></p>
 <hr>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yesec/p/12580978.html">参考文章</a></p>
 <hr>
@@ -136,7 +136,7 @@
 <blockquote>
 <p>?a=include $_GET[“zsz”] ?&gt;&amp;zsz=php://filter/read=convert.base64-encode/resource=flag.php</p>
 </blockquote>
-<p><img src="/2020/11/15/unctf/3.png" alt="img"></p>
+<p><img src="/2020/11/15/unctf2020/3.png" alt="img"></p>
 <p>base64解密得：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    $flag=<span class="string">&#x27;FLAG&#123;581e439b-deca-4e87-a957-07d07612baa3&#125;&#x27;</span>;</span><br><span class="line">    <span class="meta">?&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -144,23 +144,23 @@
 
 <hr>
 <h2 id="UN’s-online-tools"><a href="#UN’s-online-tools" class="headerlink" title="UN’s_online_tools"></a>UN’s_online_tools</h2><p>经典命令执行</p>
-<p><img src="/2020/11/15/unctf/4.png" alt="4"></p>
+<p><img src="/2020/11/15/unctf2020/4.png" alt="4"></p>
 <p>里面涉及很多过滤，在index.php里面</p>
 <p>过滤了<code>cat</code>，所以可以用能代替<code>cat</code>的命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">more:一页一页的显示档案内容</span><br><span class="line">less:与 more 类似</span><br><span class="line">head:查看头几行</span><br><span class="line">tac:从最后一行开始显示，可以看出 tac 是 cat 的反向显示</span><br><span class="line">tail:查看尾几行</span><br><span class="line">nl:显示的时候，顺便输出行号</span><br></pre></td></tr></table></figure>
 
 <p><code>%09</code>代替空格</p>
-<p><img src="/2020/11/15/unctf/5.png" alt="5"></p>
+<p><img src="/2020/11/15/unctf2020/5.png" alt="5"></p>
 <p>查看index.php内容:</p>
 <p>发现过滤内容</p>
-<p><img src="/2020/11/15/unctf/8.png" alt="8"></p>
+<p><img src="/2020/11/15/unctf2020/8.png" alt="8"></p>
 <p>style.css里面没有东西，可能flag不在这个下级目录里面</p>
-<p><img src="/2020/11/15/unctf/6.png" alt="6"></p>
+<p><img src="/2020/11/15/unctf2020/6.png" alt="6"></p>
 <p>flag被过滤了，通配符<code>?</code>来匹配</p>
-<p><img src="/2020/11/15/unctf/7.png" alt="7"></p>
+<p><img src="/2020/11/15/unctf2020/7.png" alt="7"></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/NPFS/p/13279815.html">命令执行绕过</a>    </p>
-<hr>
 <p>感觉还是要自己总结一下，后面再总结一下吧</p>
+<hr>
 <h2 id="ezphp"><a href="#ezphp" class="headerlink" title="ezphp"></a>ezphp</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">$username  = <span class="string">&quot;admin&quot;</span>;</span><br><span class="line">$password  = <span class="string">&quot;password&quot;</span>;</span><br><span class="line"><span class="keyword">include</span>(<span class="string">&quot;flag.php&quot;</span>);</span><br><span class="line">$data = <span class="keyword">isset</span>($_POST[<span class="string">&#x27;data&#x27;</span>])? $_POST[<span class="string">&#x27;data&#x27;</span>]: <span class="string">&quot;&quot;</span> ;</span><br><span class="line">$data_unserialize = unserialize($data);</span><br><span class="line"><span class="keyword">if</span> ($data_unserialize[<span class="string">&#x27;username&#x27;</span>]==$username&amp;&amp;$data_unserialize[<span class="string">&#x27;password&#x27;</span>]==$password)&#123;</span><br><span class="line">    <span class="keyword">echo</span> $flag;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;username or password error!&quot;</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 
 
@@ -200,7 +200,7 @@
 <p>当我们传入<code>?1=test</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:1:&quot;a&quot;:2:&#123;s:5:&quot;uname&quot;;s:4:&quot;test&quot;;s:8:&quot;password&quot;;i:1;&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2020/11/15/unctf/10.png" alt="10"></p>
+<p><img src="/2020/11/15/unctf2020/10.png" alt="10"></p>
 <blockquote>
 <p>在逃逸构造：</p>
 </blockquote>
@@ -214,7 +214,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?1&#x3D;</span><br><span class="line">challengechallengechallengechallengechallengechallengechallengechallenge&quot;;s:8:&quot;password&quot;;s:4:&quot;easy&quot;;&#125;aaa</span><br></pre></td></tr></table></figure>
 
 <p>{s:5:”uname”;s:104:”challengechallengechallengechallengechallengechallengechallengechallenge”;s:8:”password”;s:4:”easy”;}<code>aaa&quot;;s:8:&quot;password&quot;;i:1;&#125;</code>标记的部分由于前面的执行过了，就不能执行被丢弃了</p>
-<p><img src="/2020/11/15/unctf/9.png" alt="9"></p>
+<p><img src="/2020/11/15/unctf2020/9.png" alt="9"></p>
 <p>上面这种情况是字符串变成引起的。</p>
 <p>还有字符串变短也会引起字符串逃逸</p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hello-there/p/12870541.html">参考文章</a></p>
@@ -270,7 +270,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2020/11/15/unctf/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2020/11/15/unctf2020/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -283,10 +283,19 @@
    
   <nav class="article-nav">
     
+      <a href="/2020/11/15/unctf/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            unctf2020
+          
+        </div>
+      </a>
     
-      <a href="/2020/11/15/unctf2020/" class="article-nav-link">
+    
+      <a href="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">unctf2020</div>
+        <div class="article-nav-title">One step a day</div>
       </a>
     
   </nav>
