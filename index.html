@@ -153,6 +153,76 @@
     
     
     <article
+  id="post-内网穿透"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/12/22/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"
+    >内网穿透</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/12/22/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" class="article-date">
+  <time datetime="2020-12-22T12:35:34.000Z" itemprop="datePublished">2020-12-22</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%86%85%E7%BD%91/">内网</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="frp篇"><a href="#frp篇" class="headerlink" title="frp篇"></a><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/releases">frp篇</a></h2><h4 id="1-web端口转发"><a href="#1-web端口转发" class="headerlink" title="1.web端口转发"></a>1.web端口转发</h4><p>ubantu 桥接模式 ip:192.168.1.150  (模拟公网server)</p>
+<p>win7     NAT模式   ip:192.168.119.129(模拟内网)</p>
+<p> 下载对应版本</p>
+<hr>
+<blockquote>
+<p>ubantu  </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#frps.ini</span><br><span class="line"></span><br><span class="line">[common]</span><br><span class="line">bind_port &#x3D; 6000      #绑定端口</span><br><span class="line">vhost_http_prot&#x3D;8080  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>启动：./frps -c frps.ini</p>
+<hr>
+<blockquote>
+<p>win7   </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#frpc.ini</span><br><span class="line"></span><br><span class="line">[common]</span><br><span class="line">server_addr &#x3D; 192.168.1.150   #ip</span><br><span class="line">server_port &#x3D; 6000            #本机绑定的端口</span><br><span class="line"></span><br><span class="line">[web]</span><br><span class="line">type &#x3D; http    </span><br><span class="line">local_ip &#x3D; 192.168.119.129</span><br><span class="line">local_port &#x3D; 80                #要映射的本地端口</span><br><span class="line">custom_domains &#x3D; 192.168.1.150 #或者域名     </span><br><span class="line">remote_port &#x3D; 8080    </span><br><span class="line">http_user &#x3D; admin               #安全认证</span><br><span class="line">http_pwd &#x3D; admin  </span><br><span class="line"></span><br><span class="line">[rdp]</span><br><span class="line">type&#x3D;tcp</span><br><span class="line">local_ip &#x3D; 192.168.119.129      #远程桌面映射3389端口</span><br><span class="line">local_port &#x3D; 3389</span><br><span class="line">remote_port &#x3D; 3389</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>启动 frpc -c frpc.ini</p>
+<hr>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
   id="post-unctf"
   class="article article-type-post"
   itemscope
@@ -322,65 +392,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/file-put-content/" rel="tag">file_put_content</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-西湖论剑2020-10-17"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/10/17/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%912020-10-17/"
-    >西湖论剑web复现</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/10/17/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%912020-10-17/" class="article-date">
-  <time datetime="2020-10-17T09:00:32.000Z" itemprop="datePublished">2020-10-17</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/CTF/">CTF</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h3 id="web-esayjson"><a href="#web-esayjson" class="headerlink" title="web-esayjson"></a>web-esayjson</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="http://easyjson.xhlj.wetolink.com/">http://easyjson.xhlj.wetolink.com/</a></p>
-</blockquote>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">&#x27;security.php&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>($_GET[<span class="string">&#x27;source&#x27;</span>]))&#123;   <span class="comment">//source不能为空</span></span><br><span class="line">    show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">    <span class="keyword">die</span>();</span><br><span class="line">&#125;</span><br><span class="line">$sandbox = <span class="string">&#x27;sandbox/&#x27;</span>.sha1($_SERVER[<span class="string">&#x27;HTTP_X_FORWARDED_FOR&#x27;</span>]).<span class="string">&#x27;/&#x27;</span>; <span class="comment">//沙盒，设置沙盒根据自己ip获得目录</span></span><br><span class="line">var_dump($sandbox);</span><br><span class="line"><span class="keyword">if</span>(!file_exists($sandbox))&#123;    <span class="comment">//没有就创建沙盒</span></span><br><span class="line">    mkdir($sandbox);</span><br><span class="line">    file_put_contents($sandbox.<span class="string">&quot;index.php&quot;</span>,<span class="string">&quot;&lt;?php echo &#x27;Welcome To Dbapp OSS.&#x27;;?&gt;&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">$action = $_GET[<span class="string">&#x27;action&#x27;</span>];</span><br><span class="line">$content = file_get_contents(<span class="string">&quot;php://input&quot;</span>); <span class="comment">//POST传入</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>($action == <span class="string">&quot;write&quot;</span> &amp;&amp;  SecurityCheck(<span class="string">&#x27;filename&#x27;</span>,$_GET[<span class="string">&#x27;filename&#x27;</span>]) &amp;&amp;SecurityCheck(<span class="string">&#x27;content&#x27;</span>,$content))&#123;</span><br><span class="line">    $content = json_decode($content);  </span><br><span class="line">    $filename = $_GET[<span class="string">&#x27;filename&#x27;</span>];</span><br><span class="line">    $filecontent = $content-&gt;content;</span><br><span class="line">    $filename = $sandbox.$filename;</span><br><span class="line">    file_put_contents($filename,$filecontent.<span class="string">&quot;\n Powered By Dbapp OSS.&quot;</span>); <span class="comment">//json格式内容写入</span></span><br><span class="line">&#125;<span class="keyword">elseif</span>($action == <span class="string">&quot;reset&quot;</span>)&#123;</span><br><span class="line">    $files = scandir($sandbox);</span><br><span class="line">    <span class="keyword">foreach</span>($files <span class="keyword">as</span> $file) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!is_dir($file))&#123;</span><br><span class="line">            <span class="keyword">if</span>($file !== <span class="string">&quot;index.php&quot;</span>)&#123;</span><br><span class="line">                unlink($sandbox.$file);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&#x27;Security Check Failed.&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure> 
-      <a class="article-more-link" href="/2020/10/17/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%912020-10-17/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2020%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91web/" rel="tag">2020西湖论剑web</a></li></ul>
 
     </footer>
   </div>
