@@ -316,30 +316,13 @@
       </tags>
   </entry>
   <entry>
-    <title>php漏洞</title>
-    <url>/2021/01/28/php%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<h2 id="0x01-php双引号解析漏洞"><a href="#0x01-php双引号解析漏洞" class="headerlink" title="0x01 php双引号解析漏洞"></a>0x01 php双引号解析漏洞</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by ft</span></span><br><span class="line"><span class="comment"> * user: shmily-ing</span></span><br><span class="line"><span class="comment"> * Data: 2021/1/28 15:25</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="variable">$a</span>=<span class="number">2</span>;</span><br><span class="line"><span class="variable">$b</span>=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;<span class="subst">$a</span><span class="subst">$b</span>\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;$a$b&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*运行结果:</span></span><br><span class="line"><span class="comment">21</span></span><br><span class="line"><span class="comment">$a$b</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
-
-<p>输出结果不同，双引号和单引号都表示字符串，但双引号会对引号内容进行二次解释，就可能出现安全问题。</p>
-<span id="more"></span>
-
-<p>所以双引号内出现<code>$&#123;&#125;</code>, <code>&#123;&#125;</code>内的内容就会被当作php代码执行</p>
-<p><code>$&#123;php命令&#125;</code>例如： “${@eval($_POST[‘a’])}”</p>
-<p>但适用于php5.5以上的版本</p>
-]]></content>
-      <categories>
-        <category>php</category>
-      </categories>
-      <tags>
-        <tag>php漏洞</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>VNCTF2021-web</title>
     <url>/2021/03/29/VNCTF2021-web/</url>
     <content><![CDATA[<h2 id="Ez-game"><a href="#Ez-game" class="headerlink" title="Ez_game"></a>Ez_game</h2><p><img src="/2021/03/29/VNCTF2021-web/1.png" alt="1"></p>
 <p>玩游戏，太菜了，通不了关。自己复现总结下网上的wp。</p>
 <p>F12看源码，重点看game.js</p>
+<span id="more"></span>
+
 <p><img src="/2021/03/29/VNCTF2021-web/2.png" alt="2"></p>
 <p>####思路1</p>
 <p>在game.js里面我们发现类似加密的东西。</p>
@@ -403,6 +386,25 @@
       </categories>
       <tags>
         <tag>file_put_content</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>php漏洞</title>
+    <url>/2021/01/28/php%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h2 id="0x01-php双引号解析漏洞"><a href="#0x01-php双引号解析漏洞" class="headerlink" title="0x01 php双引号解析漏洞"></a>0x01 php双引号解析漏洞</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by ft</span></span><br><span class="line"><span class="comment"> * user: shmily-ing</span></span><br><span class="line"><span class="comment"> * Data: 2021/1/28 15:25</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="variable">$a</span>=<span class="number">2</span>;</span><br><span class="line"><span class="variable">$b</span>=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;<span class="subst">$a</span><span class="subst">$b</span>\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;$a$b&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*运行结果:</span></span><br><span class="line"><span class="comment">21</span></span><br><span class="line"><span class="comment">$a$b</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<p>输出结果不同，双引号和单引号都表示字符串，但双引号会对引号内容进行二次解释，就可能出现安全问题。</p>
+<span id="more"></span>
+
+<p>所以双引号内出现<code>$&#123;&#125;</code>, <code>&#123;&#125;</code>内的内容就会被当作php代码执行</p>
+<p><code>$&#123;php命令&#125;</code>例如： “${@eval($_POST[‘a’])}”</p>
+<p>但适用于php5.5以上的版本</p>
+]]></content>
+      <categories>
+        <category>php</category>
+      </categories>
+      <tags>
+        <tag>php漏洞</tag>
       </tags>
   </entry>
   <entry>
