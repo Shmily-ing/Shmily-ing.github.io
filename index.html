@@ -67,7 +67,7 @@
       <div>
         
         <img
-          src="true"
+          src="/images/1.gif"
           class="cover-logo"
           alt="Shmily-ing"
         />
@@ -151,6 +151,73 @@
     
     
     
+    
+    <article
+  id="post-mrctf2021"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/04/18/mrctf2021/"
+    >mrctf2021</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/04/18/mrctf2021/" class="article-date">
+  <time datetime="2021-04-18T08:08:12.000Z" itemprop="datePublished">2021-04-18</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CTF/">CTF</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>自己被打爆了，开始复盘。</p>
+<p><img src="/2021/04/18/mrctf2021/0.png" alt="0"></p>
+<h2 id="MISC-Real-Checkin"><a href="#MISC-Real-Checkin" class="headerlink" title="MISC-Real Checkin"></a>MISC-Real Checkin</h2><p>记录下这个零宽隐写，网上找的工具没有解出来</p>
+<p>叮咚！你的好大儿zbr向你发送了签到码，请注意查收：‍‎‏‍‎‍‍‎‌‌‌‍‍‎‍‎‏‎‌‎‌‌‍‎‌‌‎‌‌‍‏‎‍‎‎‌‌‍‌‏‎‎‌‍‎‌‍‎‍‎‎‍‎‎‍‏‎‎‎‍‏‌H0Xh2vcqESOonvfZJLaVupnpD3guAeq8VeO1O932HXhvlBLY2F/DRh5BmEGeHyutT3uZVTYGA503bF6tVem31Eq1MEGYpNuMkfHQ8Pbpfski7hqkDZ4n48H5OdSmsiVC   一看是加密相关的内容，base64不对，不知道什么加密，后来出题方说是零宽隐写。</p>
+<p>空格部分就是隐写的零宽字符，我们放虚拟机看下</p>
+<p><img src="/2021/04/18/mrctf2021/1.png" alt="1"></p>
+<p>群里师傅说直接说把隐写内容复制到<code>pyhon</code>里面直接用<code>zwsp_steg</code>库解密。 这里解密的内容一定要是空格那部分，而不是我想的&lt;200d&gt;&lt;200e&gt;…这部分。</p>
+<p><img src="/2021/04/18/mrctf2021/1.1.png" alt="1.1"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ECB AES QQID 0RPADDINGd</span><br></pre></td></tr></table></figure>
+
+<p>一看就是AES加密，EBC为加密模式，密钥就是qq号呗</p>
+<p><a target="_blank" rel="noopener" href="https://the-x.cn/cryptography/Aes.aspx">https://the-x.cn/cryptography/Aes.aspx</a></p>
+<p><img src="/2021/04/18/mrctf2021/1.2.png" alt="1.2"></p>
+<p>太菜了呜呜呜。</p>
+<p><a target="_blank" rel="noopener" href="https://tl2cents.github.io/2021/04/11/2021-MRCTF-WriteUp/">https://tl2cents.github.io/2021/04/11/2021-MRCTF-WriteUp/</a> 网上也有其他师傅解法，大家参考。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MRCTF2021/" rel="tag">MRCTF2021</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
     
     <article
   id="post-VNCTF2021-web"
@@ -532,8 +599,9 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h2 id="0x01-MD5-encrypt-this-string"><a href="#0x01-MD5-encrypt-this-string" class="headerlink" title="0x01 MD5 encrypt this string"></a>0x01 MD5 encrypt this string</h2><p><img src="/2021/01/10/python-study/1.png" alt="image-20210129112157855"></p>
-<p>提取字符串，进行md5加密，并提交。我还是太慢了，学学脚本</p>
-<p>from hack the box web1</p> 
+<p>提取字符串，进行md5加密，并提交。我还是太慢了，学学脚本。网络有点卡多提交几次</p>
+<p>from hack the box web1</p>
+<p>自己结合网上的学习了两种方法，re.search和re.findall，个人感觉还是比较喜欢第二种方法，感觉法二挺方便的</p> 
       <a class="article-more-link" href="/2021/01/10/python-study/"
         >阅读更多...</a
       >
@@ -671,67 +739,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-unctf"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/11/15/unctf/"
-    >unctf2020</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/11/15/unctf/" class="article-date">
-  <time datetime="2020-11-15T02:29:10.000Z" itemprop="datePublished">2020-11-15</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/CTF/">CTF</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="easy-ssrf"><a href="#easy-ssrf" class="headerlink" title="easy_ssrf"></a>easy_ssrf</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">                   welc0me to <span class="number">2020</span>UNCTF!!</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span><span class="string">&#x27;&lt;center&gt;&lt;strong&gt;welc0me to 2020UNCTF!!&lt;/strong&gt;&lt;/center&gt;&#x27;</span>;</span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="variable">$url</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;url&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span>(preg_match(<span class="string">&#x27;/unctf\.com/&#x27;</span>,<span class="variable">$url</span>))&#123;</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&#x27;/php|file|zip|bzip|zlib|base|data/i&#x27;</span>,<span class="variable">$url</span>))&#123;</span><br><span class="line">        <span class="variable">$url</span>=file_get_contents(<span class="variable">$url</span>);</span><br><span class="line">        <span class="keyword">echo</span>(<span class="variable">$url</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span>(<span class="string">&#x27;error!!&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span>(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>第一需要匹配unctf.com,第二不能匹配php|file|zip|bzip|zlib|base|data。</p>
-<p>url可控，可以访问unctf.com里面的数据 从而造成ssrf。</p> 
-      <a class="article-more-link" href="/2020/11/15/unctf/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unctf2020/" rel="tag">unctf2020</a></li></ul>
 
     </footer>
   </div>
