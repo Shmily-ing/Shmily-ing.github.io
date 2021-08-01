@@ -20,7 +20,7 @@ body {
 @media (min-width: 768px) {
   .outer,
   .wrap {
-    width: 95rem !important;
+    width: 80rem !important;
   }
 }
 @media (max-width: 768px) {

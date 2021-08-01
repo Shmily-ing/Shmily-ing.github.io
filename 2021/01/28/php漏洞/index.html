@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">136</span>
+            <span class="post-count">378</span>
         </span>
     </span>
 
@@ -101,7 +101,10 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="0x01-php双引号解析漏洞"><a href="#0x01-php双引号解析漏洞" class="headerlink" title="0x01 php双引号解析漏洞"></a>0x01 php双引号解析漏洞</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by ft</span></span><br><span class="line"><span class="comment"> * user: shmily-ing</span></span><br><span class="line"><span class="comment"> * Data: 2021/1/28 15:25</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="variable">$a</span>=<span class="number">2</span>;</span><br><span class="line"><span class="variable">$b</span>=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;<span class="subst">$a</span><span class="subst">$b</span>\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;$a$b&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*运行结果:</span></span><br><span class="line"><span class="comment">21</span></span><br><span class="line"><span class="comment">$a$b</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+  <ul>
+<li>持续更新</li>
+</ul>
+<h2 id="0x01-php双引号解析漏洞"><a href="#0x01-php双引号解析漏洞" class="headerlink" title="0x01 php双引号解析漏洞"></a>0x01 php双引号解析漏洞</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by ft</span></span><br><span class="line"><span class="comment"> * user: shmily-ing</span></span><br><span class="line"><span class="comment"> * Data: 2021/1/28 15:25</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="variable">$a</span>=<span class="number">2</span>;</span><br><span class="line"><span class="variable">$b</span>=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;<span class="subst">$a</span><span class="subst">$b</span>\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;$a$b&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*运行结果:</span></span><br><span class="line"><span class="comment">21</span></span><br><span class="line"><span class="comment">$a$b</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
 
 <p>输出结果不同，双引号和单引号都表示字符串，但双引号会对引号内容进行二次解释，就可能出现安全问题。</p>
 <span id="more"></span>
@@ -109,6 +112,34 @@
 <p>所以双引号内出现<code>$&#123;&#125;</code>, <code>&#123;&#125;</code>内的内容就会被当作php代码执行</p>
 <p><code>$&#123;php命令&#125;</code>例如： “${@eval($_POST[‘a’])}”</p>
 <p>但适用于php5.5以上的版本</p>
+<h2 id="0x02-php类型"><a href="#0x02-php类型" class="headerlink" title="0x02  php类型"></a>0x02  php类型</h2><p>####类型转换</p>
+<p>php把以<code>字母</code>开头的<code>字符或字符串</code>转化为<code>整型</code>时候，会变成<code>0</code>:<code>&#39;a123456&#39;==0</code></p>
+<p>php把以<code>数字</code>开头的<code>字符串</code>转化为<code>整型</code>时候，只取到第一个字母之前的数字:<code>&#39;123456a111&#39;==123456</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var_dump(&quot;a&quot;&#x3D;&#x3D;0);</span><br><span class="line">var_dump(&quot;a&quot;&#x3D;&#x3D;&quot;0&quot;);</span><br><span class="line">var_dump(&#39;123456a111&#39;&#x3D;&#x3D;123456);</span><br><span class="line">var_dump(&#39;a123456&#39;&#x3D;&#x3D;0);</span><br></pre></td></tr></table></figure>
+
+<p>结果为：</p>
+<p><img src="/2021/01/28/php%E6%BC%8F%E6%B4%9E/image-20210721005633561.png" alt="image-20210721005633561"></p>
+<h4 id="弱比较"><a href="#弱比较" class="headerlink" title="弱比较"></a>弱比较</h4><p>PHP在处理哈希字符串时，”OE”开头的都认为<code>0</code></p>
+<p>以下值在md5加密后以0E开头：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- QNKCDZO</span><br><span class="line">- 240610708</span><br><span class="line">- s878926199a</span><br><span class="line">- s155964671a</span><br><span class="line">- s214587387a</span><br><span class="line">- s214587387a</span><br></pre></td></tr></table></figure>
+
+
+
+<p>以下值在sha1加密后以0E开头：</p>
+<ul>
+<li>sha1(‘aaroZmOk’)</li>
+<li>sha1(‘aaK1STfY’)</li>
+<li>sha1(‘aaO8zKZF’)</li>
+<li>sha1(‘aa3OFF9m’)</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$name</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line"><span class="variable">$passwd</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;passwd&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span>(md5(<span class="variable">$name</span>)==md5(<span class="variable">$passwd</span>)&amp;&amp;<span class="variable">$name</span>!=<span class="variable">$passwd</span>)&#123;</span><br><span class="line">  var_dump(<span class="string">&quot;success&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/?name=QNKCDZO&amp;passwd=<span class="number">240610708</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="强比较"><a href="#强比较" class="headerlink" title="强比较"></a>强比较</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$name</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;name&#x27;</span>];</span><br><span class="line"><span class="variable">$passwd</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;passwd&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span>(md5(<span class="variable">$name</span>)===md5(<span class="variable">$passwd</span>)&amp;&amp;<span class="variable">$name</span>!==<span class="variable">$passwd</span>)&#123;</span><br><span class="line">  var_dump(<span class="string">&quot;success&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/?name[]=<span class="number">1</span>&amp;passwd[]=<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>md5([1])===md5([2])==NULL</code></li>
+</ol>
+<h4 id="MD5碰撞"><a href="#MD5碰撞" class="headerlink" title="MD5碰撞"></a>MD5碰撞</h4><h2 id="0x03"><a href="#0x03" class="headerlink" title="0x03"></a>0x03</h2><h2 id="0x04"><a href="#0x04" class="headerlink" title="0x04"></a>0x04</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_19980431/article/details/83018232">参考</a></p>
  
       <!-- reward -->
       
