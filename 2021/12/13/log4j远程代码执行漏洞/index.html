@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-     
+    log4j2远程代码执行漏洞 |  
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -45,114 +45,8 @@
         style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
       
     <main class="content on">
-      
-<section class="cover">
-    
-      
-      <a class="forkMe" href="https://github.com/Shen-Yu/hexo-theme-ayer"
-        target="_blank"><img width="149" height="149" src="/images/forkme.png"
-          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
-    
-  <div class="cover-frame">
-    <div class="bg-box">
-      <img src="/images/cover1.jpg" alt="image frame" />
-    </div>
-    <div class="cover-inner text-center text-white">
-      <h1><a href="/">Shmily-ing</a></h1>
-      <div id="subtitle-box">
-        
-        <span id="subtitle"></span>
-        
-      </div>
-      <div>
-        
-        <img
-          src="/images/1.gif"
-          class="cover-logo"
-          alt="Shmily-ing"
-        />
-        
-      </div>
-    </div>
-  </div>
-  <div class="cover-learn-more">
-    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
-  </div>
-</section>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
-
-
-<!-- Subtitle -->
-
-  <script>
-    try {
-      var typed = new Typed("#subtitle", {
-        strings: ['愿你一生努力，一生被爱', '你保护世界，我保护你', '有幸被爱   无畏山海'],
-        startDelay: 0,
-        typeSpeed: 200,
-        loop: true,
-        backSpeed: 200,
-        showCursor: true
-      });
-    } catch (err) {
-      console.log(err)
-    }
-  </script>
-  
-<div id="main">
-  <section class="outer">
-  
-  
-
-<div class="notice" style="margin-top:50px">
-    <i class="ri-heart-fill"></i>
-    <div class="notice-content" id="broad"></div>
-</div>
-<script type="text/javascript">
-    fetch('https://v1.hitokoto.cn')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("broad").innerHTML = data.hitokoto;
-        })
-        .catch(console.error)
-</script>
-
-<style>
-    .notice {
-        padding: 20px;
-        border: 1px dashed #e6e6e6;
-        color: #969696;
-        position: relative;
-        display: inline-block;
-        width: 100%;
-        background: #fbfbfb50;
-        border-radius: 10px;
-    }
-
-    .notice i {
-        float: left;
-        color: #999;
-        font-size: 16px;
-        padding-right: 10px;
-        vertical-align: middle;
-        margin-top: -2px;
-    }
-
-    .notice-content {
-        display: initial;
-        vertical-align: middle;
-    }
-</style>
-  
-  <article class="articles">
-    
-    
-    
-    
-    <article
+      <section class="outer">
+  <article
   id="post-log4j远程代码执行漏洞"
   class="article article-type-post"
   itemscope
@@ -163,10 +57,9 @@
     
     <header class="article-header">
        
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/12/13/log4j%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/"
-    >log4j2远程代码执行漏洞</a> 
-</h2>
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  log4j2远程代码执行漏洞
+</h1>
  
 
     </header>
@@ -178,9 +71,34 @@
   <div class="article-category">
     <a class="article-category-link" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a>
   </div>
-   
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">863</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">3 min</span>
+        </span>
+    </span>
+</div>
+ 
     </div>
       
+    <div class="tocbot"></div>
+
+
+
+
+  
     <div class="article-entry" itemprop="articleBody">
        
   <h1 id="Apache-Log4j-2远程代码执行漏洞（-CVE-2021-44228）"><a href="#Apache-Log4j-2远程代码执行漏洞（-CVE-2021-44228）" class="headerlink" title="Apache Log4j 2远程代码执行漏洞（ CVE-2021-44228）"></a>Apache Log4j 2远程代码执行漏洞（ CVE-2021-44228）</h1><h2 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h2><p>Apache log4j是Apache的一个开源项目，Apache log4j 2是一个就<code>Java的日志记录工具</code>。该工具重写了log4j框架，并且引入了大量丰富的特性，可以控制日志信息输送的目的地为控制台、文件、GUI组建等，通过定义每一条日志信息的级别，能够更加细致地控制日志的生成过程。</p>
@@ -256,556 +174,122 @@
     
     <footer class="article-footer">
        
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2021/12/13/log4j%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/log4j2/" rel="tag">log4j2</a></li></ul>
 
     </footer>
   </div>
 
-    
- 
    
-</article>
-
+  <nav class="article-nav">
     
-    <article
-  id="post-21DASCTFJuly"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
     
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/08/01/21DASCTFJuly/"
-    >21DASCTFJuly</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/08/01/21DASCTFJuly/" class="article-date">
-  <time datetime="2021-08-01T10:54:10.000Z" itemprop="datePublished">2021-08-01</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/CTF/">CTF</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><p>您的排名：148      慢慢复现有时间</p>
-<p><img src="/2021/08/01/21DASCTFJuly/image-20210801183537143.png" alt="image-20210801183537143"></p> 
-      <a class="article-more-link" href="/2021/08/01/21DASCTFJuly/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
+      <a href="/2021/08/01/21DASCTFJuly/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">21DASCTFJuly</div>
+      </a>
     
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DASCTF-July-X-CBCTF-4th/" rel="tag">DASCTF July X CBCTF 4th</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-面经"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/07/01/%E9%9D%A2%E7%BB%8F/"
-    >面经</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/07/01/%E9%9D%A2%E7%BB%8F/" class="article-date">
-  <time datetime="2021-07-01T11:05:19.000Z" itemprop="datePublished">2021-07-01</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BB%8F%E5%8E%86/">经历</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="赛宁网安"><a href="#赛宁网安" class="headerlink" title="赛宁网安"></a>赛宁网安</h2><p>信息安全实习生（南京实习）</p>
-<h4 id="一面"><a href="#一面" class="headerlink" title="一面"></a>一面</h4><p>2021.6 电话面试（hr邀请）</p>
-<ul>
-<li>sql注入有回显和没有回显，怎么处理</li>
-<li>sql注入过滤绕过</li>
-<li>xss绕过</li>
-<li>csrf利用</li>
-</ul> 
-      <a class="article-more-link" href="/2021/07/01/%E9%9D%A2%E7%BB%8F/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2021%E9%9D%A2%E7%BB%8F/" rel="tag">2021面经</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-内网横向渗透"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/"
-    >内网横向渗透</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/" class="article-date">
-  <time datetime="2021-06-21T08:04:54.000Z" itemprop="datePublished">2021-06-21</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%86%85%E7%BD%91/">内网</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h3 id="IPC"><a href="#IPC" class="headerlink" title="IPC$"></a>IPC$</h3><p>IPC$(Internet Process Connection)是共享”命名管道”的资源，是为了让进程间通信而开放的命名管道</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">net share   显示所有共享资源</span><br><span class="line"></span><br><span class="line">net use \\ip\ipc$ &quot;密码&quot; &#x2F;user:&quot;用户名&quot; 建立ipc非空连接</span><br><span class="line"></span><br><span class="line">net use h: \\ip\c$     将对方c 映射到本地h</span><br><span class="line"></span><br><span class="line">net use \\ip\ipc$ &#x2F;del   如果断开连接就删除重新连接就行</span><br></pre></td></tr></table></figure>
-
-
-
-<p>待更新</p>
-<h3 id="psexec-ipc"><a href="#psexec-ipc" class="headerlink" title="psexec+ipc$"></a>psexec+ipc$</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">net use \\192.168.3.100\ipc$   建立ipc共享</span><br><span class="line"></span><br><span class="line">PsExec64.exe -accepteula \\&lt;目标机IP&gt; -s cmd.exe   #提权，记得将PsExec64.exe上传到远程桌面上</span><br><span class="line"></span><br><span class="line">net group &#x2F;domain</span><br><span class="line"></span><br><span class="line">net user hack 123qwe... &#x2F;add &#x2F;domain   #创建普通域用户</span><br><span class="line"></span><br><span class="line">net group &quot;Domain Admins&quot; hack &#x2F;add &#x2F;domain   #将普通域用户 提升为域管理</span><br></pre></td></tr></table></figure>
-
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/" rel="tag">内网横向渗透</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-内网信息收集"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"
-    >内网信息收集</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" class="article-date">
-  <time datetime="2021-06-17T07:10:45.000Z" itemprop="datePublished">2021-06-17</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%86%85%E7%BD%91/">内网</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="windows信息收集"><a href="#windows信息收集" class="headerlink" title="windows信息收集"></a>windows信息收集</h2><h4 id="本机信息收集"><a href="#本机信息收集" class="headerlink" title="本机信息收集"></a>本机信息收集</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">whoami</span><br><span class="line"></span><br><span class="line">ipconfig &#x2F;all  #是否在域内，网卡信息等</span><br><span class="line"></span><br><span class="line">systeminfo  #查看主机信息，os名称，版本，域，补丁</span><br><span class="line">（要提取的话根据补丁，寻找https:&#x2F;&#x2F;i.hacking8.com&#x2F;tiquan）</span><br><span class="line"></span><br><span class="line">net user       #本机用户列表</span><br><span class="line">net localgroup administrators  #本地管理员</span><br><span class="line"></span><br><span class="line">wmic product get name,version   #查看安装软件版本</span><br><span class="line">powershell &quot;Get-WmiObject -class Win32_Product | Select-Object -Property name,Version&quot;          #查看安装软件版本</span><br><span class="line"></span><br><span class="line">tasklist       # 默认显示映像名称，PID，会话名，会话，内存使用</span><br><span class="line">tasklist &#x2F;svc  # 显示PID，服务  </span><br><span class="line">（查看是否有杀软 https:&#x2F;&#x2F;www.ddosi.com&#x2F;av&#x2F;1.php）</span><br><span class="line"></span><br><span class="line">netstat -nao               #查看端口</span><br><span class="line">netstat -an | find “3389”  #查看对应端口</span><br></pre></td></tr></table></figure> 
-      <a class="article-more-link" href="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">内网信息收集</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-msf-端口转发-反弹shell"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/"
-    >msf-端口转发-反弹shell</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/" class="article-date">
-  <time datetime="2021-06-03T13:00:01.000Z" itemprop="datePublished">2021-06-03</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F/">渗透</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>这里借助的是免费的端口转发工具，来进行演示。</p>
-<p><a target="_blank" rel="noopener" href="https://www.ngrok.cc/login.html">https://www.ngrok.cc/login.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://console.uulap.com/app/login/?next=/">https://console.uulap.com/app/login/?next=/</a></p>
-<p>都是有可以免费使用。</p>
-<p>实验环境：</p>
-<p>kali ：192.168.119.138   （内网）</p>
-<p>对内网主机win/linux，反弹shell。</p> 
-      <a class="article-more-link" href="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MSF/" rel="tag">MSF</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-MARDASCTF2021"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/05/02/MARDASCTF2021/"
-    >MARDASCTF2021</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/05/02/MARDASCTF2021/" class="article-date">
-  <time datetime="2021-05-02T08:49:24.000Z" itemprop="datePublished">2021-05-02</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/CTF/">CTF</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="BestDB-sql注入类型"><a href="#BestDB-sql注入类型" class="headerlink" title="BestDB -sql注入类型"></a>BestDB -sql注入类型</h2><p><img src="/2021/05/02/MARDASCTF2021/1.png" alt="1"></p>
-<p>一看就感觉存在sql注入，重点是如何闭合，绕过。</p> 
-      <a class="article-more-link" href="/2021/05/02/MARDASCTF2021/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MARDASCTF2021/" rel="tag">MARDASCTF2021</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-mrctf2021"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/04/18/mrctf2021/"
-    >mrctf2021</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/04/18/mrctf2021/" class="article-date">
-  <time datetime="2021-04-18T08:08:12.000Z" itemprop="datePublished">2021-04-18</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/CTF/">CTF</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>自己太菜了，开始复盘。</p>
-<p><img src="/2021/04/18/mrctf2021/0.png" alt="0"></p>
-<h2 id="MISC-Real-Checkin"><a href="#MISC-Real-Checkin" class="headerlink" title="MISC-Real Checkin"></a>MISC-Real Checkin</h2><p>记录下这个零宽隐写，网上找的工具没有解出来</p> 
-      <a class="article-more-link" href="/2021/04/18/mrctf2021/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MRCTF2021/" rel="tag">MRCTF2021</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-VNCTF2021-web"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/03/29/VNCTF2021-web/"
-    >VNCTF2021-web</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/03/29/VNCTF2021-web/" class="article-date">
-  <time datetime="2021-03-29T04:12:32.000Z" itemprop="datePublished">2021-03-29</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/CTF/">CTF</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="Ez-game"><a href="#Ez-game" class="headerlink" title="Ez_game"></a>Ez_game</h2><p><img src="/2021/03/29/VNCTF2021-web/1.png" alt="1"></p>
-<p>玩游戏，太菜了，通不了关。自己复现总结下网上的wp。</p>
-<p>F12看源码，重点看game.js</p> 
-      <a class="article-more-link" href="/2021/03/29/VNCTF2021-web/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VNCTF2021-web/" rel="tag">VNCTF2021-web</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-2020总结"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/02/06/2020%E6%80%BB%E7%BB%93/"
-    >2020总结</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/02/06/2020%E6%80%BB%E7%BB%93/" class="article-date">
-  <time datetime="2021-02-06T13:42:52.000Z" itemprop="datePublished">2021-02-06</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BB%8F%E5%8E%86/">经历</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  Here's something encrypted, password is required to continue reading. 
-      <a class="article-more-link" href="/2021/02/06/2020%E6%80%BB%E7%BB%93/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AF%B92020%E5%B9%B4%E6%80%BB%E7%BB%93/" rel="tag">对2020年总结</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-  </article>
-  
-
-  
-  <nav class="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
   </nav>
-  
-</section>
-</div>
 
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "BtFy2jdBgUlyi7OzkMI8hyk2-gzGzoHsz",
+    app_key: "hfvNNRgvRm7RUTPbb0m3ylVu",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+     
+</article>
+
+</section>
       <footer class="footer">
   <div class="outer">
     <ul>
@@ -958,6 +442,23 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
