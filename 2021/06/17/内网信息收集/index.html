@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">344</span>
+            <span class="post-count">409</span>
         </span>
     </span>
 
@@ -127,7 +127,7 @@
 
 
 
-<h4 id="域的信息收集"><a href="#域的信息收集" class="headerlink" title="域的信息收集"></a>域的信息收集</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">net user &#x2F;domain           #查询域用户</span><br><span class="line">net view                   #查看域信息</span><br><span class="line">net view &#x2F;domain           #查看主域信息</span><br><span class="line">net accounts &#x2F;domain       #获取与密码信息(策略)</span><br><span class="line"></span><br><span class="line">net group &quot;domain computers&quot; &#x2F;domain         #查看域内所有的主机名</span><br><span class="line">net group &quot;domain controllers&quot; &#x2F;domain       #查看域控</span><br><span class="line">net group &quot;domain admins&quot;   &#x2F;domain          #查看域管理员</span><br><span class="line">net config workstation      #主机名，主机版本，工作站域，工作站域dns-name,当前登录域</span><br><span class="line"></span><br><span class="line">nslookup god.org            #可以定位域控</span><br><span class="line"></span><br><span class="line">net share                   #查看本地共享资源</span><br></pre></td></tr></table></figure>
+<h4 id="域的信息收集"><a href="#域的信息收集" class="headerlink" title="域的信息收集"></a>域的信息收集</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">net user &#x2F;domain           #查询域用户</span><br><span class="line">net view                   #查看域信息</span><br><span class="line">net view &#x2F;domain           #查看主域信息</span><br><span class="line">net accounts &#x2F;domain       #获取与密码信息(策略)</span><br><span class="line"></span><br><span class="line">net group &#x2F;domain                            #查询域内组</span><br><span class="line">net group &quot;domain computers&quot; &#x2F;domain         #查看域内所有的主机名</span><br><span class="line">net group &quot;domain controllers&quot; &#x2F;domain       #查看域控</span><br><span class="line">net group &quot;domain admins&quot;   &#x2F;domain          #查看域管理员</span><br><span class="line">net group &quot;enterpriser admins&quot;   &#x2F;domain     #查看企业管理用户</span><br><span class="line">net config workstation      #主机名，主机版本，工作站域，工作站域dns-name,当前登录域</span><br><span class="line"></span><br><span class="line">nslookup god.org            #可以定位域控</span><br><span class="line"></span><br><span class="line">net share                   #查看本地共享资源</span><br></pre></td></tr></table></figure>
 
 
 
@@ -143,6 +143,9 @@
 <p><a target="_blank" rel="noopener" href="https://jwt1399.top/posts/25535.html#toc-heading-14">Attck1</a></p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/aXEJpZVxxSkFUfG8TqsxHw">内网渗透学习导航</a></p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/l6AajnxFp8GMIYqVcN4SGg">参考1</a></p>
+<p>命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">net user hack 123qwe... &#x2F;add &#x2F;domain   #创建普通域用户</span><br><span class="line"></span><br><span class="line">net group &quot;Domain Admins&quot; hack &#x2F;add &#x2F;domain   #将普通域用户 提升为域管理</span><br></pre></td></tr></table></figure>
+
  
       <!-- reward -->
       

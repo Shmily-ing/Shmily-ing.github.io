@@ -153,6 +153,181 @@
     
     
     <article
+  id="post-内网信息收集"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"
+    >内网信息收集</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" class="article-date">
+  <time datetime="2021-06-17T07:10:45.000Z" itemprop="datePublished">2021-06-17</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%86%85%E7%BD%91/">内网</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="windows信息收集"><a href="#windows信息收集" class="headerlink" title="windows信息收集"></a>windows信息收集</h2><h4 id="本机信息收集"><a href="#本机信息收集" class="headerlink" title="本机信息收集"></a>本机信息收集</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">whoami</span><br><span class="line"></span><br><span class="line">ipconfig &#x2F;all  #是否在域内，网卡信息等</span><br><span class="line"></span><br><span class="line">systeminfo  #查看主机信息，os名称，版本，域，补丁</span><br><span class="line">（要提取的话根据补丁，寻找https:&#x2F;&#x2F;i.hacking8.com&#x2F;tiquan）</span><br><span class="line"></span><br><span class="line">net user       #本机用户列表</span><br><span class="line">net localgroup administrators  #本地管理员</span><br><span class="line"></span><br><span class="line">wmic product get name,version   #查看安装软件版本</span><br><span class="line">powershell &quot;Get-WmiObject -class Win32_Product | Select-Object -Property name,Version&quot;          #查看安装软件版本</span><br><span class="line"></span><br><span class="line">tasklist       # 默认显示映像名称，PID，会话名，会话，内存使用</span><br><span class="line">tasklist &#x2F;svc  # 显示PID，服务  </span><br><span class="line">（查看是否有杀软 https:&#x2F;&#x2F;www.ddosi.com&#x2F;av&#x2F;1.php）</span><br><span class="line"></span><br><span class="line">netstat -nao               #查看端口</span><br><span class="line">netstat -an | find “3389”  #查看对应端口</span><br></pre></td></tr></table></figure> 
+      <a class="article-more-link" href="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">内网信息收集</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-msf-端口转发-反弹shell"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/"
+    >msf-端口转发-反弹shell</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/" class="article-date">
+  <time datetime="2021-06-03T13:00:01.000Z" itemprop="datePublished">2021-06-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F/">渗透</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>这里借助的是免费的端口转发工具，来进行演示。</p>
+<p><a target="_blank" rel="noopener" href="https://www.ngrok.cc/login.html">https://www.ngrok.cc/login.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://console.uulap.com/app/login/?next=/">https://console.uulap.com/app/login/?next=/</a></p>
+<p>都是有可以免费使用。</p>
+<p>实验环境：</p>
+<p>kali ：192.168.119.138   （内网）</p>
+<p>对内网主机win/linux，反弹shell。</p> 
+      <a class="article-more-link" href="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MSF/" rel="tag">MSF</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
+  id="post-MARDASCTF2021"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/05/02/MARDASCTF2021/"
+    >MARDASCTF2021</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/05/02/MARDASCTF2021/" class="article-date">
+  <time datetime="2021-05-02T08:49:24.000Z" itemprop="datePublished">2021-05-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CTF/">CTF</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="BestDB-sql注入类型"><a href="#BestDB-sql注入类型" class="headerlink" title="BestDB -sql注入类型"></a>BestDB -sql注入类型</h2><p><img src="/2021/05/02/MARDASCTF2021/1.png" alt="1"></p>
+<p>一看就感觉存在sql注入，重点是如何闭合，绕过。</p> 
+      <a class="article-more-link" href="/2021/05/02/MARDASCTF2021/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MARDASCTF2021/" rel="tag">MARDASCTF2021</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
   id="post-mrctf2021"
   class="article article-type-post"
   itemscope
@@ -550,192 +725,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Access%E6%B3%A8%E5%85%A5/" rel="tag">Access注入</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-python-study"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/01/10/python-study/"
-    >python-study</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/01/10/python-study/" class="article-date">
-  <time datetime="2021-01-10T07:56:35.000Z" itemprop="datePublished">2021-01-10</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="0x01-MD5-encrypt-this-string"><a href="#0x01-MD5-encrypt-this-string" class="headerlink" title="0x01 MD5 encrypt this string"></a>0x01 MD5 encrypt this string</h2><p><img src="/2021/01/10/python-study/1.png" alt="image-20210129112157855"></p>
-<p>提取字符串，进行md5加密，并提交。我还是太慢了，学学脚本。网络有点卡多提交几次</p>
-<p>from hack the box web1</p>
-<p>自己结合网上的学习了两种方法，re.search和re.findall，个人感觉还是比较喜欢第二种方法，感觉法二挺方便的</p> 
-      <a class="article-more-link" href="/2021/01/10/python-study/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%99%BD%E5%B8%BDpython/" rel="tag">白帽python</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-SQL注入"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/01/10/SQL%E6%B3%A8%E5%85%A5/"
-    >SQL注入</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/01/10/SQL%E6%B3%A8%E5%85%A5/" class="article-date">
-  <time datetime="2021-01-10T07:55:48.000Z" itemprop="datePublished">2021-01-10</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E5%85%A5/">常见数据库注入</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>用户拥有可控参数，并且用户传入的参数被当作代码执行。</p>
-<p><img src="/2021/01/10/SQL%E6%B3%A8%E5%85%A5/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg" alt="sql注入流程图"></p> 
-      <a class="article-more-link" href="/2021/01/10/SQL%E6%B3%A8%E5%85%A5/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL%E6%B3%A8%E5%85%A5/" rel="tag">SQL注入</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-内网穿透"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/12/22/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"
-    >内网穿透</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2020/12/22/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" class="article-date">
-  <time datetime="2020-12-22T12:35:34.000Z" itemprop="datePublished">2020-12-22</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%86%85%E7%BD%91/">内网</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="frp篇"><a href="#frp篇" class="headerlink" title="frp篇"></a>frp篇</h2><h3 id="web端口转发-rdp转发"><a href="#web端口转发-rdp转发" class="headerlink" title="web端口转发+rdp转发"></a>web端口转发+rdp转发</h3><p>ubantu 桥接模式 ip:192.168.1.102  (模拟公网server)</p>
-<p>win7     NAT模式   ip:192.168.119.129(模拟内网)</p>
-<p> 下载对应版本<a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/releases">https://github.com/fatedier/frp/releases</a></p>
-<hr>
-<blockquote>
-<p>ubantu  </p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;fatedier&#x2F;frp&#x2F;releases&#x2F;download&#x2F;v0.37.0&#x2F;frp_0.37.0_linux_amd64.tar.gz</span><br><span class="line">tar -zxvf frp_0.37.0_linux_amd64.tar.gz</span><br><span class="line">cd frp_0.37.0_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#frps.ini</span><br><span class="line"></span><br><span class="line">[common]</span><br><span class="line">bind_port &#x3D; 6000      #frp服务器端口</span><br><span class="line">vhost_http_port&#x3D; 8080  #设定的http访问端口  （一定要写）</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>启动：./frps -c frps.ini</li>
-</ul>
-<hr> 
-      <a class="article-more-link" href="/2020/12/22/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li></ul>
 
     </footer>
   </div>
