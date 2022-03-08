@@ -153,6 +153,70 @@
     
     
     <article
+  id="post-内网横向渗透"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/"
+    >内网横向渗透</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/" class="article-date">
+  <time datetime="2021-06-21T08:04:54.000Z" itemprop="datePublished">2021-06-21</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%86%85%E7%BD%91/">内网</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>不断更新</p>
+<p>配合impacket工具使用</p>
+<h1 id="IPC"><a href="#IPC" class="headerlink" title="IPC$"></a>IPC$</h1><p>IPC$(Internet Process Connection)是共享”命名管道”的资源，是为了让进程间通信而开放的命名管道</p>
+<p>利用条件：</p>
+<ol>
+<li>开放139,445端口</li>
+<li></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">net share   显示所有共享资源</span><br><span class="line"></span><br><span class="line">net use \\ip\ipc$ &quot;密码&quot; &#x2F;user:&quot;用户名&quot; 建立ipc非空连接</span><br><span class="line"></span><br><span class="line">net use h: \\ip\c$     将对方c 映射到本地h</span><br><span class="line"></span><br><span class="line">net use \\ip\c$ &#x2F;del   如果断开连接就删除重新连接就行</span><br></pre></td></tr></table></figure> 
+      <a class="article-more-link" href="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/" rel="tag">内网横向渗透</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
   id="post-内网信息收集"
   class="article article-type-post"
   itemscope
@@ -673,58 +737,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Oracel%E6%B3%A8%E5%85%A5/" rel="tag">Oracel注入</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-Access注入"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/01/10/Access%E6%B3%A8%E5%85%A5/"
-    >Access注入</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/01/10/Access%E6%B3%A8%E5%85%A5/" class="article-date">
-  <time datetime="2021-01-10T08:12:10.000Z" itemprop="datePublished">2021-01-10</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E5%85%A5/">常见数据库注入</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Access%E6%B3%A8%E5%85%A5/" rel="tag">Access注入</a></li></ul>
 
     </footer>
   </div>

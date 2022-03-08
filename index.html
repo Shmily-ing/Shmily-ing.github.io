@@ -153,6 +153,67 @@
     
     
     <article
+  id="post-AD域的攻击方式"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/"
+    >AD域的攻击方式</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/" class="article-date">
+  <time datetime="2022-03-03T04:11:19.000Z" itemprop="datePublished">2022-03-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%86%85%E7%BD%91/">内网</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h3><h3 id="本地组策略-LGP"><a href="#本地组策略-LGP" class="headerlink" title="本地组策略 LGP"></a>本地组策略 LGP</h3><p>简称（Local Group Policy或者Local GPO）</p>
+<p>win+R键打开运行，输入“gpedit.msc”</p>
+<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220303233218371.png" alt="image-20220303233218371"></p>
+<p>添加对应脚本即可</p>
+<p>或者将文件直接放入C:\Windows\System32\GroupPolicy\Machine\Scripts\Startup   路径下  （可以开机自启）</p>
+<p>通常用来权限维持</p> 
+      <a class="article-more-link" href="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/" rel="tag">AD域的攻击方式</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
   id="post-CVE复现"
   class="article article-type-post"
   itemscope
@@ -232,18 +293,23 @@
   <p>[toc]</p>
 <h1 id="ntlm协议"><a href="#ntlm协议" class="headerlink" title="ntlm协议"></a>ntlm协议</h1><p><a target="_blank" rel="noopener" href="https://www.istt.org.cn/NewsDetail/2031875.html">Windows认证原理 网络认证(进阶篇)-江苏智慧安全可信技术研究院 (istt.org.cn)</a></p>
 <h1 id="Kerberos协议"><a href="#Kerberos协议" class="headerlink" title="Kerberos协议"></a>Kerberos协议</h1><p>Kerberos是一种由MIT提出的一种计算机网络授权协议，旨在通过使用加密技术为客户端/服务端应用程序提供强大的认证服务。</p>
-<p>Kerberos 主要是用在域环境下的身份认证协议。</p>
+<p>Kerberos 主要是用在<code>域环境下的身份认证协议</code>。</p>
 <p><img src="/2022/01/23/%E5%86%85%E7%BD%91%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/image-20220124122003434.png" alt="image-20220124122003434"></p>
 <p>client              ——       TGT            ——               <strong>KDC</strong>，密钥分发中心(<strong>AS</strong>，身份验证服务,<strong>TGS</strong>，票据授权服务)</p>
 <p>|</p>
-<p>TGS</p>
+<p>TGS(ticket )</p>
 <p>|</p>
 <p>server </p>
-<h3 id="黄金票据"><a href="#黄金票据" class="headerlink" title="黄金票据"></a>黄金票据</h3><h3 id="白银票据"><a href="#白银票据" class="headerlink" title="白银票据"></a>白银票据</h3><p>参考：</p>
+<p>参考：</p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/MWN5darSef0OqiT6rLk9nA">https://mp.weixin.qq.com/s/MWN5darSef0OqiT6rLk9nA</a></p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/5u2dyu1wVji8d1IxLb11DA">https://mp.weixin.qq.com/s/5u2dyu1wVji8d1IxLb11DA</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.istt.org.cn/NewsDetail/2031879.html">Windows认证原理 Kerberos认证-江苏智慧安全可信技术研究院 (istt.org.cn)</a></p>
-<h1 id><a href="#" class="headerlink" title></a></h1> 
+<p>​    </p>
+<h1 id><a href="#" class="headerlink" title></a></h1><h3 id="解密浏览器密码工具"><a href="#解密浏览器密码工具" class="headerlink" title="解密浏览器密码工具"></a>解密浏览器密码工具</h3><p>（有杀软）本地解chrome数据库方法：<a target="_blank" rel="noopener" href="https://github.com/moonD4rk/HackBrowserData/releases/tag/v0.3.7">https://github.com/moonD4rk/HackBrowserData/releases/tag/v0.3.7</a> </p>
+<p>（无杀软） 直接用<a target="_blank" rel="noopener" href="https://github.com/moonD4rk/HackBrowserData">hack-browser-data.exe</a>导出cookie</p>
+<p>参考：</p>
+<p>dozerctf2021域渗透：<a target="_blank" rel="noopener" href="https://www.yuque.com/w0rkmn/lnpppa/mdie6g#f755069b">https://www.yuque.com/w0rkmn/lnpppa/mdie6g#f755069b</a></p>
+ 
       <!-- reward -->
       
     </div>
@@ -295,7 +361,15 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <p>[toc]</p> 
+  <p>[toc]</p>
+<h1 id="windows-提权"><a href="#windows-提权" class="headerlink" title="windows 提权"></a>windows 提权</h1><hr>
+<h3 id="内核提权"><a href="#内核提权" class="headerlink" title="内核提权"></a>内核提权</h3><p>汇总：<a target="_blank" rel="noopener" href="https://github.com/SecWiki/windows-kernel-exploits">https://github.com/SecWiki/windows-kernel-exploits</a></p>
+<h5 id="提权辅助"><a href="#提权辅助" class="headerlink" title="提权辅助"></a>提权辅助</h5><p>systeminfo   查看补丁</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Wmic qfe get Caption,Description,HotFixID,InstalledOn</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/01/16/%E6%8F%90%E6%9D%83/image-20220221104049104.png" alt="image-20220221104049104"></p>
+<p><a target="_blank" rel="noopener" href="https://i.hacking8.com/tiquan">https://i.hacking8.com/tiquan</a> 寻找提权漏洞，github下载，但提权exe需要经过免杀测试 </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Kernelhub">Windows提权漏洞合集</a></p> 
       <a class="article-more-link" href="/2022/01/16/%E6%8F%90%E6%9D%83/"
         >阅读更多...</a
       >
@@ -661,84 +735,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2021%E9%9D%A2%E7%BB%8F/" rel="tag">2021面经</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-内网横向渗透"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/"
-    >内网横向渗透</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/" class="article-date">
-  <time datetime="2021-06-21T08:04:54.000Z" itemprop="datePublished">2021-06-21</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%86%85%E7%BD%91/">内网</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>不断更新</p>
-<p>配合impacket工具使用</p>
-<h1 id="IPC"><a href="#IPC" class="headerlink" title="IPC$"></a>IPC$</h1><p>IPC$(Internet Process Connection)是共享”命名管道”的资源，是为了让进程间通信而开放的命名管道</p>
-<p>利用条件：</p>
-<ol>
-<li>开放139,445端口</li>
-<li></li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">net share   显示所有共享资源</span><br><span class="line"></span><br><span class="line">net use \\ip\ipc$ &quot;密码&quot; &#x2F;user:&quot;用户名&quot; 建立ipc非空连接</span><br><span class="line"></span><br><span class="line">net use h: \\ip\c$     将对方c 映射到本地h</span><br><span class="line"></span><br><span class="line">net use \\ip\c$ &#x2F;del   如果断开连接就删除重新连接就行</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-<h3 id="psexec-ipc"><a href="#psexec-ipc" class="headerlink" title="psexec+ipc$"></a>psexec+ipc$</h3><p>前提是与目标主机建立ipc连接</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">net use \\192.168.3.100\ipc$   建立ipc共享</span><br><span class="line"></span><br><span class="line">PsExec64.exe -accepteula \\&lt;目标机IP&gt; -s cmd.exe   #获得交互式shell，并且权限提升到system权限</span><br><span class="line"></span><br><span class="line">net group &#x2F;domain</span><br><span class="line"></span><br><span class="line">net user hack 123qwe... &#x2F;add &#x2F;domain   #创建普通域用户</span><br><span class="line"></span><br><span class="line">net group &quot;Domain Admins&quot; hack &#x2F;add &#x2F;domain   #将普通域用户 提升为域管理</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="ipc-at"><a href="#ipc-at" class="headerlink" title="ipc+at"></a>ipc+at</h3><h3 id="ipc-schtasks"><a href="#ipc-schtasks" class="headerlink" title="ipc+schtasks"></a>ipc+schtasks</h3><h1 id="WMI"><a href="#WMI" class="headerlink" title="WMI"></a>WMI</h1><h1 id="winrm服务"><a href="#winrm服务" class="headerlink" title="winrm服务"></a>winrm服务</h1><h1 id="委派"><a href="#委派" class="headerlink" title="委派"></a>委派</h1><h1 id="打印机漏洞"><a href="#打印机漏洞" class="headerlink" title="打印机漏洞"></a>打印机漏洞</h1><h1 id="PTH哈希传递（mimikatz-ntml-hash）"><a href="#PTH哈希传递（mimikatz-ntml-hash）" class="headerlink" title="PTH哈希传递（mimikatz+ntml hash）"></a>PTH哈希传递（mimikatz+ntml hash）</h1><h1 id="PTT票据传递"><a href="#PTT票据传递" class="headerlink" title="PTT票据传递"></a>PTT票据传递</h1><h1 id><a href="#" class="headerlink" title></a></h1><h1 id="打域控"><a href="#打域控" class="headerlink" title="打域控"></a>打域控</h1><ul>
-<li>ZeroLogon(CVE-2020-1472)</li>
-<li>（CVE-2021-42287 and CVE-2021-42278）只需一个域用户</li>
-</ul>
-<h1 id="Dcsync"><a href="#Dcsync" class="headerlink" title="Dcsync"></a>Dcsync</h1><p>利用域管理员导出域内所有用户hash</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/" rel="tag">内网横向渗透</a></li></ul>
 
     </footer>
   </div>
