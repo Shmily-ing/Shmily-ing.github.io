@@ -400,6 +400,36 @@
       </tags>
   </entry>
   <entry>
+    <title>Go</title>
+    <url>/2022/03/21/Go/</url>
+    <content><![CDATA[<p>Go 语言被设计成一门应用于搭载 Web 服务器，存储集群或类似用途的巨型中央服务器的系统编程语言。</p>
+<h3 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h3><p>学习go写脚本和 免杀（其他大佬的有些免杀也是用go写的，效果不错，也算是为了能看懂代码吧）</p>
+<p>感觉go结构和java  很像，但go有指针。</p>
+<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p><strong>go build</strong>生成二进制文件exe</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go build xxx.go</span><br></pre></td></tr></table></figure>
+
+<p>结构</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">包声明   package</span><br><span class="line">引入包   import (&quot;&quot; &quot;&quot; &quot;&quot; &quot;xx&#x2F;xxx&quot;)</span><br><span class="line">函数     func function_name( [parameter list] ) [return_types] &#123;  函数体 &#125;</span><br><span class="line">变量     var xxx&#x3D;&quot;str&quot;  </span><br><span class="line">常量     const</span><br><span class="line">语句 &amp; 表达式  </span><br><span class="line">注释      </span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+
+
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main  定义了包名</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span>  使用 fmt 包</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;菜鸟教程&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;hello go&quot;</span> + <span class="string">&quot;good&quot;</span>,<span class="string">&quot;good&quot;</span>)</span><br><span class="line"></span><br><span class="line">	test()</span><br><span class="line">	<span class="keyword">var</span> age <span class="keyword">int</span></span><br><span class="line">	age = <span class="number">11</span></span><br><span class="line">	fmt.Println(age)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>学习：<a href="https://www.runoob.com/go">https://www.runoob.com/go</a></p>
+<p><a href="https://github.com/Leslie1sMe/golang">Leslie1sMe/golang: Golang的实战项目，学习笔记，代码例程汇总。 (github.com)</a></p>
+]]></content>
+      <categories>
+        <category>Go</category>
+      </categories>
+      <tags>
+        <tag>Go学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CVE复现</title>
     <url>/2022/02/26/CVE%E5%A4%8D%E7%8E%B0/</url>
     <content><![CDATA[<h2 id="RCE"><a href="#RCE" class="headerlink" title="RCE"></a>RCE</h2><h3 id="向日葵远程代码执行"><a href="#向日葵远程代码执行" class="headerlink" title="向日葵远程代码执行"></a>向日葵远程代码执行</h3><h5 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h5><p><strong>向日葵远程控制</strong>是一款免费的集远程控制电脑手机、远程桌面连接、远程开机、远程管理、支持内网穿透的一体化远程控制管理工具软件。</p>
@@ -465,36 +495,6 @@
       </categories>
       <tags>
         <tag>CVE</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Go</title>
-    <url>/2022/03/21/Go/</url>
-    <content><![CDATA[<p>Go 语言被设计成一门应用于搭载 Web 服务器，存储集群或类似用途的巨型中央服务器的系统编程语言。</p>
-<h3 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h3><p>学习go写脚本和 免杀（其他大佬的有些免杀也是用go写的，效果不错，也算是为了能看懂代码吧）</p>
-<p>感觉go结构和java  很像，但go有指针。</p>
-<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p><strong>go build</strong>生成二进制文件exe</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go build xxx.go</span><br></pre></td></tr></table></figure>
-
-<p>结构</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">包声明   package</span><br><span class="line">引入包   import (&quot;&quot; &quot;&quot; &quot;&quot; &quot;xx&#x2F;xxx&quot;)</span><br><span class="line">函数     func function_name( [parameter list] ) [return_types] &#123;  函数体 &#125;</span><br><span class="line">变量     var xxx&#x3D;&quot;str&quot;  </span><br><span class="line">常量     const</span><br><span class="line">语句 &amp; 表达式  </span><br><span class="line">注释      </span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-
-
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main  定义了包名</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span>  使用 fmt 包</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;菜鸟教程&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;hello go&quot;</span> + <span class="string">&quot;good&quot;</span>,<span class="string">&quot;good&quot;</span>)</span><br><span class="line"></span><br><span class="line">	test()</span><br><span class="line">	<span class="keyword">var</span> age <span class="keyword">int</span></span><br><span class="line">	age = <span class="number">11</span></span><br><span class="line">	fmt.Println(age)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>学习：<a href="https://www.runoob.com/go">https://www.runoob.com/go</a></p>
-<p><a href="https://github.com/Leslie1sMe/golang">Leslie1sMe/golang: Golang的实战项目，学习笔记，代码例程汇总。 (github.com)</a></p>
-]]></content>
-      <categories>
-        <category>Go</category>
-      </categories>
-      <tags>
-        <tag>Go学习</tag>
       </tags>
   </entry>
   <entry>
@@ -1100,7 +1100,7 @@
 <p><code>--fresh-queries</code>             不会从缓存里面加载</p>
 ]]></content>
       <categories>
-        <category>渗透工具学习</category>
+        <category>渗透</category>
       </categories>
       <tags>
         <tag>sqlmap</tag>
@@ -1619,63 +1619,6 @@
       </tags>
   </entry>
   <entry>
-    <title>基础web漏洞总结</title>
-    <url>/2022/03/14/%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h1 id="sql"><a href="#sql" class="headerlink" title="sql"></a>sql</h1><h1 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h1><ol>
-<li>判断前后端校验</li>
-<li>判断黑白名单（可以上传1.xxxxx 测试）</li>
-</ol>
-<h3 id="白名单"><a href="#白名单" class="headerlink" title="白名单"></a>白名单</h3><h5 id="利用文件包含"><a href="#利用文件包含" class="headerlink" title="利用文件包含"></a>利用文件包含</h5><ul>
-<li><p>图片马</p>
-</li>
-<li><p>包含session文件</p>
-</li>
-</ul>
-<h5 id><a href="#" class="headerlink" title></a></h5><h3 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h3><h5 id="后缀绕过"><a href="#后缀绕过" class="headerlink" title="后缀绕过"></a>后缀绕过</h5><h3 id="bypass"><a href="#bypass" class="headerlink" title="bypass"></a>bypass</h3><p>参考：</p>
-<p><a href="https://xz.aliyun.com/t/10459">https://xz.aliyun.com/t/10459</a></p>
-<p><a href="https://xz.aliyun.com/t/10515">https://xz.aliyun.com/t/10515</a></p>
-<h3 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h3><ul>
-<li>条件竞争</li>
-</ul>
-<hr>
-<h1 id="网站源码备份"><a href="#网站源码备份" class="headerlink" title="网站源码备份"></a>网站源码备份</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd &#x2F;var&#x2F;www&#x2F;html</span><br><span class="line">tar -zcvf ~&#x2F;html.tar.gz *</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h1 id="脱库"><a href="#脱库" class="headerlink" title="脱库"></a>脱库</h1><ul>
-<li>mysql</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysqldump -u root -p --all-databases &gt; ~&#x2F;backup.sql  # 备份所有数据库</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">在mysql&#x2F;data&#x2F;  中文件</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>mssql 数据库</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">backup database Test to disk&#x3D;&#39;D:&#x2F;Test.bak&#39;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">msdbdata.mdf msdblog.ldf 两个文件 copy 一份</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>acccess数据库</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mdb格式直接下载</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h1 id="渗透之信息收集"><a href="#渗透之信息收集" class="headerlink" title="渗透之信息收集"></a>渗透之信息收集</h1>]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
-      <tags>
-        <tag>web</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>工具安装记录</title>
     <url>/2021/12/29/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<p>[TOC]</p>
@@ -1734,6 +1677,63 @@
       </categories>
       <tags>
         <tag>工具安装记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基础web漏洞总结</title>
+    <url>/2022/03/14/%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="sql"><a href="#sql" class="headerlink" title="sql"></a>sql</h1><h1 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h1><ol>
+<li>判断前后端校验</li>
+<li>判断黑白名单（可以上传1.xxxxx 测试）</li>
+</ol>
+<h3 id="白名单"><a href="#白名单" class="headerlink" title="白名单"></a>白名单</h3><h5 id="利用文件包含"><a href="#利用文件包含" class="headerlink" title="利用文件包含"></a>利用文件包含</h5><ul>
+<li><p>图片马</p>
+</li>
+<li><p>包含session文件</p>
+</li>
+</ul>
+<h5 id><a href="#" class="headerlink" title></a></h5><h3 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h3><h5 id="后缀绕过"><a href="#后缀绕过" class="headerlink" title="后缀绕过"></a>后缀绕过</h5><h3 id="bypass"><a href="#bypass" class="headerlink" title="bypass"></a>bypass</h3><p>参考：</p>
+<p><a href="https://xz.aliyun.com/t/10459">https://xz.aliyun.com/t/10459</a></p>
+<p><a href="https://xz.aliyun.com/t/10515">https://xz.aliyun.com/t/10515</a></p>
+<h3 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h3><ul>
+<li>条件竞争</li>
+</ul>
+<hr>
+<h1 id="网站源码备份"><a href="#网站源码备份" class="headerlink" title="网站源码备份"></a>网站源码备份</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd &#x2F;var&#x2F;www&#x2F;html</span><br><span class="line">tar -zcvf ~&#x2F;html.tar.gz *</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="脱库"><a href="#脱库" class="headerlink" title="脱库"></a>脱库</h1><ul>
+<li>mysql</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysqldump -u root -p --all-databases &gt; ~&#x2F;backup.sql  # 备份所有数据库</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">在mysql&#x2F;data&#x2F;  中文件</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>mssql 数据库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">backup database Test to disk&#x3D;&#39;D:&#x2F;Test.bak&#39;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">msdbdata.mdf msdblog.ldf 两个文件 copy 一份</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>acccess数据库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mdb格式直接下载</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="渗透之信息收集"><a href="#渗透之信息收集" class="headerlink" title="渗透之信息收集"></a>渗透之信息收集</h1>]]></content>
+      <categories>
+        <category>渗透</category>
+      </categories>
+      <tags>
+        <tag>基础web漏洞</tag>
       </tags>
   </entry>
   <entry>
