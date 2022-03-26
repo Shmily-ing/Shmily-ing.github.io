@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">2</span>
+            <span class="post-count">423</span>
         </span>
     </span>
 
@@ -101,9 +101,47 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="weblogic"><a href="#weblogic" class="headerlink" title="weblogic"></a>weblogic</h1><span id="more"></span>
+  <h1 id="weblogic"><a href="#weblogic" class="headerlink" title="weblogic"></a>weblogic</h1><p>默认端口：<code>7001</code></p>
+<p>部分历史漏洞</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 弱口令&#x2F;任意文件读取+后台war包&#x2F;任意文件上传getshell</span><br><span class="line">2. CVE-2017-20271</span><br><span class="line">3. CVE-2018-2628</span><br><span class="line">4. CVE-2019-2725</span><br><span class="line">5. CVE-2020-2555</span><br><span class="line">6. CVE-2021-2394</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h1 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h1><h1 id="jboss"><a href="#jboss" class="headerlink" title="jboss"></a>jboss</h1><h1 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h1><h1 id="ngnix"><a href="#ngnix" class="headerlink" title="ngnix"></a>ngnix</h1><h1 id="iis"><a href="#iis" class="headerlink" title="iis"></a>iis</h1> 
+<p>WebLogic是<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BE%8E%E5%9B%BDOracle%E5%85%AC%E5%8F%B8/9952086">美国Oracle公司</a>出品的一个application server，确切的说是一个基于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/JAVAEE/3066623">JAVAEE</a>架构的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%AD%E9%97%B4%E4%BB%B6/452240">中间件</a>，WebLogic是用于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%BC%80%E5%8F%91/9400971">开发</a>、集成、部署和管理大型分布式Web应用、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8/2196523">网络应用</a>和<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8/10563731">数据库应用</a>的Java<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8">应用服务器</a>。将Java的动态功能和Java Enterprise标准的安全性引入大型网络应用的开发、集成、部署和管理之中。</p>
+<p>WebLogic Server具有开发和部署关键任务电子商务Web应用系统 所需的多种特色和优势。</p>
+<p>weblogic是java EE的应用服务器（application server），包括ejb ,jsp,servlet,jms等等，全能型的。是商业软件里排名第一的容器（JSP、servlet、EJB等），并提供其他如JAVA编辑等工具，是一个综合的开发及运行环境。(收费)</p>
+<span id="more"></span>
+
+<p><img src="/2022/03/20/middleware-java/image-20220323214802592.png" alt="image-20220323214802592"></p>
+<p>以下环境为vulhub靶场环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;vulhub&#x2F;vulhub.git</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="弱口令-上传war包"><a href="#弱口令-上传war包" class="headerlink" title="弱口令+上传war包"></a>弱口令+上传war包</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>weblogic搭建完后没有修改后台登陆密码</p>
+<h3 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h3><p>启动环境</p>
+<p><img src="/2022/03/20/middleware-java/image-20220324002901248.png" alt="image-20220324002901248"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;192.168.119.165:7001&#x2F;console       访问后台</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/20/middleware-java/image-20220324010752442.png" alt="image-20220324010752442"></p>
+<p>weblogic/Oracle@123登陆后台（bp爆破，密码错五次就会禁止认证）</p>
+<p>下面要准备war包上传</p>
+<p><img src="/2022/03/20/middleware-java/image-20220324011153236.png" alt="image-20220324011153236"></p>
+<p>点上传文件</p>
+<p><img src="/2022/03/20/middleware-java/image-20220324011308204.png" alt="image-20220324011308204"></p>
+<p>将jsp马（哥斯拉生成jsp）打包成war包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jar -cvf shell.war 1.jsp</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/20/middleware-java/image-20220324011818173.png" alt="image-20220324011818173"></p>
+<p>然后一直下一步，完成</p>
+<p><img src="/2022/03/20/middleware-java/image-20220324011923927.png" alt="image-20220324011923927"></p>
+<p>成功上传</p>
+<p><img src="/2022/03/20/middleware-java/image-20220324012109060.png" alt="image-20220324012109060"></p>
+<p>访问：<a target="_blank" rel="noopener" href="http://192.168.119.165:7001/shell/1.jsp">http://192.168.119.165:7001/shell/1.jsp</a> ，shell连接</p>
+<p><img src="/2022/03/20/middleware-java/image-20220324014607221.png" alt="image-20220324014607221"></p>
+<p><img src="/2022/03/20/middleware-java/image-20220324014649096.png" alt="image-20220324014649096"></p>
+<p>参考：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/9932#toc-4">weblogic漏洞大杂烩 - 先知社区 (aliyun.com)</a></p>
+<p>工具：(<a target="_blank" rel="noopener" href="https://github.com/0xn0ne/weblogicScanner">https://github.com/0xn0ne/weblogicScanner</a>)</p>
+<h1 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h1><h1 id="jboss"><a href="#jboss" class="headerlink" title="jboss"></a>jboss</h1><p>jboss/jboss +war上传</p>
+<h1 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h1><h1 id="ngnix"><a href="#ngnix" class="headerlink" title="ngnix"></a>ngnix</h1><h1 id="iis"><a href="#iis" class="headerlink" title="iis"></a>iis</h1> 
       <!-- reward -->
       
     </div>

