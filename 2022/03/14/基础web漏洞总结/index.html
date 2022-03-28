@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">185</span>
+            <span class="post-count">178</span>
         </span>
     </span>
 
@@ -104,30 +104,53 @@
   <h1 id="sql"><a href="#sql" class="headerlink" title="sql"></a>sql</h1><p><a target="_blank" rel="noopener" href="https://www.shmilying.tk/categories/%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E5%85%A5/">常见数据库注入 | (shmilying.tk)</a></p>
  <span id="more"></span>
 
-<h3 id="常见基础绕过"><a href="#常见基础绕过" class="headerlink" title="常见基础绕过"></a>常见基础绕过</h3><h1 id="xss"><a href="#xss" class="headerlink" title="xss"></a>xss</h1><h3 id="收藏语句"><a href="#收藏语句" class="headerlink" title="收藏语句"></a>收藏语句</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line">&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># upload</span><br><span class="line"></span><br><span class="line">1. 判断前后端校验</span><br><span class="line">2. 判断黑白名单（可以上传1.xxxxx 测试）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 白名单</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##### 利用文件包含</span><br><span class="line"></span><br><span class="line">+ 图片马</span><br><span class="line"></span><br><span class="line">+ 包含session文件</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">##### </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 黑名单</span><br><span class="line"></span><br><span class="line">##### 后缀绕过</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### bypass</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">参考：</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;xz.aliyun.com&#x2F;t&#x2F;10459</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;xz.aliyun.com&#x2F;t&#x2F;10515</span><br><span class="line"></span><br><span class="line">### tips</span><br><span class="line"></span><br><span class="line">+ 条件竞争</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># csrf</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># ssrf</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 网站源码备份</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>cd /var/www/html<br>tar -zcvf ~/html.tar.gz *</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 脱库</span><br><span class="line"></span><br><span class="line">+ mysql</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p> mysqldump -u root -p –all-databases &gt; ~/backup.sql  # 备份所有数据库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-<p>在mysql/data/  中文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">+ mssql 数据库</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>backup database Test to disk=’D:/Test.bak’</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-<p>msdbdata.mdf msdblog.ldf 两个文件 copy 一份</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">+ acccess数据库</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>mdb格式直接下载</p>
-<pre><code>
+<h3 id="常见基础绕过"><a href="#常见基础绕过" class="headerlink" title="常见基础绕过"></a>常见基础绕过</h3><h1 id="xss"><a href="#xss" class="headerlink" title="xss"></a>xss</h1><h3 id="收藏语句"><a href="#收藏语句" class="headerlink" title="收藏语句"></a>收藏语句</h3><h1 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h1><ol>
+<li>判断前后端校验</li>
+<li>判断黑白名单（可以上传1.xxxxx 测试）</li>
+</ol>
+<h3 id="白名单"><a href="#白名单" class="headerlink" title="白名单"></a>白名单</h3><h5 id="利用文件包含"><a href="#利用文件包含" class="headerlink" title="利用文件包含"></a>利用文件包含</h5><ul>
+<li><p>图片马</p>
+</li>
+<li><p>包含session文件</p>
+</li>
+</ul>
+<h5 id><a href="#" class="headerlink" title></a></h5><h3 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h3><h5 id="后缀绕过"><a href="#后缀绕过" class="headerlink" title="后缀绕过"></a>后缀绕过</h5><h3 id="bypass"><a href="#bypass" class="headerlink" title="bypass"></a>bypass</h3><p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/10459">https://xz.aliyun.com/t/10459</a></p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/10515">https://xz.aliyun.com/t/10515</a></p>
+<h3 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h3><ul>
+<li>条件竞争</li>
+</ul>
+<h1 id="csrf"><a href="#csrf" class="headerlink" title="csrf"></a>csrf</h1><h1 id="ssrf"><a href="#ssrf" class="headerlink" title="ssrf"></a>ssrf</h1><hr>
+<h1 id="网站源码备份"><a href="#网站源码备份" class="headerlink" title="网站源码备份"></a>网站源码备份</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;var&#x2F;www&#x2F;html</span><br><span class="line">tar -zcvf ~&#x2F;html.tar.gz *</span><br></pre></td></tr></table></figure>
 
 
 
 
-# 渗透之信息收集
+
+<h1 id="脱库"><a href="#脱库" class="headerlink" title="脱库"></a>脱库</h1><ul>
+<li>mysql</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u root -p --all-databases &gt; ~&#x2F;backup.sql  # 备份所有数据库</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在mysql&#x2F;data&#x2F;  中文件</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>mssql 数据库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">backup database Test to disk&#x3D;&#39;D:&#x2F;Test.bak&#39;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msdbdata.mdf msdblog.ldf 两个文件 copy 一份</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>acccess数据库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mdb格式直接下载</span><br></pre></td></tr></table></figure>
 
 
 
 
-</code></pre>
- 
+
+<h1 id="渗透之信息收集"><a href="#渗透之信息收集" class="headerlink" title="渗透之信息收集"></a>渗透之信息收集</h1> 
       <!-- reward -->
       
     </div>
