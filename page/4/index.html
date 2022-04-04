@@ -153,6 +153,67 @@
     
     
     <article
+  id="post-unctf"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/11/15/unctf/"
+    >unctf2020</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/11/15/unctf/" class="article-date">
+  <time datetime="2020-11-15T02:29:10.000Z" itemprop="datePublished">2020-11-15</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CTF/">CTF</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="easy-ssrf"><a href="#easy-ssrf" class="headerlink" title="easy_ssrf"></a>easy_ssrf</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">                   welc0me to <span class="number">2020</span>UNCTF!!</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span><span class="string">&#x27;&lt;center&gt;&lt;strong&gt;welc0me to 2020UNCTF!!&lt;/strong&gt;&lt;/center&gt;&#x27;</span>;</span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="variable">$url</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;url&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span>(preg_match(<span class="string">&#x27;/unctf\.com/&#x27;</span>,<span class="variable">$url</span>))&#123;</span><br><span class="line">    <span class="keyword">if</span>(!preg_match(<span class="string">&#x27;/php|file|zip|bzip|zlib|base|data/i&#x27;</span>,<span class="variable">$url</span>))&#123;</span><br><span class="line">        <span class="variable">$url</span>=file_get_contents(<span class="variable">$url</span>);</span><br><span class="line">        <span class="keyword">echo</span>(<span class="variable">$url</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span>(<span class="string">&#x27;error!!&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span>(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>第一需要匹配unctf.com,第二不能匹配php|file|zip|bzip|zlib|base|data。</p>
+<p>url可控，可以访问unctf.com里面的数据 从而造成ssrf。</p> 
+      <a class="article-more-link" href="/2020/11/15/unctf/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unctf2020/" rel="tag">unctf2020</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
   id="post-每日一题"
   class="article article-type-post"
   itemscope
