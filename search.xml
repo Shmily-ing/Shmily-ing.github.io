@@ -330,11 +330,14 @@
 <p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220303233218371.png" alt="image-20220303233218371"></p>
 <p>添加对应脚本即可</p>
 <p>或者将文件直接放入C:\Windows\System32\GroupPolicy\Machine\Scripts\Startup   路径下  （可以开机自启）</p>
-<p>通常用来权限维持</p>
+<p>通常用来<code>权限维持</code></p>
 <span id="more"></span>
 
 <h3 id="域组策略"><a href="#域组策略" class="headerlink" title="域组策略"></a>域组策略</h3><p>域控机器下发一些策略，可以利用域组策略进行批量修改</p>
-<h5 id="SYSVOL"><a href="#SYSVOL" class="headerlink" title="SYSVOL"></a>SYSVOL</h5><p>SYSVOL是存储域公共文件服务器副本的共享的文件夹，存在域控制器(DC)的C:\Windows\SYSVOL下，用来为整个域中域控制器提供访问和复制的能力，里面保存了组策略相关的信息。     同时存放在Sysvol文件夹中的信息会复制到域中所有DC上。   在域中，用户登录时会先在sysvol下查找<strong>GPO</strong></p>
+<h5 id="SYSVOL"><a href="#SYSVOL" class="headerlink" title="SYSVOL"></a>SYSVOL</h5><ul>
+<li>保存了域内组策略相关的信息（登陆脚本，组策略数据，等等）</li>
+</ul>
+<p>SYSVOL是存储域公共文件服务器副本的共享的文件夹，存在域控制器(DC)的C:\Windows\SYSVOL下，用来为整个域中域控制器提供访问，复制，共享的能力。  在域中，用户登录时会先在sysvol下查找<strong>GPO</strong></p>
 <p>目录</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Domain 文件夹：存储策略实体，策略和脚本存储位置</span><br><span class="line">Staging：交换区域，临时存放多台DC之间需要同步的数据，DC中的数据首先复制该文件夹，然后在DC之间相互复制</span><br></pre></td></tr></table></figure>
 
@@ -360,7 +363,7 @@
 
 <h1 id="relay"><a href="#relay" class="headerlink" title="relay"></a>relay</h1><p>参考：<a href="https://xz.aliyun.com/t/9511">https://xz.aliyun.com/t/9511</a></p>
 <h1 id="委派"><a href="#委派" class="headerlink" title="委派"></a>委派</h1><p>参考：<a href="https://www.freebuf.com/articles/system/198381.html">https://www.freebuf.com/articles/system/198381.html</a></p>
-<h1 id="打印机漏洞"><a href="#打印机漏洞" class="headerlink" title="打印机漏洞"></a>打印机漏洞</h1><h1 id="打域控"><a href="#打域控" class="headerlink" title="打域控"></a>打域控</h1><h3 id="ZeroLogon-CVE-2020-1472"><a href="#ZeroLogon-CVE-2020-1472" class="headerlink" title="ZeroLogon(CVE-2020-1472)"></a>ZeroLogon(CVE-2020-1472)</h3><h3 id="CVE-2021-42287-and-CVE-2021-42278-只需一个域用户"><a href="#CVE-2021-42287-and-CVE-2021-42278-只需一个域用户" class="headerlink" title="(CVE-2021-42287 and CVE-2021-42278)只需一个域用户"></a>(CVE-2021-42287 and CVE-2021-42278)只需一个域用户</h3><h1 id="Dcsync"><a href="#Dcsync" class="headerlink" title="Dcsync"></a>Dcsync</h1><h3 id="导hash"><a href="#导hash" class="headerlink" title="导hash"></a>导hash</h3><ul>
+<h1 id="打印机漏洞"><a href="#打印机漏洞" class="headerlink" title="打印机漏洞"></a>打印机漏洞</h1><h1 id="打域控"><a href="#打域控" class="headerlink" title="打域控"></a>打域控</h1><h3 id="ZeroLogon-CVE-2020-1472"><a href="#ZeroLogon-CVE-2020-1472" class="headerlink" title="ZeroLogon(CVE-2020-1472)"></a>ZeroLogon(CVE-2020-1472)</h3><h3 id="CVE-2021-42287-and-CVE-2021-42278-只需一个域用户"><a href="#CVE-2021-42287-and-CVE-2021-42278-只需一个域用户" class="headerlink" title="(CVE-2021-42287 and CVE-2021-42278)只需一个域用户"></a>(CVE-2021-42287 and CVE-2021-42278)只需一个域用户</h3><h1 id="Dcsync"><a href="#Dcsync" class="headerlink" title="Dcsync"></a>Dcsync</h1><h3 id="dump-hash"><a href="#dump-hash" class="headerlink" title="dump hash"></a>dump hash</h3><ul>
 <li>需要获得以下任一用户的权限：</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Administrators组内的用户</span><br><span class="line">Domain Admins组内的用户</span><br><span class="line">Enterprise Admins组内的用户</span><br><span class="line">域控制器的计算机帐户</span><br></pre></td></tr></table></figure>
@@ -530,6 +533,165 @@
       </tags>
   </entry>
   <entry>
+    <title>Laravel</title>
+    <url>/2022/04/04/Laravel/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Laravel 是一个 Web应用框架，php作为底层语言，能够有很好的扩展，拥有比较完善的软件包。</p>
+<p>3大核心：路由，控制器，视图</p>
+<p>中文官方：<strong><a href="https://learnku.com/docs/laravel/8.x">https://learnku.com/docs/laravel/8.x</a></strong></p>
+<span id="more"></span>
+
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><ol>
+<li>composer下载 ：<a href="https://getcomposer.org/download/">https://getcomposer.org/download/</a></li>
+</ol>
+<p>安装目录下执行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">echo @php &quot;%~dp0composer.phar&quot; %*&gt;composer.bat</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">composer -V</span><br><span class="line"></span><br><span class="line">换源</span><br><span class="line">国内：</span><br><span class="line"><span class="comment"># composer config -g repo.packagist composer https://packagist.phpcomposer.com</span></span><br><span class="line">或</span><br><span class="line"><span class="comment"># composer config -g repo.packagist composer https://packagist.laravel-china.org  （这个可能有时会报错）</span></span><br><span class="line"></span><br><span class="line">国外官方：</span><br><span class="line">composer config -g repo.packagist composer https://packagist.org </span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>从<a href="https://laravelacademy.org/post/2%E4%B8%8B%E8%BD%BD%E6%A1%86%E6%9E%B6">https://laravelacademy.org/post/2下载框架</a></li>
+</ol>
+<p>或者</p>
+<p>利用composer直接下载，在phpstudy 的www目录下执行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">composer create-project --prefer-dist  laravel&#x2F;laravel laravel8  #创建laravel8文件，将框架下载到其中，不指定版本</span><br><span class="line"></span><br><span class="line">composer create-project --prefer-dist  laravel&#x2F;laravel laravel 7.x #指定版本</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/04/Laravel/image-20220404135443531.png" alt="image-20220404135443531"></p>
+<p>phpstudy 配置：设置根目录到为public<br><img src="/2022/04/04/Laravel/image-20220404135516295.png" alt="image-20220404135516295"></p>
+<p>访问如下图</p>
+<p><img src="/2022/04/04/Laravel/image-20220404135640257.png" alt="image-20220404135640257"></p>
+<p>以下代码分析均为<code>laravel8.83.6 </code>框架，目前laravel框架已经更新到9.x了</p>
+<h1 id="框架结构"><a href="#框架结构" class="headerlink" title="框架结构"></a>框架结构</h1><p><a href="https://learnku.com/docs/laravel/8.x/structure/9356">https://learnku.com/docs/laravel/8.x/structure/9356</a></p>
+<p>主要目录分析</p>
+<p><img src="/2022/04/04/Laravel/image-20220404150632990.png" alt="image-20220404150632990"></p>
+<h3 id="app"><a href="#app" class="headerlink" title="app"></a>app</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">整个laravel最主要部分，主要代码都在app目录下完成，包含了mvc三大模块</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/04/Laravel/image-20220404151946298.png" alt="image-20220404151946298"></p>
+<ul>
+<li>/app/Http</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">包含控制器，中间件，表单请求等，几乎所有请求处理都在这里</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/04/Laravel/image-20220404153320786.png" alt="image-20220404153320786"></p>
+<ul>
+<li>/app/Models</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">包含Eloquent 等模型文件，用于处理数据库操作实现。每个表都有对应的model类，通过模型方法进行数据表的增删改查。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>/app/Http/Controllers/</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">控制器用于将相关的 HTTP 请求封装到一个类中进行处理，如同TP6一样，默认情况下，控制器没有分组，默认都存放在 app&#x2F;Http&#x2F;Controllers 目录下。</span><br></pre></td></tr></table></figure>
+
+<p>控制器有类似tp的目录结构</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">app</span><br><span class="line">├─Http </span><br><span class="line">│  ├─Controllers  控制器目录</span><br><span class="line">│  │  ├─admin  后台Admin模块</span><br><span class="line">│  │  │  ├─IndexController.php 后台首页控制器</span><br><span class="line">│  │  │  ├─CategoryController.php 分类管理控制器</span><br><span class="line">│  │  ├─home   前台Home模块</span><br><span class="line">│  │  │  ├─IndexController.php 前台首页控制器</span><br><span class="line">│  │  │  ├─ArticleController.php 文章展示控制器</span><br><span class="line">│  │  ├─user   用户User模块</span><br><span class="line">│  │  │  ├─IndexController.php 用户首页控制器</span><br><span class="line">│  │  │  ├─TagController.php 标签管理控制器</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="bootstrap"><a href="#bootstrap" class="headerlink" title="bootstrap"></a>bootstrap</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">存放所有的第三方代码，包括框架函数源码（&#x2F;vendor&#x2F;laravel）、插件和扩展等。</span><br></pre></td></tr></table></figure>
+
+<h3 id="config"><a href="#config" class="headerlink" title="config"></a>config</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">网站入口，存放对外开放的资源目录，</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/04/Laravel/image-20220404154958546.png" alt="image-20220404154958546"></p>
+<h3 id="database"><a href="#database" class="headerlink" title="database"></a>database</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">数据库操作相关文件（数据库迁移和数据填充）</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/04/Laravel/image-20220404155250445.png" alt="image-20220404155250445"></p>
+<h3 id="public"><a href="#public" class="headerlink" title="public"></a>public</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">index.php进入程序请求的入口， 同时包含前端控制器和资源相关文件</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/04/Laravel/image-20220404155516021.png" alt="image-20220404155516021"></p>
+<h3 id="resources"><a href="#resources" class="headerlink" title="resources"></a>resources</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">资源文件,前端显示内容，通常利用路由调用views里面的文件进行显示</span><br><span class="line"></span><br><span class="line">views 一般以xx.blade.php命名，</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/04/Laravel/image-20220404155645046.png" alt="image-20220404155645046"></p>
+<h3 id="routes"><a href="#routes" class="headerlink" title="routes"></a>routes</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">通过配置路由，进行资源的访问，请求，页面的显示等</span><br><span class="line"></span><br><span class="line">web.php 文件包含 RouteServiceProvider 放置在 web 中间件组中的路由，后者提供会话状态、CSRF 保护和 cookie 加密。如果您的应用程序不提供无状态的 RESTful API，那么您的所有路由都很可能在 web.php 文件。</span><br><span class="line"></span><br><span class="line">api.php 文件包含 RouteServiceProvider 放置在 api 中间件组中的路由，后者提供速率限制。这些路由是无状态的，因此通过这些路由进入应用程序的请求将通过令牌进行身份验证，并且不能访问会话状态。</span><br><span class="line"></span><br><span class="line">console.php 文件是您可以定义所有基于闭包的控制台命令的地方。每个闭包都绑定到一个命令实例，允许使用一种简单的方法与每个命令的进行 IO 交互。尽管这个文件没有定义 HTTP 路由，但是它定义了应用程序中基于控制台的入口点（路由）。</span><br><span class="line"></span><br><span class="line">channels.php 文件是您可以注册应用程序支持的所有事件广播频道的位置。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2022/04/04/Laravel/image-20220405005017795.png" alt="image-20220405005017795"></p>
+<h3 id="storage"><a href="#storage" class="headerlink" title="storage"></a>storage</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">编译后的视图、基于会话、文件缓存和其它框架生成的文件</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/04/04/Laravel/image-20220404155731350.png" alt="image-20220404155731350"></p>
+<p>​    </p>
+<h3 id="texts"><a href="#texts" class="headerlink" title="texts"></a>texts</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">应用测试相关文件</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="vendor"><a href="#vendor" class="headerlink" title="vendor"></a>vendor</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">需要调用的 依赖模块</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="数据库配置"><a href="#数据库配置" class="headerlink" title="数据库配置"></a>数据库配置</h3><p>.env</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DB_CONNECTION&#x3D;mysql</span><br><span class="line">DB_HOST&#x3D;127.0.0.1</span><br><span class="line">DB_PORT&#x3D;3306</span><br><span class="line">DB_DATABASE&#x3D;laravel    数据库名</span><br><span class="line">DB_USERNAME&#x3D;root       数据库账户</span><br><span class="line">DB_PASSWORD&#x3D;XXXX       数据库密码</span><br></pre></td></tr></table></figure>
+
+<p>/config—&gt;database.php</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#39;mysql&#39; &#x3D;&gt; [</span><br><span class="line">    &#39;driver&#39; &#x3D;&gt; &#39;mysql&#39;,</span><br><span class="line">    &#39;url&#39; &#x3D;&gt; env(&#39;DATABASE_URL&#39;),</span><br><span class="line">    &#39;host&#39; &#x3D;&gt; env(&#39;DB_HOST&#39;, &#39;127.0.0.1&#39;),</span><br><span class="line">    &#39;port&#39; &#x3D;&gt; env(&#39;DB_PORT&#39;, &#39;3306&#39;),</span><br><span class="line">    &#39;database&#39; &#x3D;&gt; env(&#39;DB_DATABASE&#39;, &#39;laravel&#39;),</span><br><span class="line">    &#39;username&#39; &#x3D;&gt; env(&#39;DB_USERNAME&#39;, &#39;root&#39;),</span><br><span class="line">    &#39;password&#39; &#x3D;&gt; env(&#39;DB_PASSWORD&#39;, &#39;XXXX&#39;),</span><br><span class="line">    &#39;unix_socket&#39; &#x3D;&gt; env(&#39;DB_SOCKET&#39;, &#39;&#39;),</span><br><span class="line">    &#39;charset&#39; &#x3D;&gt; &#39;utf8mb4&#39;,</span><br><span class="line">    &#39;collation&#39; &#x3D;&gt; &#39;utf8mb4_unicode_ci&#39;,</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><h3 id="基础路由"><a href="#基础路由" class="headerlink" title="基础路由"></a>基础路由</h3><p>routes文件下进行</p>
+<ul>
+<li>基本用法</li>
+</ul>
+<p>routes/web.php添加，  </p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">Route::get(<span class="string">&#x27;test&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;hello Laravel&quot;</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p> url/test    ，进行访问</p>
+<p>​    <img src="/2022/04/04/Laravel/image-20220405002141084.png" alt="image-20220405002141084"></p>
+<p>另外一种用法,利用闭包函数，（例如视图文件），</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">Route::get(<span class="string">&#x27;/we&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> view(<span class="string">&#x27;welcome&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>视图文件在resouces/views/中welcome.blade.php</p>
+<p><img src="/2022/04/04/Laravel/image-20220405003140886.png" alt="image-20220405003140886"></p>
+<p>访问(<a href="http://127.0.0.1:10001/we">http://127.0.0.1:10001/we</a>)</p>
+<p><img src="/2022/04/04/Laravel/image-20220405003209479.png" alt="image-20220405003209479"></p>
+<p>还有更多的路由请求方式就不在叙述了（<a href="https://laravelacademy.org/post/21970%EF%BC%89%E6%AF%95%E7%AB%9F%E6%88%91%E4%B8%8D%E6%98%AF%E5%BC%80%E5%8F%91%E5%95%8A">https://laravelacademy.org/post/21970）毕竟我不是开发啊</a> </p>
+<ul>
+<li>在api.php下定义的路由需要加上/api/</li>
+</ul>
+<p><img src="/2022/04/04/Laravel/image-20220405003738965.png" alt="image-20220405003738965"></p>
+<p><a href="http://127.0.0.1:10001/api/testapi">http://127.0.0.1:10001/api/testapi</a></p>
+<p><img src="/2022/04/04/Laravel/image-20220405003809337.png" alt="image-20220405003809337"></p>
+<p>等等等</p>
+<h3 id="laravel8-的路由用法的变化"><a href="#laravel8-的路由用法的变化" class="headerlink" title="laravel8 的路由用法的变化"></a>laravel8 的路由用法的变化</h3><p>laravel7等Laravel旧版本中，RouteServiceProvider类中包含$namespace属性，值为AppHttpControllers，此属性可自动为路由添加AppHttpControllers前缀。</p>
+<p>即直接进行下面方式路由配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Route::get(&#39;login&#39;, &#39;LoginControl@index&#39;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>laravel8.x 中该属性值默认为null，路由中只能使用标准PHP调用语法（需填写controller全路径）</p>
+<p><img src="/2022/04/04/Laravel/image-20220405001507199.png" alt="image-20220405001507199"></p>
+<p>方法1：取消<code>protected $namespace = &#39;App\\Http\\Controllers&#39;;</code>注释</p>
+<p>方法2：在进行下面路由配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use App\Http\Controllers\LoginControl;      </span><br><span class="line"></span><br><span class="line">Route::get(&#39;login&#39;, [LoginControl::class, &#39;index&#39;]);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="创建新控制器文件"><a href="#创建新控制器文件" class="headerlink" title="创建新控制器文件"></a>创建新控制器文件</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">php artisan make:controller  LoginController</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="简单实例应用路由调用控制器"><a href="#简单实例应用路由调用控制器" class="headerlink" title="简单实例应用路由调用控制器"></a>简单实例应用路由调用控制器</h3><ul>
+<li></li>
+</ul>
+<p>参考:</p>
+<p><a href="https://cloud.tencent.com/developer/article/1723191">https://cloud.tencent.com/developer/article/1723191</a>      Laravel框架分析</p>
+<p><a href="https://mp.weixin.qq.com/s/aFGw2fPgjoSTD6zK_j-oHA">https://mp.weixin.qq.com/s/aFGw2fPgjoSTD6zK_j-oHA</a>    零基础学习laravel8 </p>
+<p><a href="https://blog.csdn.net/wjcms/article/details/109016643">https://blog.csdn.net/wjcms/article/details/109016643</a>   laravel8更新之路由调整</p>
+]]></content>
+      <categories>
+        <category>php</category>
+      </categories>
+      <tags>
+        <tag>Laravel框架学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MARDASCTF2021</title>
     <url>/2021/05/02/MARDASCTF2021/</url>
     <content><![CDATA[<h2 id="BestDB-sql注入类型"><a href="#BestDB-sql注入类型" class="headerlink" title="BestDB -sql注入类型"></a>BestDB -sql注入类型</h2><p><img src="/2021/05/02/MARDASCTF2021/1.png" alt="1"></p>
@@ -599,146 +761,6 @@
       </categories>
       <tags>
         <tag>Oracel注入</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Laravel</title>
-    <url>/2022/04/04/Laravel/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Laravel 是一个 Web应用框架，php作为底层语言，能够有很好的扩展，拥有比较完善的软件包。</p>
-<p>中文官方：<a href="http://laravel.p2hp.com/cndocs/9.x/installation">http://laravel.p2hp.com/cndocs/9.x/installation</a></p>
-<span id="more"></span>
-
-<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><ol>
-<li>composer下载 ：<a href="https://getcomposer.org/download/">https://getcomposer.org/download/</a></li>
-</ol>
-<p>安装目录下执行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">echo @php &quot;%~dp0composer.phar&quot; %*&gt;composer.bat</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">composer -V</span><br><span class="line"></span><br><span class="line">换源</span><br><span class="line">国内：</span><br><span class="line"><span class="comment"># composer config -g repo.packagist composer https://packagist.phpcomposer.com</span></span><br><span class="line">或</span><br><span class="line"><span class="comment"># composer config -g repo.packagist composer https://packagist.laravel-china.org  （这个可能有时会报错）</span></span><br><span class="line"></span><br><span class="line">国外官方：</span><br><span class="line">composer config -g repo.packagist composer https://packagist.org </span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>从<a href="https://laravelacademy.org/post/2%E4%B8%8B%E8%BD%BD%E6%A1%86%E6%9E%B6">https://laravelacademy.org/post/2下载框架</a></li>
-</ol>
-<p>或者</p>
-<p>利用composer直接下载，在phpstudy 的www目录下执行</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">composer create-project --prefer-dist  laravel&#x2F;laravel laravel8  #创建laravel8文件，将框架下载到其中，不指定版本</span><br><span class="line"></span><br><span class="line">composer create-project --prefer-dist  laravel&#x2F;laravel laravel 7.x #指定版本</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/04/04/Laravel/image-20220404135443531.png" alt="image-20220404135443531"></p>
-<p>phpstudy 配置：设置根目录到为public<br><img src="/2022/04/04/Laravel/image-20220404135516295.png" alt="image-20220404135516295"></p>
-<p>访问如下图</p>
-<p><img src="/2022/04/04/Laravel/image-20220404135640257.png" alt="image-20220404135640257"></p>
-<p>以下代码分析均为<code>laravel8.83.6 </code>框架，目前laravel框架已经更新到9.x了</p>
-<h1 id="框架结构"><a href="#框架结构" class="headerlink" title="框架结构"></a>框架结构</h1><p>主要目录分析</p>
-<p><img src="/2022/04/04/Laravel/image-20220404150632990.png" alt="image-20220404150632990"></p>
-<h3 id="app"><a href="#app" class="headerlink" title="app"></a>app</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">整个laravel最主要部分，主要代码都在app目录下完成，包含了mvc三大模块</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/04/04/Laravel/image-20220404151946298.png" alt="image-20220404151946298"></p>
-<ul>
-<li>/app/Http</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">包含控制器，中间件，表单请求等，</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/04/04/Laravel/image-20220404153320786.png" alt="image-20220404153320786"></p>
-<ul>
-<li>/app/Models</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">包含Eloquent 等模型文件，用于处理数据库操作实现。每个表都有对应的model类，通过模型方法进行数据表的增删改查。</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="bootstrap"><a href="#bootstrap" class="headerlink" title="bootstrap"></a>bootstrap</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">存放所有的第三方代码，包括框架函数源码（&#x2F;vendor&#x2F;laravel）、插件和扩展等。</span><br></pre></td></tr></table></figure>
-
-<h3 id="config"><a href="#config" class="headerlink" title="config"></a>config</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">网站入口，存放对外开放的资源目录，</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/04/04/Laravel/image-20220404154958546.png" alt="image-20220404154958546"></p>
-<h3 id="database"><a href="#database" class="headerlink" title="database"></a>database</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">数据库操作相关文件（数据库迁移和数据填充）</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/04/04/Laravel/image-20220404155250445.png" alt="image-20220404155250445"></p>
-<h3 id="public"><a href="#public" class="headerlink" title="public"></a>public</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">前端控制器和资源相关文件</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/04/04/Laravel/image-20220404155516021.png" alt="image-20220404155516021"></p>
-<h3 id="resources"><a href="#resources" class="headerlink" title="resources"></a>resources</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">资源文件,前端显示内容，通常利用路由调用views里面的文件进行显示</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/04/04/Laravel/image-20220404155645046.png" alt="image-20220404155645046"></p>
-<h3 id="routes"><a href="#routes" class="headerlink" title="routes"></a>routes</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">通过配置路由，进行资源的访问，请求，页面的显示等</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/04/04/Laravel/image-20220405005017795.png" alt="image-20220405005017795"></p>
-<h3 id="storage"><a href="#storage" class="headerlink" title="storage"></a>storage</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">编译后的视图、基于会话、文件缓存和其它框架生成的文件</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/04/04/Laravel/image-20220404155731350.png" alt="image-20220404155731350"></p>
-<p>​    </p>
-<h3 id="texts"><a href="#texts" class="headerlink" title="texts"></a>texts</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">应用测试相关文件</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="vendor"><a href="#vendor" class="headerlink" title="vendor"></a>vendor</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">需要调用的 依赖模块</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="数据库配置"><a href="#数据库配置" class="headerlink" title="数据库配置"></a>数据库配置</h3><p>.env</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DB_CONNECTION&#x3D;mysql</span><br><span class="line">DB_HOST&#x3D;127.0.0.1</span><br><span class="line">DB_PORT&#x3D;3306</span><br><span class="line">DB_DATABASE&#x3D;laravel    数据库名</span><br><span class="line">DB_USERNAME&#x3D;root       数据库账户</span><br><span class="line">DB_PASSWORD&#x3D;XXXX       数据库密码</span><br></pre></td></tr></table></figure>
-
-<p>/config—&gt;database.php</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#39;mysql&#39; &#x3D;&gt; [</span><br><span class="line">    &#39;driver&#39; &#x3D;&gt; &#39;mysql&#39;,</span><br><span class="line">    &#39;url&#39; &#x3D;&gt; env(&#39;DATABASE_URL&#39;),</span><br><span class="line">    &#39;host&#39; &#x3D;&gt; env(&#39;DB_HOST&#39;, &#39;127.0.0.1&#39;),</span><br><span class="line">    &#39;port&#39; &#x3D;&gt; env(&#39;DB_PORT&#39;, &#39;3306&#39;),</span><br><span class="line">    &#39;database&#39; &#x3D;&gt; env(&#39;DB_DATABASE&#39;, &#39;laravel&#39;),</span><br><span class="line">    &#39;username&#39; &#x3D;&gt; env(&#39;DB_USERNAME&#39;, &#39;root&#39;),</span><br><span class="line">    &#39;password&#39; &#x3D;&gt; env(&#39;DB_PASSWORD&#39;, &#39;XXXX&#39;),</span><br><span class="line">    &#39;unix_socket&#39; &#x3D;&gt; env(&#39;DB_SOCKET&#39;, &#39;&#39;),</span><br><span class="line">    &#39;charset&#39; &#x3D;&gt; &#39;utf8mb4&#39;,</span><br><span class="line">    &#39;collation&#39; &#x3D;&gt; &#39;utf8mb4_unicode_ci&#39;,</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><h3 id="基础路由"><a href="#基础路由" class="headerlink" title="基础路由"></a>基础路由</h3><p>routes文件下进行</p>
-<ul>
-<li>基本用法</li>
-</ul>
-<p>routes/web.php添加，  </p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">Route::get(<span class="string">&#x27;test&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;hello Laravel&quot;</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p> url/test    ，进行访问</p>
-<p>​    <img src="/2022/04/04/Laravel/image-20220405002141084.png" alt="image-20220405002141084"></p>
-<p>另外一种用法,利用闭包函数，（例如视图文件），</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">Route::get(<span class="string">&#x27;/we&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> view(<span class="string">&#x27;welcome&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>视图文件在resouces/views/中welcome.blade.php</p>
-<p><img src="/2022/04/04/Laravel/image-20220405003140886.png" alt="image-20220405003140886"></p>
-<p>访问(<a href="http://127.0.0.1:10001/we">http://127.0.0.1:10001/we</a>)</p>
-<p><img src="/2022/04/04/Laravel/image-20220405003209479.png" alt="image-20220405003209479"></p>
-<p>还有更多的路由请求方式就不在叙述了（<a href="https://laravelacademy.org/post/21970%EF%BC%89%E6%AF%95%E7%AB%9F%E6%88%91%E4%B8%8D%E6%98%AF%E5%BC%80%E5%8F%91%E5%95%8A">https://laravelacademy.org/post/21970）毕竟我不是开发啊</a> </p>
-<ul>
-<li>在api.php下定义的路由需要加上/api/</li>
-</ul>
-<p><img src="/2022/04/04/Laravel/image-20220405003738965.png" alt="image-20220405003738965"></p>
-<p><a href="http://127.0.0.1:10001/api/testapi">http://127.0.0.1:10001/api/testapi</a></p>
-<p><img src="/2022/04/04/Laravel/image-20220405003809337.png" alt="image-20220405003809337"></p>
-<h3 id="laravel8-的路由用法的变化"><a href="#laravel8-的路由用法的变化" class="headerlink" title="laravel8 的路由用法的变化"></a>laravel8 的路由用法的变化</h3><p>laravel7等Laravel旧版本中，RouteServiceProvider类中包含$namespace属性，值为AppHttpControllers，此属性可自动为路由添加AppHttpControllers前缀。</p>
-<p>即直接进行下面方式路由配置</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Route::get(&#39;login&#39;, &#39;LoginControl@index&#39;);</span><br></pre></td></tr></table></figure>
-
-
-
-<p>laravel8.x 中该属性值默认为null，路由中只能使用标准PHP调用语法（需填写controller全路径）</p>
-<p><img src="/2022/04/04/Laravel/image-20220405001507199.png" alt="image-20220405001507199"></p>
-<p>方法1：取消<code>protected $namespace = &#39;App\\Http\\Controllers&#39;;</code>注释</p>
-<p>方法2：在进行下面路由配置</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use App\Http\Controllers\LoginControl;      #添加命名空间</span><br><span class="line"></span><br><span class="line">Route::get(&#39;login&#39;, [LoginControl::class, &#39;index&#39;]);</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="简单实例应用路由调用控制器"><a href="#简单实例应用路由调用控制器" class="headerlink" title="简单实例应用路由调用控制器"></a>简单实例应用路由调用控制器</h3><ul>
-<li></li>
-</ul>
-<p>参考:</p>
-<p><a href="https://cloud.tencent.com/developer/article/1723191">https://cloud.tencent.com/developer/article/1723191</a>      Laravel框架分析</p>
-<p><a href="https://mp.weixin.qq.com/s/aFGw2fPgjoSTD6zK_j-oHA">https://mp.weixin.qq.com/s/aFGw2fPgjoSTD6zK_j-oHA</a>    零基础学习laravel8 </p>
-<p><a href="https://blog.csdn.net/wjcms/article/details/109016643">https://blog.csdn.net/wjcms/article/details/109016643</a>   laravel8更新之路由调整</p>
-]]></content>
-      <categories>
-        <category>php</category>
-      </categories>
-      <tags>
-        <tag>Laravel框架学习</tag>
       </tags>
   </entry>
   <entry>
@@ -1584,10 +1606,11 @@
 
 
 <hr>
-<h1 id="指纹识别"><a href="#指纹识别" class="headerlink" title="指纹识别"></a>指纹识别</h1><h3 id="在线平台"><a href="#在线平台" class="headerlink" title="在线平台"></a>在线平台</h3><p>潮汐  <a href="http://finger.tidesec.com/">TideFinger 潮汐指纹 TideFinger 潮汐指纹 (tidesec.com)</a></p>
+<h1 id="指纹识别"><a href="#指纹识别" class="headerlink" title="指纹识别"></a>指纹识别</h1><h3 id="在线平台"><a href="#在线平台" class="headerlink" title="在线平台"></a>在线平台</h3><p>潮汐 (<a href="http://finger.tidesec.com/">http://finger.tidesec.com/</a>)</p>
 <p>云溪  (<a href="https://www.yunsee.cn/">https://www.yunsee.cn/</a>)   收费</p>
-<p><a href="http://whatweb.bugscaner.com/look/">在线指纹识别,在线cms识别小插件–在线工具 (bugscaner.com)</a></p>
-<p><a href="https://fp.shuziguanxing.com/#/">指纹收录平台 (shuziguanxing.com)</a></p>
+<p> (bugscaner.com)(<a href="http://whatweb.bugscaner.com/look/">http://whatweb.bugscaner.com/look/</a>)</p>
+<p>(shuziguanxing.com)(<a href="https://fp.shuziguanxing.com/#/">https://fp.shuziguanxing.com/#/</a>)</p>
+<p>GoeEye平台 (<a href="https://www.godeye.vip/index/">https://www.godeye.vip/index/</a>)</p>
 <h3 id="github工具"><a href="#github工具" class="headerlink" title="github工具"></a>github工具</h3><p>WhatWeb</p>
 <p><a href="https://github.com/TideSec/TideFinger">TideFinger</a></p>
 <p><a href="https://github.com/Tuhinshubhra/CMSeeK">Tuhinshubhra/CMSeeK: CMS Detection and Exploitation suite - Scan WordPress, Joomla, Drupal and over 180 other CMSs (github.com)</a></p>
@@ -1607,7 +1630,8 @@
 <li>dirsearch</li>
 <li>dirmap</li>
 </ul>
-<h1 id="漏洞库"><a href="#漏洞库" class="headerlink" title="漏洞库"></a>漏洞库</h1><p><a href="https://qftm.github.io/Information_Collection_Handbook/exploit-database/domestic.html">https://qftm.github.io/Information_Collection_Handbook/exploit-database/domestic.html</a></p>
+<h1 id="漏洞库"><a href="#漏洞库" class="headerlink" title="漏洞库"></a>漏洞库</h1><p><a href="https://wiki.96.mk/">https://wiki.96.mk/</a></p>
+<p><a href="https://qftm.github.io/Information_Collection_Handbook/exploit-database/domestic.html">https://qftm.github.io/Information_Collection_Handbook/exploit-database/domestic.html</a></p>
 <p><a href="https://qftm.github.io/Information_Collection_Handbook/exploit-database/foreign.html">https://qftm.github.io/Information_Collection_Handbook/exploit-database/foreign.html</a></p>
 <p>参考</p>
 <p><a href="https://github.com/Qftm/Information_Collection_Handbook">https://github.com/Qftm/Information_Collection_Handbook</a></p>
@@ -1774,6 +1798,9 @@
 <li>md5解密ntml hash 比较简单的可以解出</li>
 <li>一些工具要做对应的免杀测试吧。</li>
 </ol>
+<p>记录下几篇文章：</p>
+<p>利用脚本工具进行无文件LSASS dump凭据转储</p>
+<p><a href="https://s3cur3th1ssh1t.github.io/Reflective-Dump-Tools/">https://s3cur3th1ssh1t.github.io/Reflective-Dump-Tools/</a></p>
 ]]></content>
       <categories>
         <category>内网</category>
@@ -1881,7 +1908,9 @@
     <title>内网知识学习</title>
     <url>/2022/01/23/%E5%86%85%E7%BD%91%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<p>[toc]</p>
-<h1 id="ntlm协议"><a href="#ntlm协议" class="headerlink" title="ntlm协议"></a>ntlm协议</h1><p><a href="https://www.istt.org.cn/NewsDetail/2031875.html">Windows认证原理 网络认证(进阶篇)-江苏智慧安全可信技术研究院 (istt.org.cn)</a></p>
+<h1 id="ntlm协议"><a href="#ntlm协议" class="headerlink" title="ntlm协议"></a>ntlm协议</h1><p>windows身份认证</p>
+<p>pth基础</p>
+<p><a href="https://www.istt.org.cn/NewsDetail/2031875.html">Windows认证原理 网络认证(进阶篇)-江苏智慧安全可信技术研究院 (istt.org.cn)</a></p>
 <h1 id="Kerberos协议"><a href="#Kerberos协议" class="headerlink" title="Kerberos协议"></a>Kerberos协议</h1><p>Kerberos是一种由MIT提出的一种计算机网络授权协议，旨在通过使用加密技术为客户端/服务端应用程序提供强大的认证服务。</p>
 <p>Kerberos 主要是用在<code>域环境下的身份认证协议</code>。</p>
 <p><img src="/2022/01/23/%E5%86%85%E7%BD%91%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/image-20220124122003434.png" alt="image-20220124122003434"></p>
@@ -1906,6 +1935,9 @@
 <h1 id="活动目录"><a href="#活动目录" class="headerlink" title="活动目录"></a>活动目录</h1><p> 活动目录是一种目录服务：活动目录通过域控制器接受查询请求，查询活动目录数据库把域对象名字解析为对象记录</p>
 <p>​    <code>活动目录用户</code>通过<code>LDAP协议</code>（一种进入目录服务的协议）向活动目录服务器<code>发送请求</code>，为了定位提供查询服务的域控制器就需要借助于DNS。</p>
 <p>​    活动目录使用<code>DNS服务器</code>作为<code>定位服务器</code>，把域控制器解析为IP地址。活动目录要发挥作用，离不开DNS。</p>
+<p>ntds.dit</p>
+<p>ldap</p>
+<p><a href="https://www.freebuf.com/articles/network/283763.html">内网渗透测试：内网环境与活动目录基础概念 - FreeBuf网络安全行业门户</a></p>
 ]]></content>
       <categories>
         <category>内网</category>
@@ -1915,7 +1947,92 @@
       </tags>
   </entry>
   <entry>
-    <title>内网穿透</title>
+    <title>基础web漏洞总结</title>
+    <url>/2022/03/14/%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h1 id="sql"><a href="#sql" class="headerlink" title="sql"></a>sql</h1><p>简单来说就是传参过滤不严谨照成sql语句的拼接</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$id</span>  = <span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;SELECT name FROM users WHERE id = <span class="subst">$id</span>&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://www.shmilying.tk/categories/%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E5%85%A5/">常见数据库注入 | (shmilying.tk)</a></p>
+ <span id="more"></span>
+
+
+
+<h3 id="常见基础绕过"><a href="#常见基础绕过" class="headerlink" title="常见基础绕过"></a>常见基础绕过</h3><h3 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h3><ul>
+<li>预编译</li>
+</ul>
+<ul>
+<li>PDO</li>
+</ul>
+<p>防止了sql语句的拼接</p>
+<ul>
+<li>正则规则</li>
+</ul>
+<h1 id="xss"><a href="#xss" class="headerlink" title="xss"></a>xss</h1><h3 id="收藏语句"><a href="#收藏语句" class="headerlink" title="收藏语句"></a>收藏语句</h3><h1 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h1><ol>
+<li>判断前后端校验</li>
+<li>判断黑白名单（可以上传1.xxxxx 测试）</li>
+</ol>
+<h3 id="白名单"><a href="#白名单" class="headerlink" title="白名单"></a>白名单</h3><h5 id="利用文件包含"><a href="#利用文件包含" class="headerlink" title="利用文件包含"></a>利用文件包含</h5><ul>
+<li><p>图片马</p>
+</li>
+<li><p>包含session文件</p>
+</li>
+</ul>
+<h5 id><a href="#" class="headerlink" title></a></h5><h3 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h3><h5 id="后缀绕过"><a href="#后缀绕过" class="headerlink" title="后缀绕过"></a>后缀绕过</h5><h3 id="解析漏洞"><a href="#解析漏洞" class="headerlink" title="解析漏洞"></a>解析漏洞</h3><ul>
+<li>IIS 6.0—— /xx.asp/xx.jpg</li>
+<li>IIS 7.0—— 默认Fast-cgi开启，直接在图片地址后面输入/.php就会将图片当做php解析</li>
+<li>Nginx——版本小于0.8.37 利用方法和IIS7.0一样</li>
+<li>Apache—— 上传文件名为test.php.x1.x2.x3, Apache是从右往左判断</li>
+<li>Lighttpd—— XX.jpg/xx.php</li>
+</ul>
+<h3 id="bypass"><a href="#bypass" class="headerlink" title="bypass"></a>bypass</h3><p>参考：</p>
+<p><a href="https://xz.aliyun.com/t/10459">https://xz.aliyun.com/t/10459</a></p>
+<p><a href="https://xz.aliyun.com/t/10515">https://xz.aliyun.com/t/10515</a></p>
+<h3 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h3><ul>
+<li>条件竞争</li>
+</ul>
+<h1 id="csrf"><a href="#csrf" class="headerlink" title="csrf"></a>csrf</h1><h1 id="ssrf"><a href="#ssrf" class="headerlink" title="ssrf"></a>ssrf</h1><h3 id="常用协议："><a href="#常用协议：" class="headerlink" title="常用协议："></a>常用协议：</h3><p>file，dict，gopher，dns</p>
+<h3 id="ssrf-redis"><a href="#ssrf-redis" class="headerlink" title="ssrf+redis"></a>ssrf+redis</h3><ol>
+<li>主从复制</li>
+<li>计划任务</li>
+</ol>
+<hr>
+<h1 id="网站源码备份"><a href="#网站源码备份" class="headerlink" title="网站源码备份"></a>网站源码备份</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd &#x2F;var&#x2F;www&#x2F;html</span><br><span class="line">tar -zcvf ~&#x2F;html.tar.gz *</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="脱库"><a href="#脱库" class="headerlink" title="脱库"></a>脱库</h1><ul>
+<li>mysql</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysqldump -u root -p --all-databases &gt; ~&#x2F;backup.sql  # 备份所有数据库</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">在mysql&#x2F;data&#x2F;  中文件</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>mssql 数据库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">backup database Test to disk&#x3D;&#39;D:&#x2F;Test.bak&#39;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">msdbdata.mdf msdblog.ldf 两个文件 copy 一份</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>acccess数据库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mdb格式直接下载</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>渗透</category>
+      </categories>
+      <tags>
+        <tag>基础web漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>内网穿透/代理</title>
     <url>/2020/12/22/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</url>
     <content><![CDATA[<h2 id="frp篇"><a href="#frp篇" class="headerlink" title="frp篇"></a>frp篇</h2><h3 id="web端口转发-rdp转发"><a href="#web端口转发-rdp转发" class="headerlink" title="web端口转发+rdp转发"></a>web端口转发+rdp转发</h3><p>ubantu 桥接模式 ip:192.168.1.102  (模拟公网server)</p>
 <p>win7     NAT模式   ip:192.168.119.129(模拟内网)</p>
@@ -2041,14 +2158,20 @@
 
 
 <hr>
-<h2 id="reGeorg"><a href="#reGeorg" class="headerlink" title="reGeorg"></a>reGeorg</h2><p>tunnel.php多了<code>dl(&quot;php_sockets.dll&quot;);</code>这行代码。作用是加载socket这个模块，但dl自php 5.3起默认情况下处于禁用状态，所以php 5.3版本以下才可以使用tunnel.php。如果启用，则需配置php.ini(开启enable_dl ，安装php_sockets扩展客户端)。</p>
+<h2 id="reGeorg"><a href="#reGeorg" class="headerlink" title="reGeorg"></a>reGeorg</h2><ul>
+<li>正向代理</li>
+</ul>
+<p>tunnel.php多了<code>dl(&quot;php_sockets.dll&quot;);</code>这行代码。作用是加载socket这个模块，但dl自php 5.3起默认情况下处于禁用状态，所以php 5.3版本以下才可以使用tunnel.php。如果启用，则需配置php.ini(开启enable_dl ，安装php_sockets扩展客户端)。</p>
 <p>window下这个靶机我是没有配置好。。。</p>
 <p>本机：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python reGeorgSocksProxy.py -p 10010 -u http:&#x2F;&#x2F;192.168.1.102&#x2F;tunnel.php</span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="Neo-reGeorg"><a href="#Neo-reGeorg" class="headerlink" title="Neo-reGeorg"></a>Neo-reGeorg</h2><p>人家魔改的,我的靶机还是报错，，，感觉这个还是有点限制的</p>
+<h2 id="Neo-reGeorg"><a href="#Neo-reGeorg" class="headerlink" title="Neo-reGeorg"></a>Neo-reGeorg</h2><ul>
+<li>正向代理</li>
+</ul>
+<p>人家魔改的,我的靶机还是报错，，，感觉这个还是有点限制的</p>
 <p>本机：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python neoreg.py generate -k zzz</span><br><span class="line">python neoreg.py -k zzz -u http:&#x2F;&#x2F;192.168.1.102&#x2F;tunnel.php  -p 10010</span><br></pre></td></tr></table></figure>
 
@@ -2057,92 +2180,7 @@
         <category>内网</category>
       </categories>
       <tags>
-        <tag>内网穿透</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基础web漏洞总结</title>
-    <url>/2022/03/14/%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h1 id="sql"><a href="#sql" class="headerlink" title="sql"></a>sql</h1><p>简单来说就是传参过滤不严谨照成sql语句的拼接</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$id</span>  = <span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;SELECT name FROM users WHERE id = <span class="subst">$id</span>&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><a href="https://www.shmilying.tk/categories/%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E5%85%A5/">常见数据库注入 | (shmilying.tk)</a></p>
- <span id="more"></span>
-
-
-
-<h3 id="常见基础绕过"><a href="#常见基础绕过" class="headerlink" title="常见基础绕过"></a>常见基础绕过</h3><h3 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h3><ul>
-<li>预编译</li>
-</ul>
-<ul>
-<li>PDO</li>
-</ul>
-<p>防止了sql语句的拼接</p>
-<ul>
-<li>正则规则</li>
-</ul>
-<h1 id="xss"><a href="#xss" class="headerlink" title="xss"></a>xss</h1><h3 id="收藏语句"><a href="#收藏语句" class="headerlink" title="收藏语句"></a>收藏语句</h3><h1 id="upload"><a href="#upload" class="headerlink" title="upload"></a>upload</h1><ol>
-<li>判断前后端校验</li>
-<li>判断黑白名单（可以上传1.xxxxx 测试）</li>
-</ol>
-<h3 id="白名单"><a href="#白名单" class="headerlink" title="白名单"></a>白名单</h3><h5 id="利用文件包含"><a href="#利用文件包含" class="headerlink" title="利用文件包含"></a>利用文件包含</h5><ul>
-<li><p>图片马</p>
-</li>
-<li><p>包含session文件</p>
-</li>
-</ul>
-<h5 id><a href="#" class="headerlink" title></a></h5><h3 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h3><h5 id="后缀绕过"><a href="#后缀绕过" class="headerlink" title="后缀绕过"></a>后缀绕过</h5><h3 id="解析漏洞"><a href="#解析漏洞" class="headerlink" title="解析漏洞"></a>解析漏洞</h3><ul>
-<li>IIS 6.0—— /xx.asp/xx.jpg</li>
-<li>IIS 7.0—— 默认Fast-cgi开启，直接在图片地址后面输入/.php就会将图片当做php解析</li>
-<li>Nginx——版本小于0.8.37 利用方法和IIS7.0一样</li>
-<li>Apache—— 上传文件名为test.php.x1.x2.x3, Apache是从右往左判断</li>
-<li>Lighttpd—— XX.jpg/xx.php</li>
-</ul>
-<h3 id="bypass"><a href="#bypass" class="headerlink" title="bypass"></a>bypass</h3><p>参考：</p>
-<p><a href="https://xz.aliyun.com/t/10459">https://xz.aliyun.com/t/10459</a></p>
-<p><a href="https://xz.aliyun.com/t/10515">https://xz.aliyun.com/t/10515</a></p>
-<h3 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h3><ul>
-<li>条件竞争</li>
-</ul>
-<h1 id="csrf"><a href="#csrf" class="headerlink" title="csrf"></a>csrf</h1><h1 id="ssrf"><a href="#ssrf" class="headerlink" title="ssrf"></a>ssrf</h1><h3 id="常用协议："><a href="#常用协议：" class="headerlink" title="常用协议："></a>常用协议：</h3><p>file，dict，gopher，dns</p>
-<h3 id="ssrf-redis"><a href="#ssrf-redis" class="headerlink" title="ssrf+redis"></a>ssrf+redis</h3><ol>
-<li>主从复制</li>
-<li>计划任务</li>
-</ol>
-<hr>
-<h1 id="网站源码备份"><a href="#网站源码备份" class="headerlink" title="网站源码备份"></a>网站源码备份</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd &#x2F;var&#x2F;www&#x2F;html</span><br><span class="line">tar -zcvf ~&#x2F;html.tar.gz *</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h1 id="脱库"><a href="#脱库" class="headerlink" title="脱库"></a>脱库</h1><ul>
-<li>mysql</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysqldump -u root -p --all-databases &gt; ~&#x2F;backup.sql  # 备份所有数据库</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">在mysql&#x2F;data&#x2F;  中文件</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>mssql 数据库</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">backup database Test to disk&#x3D;&#39;D:&#x2F;Test.bak&#39;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">msdbdata.mdf msdblog.ldf 两个文件 copy 一份</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>acccess数据库</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mdb格式直接下载</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>渗透</category>
-      </categories>
-      <tags>
-        <tag>基础web漏洞</tag>
+        <tag>内网穿透/代理</tag>
       </tags>
   </entry>
   <entry>

@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">396</span>
+            <span class="post-count">435</span>
         </span>
     </span>
 
@@ -102,7 +102,9 @@
     <div class="article-entry" itemprop="articleBody">
        
   <p>[toc]</p>
-<h1 id="ntlm协议"><a href="#ntlm协议" class="headerlink" title="ntlm协议"></a>ntlm协议</h1><p><a target="_blank" rel="noopener" href="https://www.istt.org.cn/NewsDetail/2031875.html">Windows认证原理 网络认证(进阶篇)-江苏智慧安全可信技术研究院 (istt.org.cn)</a></p>
+<h1 id="ntlm协议"><a href="#ntlm协议" class="headerlink" title="ntlm协议"></a>ntlm协议</h1><p>windows身份认证</p>
+<p>pth基础</p>
+<p><a target="_blank" rel="noopener" href="https://www.istt.org.cn/NewsDetail/2031875.html">Windows认证原理 网络认证(进阶篇)-江苏智慧安全可信技术研究院 (istt.org.cn)</a></p>
 <h1 id="Kerberos协议"><a href="#Kerberos协议" class="headerlink" title="Kerberos协议"></a>Kerberos协议</h1><p>Kerberos是一种由MIT提出的一种计算机网络授权协议，旨在通过使用加密技术为客户端/服务端应用程序提供强大的认证服务。</p>
 <p>Kerberos 主要是用在<code>域环境下的身份认证协议</code>。</p>
 <p><img src="/2022/01/23/%E5%86%85%E7%BD%91%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/image-20220124122003434.png" alt="image-20220124122003434"></p>
@@ -127,6 +129,9 @@
 <h1 id="活动目录"><a href="#活动目录" class="headerlink" title="活动目录"></a>活动目录</h1><p> 活动目录是一种目录服务：活动目录通过域控制器接受查询请求，查询活动目录数据库把域对象名字解析为对象记录</p>
 <p>​    <code>活动目录用户</code>通过<code>LDAP协议</code>（一种进入目录服务的协议）向活动目录服务器<code>发送请求</code>，为了定位提供查询服务的域控制器就需要借助于DNS。</p>
 <p>​    活动目录使用<code>DNS服务器</code>作为<code>定位服务器</code>，把域控制器解析为IP地址。活动目录要发挥作用，离不开DNS。</p>
+<p>ntds.dit</p>
+<p>ldap</p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/network/283763.html">内网渗透测试：内网环境与活动目录基础概念 - FreeBuf网络安全行业门户</a></p>
  
       <!-- reward -->
       
@@ -209,56 +214,34 @@
     
   </nav>
 
+  
    
-<!-- valine评论 -->
-<div id="vcomments-box">
-  <div id="vcomments"></div>
-</div>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
-<script>
-  new Valine({
-    el: "#vcomments",
-    app_id: "BtFy2jdBgUlyi7OzkMI8hyk2-gzGzoHsz",
-    app_key: "hfvNNRgvRm7RUTPbb0m3ylVu",
-    path: window.location.pathname,
-    avatar: "monsterid",
-    placeholder: "给我的文章加点评论吧~",
-    recordIP: true,
-  });
-  const infoEle = document.querySelector("#vcomments .info");
-  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
-    infoEle.childNodes.forEach(function (item) {
-      item.parentNode.removeChild(item);
-    });
-  }
+<div class="gitalk" id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.css">
+
+
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+
+<script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: 'a93ec7fc60a3669f1146',
+    clientSecret: '05f5106f8179ccda226493433605674cade1727b',
+    repo: 'blog-comments',
+    owner: 'Shmily-ing# GitHub ID',
+    admin: ['Shmily-ing# GitHub ID'],
+    // id: location.pathname,      // Ensure uniqueness and length less than 50
+    id: md5(location.pathname),
+    distractionFreeMode: false,  // Facebook-like distraction free mode
+    pagerDirection: 'last'
+  })
+
+  gitalk.render('gitalk-container')
 </script>
-<style>
-  #vcomments-box {
-    padding: 5px 30px;
-  }
-
-  @media screen and (max-width: 800px) {
-    #vcomments-box {
-      padding: 5px 0px;
-    }
-  }
-
-  #vcomments-box #vcomments {
-    background-color: #fff;
-  }
-
-  .v .vlist .vcard .vh {
-    padding-right: 20px;
-  }
-
-  .v .vlist .vcard {
-    padding-left: 10px;
-  }
-</style>
-
- 
-     
+  
 </article>
 
 </section>

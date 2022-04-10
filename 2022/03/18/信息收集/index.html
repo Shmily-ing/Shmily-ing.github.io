@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.9k</span>
+            <span class="post-count">1.8k</span>
         </span>
     </span>
 
@@ -234,10 +234,11 @@
 
 
 <hr>
-<h1 id="指纹识别"><a href="#指纹识别" class="headerlink" title="指纹识别"></a>指纹识别</h1><h3 id="在线平台"><a href="#在线平台" class="headerlink" title="在线平台"></a>在线平台</h3><p>潮汐  <a target="_blank" rel="noopener" href="http://finger.tidesec.com/">TideFinger 潮汐指纹 TideFinger 潮汐指纹 (tidesec.com)</a></p>
+<h1 id="指纹识别"><a href="#指纹识别" class="headerlink" title="指纹识别"></a>指纹识别</h1><h3 id="在线平台"><a href="#在线平台" class="headerlink" title="在线平台"></a>在线平台</h3><p>潮汐 (<a target="_blank" rel="noopener" href="http://finger.tidesec.com/">http://finger.tidesec.com/</a>)</p>
 <p>云溪  (<a target="_blank" rel="noopener" href="https://www.yunsee.cn/">https://www.yunsee.cn/</a>)   收费</p>
-<p><a target="_blank" rel="noopener" href="http://whatweb.bugscaner.com/look/">在线指纹识别,在线cms识别小插件–在线工具 (bugscaner.com)</a></p>
-<p><a target="_blank" rel="noopener" href="https://fp.shuziguanxing.com/#/">指纹收录平台 (shuziguanxing.com)</a></p>
+<p> (bugscaner.com)(<a target="_blank" rel="noopener" href="http://whatweb.bugscaner.com/look/">http://whatweb.bugscaner.com/look/</a>)</p>
+<p>(shuziguanxing.com)(<a target="_blank" rel="noopener" href="https://fp.shuziguanxing.com/#/">https://fp.shuziguanxing.com/#/</a>)</p>
+<p>GoeEye平台 (<a target="_blank" rel="noopener" href="https://www.godeye.vip/index/">https://www.godeye.vip/index/</a>)</p>
 <h3 id="github工具"><a href="#github工具" class="headerlink" title="github工具"></a>github工具</h3><p>WhatWeb</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/TideSec/TideFinger">TideFinger</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Tuhinshubhra/CMSeeK">Tuhinshubhra/CMSeeK: CMS Detection and Exploitation suite - Scan WordPress, Joomla, Drupal and over 180 other CMSs (github.com)</a></p>
@@ -257,7 +258,8 @@
 <li>dirsearch</li>
 <li>dirmap</li>
 </ul>
-<h1 id="漏洞库"><a href="#漏洞库" class="headerlink" title="漏洞库"></a>漏洞库</h1><p><a target="_blank" rel="noopener" href="https://qftm.github.io/Information_Collection_Handbook/exploit-database/domestic.html">https://qftm.github.io/Information_Collection_Handbook/exploit-database/domestic.html</a></p>
+<h1 id="漏洞库"><a href="#漏洞库" class="headerlink" title="漏洞库"></a>漏洞库</h1><p><a target="_blank" rel="noopener" href="https://wiki.96.mk/">https://wiki.96.mk/</a></p>
+<p><a target="_blank" rel="noopener" href="https://qftm.github.io/Information_Collection_Handbook/exploit-database/domestic.html">https://qftm.github.io/Information_Collection_Handbook/exploit-database/domestic.html</a></p>
 <p><a target="_blank" rel="noopener" href="https://qftm.github.io/Information_Collection_Handbook/exploit-database/foreign.html">https://qftm.github.io/Information_Collection_Handbook/exploit-database/foreign.html</a></p>
 <p>参考</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Qftm/Information_Collection_Handbook">https://github.com/Qftm/Information_Collection_Handbook</a></p>
@@ -343,56 +345,34 @@
     
   </nav>
 
+  
    
-<!-- valine评论 -->
-<div id="vcomments-box">
-  <div id="vcomments"></div>
-</div>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
-<script>
-  new Valine({
-    el: "#vcomments",
-    app_id: "BtFy2jdBgUlyi7OzkMI8hyk2-gzGzoHsz",
-    app_key: "hfvNNRgvRm7RUTPbb0m3ylVu",
-    path: window.location.pathname,
-    avatar: "monsterid",
-    placeholder: "给我的文章加点评论吧~",
-    recordIP: true,
-  });
-  const infoEle = document.querySelector("#vcomments .info");
-  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
-    infoEle.childNodes.forEach(function (item) {
-      item.parentNode.removeChild(item);
-    });
-  }
+<div class="gitalk" id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.css">
+
+
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+
+<script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: 'a93ec7fc60a3669f1146',
+    clientSecret: '05f5106f8179ccda226493433605674cade1727b',
+    repo: 'blog-comments',
+    owner: 'Shmily-ing# GitHub ID',
+    admin: ['Shmily-ing# GitHub ID'],
+    // id: location.pathname,      // Ensure uniqueness and length less than 50
+    id: md5(location.pathname),
+    distractionFreeMode: false,  // Facebook-like distraction free mode
+    pagerDirection: 'last'
+  })
+
+  gitalk.render('gitalk-container')
 </script>
-<style>
-  #vcomments-box {
-    padding: 5px 30px;
-  }
-
-  @media screen and (max-width: 800px) {
-    #vcomments-box {
-      padding: 5px 0px;
-    }
-  }
-
-  #vcomments-box #vcomments {
-    background-color: #fff;
-  }
-
-  .v .vlist .vcard .vh {
-    padding-right: 20px;
-  }
-
-  .v .vlist .vcard {
-    padding-left: 10px;
-  }
-</style>
-
- 
-     
+  
 </article>
 
 </section>

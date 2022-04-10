@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1k</span>
+            <span class="post-count">1.5k</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">4 min</span>
+            <span class="post-count">6 min</span>
         </span>
     </span>
 </div>
@@ -102,7 +102,8 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Laravel 是一个 Web应用框架，php作为底层语言，能够有很好的扩展，拥有比较完善的软件包。</p>
-<p>中文官方：<a target="_blank" rel="noopener" href="http://laravel.p2hp.com/cndocs/9.x/installation">http://laravel.p2hp.com/cndocs/9.x/installation</a></p>
+<p>3大核心：路由，控制器，视图</p>
+<p>中文官方：<strong><a target="_blank" rel="noopener" href="https://learnku.com/docs/laravel/8.x">https://learnku.com/docs/laravel/8.x</a></strong></p>
 <span id="more"></span>
 
 <h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><ol>
@@ -125,7 +126,8 @@
 <p>访问如下图</p>
 <p><img src="/2022/04/04/Laravel/image-20220404135640257.png" alt="image-20220404135640257"></p>
 <p>以下代码分析均为<code>laravel8.83.6 </code>框架，目前laravel框架已经更新到9.x了</p>
-<h1 id="框架结构"><a href="#框架结构" class="headerlink" title="框架结构"></a>框架结构</h1><p>主要目录分析</p>
+<h1 id="框架结构"><a href="#框架结构" class="headerlink" title="框架结构"></a>框架结构</h1><p><a target="_blank" rel="noopener" href="https://learnku.com/docs/laravel/8.x/structure/9356">https://learnku.com/docs/laravel/8.x/structure/9356</a></p>
+<p>主要目录分析</p>
 <p><img src="/2022/04/04/Laravel/image-20220404150632990.png" alt="image-20220404150632990"></p>
 <h3 id="app"><a href="#app" class="headerlink" title="app"></a>app</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">整个laravel最主要部分，主要代码都在app目录下完成，包含了mvc三大模块</span><br></pre></td></tr></table></figure>
 
@@ -133,13 +135,21 @@
 <ul>
 <li>/app/Http</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">包含控制器，中间件，表单请求等，</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">包含控制器，中间件，表单请求等，几乎所有请求处理都在这里</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/04/04/Laravel/image-20220404153320786.png" alt="image-20220404153320786"></p>
 <ul>
 <li>/app/Models</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">包含Eloquent 等模型文件，用于处理数据库操作实现。每个表都有对应的model类，通过模型方法进行数据表的增删改查。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>/app/Http/Controllers/</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">控制器用于将相关的 HTTP 请求封装到一个类中进行处理，如同TP6一样，默认情况下，控制器没有分组，默认都存放在 app&#x2F;Http&#x2F;Controllers 目录下。</span><br></pre></td></tr></table></figure>
+
+<p>控制器有类似tp的目录结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">app</span><br><span class="line">├─Http </span><br><span class="line">│  ├─Controllers  控制器目录</span><br><span class="line">│  │  ├─admin  后台Admin模块</span><br><span class="line">│  │  │  ├─IndexController.php 后台首页控制器</span><br><span class="line">│  │  │  ├─CategoryController.php 分类管理控制器</span><br><span class="line">│  │  ├─home   前台Home模块</span><br><span class="line">│  │  │  ├─IndexController.php 前台首页控制器</span><br><span class="line">│  │  │  ├─ArticleController.php 文章展示控制器</span><br><span class="line">│  │  ├─user   用户User模块</span><br><span class="line">│  │  │  ├─IndexController.php 用户首页控制器</span><br><span class="line">│  │  │  ├─TagController.php 标签管理控制器</span><br></pre></td></tr></table></figure>
 
 
 
@@ -151,13 +161,15 @@
 <h3 id="database"><a href="#database" class="headerlink" title="database"></a>database</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数据库操作相关文件（数据库迁移和数据填充）</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/04/04/Laravel/image-20220404155250445.png" alt="image-20220404155250445"></p>
-<h3 id="public"><a href="#public" class="headerlink" title="public"></a>public</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">前端控制器和资源相关文件</span><br></pre></td></tr></table></figure>
+<h3 id="public"><a href="#public" class="headerlink" title="public"></a>public</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index.php进入程序请求的入口， 同时包含前端控制器和资源相关文件</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/04/04/Laravel/image-20220404155516021.png" alt="image-20220404155516021"></p>
-<h3 id="resources"><a href="#resources" class="headerlink" title="resources"></a>resources</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">资源文件,前端显示内容，通常利用路由调用views里面的文件进行显示</span><br></pre></td></tr></table></figure>
+<h3 id="resources"><a href="#resources" class="headerlink" title="resources"></a>resources</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">资源文件,前端显示内容，通常利用路由调用views里面的文件进行显示</span><br><span class="line"></span><br><span class="line">views 一般以xx.blade.php命名，</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/04/04/Laravel/image-20220404155645046.png" alt="image-20220404155645046"></p>
-<h3 id="routes"><a href="#routes" class="headerlink" title="routes"></a>routes</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过配置路由，进行资源的访问，请求，页面的显示等</span><br></pre></td></tr></table></figure>
+<h3 id="routes"><a href="#routes" class="headerlink" title="routes"></a>routes</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">通过配置路由，进行资源的访问，请求，页面的显示等</span><br><span class="line"></span><br><span class="line">web.php 文件包含 RouteServiceProvider 放置在 web 中间件组中的路由，后者提供会话状态、CSRF 保护和 cookie 加密。如果您的应用程序不提供无状态的 RESTful API，那么您的所有路由都很可能在 web.php 文件。</span><br><span class="line"></span><br><span class="line">api.php 文件包含 RouteServiceProvider 放置在 api 中间件组中的路由，后者提供速率限制。这些路由是无状态的，因此通过这些路由进入应用程序的请求将通过令牌进行身份验证，并且不能访问会话状态。</span><br><span class="line"></span><br><span class="line">console.php 文件是您可以定义所有基于闭包的控制台命令的地方。每个闭包都绑定到一个命令实例，允许使用一种简单的方法与每个命令的进行 IO 交互。尽管这个文件没有定义 HTTP 路由，但是它定义了应用程序中基于控制台的入口点（路由）。</span><br><span class="line"></span><br><span class="line">channels.php 文件是您可以注册应用程序支持的所有事件广播频道的位置。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
 
 <p><img src="/2022/04/04/Laravel/image-20220405005017795.png" alt="image-20220405005017795"></p>
 <h3 id="storage"><a href="#storage" class="headerlink" title="storage"></a>storage</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">编译后的视图、基于会话、文件缓存和其它框架生成的文件</span><br></pre></td></tr></table></figure>
@@ -209,6 +221,7 @@
 <p><img src="/2022/04/04/Laravel/image-20220405003738965.png" alt="image-20220405003738965"></p>
 <p><a target="_blank" rel="noopener" href="http://127.0.0.1:10001/api/testapi">http://127.0.0.1:10001/api/testapi</a></p>
 <p><img src="/2022/04/04/Laravel/image-20220405003809337.png" alt="image-20220405003809337"></p>
+<p>等等等</p>
 <h3 id="laravel8-的路由用法的变化"><a href="#laravel8-的路由用法的变化" class="headerlink" title="laravel8 的路由用法的变化"></a>laravel8 的路由用法的变化</h3><p>laravel7等Laravel旧版本中，RouteServiceProvider类中包含$namespace属性，值为AppHttpControllers，此属性可自动为路由添加AppHttpControllers前缀。</p>
 <p>即直接进行下面方式路由配置</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Route::get(&#39;login&#39;, &#39;LoginControl@index&#39;);</span><br></pre></td></tr></table></figure>
@@ -219,7 +232,13 @@
 <p><img src="/2022/04/04/Laravel/image-20220405001507199.png" alt="image-20220405001507199"></p>
 <p>方法1：取消<code>protected $namespace = &#39;App\\Http\\Controllers&#39;;</code>注释</p>
 <p>方法2：在进行下面路由配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use App\Http\Controllers\LoginControl;      #添加命名空间</span><br><span class="line"></span><br><span class="line">Route::get(&#39;login&#39;, [LoginControl::class, &#39;index&#39;]);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use App\Http\Controllers\LoginControl;      </span><br><span class="line"></span><br><span class="line">Route::get(&#39;login&#39;, [LoginControl::class, &#39;index&#39;]);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="创建新控制器文件"><a href="#创建新控制器文件" class="headerlink" title="创建新控制器文件"></a>创建新控制器文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan make:controller  LoginController</span><br></pre></td></tr></table></figure>
+
+
 
 
 
@@ -303,56 +322,34 @@
     
   </nav>
 
+  
    
-<!-- valine评论 -->
-<div id="vcomments-box">
-  <div id="vcomments"></div>
-</div>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
-<script>
-  new Valine({
-    el: "#vcomments",
-    app_id: "BtFy2jdBgUlyi7OzkMI8hyk2-gzGzoHsz",
-    app_key: "hfvNNRgvRm7RUTPbb0m3ylVu",
-    path: window.location.pathname,
-    avatar: "monsterid",
-    placeholder: "给我的文章加点评论吧~",
-    recordIP: true,
-  });
-  const infoEle = document.querySelector("#vcomments .info");
-  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
-    infoEle.childNodes.forEach(function (item) {
-      item.parentNode.removeChild(item);
-    });
-  }
+<div class="gitalk" id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.css">
+
+
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+
+<script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: 'a93ec7fc60a3669f1146',
+    clientSecret: '05f5106f8179ccda226493433605674cade1727b',
+    repo: 'blog-comments',
+    owner: 'Shmily-ing# GitHub ID',
+    admin: ['Shmily-ing# GitHub ID'],
+    // id: location.pathname,      // Ensure uniqueness and length less than 50
+    id: md5(location.pathname),
+    distractionFreeMode: false,  // Facebook-like distraction free mode
+    pagerDirection: 'last'
+  })
+
+  gitalk.render('gitalk-container')
 </script>
-<style>
-  #vcomments-box {
-    padding: 5px 30px;
-  }
-
-  @media screen and (max-width: 800px) {
-    #vcomments-box {
-      padding: 5px 0px;
-    }
-  }
-
-  #vcomments-box #vcomments {
-    background-color: #fff;
-  }
-
-  .v .vlist .vcard .vh {
-    padding-right: 20px;
-  }
-
-  .v .vlist .vcard {
-    padding-left: 10px;
-  }
-</style>
-
- 
-     
+  
 </article>
 
 </section>
