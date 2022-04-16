@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">423</span>
+            <span class="post-count">1k</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">4 min</span>
         </span>
     </span>
 </div>
@@ -101,7 +101,7 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="weblogic"><a href="#weblogic" class="headerlink" title="weblogic"></a>weblogic</h1><p>默认端口：<code>7001</code></p>
+  <h1 id="Weblogic"><a href="#Weblogic" class="headerlink" title="Weblogic"></a>Weblogic</h1><p>默认端口：<code>7001</code></p>
 <p>部分历史漏洞</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 弱口令&#x2F;任意文件读取+后台war包&#x2F;任意文件上传getshell</span><br><span class="line">2. CVE-2017-20271</span><br><span class="line">3. CVE-2018-2628</span><br><span class="line">4. CVE-2019-2725</span><br><span class="line">5. CVE-2020-2555</span><br><span class="line">6. CVE-2021-2394</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -118,13 +118,14 @@
 
 
 
-<h2 id="弱口令-上传war包"><a href="#弱口令-上传war包" class="headerlink" title="弱口令+上传war包"></a>弱口令+上传war包</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>weblogic搭建完后没有修改后台登陆密码</p>
+<h2 id="弱口令-上传war包"><a href="#弱口令-上传war包" class="headerlink" title="弱口令+上传war包"></a>弱口令+上传war包</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>weblogic搭建完后没有修改后台登陆密码/后台登陆为弱口令</p>
 <h3 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h3><p>启动环境</p>
 <p><img src="/2022/03/20/middleware-java/image-20220324002901248.png" alt="image-20220324002901248"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;192.168.119.165:7001&#x2F;console       访问后台</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2022/03/20/middleware-java/image-20220324010752442.png" alt="image-20220324010752442"></p>
 <p>weblogic/Oracle@123登陆后台（bp爆破，密码错五次就会禁止认证）</p>
+<p>弱口令参考：<a target="_blank" rel="noopener" href="https://cirt.net/passwords?criteria=WebLogic">Default Passwords | CIRT.net</a></p>
 <p>下面要准备war包上传</p>
 <p><img src="/2022/03/20/middleware-java/image-20220324011153236.png" alt="image-20220324011153236"></p>
 <p>点上传文件</p>
@@ -142,8 +143,63 @@
 <p><img src="/2022/03/20/middleware-java/image-20220324014649096.png" alt="image-20220324014649096"></p>
 <p>参考：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/9932#toc-4">weblogic漏洞大杂烩 - 先知社区 (aliyun.com)</a></p>
 <p>工具：(<a target="_blank" rel="noopener" href="https://github.com/0xn0ne/weblogicScanner">https://github.com/0xn0ne/weblogicScanner</a>)</p>
-<h1 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h1><h1 id="jboss"><a href="#jboss" class="headerlink" title="jboss"></a>jboss</h1><p>jboss/jboss +war上传</p>
-<h1 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h1><h1 id="ngnix"><a href="#ngnix" class="headerlink" title="ngnix"></a>ngnix</h1><h1 id="iis"><a href="#iis" class="headerlink" title="iis"></a>iis</h1> 
+<h1 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h1><h1 id="Jboss"><a href="#Jboss" class="headerlink" title="Jboss"></a>Jboss</h1><ol>
+<li>jboss/jboss +war上传</li>
+</ol>
+<h1 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a>Apache</h1><h3 id="HTTPD-换行解析漏洞"><a href="#HTTPD-换行解析漏洞" class="headerlink" title="HTTPD 换行解析漏洞"></a>HTTPD 换行解析漏洞</h3><p>CVE-2017-15715     2.4.0~2.4.29</p>
+<p><code>/phpinfo.php%0a</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;FilesMatch \.php$&gt; </span><br><span class="line">	SetHandler application&#x2F;x-httpd-php </span><br><span class="line">&lt;&#x2F;FilesMatch&gt;</span><br></pre></td></tr></table></figure>
+
+<p>$符号不仅匹配字符串结尾位置，也可以匹配\n 或 \r。 导致/phpinfo.php\x0A能够被解析</p>
+<p>上传 xxx.php%0a 绕过后缀限制。</p>
+<p>访问： xxx.com/phpinfo.php%0a 即可</p>
+<h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><h3 id="解析漏洞"><a href="#解析漏洞" class="headerlink" title="解析漏洞"></a>解析漏洞</h3><p>配置文件错误导致 正常123.jpg    访问时候  .com/123.jpg/xxxxxx.php      123.jpg会以php形式解析</p>
+<p>漏洞配置如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">server &#123; </span><br><span class="line">	location ~ \.php$ &#123; </span><br><span class="line">		root            &#x2F;work&#x2F;www&#x2F;test; </span><br><span class="line">		fastcgi_index   index.php; </span><br><span class="line">		fastcgi_param   SCRIPT_FILENAME </span><br><span class="line">		$document_root  $fastcgi_script_name; </span><br><span class="line">		include         fastcgi_params; </span><br><span class="line">		fastcgi_pass    unix:&#x2F;tmp&#x2F;php-fpm.sock; </span><br><span class="line">		&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>com/123.jpg/xxxxxx.php    首先<code>PHP fastcgi</code> 进行处理，但找不到xxxxxx.php，</p>
+<p>又由于<code>cgi.fix_pathinfo</code>默认是开启的，因此PHP 会继续检查路径中存在的文件，并将 </p>
+<p>多余的部分当作 PATH_INFO。接着PHP在文件系统中找到.jpg文件，而后以PHP的形式执行.jpg的内容，并将/xxx.php存储在 PATH_INFO 后丢弃</p>
+<h1 id="IIs"><a href="#IIs" class="headerlink" title="IIs"></a>IIs</h1><h3 id="IIS-6-0-解析漏洞"><a href="#IIS-6-0-解析漏洞" class="headerlink" title="IIS 6.0 解析漏洞"></a>IIS 6.0 解析漏洞</h3><p>（*.asp;.jpg             *.asp/test.jpg   ）</p>
+<ul>
+<li><p>*.asp;.jpg ，服务器默认不解析<code>;</code>后面的内容。</p>
+</li>
+<li><p>*.asp/目录下的文件被当作asp解析。</p>
+</li>
+</ul>
+<h3 id="IIS7-x-文件解析漏洞"><a href="#IIS7-x-文件解析漏洞" class="headerlink" title="IIS7.x  文件解析漏洞"></a>IIS7.x  文件解析漏洞</h3><p> (test.jpg/.php)</p>
+<ul>
+<li>在IIS7/7.5 FastCGI运行模式下，在任意文件，例：test.jpg后面加上/.php，会将test.jpg 解析为php文件。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">原因cgi.fix_pathinfo&#x3D;1</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="IIS-6-0-PUT漏洞"><a href="#IIS-6-0-PUT漏洞" class="headerlink" title="IIS 6.0 PUT漏洞"></a>IIS 6.0 PUT漏洞</h3><ul>
+<li>IIS的 Web 服务扩展中开启了 WebDAV之后，<code>支持多种请求</code>，配合写入权限，可造成任意文件写入(PUT写 webshell)。</li>
+</ul>
+<h3 id="短文件名"><a href="#短文件名" class="headerlink" title="短文件名"></a>短文件名</h3><ul>
+<li>为了兼容<code>16</code>位<code>MS-DOS</code>程序，Windows为文件名较长的文件（和文件夹）生成了对应的<code>Windows 8.3</code>短文件名。</li>
+</ul>
+<p>​        </p>
+<p>​                                                          左边短文件名                右边文件名</p>
+<p><img src="/2022/03/20/middleware-java/image-20220415203407334.png" alt="image-20220415203407334"></p>
+<p>/xxx.xxx.xx.xx/A*~1/xxx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当访问构造的某个存在的短文件名，会返回404</span><br></pre></td></tr></table></figure>
+
+
+
+<p>/xxx.xxx.xx.xx/AB*~1/xxx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当访问构造的某个不存在的短文件名，会返回400；</span><br></pre></td></tr></table></figure>
+
+
+
+<p>目前IIS支持短文件名猜测的HTTP方法主要包括：DEBUG、OPTIONS、GET、POST、HEAD、TRACE六种。 </p>
+<p>IIS 8.0之后的版本只能通过OPTIONS和TRACE方法被猜测成功。</p>
+<p>IIS8.0以下版本需要开启ASP.NET支持，IIS大于等于8.0版本,即使没有安装ASP.NET，通过OPTIONS和TRACE方法也可以猜解成功。 </p>
+<p>以下通过开启IIS6.0 ASP.NET后进行复现。</p>
+<p>（参考网上）</p>
+ 
       <!-- reward -->
       
     </div>
