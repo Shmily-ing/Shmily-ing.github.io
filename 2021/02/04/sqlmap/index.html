@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">256</span>
+            <span class="post-count">493</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">2 min</span>
         </span>
     </span>
 </div>
@@ -104,7 +104,7 @@
   <h2 id="sqlmap的常见使用方式"><a href="#sqlmap的常见使用方式" class="headerlink" title="sqlmap的常见使用方式"></a>sqlmap的常见使用方式</h2><blockquote>
 <p>需要python环境</p>
 </blockquote>
-<h4 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h4><p>常见指令:</p>
+<h3 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h3><p>常见指令:</p>
 <ul>
 <li><p><code>-u</code>               指定url</p>
 </li>
@@ -145,15 +145,30 @@
 <li><p><code>-v </code>              显示详细的输出等级（-v 3 会显示Payload）</p>
 </li>
 </ul>
-<p>代理：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">–proxy http:&#x2F;&#x2F;192.168.1.1:xxxx</span><br></pre></td></tr></table></figure>
+<h3 id="代理："><a href="#代理：" class="headerlink" title="代理："></a>代理：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">–proxy http:&#x2F;&#x2F;192.168.1.1:xxxx</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">–proxy-file：加载代理ip列表</span><br><span class="line"></span><br><span class="line">–proxy-file&#x3D;xxx.txt</span><br></pre></td></tr></table></figure>
 
 
 
-<p><code>--fresh-queries</code>             不会从缓存里面加载</p>
+
+
+<h3 id="fresh-queries"><a href="#fresh-queries" class="headerlink" title="--fresh-queries"></a><code>--fresh-queries</code></h3><p>​    不会从缓存里面加载</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py -u &quot;xxxxx&quot; --proxy&#x3D;http:&#x2F;&#x2F;127.0.0.1:10809 --is-dba --level 5</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="tamper"><a href="#tamper" class="headerlink" title="tamper"></a>tamper</h3><p>使用：<code>--tamper=xxxx.py</code></p>
+<p>环境：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">function sqlwaf( $str ) &#123;</span><br><span class="line"></span><br><span class="line">	$str &#x3D; str_ireplace( &quot;and&quot;, &quot;&quot;, $str );</span><br><span class="line"></span><br><span class="line">	$str &#x3D; str_ireplace( &quot;or&quot;, &quot;&quot;, $str );</span><br><span class="line"></span><br><span class="line">	$str &#x3D; str_ireplace( &quot;union&quot;, &quot;&quot;, $str );</span><br><span class="line"></span><br><span class="line">	$str &#x3D; str_ireplace( &quot;select&quot;, &quot;&quot;, $str );</span><br><span class="line"></span><br><span class="line">	$str &#x3D; str_ireplace( &quot;sleep&quot;, &quot;&quot;, $str );</span><br><span class="line"></span><br><span class="line">	$str &#x3D; str_ireplace( &quot;group&quot;, &quot;&quot;, $str );</span><br><span class="line"></span><br><span class="line">	$str &#x3D; str_ireplace( &quot;extractvalue&quot;, &quot;&quot;, $str );</span><br><span class="line"></span><br><span class="line">	$str &#x3D; str_ireplace( &quot;updatexml&quot;, &quot;&quot;, $str );</span><br><span class="line"></span><br><span class="line">	$str &#x3D; str_ireplace( &quot;PROCEDURE&quot;, &quot;&quot;, $str );</span><br><span class="line"></span><br><span class="line">	return $str;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>tamper脚本编写：xxxx.py   （关键词替换）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># sqlmap/tamper/escapequotes.py</span></span><br><span class="line"><span class="keyword">from</span> lib.core.enums <span class="keyword">import</span> PRIORITY</span><br><span class="line">__priority__ = PRIORITY.NORMAL              <span class="comment">#__priority__指定了tamper脚本的优先级</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dependencies</span>():</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tamper</span>(<span class="params">payload, **kwargs</span>):</span></span><br><span class="line">    <span class="keyword">if</span> payload:</span><br><span class="line">        result = payload.replace(<span class="string">&quot;OR&quot;</span>, <span class="string">&quot;oorr&quot;</span>).replace(<span class="string">&quot;AND&quot;</span>, <span class="string">&quot;aandnd&quot;</span>).replace(<span class="string">&quot;UNION&quot;</span>, <span class="string">&quot;ununionion&quot;</span>).replace(<span class="string">&quot;SELECT&quot;</span>, <span class="string">&quot;seleselectct&quot;</span>).replace(<span class="string">&quot;PROCEDURE&quot;</span>, <span class="string">&quot;PROCEPROCEDUREURE&quot;</span>).replace(<span class="string">&quot;SLEEP&quot;</span>, <span class="string">&quot;slesleepep&quot;</span>).replace(<span class="string">&quot;GROUP&quot;</span>, <span class="string">&quot;grogroupup&quot;</span>).replace(<span class="string">&quot;EXTRACTVALUE&quot;</span>, <span class="string">&quot;extractvextractvaluealue&quot;</span>).replace(<span class="string">&quot;UPDATEXML&quot;</span>, <span class="string">&quot;updatupdatexmlexml&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
+
+
+<p>固定格式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> xxx             <span class="comment">#根据需求</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> lib.core.enums <span class="keyword">import</span> PRIORITY</span><br><span class="line">__priority__ = PRIORITY.NORMAL </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tamper</span>(<span class="params">payload, **kwargs</span>):</span></span><br><span class="line">	<span class="keyword">if</span> payload:</span><br><span class="line">		xxxxx</span><br><span class="line">		xxxxx</span><br><span class="line">		xxxxx</span><br><span class="line">		result=xxxxx</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
 
  
       <!-- reward -->

