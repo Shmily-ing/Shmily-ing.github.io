@@ -465,6 +465,17 @@
       </tags>
   </entry>
   <entry>
+    <title>Access注入</title>
+    <url>/2021/01/10/Access%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>常见数据库注入</category>
+      </categories>
+      <tags>
+        <tag>Access注入</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CVE复现</title>
     <url>/2022/02/26/CVE%E5%A4%8D%E7%8E%B0/</url>
     <content><![CDATA[<h2 id="RCE"><a href="#RCE" class="headerlink" title="RCE"></a>RCE</h2><h3 id="向日葵远程代码执行"><a href="#向日葵远程代码执行" class="headerlink" title="向日葵远程代码执行"></a>向日葵远程代码执行</h3><h5 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h5><p><strong>向日葵远程控制</strong>是一款免费的集远程控制电脑手机、远程桌面连接、远程开机、远程管理、支持内网穿透的一体化远程控制管理工具软件。</p>
@@ -554,17 +565,6 @@
       </categories>
       <tags>
         <tag>CVE</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Access注入</title>
-    <url>/2021/01/10/Access%E6%B3%A8%E5%85%A5/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>常见数据库注入</category>
-      </categories>
-      <tags>
-        <tag>Access注入</tag>
       </tags>
   </entry>
   <entry>
@@ -3261,6 +3261,8 @@
 </li>
 </ul>
 <p>使用序列化和反序列化 主要是方便数据的存储和数据的转换读取。</p>
+<span id="more"></span>
+
 <h3 id="序列化格式"><a href="#序列化格式" class="headerlink" title="序列化格式"></a>序列化格式</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Created</span> by PhpStorm_培训</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: shmily-ing</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Data</span>: 2022/4/29 16:32</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">body</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$height</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$weight</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$height</span>,<span class="variable">$weight</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;height = <span class="variable">$height</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;weight = <span class="variable">$weight</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$jyf</span> = <span class="keyword">new</span> body(<span class="string">&#x27;180&#x27;</span>,<span class="number">130</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> serialize(<span class="variable">$jyf</span>).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">var_dump(unserialize(<span class="string">&quot;O:4:\&quot;body\&quot;:2:&#123;s:6:\&quot;height\&quot;;s:3:\&quot;180\&quot;;s:6:\&quot;weight\&quot;;i:130;&#125;&quot;</span>));</span><br></pre></td></tr></table></figure>
 
 <p>输出：</p>
