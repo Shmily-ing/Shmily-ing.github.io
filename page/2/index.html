@@ -153,6 +153,88 @@
     
     
     <article
+  id="post-内网知识学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/01/23/%E5%86%85%E7%BD%91%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/"
+    >内网知识学习</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/01/23/%E5%86%85%E7%BD%91%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2022-01-23T04:57:54.000Z" itemprop="datePublished">2022-01-23</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%86%85%E7%BD%91/">内网</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>[toc]</p>
+<h1 id="ntlm协议"><a href="#ntlm协议" class="headerlink" title="ntlm协议"></a>ntlm协议</h1><p>windows身份认证</p>
+<p>pth基础</p>
+<p><a target="_blank" rel="noopener" href="https://www.istt.org.cn/NewsDetail/2031875.html">Windows认证原理 网络认证(进阶篇)-江苏智慧安全可信技术研究院 (istt.org.cn)</a></p>
+<h1 id="Kerberos协议"><a href="#Kerberos协议" class="headerlink" title="Kerberos协议"></a>Kerberos协议</h1><p>Kerberos是一种由MIT提出的一种计算机网络授权协议，旨在通过使用加密技术为客户端/服务端应用程序提供强大的认证服务。</p>
+<p>Kerberos 主要是用在<code>域环境下的身份认证协议</code>。</p>
+<p><img src="/2022/01/23/%E5%86%85%E7%BD%91%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/image-20220124122003434.png" alt="image-20220124122003434"></p>
+<p>client              ——       TGT            ——               <strong>KDC</strong>，密钥分发中心(<strong>AS</strong>，身份验证服务,<strong>TGS</strong>，票据授权服务)</p>
+<p>|</p>
+<p>TGS(ticket )</p>
+<p>|</p>
+<p>server </p>
+<p>tgt   黄金票据</p>
+<p>tgs  白银票据</p>
+<p>EnhancedGolden <strong>Tickets</strong>    增强版（子域打域控）</p>
+<p>（权限维持）</p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/MWN5darSef0OqiT6rLk9nA">https://mp.weixin.qq.com/s/MWN5darSef0OqiT6rLk9nA</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/5u2dyu1wVji8d1IxLb11DA">https://mp.weixin.qq.com/s/5u2dyu1wVji8d1IxLb11DA</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.istt.org.cn/NewsDetail/2031879.html">Windows认证原理 Kerberos认证-江苏智慧安全可信技术研究院 (istt.org.cn)</a></p>
+<p>​    </p>
+<h1 id="解密浏览器密码工具"><a href="#解密浏览器密码工具" class="headerlink" title="解密浏览器密码工具"></a>解密浏览器密码工具</h1><p>（有杀软）本地解chrome数据库方法：<a target="_blank" rel="noopener" href="https://github.com/moonD4rk/HackBrowserData/releases/tag/v0.3.7">https://github.com/moonD4rk/HackBrowserData/releases/tag/v0.3.7</a> </p>
+<p>（无杀软） 直接用<a target="_blank" rel="noopener" href="https://github.com/moonD4rk/HackBrowserData">hack-browser-data.exe</a>导出cookie</p>
+<p>参考：</p>
+<p>dozerctf2021域渗透：<a target="_blank" rel="noopener" href="https://www.yuque.com/w0rkmn/lnpppa/mdie6g#f755069b">https://www.yuque.com/w0rkmn/lnpppa/mdie6g#f755069b</a></p>
+<h1 id="活动目录"><a href="#活动目录" class="headerlink" title="活动目录"></a>活动目录</h1><p> 活动目录是一种目录服务：活动目录通过域控制器接受查询请求，查询活动目录数据库把域对象名字解析为对象记录</p>
+<p>​    <code>活动目录用户</code>通过<code>LDAP协议</code>（一种进入目录服务的协议）向活动目录服务器<code>发送请求</code>，为了定位提供查询服务的域控制器就需要借助于DNS。</p>
+<p>​    活动目录使用<code>DNS服务器</code>作为<code>定位服务器</code>，把域控制器解析为IP地址。活动目录要发挥作用，离不开DNS。</p>
+<p>ntds.dit</p>
+<p>ldap</p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/network/283763.html">内网渗透测试：内网环境与活动目录基础概念 - FreeBuf网络安全行业门户</a></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/" rel="tag">内网知识学习</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
   id="post-提权"
   class="article article-type-post"
   itemscope
@@ -672,67 +754,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">内网信息收集</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-</article>
-
-    
-    <article
-  id="post-msf-端口转发-反弹shell"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/"
-    >msf-端口转发-反弹shell</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/" class="article-date">
-  <time datetime="2021-06-03T13:00:01.000Z" itemprop="datePublished">2021-06-03</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F/">渗透</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>这里借助的是免费的端口转发工具，来进行演示。</p>
-<p><a target="_blank" rel="noopener" href="https://www.ngrok.cc/login.html">https://www.ngrok.cc/login.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://console.uulap.com/app/login/?next=/">https://console.uulap.com/app/login/?next=/</a></p>
-<p>都是有可以免费使用。</p>
-<p>实验环境：</p>
-<p>kali ：192.168.119.138   （内网）</p>
-<p>对内网主机win/linux，反弹shell。</p> 
-      <a class="article-more-link" href="/2021/06/03/msf-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91-%E5%8F%8D%E5%BC%B9shell/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MSF/" rel="tag">MSF</a></li></ul>
 
     </footer>
   </div>
