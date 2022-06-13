@@ -74,7 +74,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">302</span>
         </span>
     </span>
 
@@ -90,13 +90,53 @@
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul>
+<li>要换电脑，迁移下blog，感觉有些东西还是要写出来才有点感觉</li>
+</ul>
+<hr>
+<h1 id="git配置"><a href="#git配置" class="headerlink" title="git配置"></a>git配置</h1><ul>
+<li>环境该下的下载好，blog文件可以直接拖拽到另一台电脑上就行</li>
+</ul>
+<ul>
+<li>下面就是配置git 的ssh key，连接github blog仓库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;Shmily-ing&quot;    #仓库名</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">git config --global user.email &quot;xxxxxx@qq.com&quot;</span><br><span class="line"></span><br><span class="line">ssh-keygen -t rsa -C xxxxxx@qq.com”   #默认位置就行 ，会生成公私钥</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>id_rsa.pub  添加到github</li>
+</ul>
+<p><img src="/2022/06/13/blog%E8%BF%81%E7%A7%BB/image-20220614005502831.png" alt="image-20220614005502831"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\shmilying&gt;git init</span><br><span class="line">Initialized empty Git repository in C:&#x2F;Users&#x2F;shmilying&#x2F;.git&#x2F;</span><br><span class="line"></span><br><span class="line">C:\Users\shmilying&gt;ssh -T git@github.com</span><br><span class="line">ssh: connect to host github.com port 22: Connection refused</span><br><span class="line"></span><br><span class="line">C:\Users\shmilying&gt;git remote add origin git@github.com:Shmily-ing&#x2F;Shmily-ing.github.io.git</span><br><span class="line"></span><br><span class="line">C:\Users\shmilying&gt;git remote -v</span><br><span class="line">origin  git@github.com:Shmily-ing&#x2F;Shmily-ing.github.io.git (fetch)</span><br><span class="line">origin  git@github.com:Shmily-ing&#x2F;Shmily-ing.github.io.git (push)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后在git bash里面输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="报错解决"><a href="#报错解决" class="headerlink" title="报错解决"></a>报错解决</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_52293358/article/details/124535927">(28条消息) Windows下解决ssh: connect to host github.com port 22: Connection refused_Sososoby的博客-CSDN博客</a></p>
+<p>我用的方法三，完美解决</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">User xxxxxx9@qq.com</span><br><span class="line">Hostname ssh.github.com</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">IdentityFile C:&#x2F;Users&#x2F;shmilying&#x2F;.ssh&#x2F;id_rsa</span><br><span class="line">Port 443</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi Shmily-ing! You&#39;ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后就hexo命令和之前一样。</p>
+ 
       <!-- reward -->
       
     </div>
