@@ -189,87 +189,8 @@
 </ul>
 <ul>
 <li>下面就是配置git 的ssh key，连接github blog仓库</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;Shmily-ing&quot;    #仓库名</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">git config --global user.email &quot;xxxxxx@qq.com&quot;</span><br><span class="line"></span><br><span class="line">ssh-keygen -t rsa -C xxxxxx@qq.com”   #默认位置就行 ，会生成公私钥</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>id_rsa.pub  添加到github</li>
-</ul>
-<p><img src="/2022/06/13/blog%E8%BF%81%E7%A7%BB/image-20220614005502831.png" alt="image-20220614005502831"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\shmilying&gt;git init</span><br><span class="line">Initialized empty Git repository in C:&#x2F;Users&#x2F;shmilying&#x2F;.git&#x2F;</span><br><span class="line"></span><br><span class="line">C:\Users\shmilying&gt;ssh -T git@github.com</span><br><span class="line">ssh: connect to host github.com port 22: Connection refused</span><br><span class="line"></span><br><span class="line">C:\Users\shmilying&gt;git remote add origin git@github.com:Shmily-ing&#x2F;Shmily-ing.github.io.git</span><br><span class="line"></span><br><span class="line">C:\Users\shmilying&gt;git remote -v</span><br><span class="line">origin  git@github.com:Shmily-ing&#x2F;Shmily-ing.github.io.git (fetch)</span><br><span class="line">origin  git@github.com:Shmily-ing&#x2F;Shmily-ing.github.io.git (push)</span><br></pre></td></tr></table></figure>
-
-
-
-<p>然后在git bash里面输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="报错解决"><a href="#报错解决" class="headerlink" title="报错解决"></a>报错解决</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_52293358/article/details/124535927">(28条消息) Windows下解决ssh: connect to host github.com port 22: Connection refused_Sososoby的博客-CSDN博客</a></p>
-<p>我用的方法三，完美解决</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host github.com</span><br><span class="line">User xxxxxx9@qq.com</span><br><span class="line">Hostname ssh.github.com</span><br><span class="line">PreferredAuthentications publickey</span><br><span class="line">IdentityFile C:&#x2F;Users&#x2F;shmilying&#x2F;.ssh&#x2F;id_rsa</span><br><span class="line">Port 443</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi Shmily-ing! You&#39;ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
-
-
-
-<p>然后就hexo命令和之前一样。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-   
-</article>
-
-    
-    <article
-  id="post-2020.9.16链表"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/06/13/2020.9.16%E9%93%BE%E8%A1%A8/"
-    >链表-c语言</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/06/13/2020.9.16%E9%93%BE%E8%A1%A8/" class="article-date">
-  <time datetime="2022-06-13T12:04:03.742Z" itemprop="datePublished">2022-06-13</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>Welcome to <a target="_blank" rel="noopener" href="https://shmily-ing.github.io/">Shmily-ing’blog</a>! </p>
-<p>下面主要是运用C去实现链表的头插法，尾插法实现有序插入，以及中间插入一个数。</p> 
-      <a class="article-more-link" href="/2022/06/13/2020.9.16%E9%93%BE%E8%A1%A8/"
+</ul> 
+      <a class="article-more-link" href="/2022/06/13/blog%E8%BF%81%E7%A7%BB/"
         >阅读更多...</a
       >
        
@@ -282,8 +203,6 @@
     
     <footer class="article-footer">
        
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">算法与数据结构</a></li></ul>
-
     </footer>
   </div>
 
@@ -818,6 +737,68 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="tag">中间件</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-信息收集"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/03/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"
+    >信息收集</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/03/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" class="article-date">
+  <time datetime="2022-03-18T08:03:33.000Z" itemprop="datePublished">2022-03-18</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F/">渗透</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>参考</p>
+<p>本文参考：<a target="_blank" rel="noopener" href="https://github.com/Qftm/Information_Collection_Handbook">https://github.com/Qftm/Information_Collection_Handbook</a></p>
+<h1 id="域名信息"><a href="#域名信息" class="headerlink" title="域名信息"></a>域名信息</h1><p>查询域名是否已经被注册，以及注册域名和注册人的详细信息</p>
+<h3 id="whois查询"><a href="#whois查询" class="headerlink" title="whois查询"></a>whois查询</h3><ul>
+<li>站长之家：<a target="_blank" rel="noopener" href="http://whois.chinaz.com/">http://whois.chinaz.com/</a></li>
+<li>国外：       <a target="_blank" rel="noopener" href="https://www.whois.com/">https://www.whois.com/</a></li>
+<li>腾讯云：  <a target="_blank" rel="noopener" href="https://whois.cloud.tencent.com/domain?domain=">https://whois.cloud.tencent.com/domain?domain=</a></li>
+</ul> 
+      <a class="article-more-link" href="/2022/03/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li></ul>
 
     </footer>
   </div>
