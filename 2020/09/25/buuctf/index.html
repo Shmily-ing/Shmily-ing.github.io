@@ -48,7 +48,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-2020-9-27buuctf"
+  id="post-buuctf"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -66,8 +66,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2022/06/13/2020-9-27buuctf/" class="article-date">
-  <time datetime="2022-06-13T12:04:03.727Z" itemprop="datePublished">2022-06-13</time>
+      <a href="/2020/09/25/buuctf/" class="article-date">
+  <time datetime="2020-09-25T08:04:54.000Z" itemprop="datePublished">2020-09-25</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/CTF/">CTF</a>
@@ -107,12 +107,12 @@
 <p>phpmyadmin (CVE-2018-12613)任意文件包含漏洞。影响版本4.8.0–4.8.1</p>
 <a id="more"></a>
 </blockquote>
-<h3 id="打开网页，神马也不是。"><a href="#打开网页，神马也不是。" class="headerlink" title="打开网页，神马也不是。"></a>打开网页，神马也不是。</h3><p><img src="/2022/06/13/2020-9-27buuctf/image-20200925180115693.png" alt="image-20200925180115693"></p>
+<h3 id="打开网页，神马也不是。"><a href="#打开网页，神马也不是。" class="headerlink" title="打开网页，神马也不是。"></a>打开网页，神马也不是。</h3><p><img src="/2020/09/25/buuctf/image-20200925180115693.png" alt="image-20200925180115693"></p>
 <h3 id="F12没有信息，直接扫网站后台"><a href="#F12没有信息，直接扫网站后台" class="headerlink" title="F12没有信息，直接扫网站后台"></a>F12没有信息，直接扫网站后台</h3><blockquote>
 <p>python dirsearch.py -u <a target="_blank" rel="noopener" href="http://10b9238b-d123-4f63-891c-33ce01e55ca1.node3.buuoj.cn/">http://10b9238b-d123-4f63-891c-33ce01e55ca1.node3.buuoj.cn/</a> -e *  -s  0.05</p>
 </blockquote>
 <p> 刚开始没有扫出来，全是429，可能太快了，  就在后面加了个 -s  延迟一下</p>
-<p><img src="/2022/06/13/2020-9-27buuctf/image-20200925230015691.png" alt="image-20200925230015691"></p>
+<p><img src="/2020/09/25/buuctf/image-20200925230015691.png" alt="image-20200925230015691"></p>
 <p>发现phpmyadmin ,phpinfo.php(没信息)</p>
 <p>直接进入数据库。查看版本4.8.1</p>
 <p>然后就百度该版本漏洞，发现有 任意文件包含和任意代码执行漏洞</p>
@@ -121,12 +121,12 @@
 <h3 id="目录穿越，任意文件包含pyload："><a href="#目录穿越，任意文件包含pyload：" class="headerlink" title="目录穿越，任意文件包含pyload："></a>目录穿越，任意文件包含pyload：</h3><blockquote>
 <p>?target=db_sql.php%253f/../../../../../../../../flag</p>
 </blockquote>
-<p><img src="/2022/06/13/2020-9-27buuctf/image-20200926122420288.png" alt="image-20200926122420288"></p>
+<p><img src="/2020/09/25/buuctf/image-20200926122420288.png" alt="image-20200926122420288"></p>
 <ul>
 <li>session 进行 php 代码执行（session 文件中中记录了执行的操作）</li>
 </ul>
 <p>​        具体方法：SELECT ‘ <code>&lt;?php phpinfo()?&gt;</code> ‘ ;</p>
-<p><img src="/2022/06/13/2020-9-27buuctf/image-20200926120643739.png" alt="image-20200926120643739"></p>
+<p><img src="/2020/09/25/buuctf/image-20200926120643739.png" alt="image-20200926120643739"></p>
 <p>然后查看session值,</p>
 <blockquote>
 <p>?target=db_sql.php%253f/../../../../../../../../tmp/sess_fal9idhffq4t112qfa86k5kbo1</p>
@@ -135,7 +135,7 @@
 <ul>
 <li>网上说写入后门（本题好像不太行，因为没有写入权限），本地搭建的话可以实现。</li>
 </ul>
-<p><img src="/2022/06/13/2020-9-27buuctf/image-20200926122045439.png" alt="image-20200926122045439"></p>
+<p><img src="/2020/09/25/buuctf/image-20200926122045439.png" alt="image-20200926122045439"></p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIzMTc1MjExOQ==&mid=2247485036&idx=1&sn=8e9647906c5d94f72564dec5bc51a2ab&chksm=e89e2eb4dfe9a7a28bff2efebb5b2723782dab660acff074c3f18c9e7dca924abdf3da618fb4&mpshare=1&scene=1&srcid=0621gAv1FMtrgoahD01psMZr&pass_ticket=LqhRfckPxAVG2dF/jxV/9/cEb5pShRgewJe/ttJn2gIlIyGF/bsgGmzcbsV+LmMK#rd">后台gertshell</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wangyuyang1016/p/12014016.html">参考博客</a></p>
 <hr>
@@ -216,7 +216,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/06/13/2020-9-27buuctf/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2020/09/25/buuctf/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -229,19 +229,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2022/06/13/blog%E8%BF%81%E7%A7%BB/" class="article-nav-link">
+      <a href="/2020/09/26/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            blog迁移
+            MSF-永恒之蓝入侵
           
         </div>
       </a>
     
     
-      <a href="/2022/06/13/2020-9-26MSF-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E5%85%A5%E4%BE%B5/" class="article-nav-link">
+      <a href="/2020/09/16/2020.9.16%E9%93%BE%E8%A1%A8/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">MSF-永恒之蓝入侵</div>
+        <div class="article-nav-title">链表-c语言</div>
       </a>
     
   </nav>
