@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.9k</span>
+            <span class="post-count">2.1k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">8 min</span>
+            <span class="post-count">9 min</span>
         </span>
     </span>
 </div>
@@ -104,6 +104,7 @@
        
   <p>参考</p>
 <p>本文参考：<a target="_blank" rel="noopener" href="https://github.com/Qftm/Information_Collection_Handbook">https://github.com/Qftm/Information_Collection_Handbook</a></p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/bighammerdata/p/13268624.html">史上最全的子域名搜集方法（证书透明度/DNS记录/威胁情报/代码仓库/dns暴力破解/各种细节） - BIGHAMMERS - 博客园 (cnblogs.com)</a></p>
 <h1 id="域名信息"><a href="#域名信息" class="headerlink" title="域名信息"></a>域名信息</h1><p>查询域名是否已经被注册，以及注册域名和注册人的详细信息</p>
 <h3 id="whois查询"><a href="#whois查询" class="headerlink" title="whois查询"></a>whois查询</h3><ul>
 <li>站长之家：<a target="_blank" rel="noopener" href="http://whois.chinaz.com/">http://whois.chinaz.com/</a></li>
@@ -140,12 +141,25 @@
 <li><a target="_blank" rel="noopener" href="https://www.t1h2ua.cn/tools/">t1h2ua</a></li>
 <li><a target="_blank" rel="noopener" href="https://dnsdumpster.com/">dnsdumpster</a></li>
 <li><a target="_blank" rel="noopener" href="http://z.zcjun.com/">zcjun</a></li>
+<li><a target="_blank" rel="noopener" href="https://app.binaryedge.io/services/domains">BinaryEdge Portal</a></li>
 </ul>
 <p>phpinfo  还行</p>
 <h3 id="枚举工具"><a href="#枚举工具" class="headerlink" title="枚举工具"></a>枚举工具</h3><p><a target="_blank" rel="noopener" href="https://github.com/shmilylty/OneForAll">OneForAll</a></p>
 <p>Layer</p>
 <h3 id="搜索引擎"><a href="#搜索引擎" class="headerlink" title="搜索引擎"></a>搜索引擎</h3><p>google hack ：site:xxx</p>
 <p>FOFA，hunter等（domain:xxxxx）</p>
+<h3 id="证书"><a href="#证书" class="headerlink" title="证书"></a>证书</h3><p>利用SSL 证书</p>
+<p><a target="_blank" rel="noopener" href="https://crt.sh/">crt.sh | Certificate Search</a></p>
+<p><a target="_blank" rel="noopener" href="https://search.censys.io/certificates?q=">Censys</a></p>
+<p><a target="_blank" rel="noopener" href="https://sslmate.com/ct_search_api/">Certificate Transparency Search API by SSLMate</a></p>
+<p><a target="_blank" rel="noopener" href="https://ui.ctsearch.entrust.com/ui/ctsearchui">Entrust Certificate Search - Entrust, Inc.</a></p>
+<h3 id="DNS-记录"><a href="#DNS-记录" class="headerlink" title="DNS 记录"></a>DNS 记录</h3><p><a target="_blank" rel="noopener" href="https://dnsdumpster.com/">DNSdumpster.com - dns recon and research, find and lookup dns records</a></p>
+<p>dns 记录破解</p>
+<p>subDomainsBrute：<a target="_blank" rel="noopener" href="https://github.com/lijiejie/subDomainsBrute">https://github.com/lijiejie/subDomainsBrute</a></p>
+<p>gobuster：<a target="_blank" rel="noopener" href="https://github.com/OJ/gobuster">https://github.com/OJ/gobuster</a></p>
+<h3 id="威胁情报"><a href="#威胁情报" class="headerlink" title="威胁情报"></a>威胁情报</h3><p><a target="_blank" rel="noopener" href="https://www.threatminer.org/">ThreatMiner.org | Data Mining for Threat Intelligence</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.virustotal.com/gui/home/search">VirusTotal - Home</a></p>
+<p><a target="_blank" rel="noopener" href="https://x.threatbook.com/">微步在线X情报社区-威胁情报查询_威胁分析平台_开放社区 (threatbook.com)</a></p>
 <hr>
 <h1 id="域名对应ip"><a href="#域名对应ip" class="headerlink" title="域名对应ip"></a>域名对应ip</h1><h3 id="判断是否有CDN"><a href="#判断是否有CDN" class="headerlink" title="判断是否有CDN"></a>判断是否有CDN</h3><ol>
 <li>多地ping，查看ip是否改变</li>
@@ -253,11 +267,15 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip3 install requests bs4</span><br><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;Threezh1&#x2F;JSFinder.git  快速提取js中的子域名</span><br></pre></td></tr></table></figure>
 
 <p>魔改：<br><a target="_blank" rel="noopener" href="https://github.com/msfisgood/JSFinderAAA">msfisgood/JSFinderAAA: JSFinder魔改版 (github.com)</a></p>
-<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><ul>
+<h3 id="敏感目录"><a href="#敏感目录" class="headerlink" title="敏感目录"></a>敏感目录</h3><p>robots，js文件，请求响应内容，  SVN</p>
+<ul>
 <li>dirsearch</li>
 <li>dirmap</li>
 </ul>
-<h1 id="漏洞库"><a href="#漏洞库" class="headerlink" title="漏洞库"></a>漏洞库</h1><p><a target="_blank" rel="noopener" href="https://wiki.96.mk/">https://wiki.96.mk/</a></p>
+<h3 id="代码托管"><a href="#代码托管" class="headerlink" title="代码托管"></a>代码托管</h3><p>github</p>
+<p>gitee</p>
+<p>code.aliyun.com</p>
+<h3 id="域传送漏洞"><a href="#域传送漏洞" class="headerlink" title="域传送漏洞"></a>域传送漏洞</h3><h1 id="漏洞库"><a href="#漏洞库" class="headerlink" title="漏洞库"></a>漏洞库</h1><p><a target="_blank" rel="noopener" href="https://wiki.96.mk/">https://wiki.96.mk/</a></p>
 <p><a target="_blank" rel="noopener" href="https://wiki.bylibrary.cn/">https://wiki.bylibrary.cn/</a></p>
 <p><a target="_blank" rel="noopener" href="https://qftm.github.io/Information_Collection_Handbook/exploit-database/domestic.html">国内 · Information Collection Handbook (qftm.github.io)</a></p>
 <p><a target="_blank" rel="noopener" href="https://qftm.github.io/Information_Collection_Handbook/exploit-database/foreign.html">国外 · Information Collection Handbook (qftm.github.io)</a></p>
@@ -267,7 +285,6 @@
 <p><a target="_blank" rel="noopener" href="https://unsafe.sh/cve">unsafe.sh - 不安全</a></p>
 <p>在线工具：</p>
 <p><a target="_blank" rel="noopener" href="https://hackertarget.com/">https://hackertarget.com/</a>  </p>
-<p><a target="_blank" rel="noopener" href="https://lovebear.top/info/cn/index.html">https://lovebear.top/info/cn/index.html</a></p>
 <p><a target="_blank" rel="noopener" href="https://lovebear.top/info/cn/index.html">https://lovebear.top/info/cn/index.html</a></p>
  
       <!-- reward -->
