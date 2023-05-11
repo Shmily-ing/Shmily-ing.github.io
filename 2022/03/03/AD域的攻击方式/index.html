@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.5k</span>
+            <span class="post-count">2k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">6 min</span>
+            <span class="post-count">7 min</span>
         </span>
     </span>
 </div>
@@ -195,19 +195,39 @@
 
 <p>参考：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/9511">https://xz.aliyun.com/t/9511</a></p>
 <p><a target="_blank" rel="noopener" href="https://3gstudent.github.io/">https://3gstudent.github.io/</a></p>
-<h1 id="ntlm-relay"><a href="#ntlm-relay" class="headerlink" title="ntlm-relay"></a>ntlm-relay</h1><h1 id="委派"><a href="#委派" class="headerlink" title="委派"></a>委派</h1><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1899592">域渗透之委派攻击详解（非约束委派/约束委派/资源委派） - 云+社区 - 腾讯云 (tencent.com)</a></p>
+<h1 id="Kerberoasting"><a href="#Kerberoasting" class="headerlink" title="Kerberoasting"></a>Kerberoasting</h1><p>需要域用户手动注册的spn ，一般只有域管理员才能自己注册，</p>
+<ol>
+<li>寻找自己注册spn 的用户</li>
+<li>请求对应服务票据</li>
+<li>导出票据</li>
+<li>破解 （hashcat /tgsrepcrack.py）</li>
+</ol>
+<h1 id="ntlm-relay"><a href="#ntlm-relay" class="headerlink" title="ntlm-relay"></a>ntlm-relay</h1><p>中继到其他机器，但是不能中继到域控，有smb认证</p>
+<p>system权限不能中继自身调用rpc，可以创建机器账号，中继域控ldap设置基于资源的约束委派，伪造域管理员请求对应服务st即可</p>
+<p><a target="_blank" rel="noopener" href="https://blog.ateam.qianxin.com/post/zhe-shi-yi-pian-bu-yi-yang-de-zhen-shi-shen-tou-ce-shi-an-li-fen-xi-wen-zhang/#422-%E5%9C%A8%E5%9F%9F%E4%B8%AD%E5%A2%9E%E5%8A%A0%E6%9C%BA%E5%99%A8%E8%B4%A6%E6%88%B7">这是一篇“不一样”的真实渗透测试案例分析文章 - 奇安信A-TEAM技术博客 (qianxin.com)</a></p>
+<h1 id="委派"><a href="#委派" class="headerlink" title="委派"></a>委派</h1><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1899592">域渗透之委派攻击详解（非约束委派/约束委派/资源委派） - 云+社区 - 腾讯云 (tencent.com)</a></p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/uKe-qAJiXqOQVhiAWB43qg">委派攻击 (qq.com)</a></p>
 <p>只有服务账号/机器账号才能设置委派</p>
-<h3 id="非约束性委派"><a href="#非约束性委派" class="headerlink" title="非约束性委派"></a>非约束性委派</h3><h3 id="约束性委派"><a href="#约束性委派" class="headerlink" title="约束性委派"></a>约束性委派</h3><h3 id="基于资源的约束性委派"><a href="#基于资源的约束性委派" class="headerlink" title="基于资源的约束性委派"></a>基于资源的约束性委派</h3><p>参考：<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/system/198381.html">https://www.freebuf.com/articles/system/198381.html</a></p>
+<p>这里就设计s4u协议（s4u2proxy   s4u2self）</p>
+<h3 id="非约束性委派"><a href="#非约束性委派" class="headerlink" title="非约束性委派"></a>非约束性委派</h3><p>A设置非约束性委派</p>
+<p>简单来说，就是利用协议  伪造用户请求并且获得用户的TGT，包括对任意服务的TGS</p>
+<h3 id="约束性委派"><a href="#约束性委派" class="headerlink" title="约束性委派"></a>约束性委派</h3><p>A设置约束性委派，并且需要指定可委派的服务</p>
+<p>利用协议  伪造任意用户请求并且获得用户对应可委派服务的TGS</p>
+<h3 id="基于资源的约束性委派"><a href="#基于资源的约束性委派" class="headerlink" title="基于资源的约束性委派"></a>基于资源的约束性委派</h3><p>B设置msDS-AllowedToActOnBehalfOfOtherIdentity基于资源的约束性委派，并且指定sid（即谁可以委派请求b服务）</p>
+<p>比如我们那些了对应sid 账号，发现B设置基于资源的约束性委派 并为此用户sid ，那么可以利用su4协议伪造任意用户对应B的TGS。</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/system/198381.html">https://www.freebuf.com/articles/system/198381.html</a></p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/WyFeKkmzIjqcbP5uciDW6Q">https://mp.weixin.qq.com/s/WyFeKkmzIjqcbP5uciDW6Q</a></p>
-<h1 id="打印机漏洞"><a href="#打印机漏洞" class="headerlink" title="打印机漏洞"></a>打印机漏洞</h1><h1 id="打域控"><a href="#打域控" class="headerlink" title="打域控"></a>打域控</h1><p>域控独特端口：ladp 389</p>
-<h3 id="域内漏洞"><a href="#域内漏洞" class="headerlink" title="域内漏洞"></a>域内漏洞</h3><p>CVE-2019-1040（攻击使得攻击者在仅有一个普通域账号的情况下可以远程控制Windows域内的任何机器，包括域控服务器。）</p>
+<p>参考：先知社区</p>
+<h1 id="打印机漏洞？"><a href="#打印机漏洞？" class="headerlink" title="打印机漏洞？"></a>打印机漏洞？</h1><h1 id="打域控"><a href="#打域控" class="headerlink" title="打域控"></a>打域控</h1><p>域控独特端口：ladp 389</p>
+<h1 id="域内漏洞"><a href="#域内漏洞" class="headerlink" title="域内漏洞"></a>域内漏洞</h1><p>CVE-2019-1040（攻击使得攻击者在仅有一个普通域账号的情况下可以远程控制Windows域内的任何机器，包括域控服务器。）</p>
 <p>ZeroLogon(CVE-2020-1472)</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">攻击者可以向域发起Netlogon 计算机账户认证请求, 使用8字节全0 client challenge 不断尝试得到一个正确的8字节全0 client credential 通过认证，再通过相关调用完成对域控密码的修改。</span><br></pre></td></tr></table></figure>
 
 
 
 <p>(CVE-2021-42287 and CVE-2021-42278)只需一个域用户</p>
+<p><strong>CVE-2022-33647</strong>，该漏洞导致攻击者可进行中继攻击，通过修改AS-REQ包中etype字段进行强制加密降级到RC4 _MD4，对加密session_key使用的密钥流进行破解，从而实现权限提升。</p>
+<p><strong>CVE-2022-33679</strong>，该漏洞导致攻击者可请求设置了“不要求Kerberos预身份验证”的用户的TGT票据,并对AS-REP中加密session_key使用的密钥流进行破解，从而实现权限提升。<a target="_blank" rel="noopener" href="https://www.ctfiot.com/71193.html">Kerberos再现高危漏洞，身份安全亟需防护 | CTF导航 (ctfiot.com)</a></p>
 <h3 id="其他漏洞"><a href="#其他漏洞" class="headerlink" title="其他漏洞"></a>其他漏洞</h3><p>CVE-2021-1675 Windows Print Spooler权限提升漏洞复现</p>
 <p>17010</p>
 <p>CVE-2020-0796(永恒之黑)</p>
@@ -215,7 +235,7 @@
 <ul>
 <li>需要获得以下任一用户的权限：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Administrators组内的用户</span><br><span class="line">Domain Admins组内的用户</span><br><span class="line">Enterprise Admins组内的用户</span><br><span class="line">域控制器的计算机帐户</span><br><span class="line">exchange trusted subsystem组内账户&#96; (需要写ACL)&#96; 暂时不会</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Administrators组内的用户</span><br><span class="line">Domain Admins组内的用户</span><br><span class="line">Enterprise Admins组内的用户       跨域</span><br><span class="line">域控制器的计算机帐户</span><br><span class="line">exchange trusted subsystem组内账户&#96; (需要写ACL)&#96; 暂时不会</span><br></pre></td></tr></table></figure>
 
 
 
@@ -235,7 +255,7 @@
 
 
 <h3 id="维权"><a href="#维权" class="headerlink" title="维权"></a>维权</h3><p>写ACL 让普通域用户具有dcsync权限</p>
- 
+<h1 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h1><h1 id="ADCS"><a href="#ADCS" class="headerlink" title="ADCS"></a>ADCS</h1> 
       <!-- reward -->
       
     </div>
@@ -353,7 +373,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2020-2022
+        2020-2023
         <i class="ri-heart-fill heart_icon"></i> Shmily-ing
       </li>
     </ul>
